@@ -1,6 +1,6 @@
-# ContosoUniversityBlazorExtended
-A fork of my ContosoUniversityBlazor project meant for further experimentation with MudBlazor and other extras
+# ContosoUniversityBlazorAuthenticated
+A fork of my ContosoUniversityBlazorExtended project meant for further experimentation with Authentication/Authorization
 
-[![Master build](https://github.com/nealrobben/ContosoUniversityBlazorExtended/actions/workflows/Master%20build.yml/badge.svg)](https://github.com/nealrobben/ContosoUniversityBlazorExtended/actions/workflows/Master%20build.yml)
+[![Master build](https://github.com/nealrobben/ContosoUniversityBlazorAuthenticated/actions/workflows/Master%20build.yml/badge.svg)](https://github.com/nealrobben/ContosoUniversityBlazorAuthenticated/actions/workflows/Master%20build.yml)
 
 
