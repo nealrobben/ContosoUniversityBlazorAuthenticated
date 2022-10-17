@@ -5,7 +5,6 @@ using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityCQRS.Application.Instructors.Queries.GetInstructorsOverview;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
