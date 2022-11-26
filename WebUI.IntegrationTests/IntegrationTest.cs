@@ -16,11 +16,10 @@ public class IntegrationTest
             {
                 builder.ConfigureAppConfiguration((context, configBuilder) =>
                 {
-                    configBuilder.AddInMemoryCollection(
-                        new Dictionary<string, string>
-                        {
-                            ["UseInMemoryDatabase"] = "true"
-                        });
+                    configBuilder.AddInMemoryCollection(new List<KeyValuePair<string, string?>>
+                    {
+                        KeyValuePair.Create<string,string?>("UseInMemoryDatabase", "true")
+                    });
                 });
             });
 
