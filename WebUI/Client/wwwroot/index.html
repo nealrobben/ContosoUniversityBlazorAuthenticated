@@ -15,10 +15,11 @@
 
 <body>
     <app>
-        <div style="position:absolute; top:30vh; width:100%; text-align:center">
-            <h1>Contoso University</h1>
-            <p><i class="fas fa-spin fa-spinner"></i>Loading...</p>
-        </div>
+        <svg class="loading-progress">
+            <circle r="40%" cx="50%" cy="50%" />
+            <circle r="40%" cx="50%" cy="50%" />
+        </svg>
+        <div class="loading-progress-text"></div>
     </app>
 
     <div id="blazor-error-ui">
