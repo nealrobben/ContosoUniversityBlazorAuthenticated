@@ -4,6 +4,7 @@ using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Application.Instructors.Queries.GetInstructorsLookup;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,9 +28,8 @@ public class GetInstructorLookupQueryHandler : IRequestHandler<GetInstructorLook
         var instructors = await _context.Instructors
             .AsNoTracking()
             .OrderBy(x => x.LastName)
-            .ProjectTo<InstructorLookupVM>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);
 
-        return new InstructorsLookupVM(instructors);
+        return new InstructorsLookupVM(_mapper.Map<List<InstructorLookupVM>>(instructors));
     }
 }

@@ -342,6 +342,12 @@ public class CoursesControllerTests : IntegrationTest
     [Fact]
     public async Task Create_CreatesCourse()
     {
+        var department = new Department
+        {
+            DepartmentID = 1,
+            Name = "Name 1"
+        };
+
         var course = new CreateCourseCommand
         {
             CourseID = 1,
@@ -349,6 +355,14 @@ public class CoursesControllerTests : IntegrationTest
             Credits = 2,
             DepartmentID = 1
         };
+
+        using (var scope = _appFactory.Services.CreateScope())
+        {
+            var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
+
+            schoolContext.Departments.Add(department);
+            await schoolContext.SaveChangesAsync();
+        }
 
         var response = await _client.PostAsJsonAsync("/api/courses", course);
 

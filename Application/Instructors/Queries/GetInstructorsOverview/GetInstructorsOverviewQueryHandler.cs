@@ -5,6 +5,7 @@ using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityCQRS.Application.Instructors.Queries.GetInstructorsOverview;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -49,9 +50,8 @@ public class GetInstructorsOverviewQueryHandler : IRequestHandler<GetInstructors
               .AsNoTracking()
               .Skip((metaData.PageNumber) * metaData.PageSize)
               .Take(metaData.PageSize)
-              .ProjectTo<InstructorVM>(_mapper.ConfigurationProvider)
               .ToListAsync(cancellationToken);
 
-        return new OverviewVM<InstructorVM>(items, metaData);
+        return new OverviewVM<InstructorVM>(_mapper.Map<List<InstructorVM>>(items), metaData);
     }
 }

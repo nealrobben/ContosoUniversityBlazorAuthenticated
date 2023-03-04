@@ -36,9 +36,8 @@ public class GetCoursesForInstructorQueryHandler : IRequestHandler<GetCoursesFor
             .Where(x => courseIdsForInstructor.Contains(x.CourseID))
             .Include(c => c.Department)
             .AsNoTracking()
-            .ProjectTo<CourseForInstructorVM>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);
 
-        return new CoursesForInstructorOverviewVM(courses);
+        return new CoursesForInstructorOverviewVM(_mapper.Map<List<CourseForInstructorVM>>(courses));
     }
 }

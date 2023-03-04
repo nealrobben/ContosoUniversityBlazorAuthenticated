@@ -31,9 +31,8 @@ public class GetStudentsForCourseQueryHandler : IRequestHandler<GetStudentsForCo
             .Where(x => x.CourseID == request.ID)
             .Include(c => c.Student)
             .AsNoTracking()
-            .ProjectTo<StudentForCourseVM>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);
 
-        return new StudentsForCourseVM(students);
+        return new StudentsForCourseVM(_mapper.Map<List<StudentForCourseVM>>(students));
     }
 }

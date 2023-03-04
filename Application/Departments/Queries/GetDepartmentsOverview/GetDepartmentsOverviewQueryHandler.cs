@@ -4,6 +4,7 @@ using AutoMapper.QueryableExtensions;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -41,9 +42,8 @@ public class GetDepartmentsOverviewQueryHandler : IRequestHandler<GetDepartments
             .AsNoTracking()
             .Skip((metaData.PageNumber) * metaData.PageSize)
             .Take(metaData.PageSize)
-            .ProjectTo<DepartmentVM>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);
 
-        return new OverviewVM<DepartmentVM>(items, metaData);
+        return new OverviewVM<DepartmentVM>(_mapper.Map<List<DepartmentVM>>(items), metaData);
     }
 }

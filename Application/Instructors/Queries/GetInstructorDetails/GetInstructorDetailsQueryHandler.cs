@@ -29,12 +29,11 @@ public class GetInstructorDetailsQueryHandler : IRequestHandler<GetInstructorDet
 
         var instructor = await _context.Instructors
             .AsNoTracking()
-            .ProjectTo<InstructorDetailsVM>(_mapper.ConfigurationProvider)
-            .FirstOrDefaultAsync(m => m.InstructorID == request.ID, cancellationToken);
+            .FirstOrDefaultAsync(m => m.ID == request.ID, cancellationToken);
 
         if (instructor == null)
             throw new NotFoundException(nameof(Instructor), request.ID);
 
-        return instructor;
+        return _mapper.Map<InstructorDetailsVM>(instructor);
     }
 }

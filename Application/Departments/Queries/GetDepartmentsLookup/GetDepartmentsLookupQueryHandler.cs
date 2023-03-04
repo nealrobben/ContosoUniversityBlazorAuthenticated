@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
+using System.Collections.Generic;
 
 namespace ContosoUniversityBlazor.Application.Departments.Queries.GetDepartmentsLookup;
 
@@ -26,9 +27,8 @@ public class GetDepartmentsLookupQueryHandler : IRequestHandler<GetDepartmentsLo
         var list = await _context.Departments
             .AsNoTracking()
             .OrderBy(x => x.Name)
-            .ProjectTo<DepartmentLookupVM>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);
 
-        return new DepartmentsLookupVM(list);
+        return new DepartmentsLookupVM(_mapper.Map<List<DepartmentLookupVM>>(list));
     }
 }

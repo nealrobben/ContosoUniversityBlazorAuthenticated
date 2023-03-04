@@ -10,6 +10,7 @@ using AutoMapper;
 using WebUI.Shared.Students.Queries.GetStudentsOverview;
 using Application.Common.Extensions;
 using WebUI.Shared.Common;
+using System.Collections.Generic;
 
 namespace ContosoUniversityBlazor.Application.Students.Queries.GetStudentsOverview;
 
@@ -39,9 +40,8 @@ public class GetStudentsOverviewQueryHandler : IRequestHandler<GetStudentsOvervi
 
         var items = await students.AsNoTracking().Skip((metaData.PageNumber) * metaData.PageSize)
             .Take(metaData.PageSize)
-            .ProjectTo<StudentOverviewVM>(_mapper.ConfigurationProvider)
             .ToListAsync(cancellationToken);
 
-        return new OverviewVM<StudentOverviewVM>(items, metaData);
+        return new OverviewVM<StudentOverviewVM>(_mapper.Map<List<StudentOverviewVM>>(items), metaData);
     }
 }
