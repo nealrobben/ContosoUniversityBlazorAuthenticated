@@ -7,12 +7,12 @@ using System.Collections.Generic;
 
 namespace ContosoUniversityBlazor.WebUI.Filters;
 
-public class ApiExceptionFilter : ExceptionFilterAttribute
+public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
 {
 
     private readonly IDictionary<Type, Action<ExceptionContext>> _exceptionHandlers;
 
-    public ApiExceptionFilter()
+    public ApiExceptionFilterAttribute()
     {
         // Register known exception types and handlers.
         _exceptionHandlers = new Dictionary<Type, Action<ExceptionContext>>
@@ -32,16 +32,17 @@ public class ApiExceptionFilter : ExceptionFilterAttribute
     private void HandleException(ExceptionContext context)
     {
         Type type = context.Exception.GetType();
-        if (_exceptionHandlers.ContainsKey(type))
+
+        if (_exceptionHandlers.TryGetValue(type, out Action<ExceptionContext> value))
         {
-            _exceptionHandlers[type].Invoke(context);
+            value.Invoke(context);
             return;
         }
 
         HandleUnknownException(context);
     }
 
-    private void HandleUnknownException(ExceptionContext context)
+    private static void HandleUnknownException(ExceptionContext context)
     {
         var details = new ProblemDetails
         {

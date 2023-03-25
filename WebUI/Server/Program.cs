@@ -12,7 +12,7 @@ using WebUI.Server.Extensions;
 
 namespace WebUI.Server;
 
-public class Program
+public static class Program
 {
     public async static Task Main(string[] args)
     {

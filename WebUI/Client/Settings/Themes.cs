@@ -109,7 +109,7 @@ public static class Themes
         DefaultBorderRadius = "3px"
     };
 
-    public static MudTheme DefaultTheme = new MudTheme()
+    private static readonly MudTheme defaultTheme = new()
     {
         Palette = new Palette()
         {
@@ -124,7 +124,7 @@ public static class Themes
         LayoutProperties = DefaultLayoutProperties
     };
 
-    public static MudTheme DarkTheme = new MudTheme()
+    private static readonly MudTheme darkTheme = new MudTheme()
     {
         Palette = new Palette()
         {
@@ -148,4 +148,8 @@ public static class Themes
         Typography = DefaultTypography,
         LayoutProperties = DefaultLayoutProperties
     };
+
+    public static MudTheme DefaultTheme => defaultTheme;
+
+    public static MudTheme DarkTheme => darkTheme;
 }

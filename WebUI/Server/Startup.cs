@@ -40,7 +40,7 @@ public class Startup
             .AddDbContextCheck<SchoolContext>();
 
         services.AddControllersWithViews(options =>
-            options.Filters.Add(new ApiExceptionFilter()));
+            options.Filters.Add(new ApiExceptionFilterAttribute()));
 
         services.AddRazorPages();
 
