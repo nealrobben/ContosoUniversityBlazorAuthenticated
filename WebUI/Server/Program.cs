@@ -51,7 +51,7 @@ public static class Program
             }
             catch (Exception ex)
             {
-                var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+                var logger = scope.ServiceProvider.GetRequiredService<ILogger<Startup>>();
                 logger.LogError(ex, "An error occurred while migrating or seeding the database.");
 
             }
