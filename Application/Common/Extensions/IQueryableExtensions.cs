@@ -15,6 +15,31 @@ public static class IQueryableExtensions
                    || s.FirstMidName.Contains(searchString, StringComparison.CurrentCultureIgnoreCase));
     }
 
+    public static IQueryable<Department> Search(this IQueryable<Department> value, string searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return value;
+
+        return value.Where(s => s.Name.Contains(searchString, StringComparison.CurrentCultureIgnoreCase));
+    }
+
+    public static IQueryable<Instructor> Search(this IQueryable<Instructor> value, string searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return value;
+
+        return value.Where(s => s.LastName.Contains(searchString, StringComparison.CurrentCultureIgnoreCase)
+                   || s.FirstMidName.Contains(searchString, StringComparison.CurrentCultureIgnoreCase));
+    }
+
+    public static IQueryable<Course> Search(this IQueryable<Course> value, string searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return value;
+
+        return value.Where(s => s.Title.Contains(searchString, StringComparison.CurrentCultureIgnoreCase));
+    }
+
     public static IQueryable<Student> Sort(this IQueryable<Student> value, string sortString)
     {
         switch (sortString?.ToLower() ?? "")
@@ -36,14 +61,6 @@ public static class IQueryableExtensions
         }
     }
 
-    public static IQueryable<Department> Search(this IQueryable<Department> value, string searchString)
-    {
-        if (string.IsNullOrWhiteSpace(searchString))
-            return value;
-
-        return value.Where(s => s.Name.Contains(searchString, StringComparison.CurrentCultureIgnoreCase));
-    }
-
     public static IQueryable<Department> Sort(this IQueryable<Department> value, string sortString)
     {
         switch (sortString?.ToLower() ?? "")
@@ -55,15 +72,6 @@ public static class IQueryableExtensions
             default:
                 return value.OrderBy(s => s.Name);
         }
-    }
-
-    public static IQueryable<Instructor> Search(this IQueryable<Instructor> value, string searchString)
-    {
-        if (string.IsNullOrWhiteSpace(searchString))
-            return value;
-
-        return value.Where(s => s.LastName.Contains(searchString, StringComparison.CurrentCultureIgnoreCase)
-                   || s.FirstMidName.Contains(searchString, StringComparison.CurrentCultureIgnoreCase));
     }
 
     public static IQueryable<Instructor> Sort(this IQueryable<Instructor> value, string sortString)
@@ -85,14 +93,6 @@ public static class IQueryableExtensions
             default:
                 return value.OrderBy(s => s.LastName);
         }
-    }
-
-    public static IQueryable<Course> Search(this IQueryable<Course> value, string searchString)
-    {
-        if (string.IsNullOrWhiteSpace(searchString))
-            return value;
-
-        return value.Where(s => s.Title.Contains(searchString, StringComparison.CurrentCultureIgnoreCase));
     }
 
     public static IQueryable<Course> Sort(this IQueryable<Course> value, string sortString)

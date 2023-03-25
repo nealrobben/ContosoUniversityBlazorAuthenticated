@@ -25,12 +25,10 @@ public partial class InstructorCreate
     [CascadingParameter]
     MudDialogInstance MudDialog { get; set; }
 
-    private CreateInstructorCommand createInstructorCommand = new CreateInstructorCommand() { HireDate = DateTime.Now.Date };
-
     public bool ErrorVisible { get; set; }
 
     public IList<IBrowserFile> files { get; set; } = new List<IBrowserFile>();
-    public CreateInstructorCommand CreateInstructorCommand { get => createInstructorCommand; set => createInstructorCommand = value; }
+    public CreateInstructorCommand CreateInstructorCommand { get; set; } = new CreateInstructorCommand() { HireDate = DateTime.Now.Date };
 
     public async Task FormSubmitted(EditContext editContext)
     {

@@ -27,12 +27,10 @@ public partial class InstructorEdit
     [CascadingParameter]
     MudDialogInstance MudDialog { get; set; }
 
-    private UpdateInstructorCommand updateInstructorCommand = new UpdateInstructorCommand();
-
     public bool ErrorVisible { get; set; }
 
     public IList<IBrowserFile> files { get; set; } = new List<IBrowserFile>();
-    public UpdateInstructorCommand UpdateInstructorCommand { get => updateInstructorCommand; set => updateInstructorCommand = value; }
+    public UpdateInstructorCommand UpdateInstructorCommand { get; set; } = new UpdateInstructorCommand();
 
     protected override async Task OnParametersSetAsync()
     {
