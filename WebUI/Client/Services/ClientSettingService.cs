@@ -43,10 +43,8 @@ public class ClientSettingService
     {
         var setting = await GetSettings();
 
-        if (setting != null)
-        {
-            if (setting.IsDarkMode == true) return Themes.DarkTheme;
-        }
+        if (setting != null && setting.IsDarkMode)
+            return Themes.DarkTheme;
 
         return Themes.DefaultTheme;
     }

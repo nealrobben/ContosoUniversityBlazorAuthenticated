@@ -16,7 +16,7 @@ public interface IFileuploadService
 
 public class FileuploadService : IFileuploadService
 {
-    private HttpClient _http;
+    private readonly HttpClient _http;
 
     const long maxFileSize = 1024 * 1024 * 15;
 
@@ -30,24 +30,16 @@ public class FileuploadService : IFileuploadService
         var storedFileName = "";
         using var content = new MultipartFormDataContent();
 
-        try
+        var fileContent = new StreamContent(file.OpenReadStream(maxFileSize));
+        content.Add(content: fileContent, name: "\"files\"", fileName: file.Name);
+
+        var response = await _http.PostAsync("api/File", content);
+
+        var newUploadResults = await response.Content.ReadFromJsonAsync<IList<UploadResult>>();
+
+        if (newUploadResults.Count != 0)
         {
-            var fileContent = new StreamContent(file.OpenReadStream(maxFileSize));
-
-            content.Add(content: fileContent, name: "\"files\"", fileName: file.Name);
-
-            var response = await _http.PostAsync("api/File", content);
-
-            var newUploadResults = await response.Content.ReadFromJsonAsync<IList<UploadResult>>();
-
-            if (newUploadResults.Count != 0)
-            {
-                storedFileName = newUploadResults.First().StoredFileName;
-            }
-        }
-        catch (Exception)
-        {
-            throw;
+            storedFileName = newUploadResults.First().StoredFileName;
         }
 
         return storedFileName;

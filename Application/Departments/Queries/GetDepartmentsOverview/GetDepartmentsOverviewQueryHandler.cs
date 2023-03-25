@@ -32,7 +32,7 @@ public class GetDepartmentsOverviewQueryHandler : IRequestHandler<GetDepartments
             .Search(request.SearchString)
             .Sort(request.SortOrder);
 
-        var totalDepartments = await departments.CountAsync();
+        var totalDepartments = await departments.CountAsync(cancellationToken);
 
         var metaData = new MetaData(request.PageNumber ?? 0, totalDepartments,
             request.PageSize ?? _defaultPageSize, request.SortOrder, request.SearchString);

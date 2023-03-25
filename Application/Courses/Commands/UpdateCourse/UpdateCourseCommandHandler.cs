@@ -24,7 +24,7 @@ public class UpdateCourseCommandHandler : IRequestHandler<UpdateCourseCommand>
             throw new NotFoundException(nameof(Course), request.CourseID);
 
         var courseToUpdate = await _context.Courses
-            .FirstOrDefaultAsync(c => c.CourseID == request.CourseID);
+            .FirstOrDefaultAsync(c => c.CourseID == request.CourseID, cancellationToken);
 
         courseToUpdate.Title = request.Title;
         courseToUpdate.Credits = request.Credits;

@@ -30,7 +30,7 @@ public class UpdateInstructorCommandHandler : IRequestHandler<UpdateInstructorCo
             .Include(i => i.OfficeAssignment)
             .Include(i => i.CourseAssignments)
             .ThenInclude(i => i.Course)
-            .FirstOrDefaultAsync(m => m.ID == request.InstructorID);
+            .FirstOrDefaultAsync(m => m.ID == request.InstructorID, cancellationToken);
 
         if (instructorToUpdate == null)
             throw new NotFoundException(nameof(Instructor), request.InstructorID);

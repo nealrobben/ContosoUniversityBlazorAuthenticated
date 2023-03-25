@@ -18,7 +18,7 @@ public class DeleteCourseCommandHandler : IRequestHandler<DeleteCourseCommand>
 
     public async Task<Unit> Handle(DeleteCourseCommand request, CancellationToken cancellationToken)
     {
-        var course = await _context.Courses.FindAsync(request.ID);
+        var course = await _context.Courses.FindAsync(request.ID, cancellationToken);
 
         if (course == null)
             throw new NotFoundException(nameof(Course), request.ID);

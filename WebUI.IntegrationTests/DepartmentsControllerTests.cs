@@ -126,7 +126,7 @@ public class DepartmentsControllerTests : IntegrationTest
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         var result = (await response.Content.ReadAsAsync<OverviewVM<DepartmentVM>>());
 
-        result.Records.Count().Should().Be(2);
+        result.Records.Count.Should().Be(2);
         result.Records.First().DepartmentID.Should().Be(department2.DepartmentID);
         result.Records.First().Name.Should().Be(department2.Name);
         result.Records.First().Budget.Should().Be(department2.Budget);

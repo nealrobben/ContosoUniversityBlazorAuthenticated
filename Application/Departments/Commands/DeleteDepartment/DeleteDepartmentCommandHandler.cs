@@ -18,7 +18,7 @@ public class DeleteDepartmentCommandHandler : IRequestHandler<DeleteDepartmentCo
 
     public async Task<Unit> Handle(DeleteDepartmentCommand request, CancellationToken cancellationToken)
     {
-        var department = await _context.Departments.FindAsync(request.ID);
+        var department = await _context.Departments.FindAsync(request.ID, cancellationToken);
 
         if (department == null)
             throw new NotFoundException(nameof(Department), request.ID);

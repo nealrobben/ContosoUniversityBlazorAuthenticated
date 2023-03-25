@@ -22,12 +22,12 @@ public abstract class ServiceBase<TOverviewVM, TDetailsVM, TCreateCommand, TUpda
     private const string PageSizeParameterName = "pageSize";
 
     protected const string ApiBase = "/api";
-    private string _controllerName = "";
+    private readonly string _controllerName;
     protected string Endpoint => $"{ApiBase}/{_controllerName}";
 
     protected HttpClient _http;
 
-    public ServiceBase(HttpClient http, string controllerName)
+    protected ServiceBase(HttpClient http, string controllerName)
     {
         _http = http;
         _controllerName = controllerName;
@@ -69,7 +69,7 @@ public abstract class ServiceBase<TOverviewVM, TDetailsVM, TCreateCommand, TUpda
         await CheckResultForError(result);
     }
 
-    private async Task CheckResultForError(HttpResponseMessage result)
+    private static async Task CheckResultForError(HttpResponseMessage result)
     {
         var status = (int)result.StatusCode;
 

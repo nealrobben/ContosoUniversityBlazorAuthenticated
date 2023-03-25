@@ -25,13 +25,14 @@ public partial class CourseCreate
     [Inject]
     public ICourseService CourseService { get; set; }
 
-    public CreateCourseCommand CreateCourseCommand = new CreateCourseCommand();
+    private CreateCourseCommand createCourseCommand = new CreateCourseCommand();
     public DepartmentsLookupVM DepartmentsLookup { get; set; }
 
     public bool ErrorVisible { get; set; }
 
     [CascadingParameter]
     MudDialogInstance MudDialog { get; set; }
+    public CreateCourseCommand CreateCourseCommand { get => createCourseCommand; set => createCourseCommand = value; }
 
     private CustomValidation _customValidation;
 

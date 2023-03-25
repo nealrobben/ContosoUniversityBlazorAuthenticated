@@ -205,7 +205,7 @@ public class CourseCreateTests : BunitTestBase
         comp.FindAll("div.validation-message")[3].TrimmedText().Should().Be("'Credits' must be greater than '0'.");
     }
 
-    private DepartmentsLookupVM GetDepartmentsLookupVMWithTestData()
+    private static DepartmentsLookupVM GetDepartmentsLookupVMWithTestData()
     {
         return new DepartmentsLookupVM(new List<DepartmentLookupVM>
         {

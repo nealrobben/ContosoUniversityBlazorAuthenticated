@@ -32,7 +32,7 @@ public class GetCoursesOverviewQueryHandler : IRequestHandler<GetCoursesOverview
             .Search(request.SearchString)
             .Sort(request.SortOrder);
 
-        var totalCourses = await courses.CountAsync();
+        var totalCourses = await courses.CountAsync(cancellationToken);
 
         var metaData = new MetaData(request.PageNumber ?? 0, totalCourses,
             request.PageSize ?? _defaultPageSize, request.SortOrder, request.SearchString);

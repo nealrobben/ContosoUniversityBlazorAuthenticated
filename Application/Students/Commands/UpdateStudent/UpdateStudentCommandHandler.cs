@@ -27,7 +27,7 @@ public class UpdateStudentCommandHandler : IRequestHandler<UpdateStudentCommand>
             throw new NotFoundException(nameof(Student), request.StudentID);
 
         var studentToUpdate = await _context.Students
-            .FirstOrDefaultAsync(s => s.ID == request.StudentID);
+            .FirstOrDefaultAsync(s => s.ID == request.StudentID, cancellationToken);
 
         if (!Equals(studentToUpdate.ProfilePictureName, request.ProfilePictureName))
             _profilePictureService.DeleteImageFile(studentToUpdate.ProfilePictureName);

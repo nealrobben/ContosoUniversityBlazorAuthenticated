@@ -67,7 +67,7 @@ public class FileController : ContosoApiController
                         {
                             await file.CopyToAsync(ms);
                             await _profilePictureService.WriteImageFile(trustedFileNameForFileStorage, ms);
-                        };
+                        }
 
                         _logger.LogInformation("{FileName} saved",
                             trustedFileNameForDisplay);

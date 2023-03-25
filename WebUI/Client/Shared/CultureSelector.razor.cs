@@ -19,11 +19,6 @@ public partial class CultureSelector
         new CultureInfo("nl-NL"),
     };
 
-    private CultureInfo Culture
-    {
-        get => CultureInfo.CurrentCulture;
-    }
-
     private async Task ChangeLanguageAsync(CultureInfo culture)
     {
         if (CultureInfo.CurrentCulture != culture)

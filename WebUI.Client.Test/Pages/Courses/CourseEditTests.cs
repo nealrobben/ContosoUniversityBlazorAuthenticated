@@ -278,7 +278,7 @@ public class CourseEditTests : BunitTestBase
         comp.FindAll("div.validation-message")[1].TrimmedText().Should().Be("The Credits field must be a number.");
     }
 
-    private DepartmentsLookupVM GetDepartmentsLookupVMWithTestData()
+    private static DepartmentsLookupVM GetDepartmentsLookupVMWithTestData()
     {
         return new DepartmentsLookupVM(new List<DepartmentLookupVM>
         {

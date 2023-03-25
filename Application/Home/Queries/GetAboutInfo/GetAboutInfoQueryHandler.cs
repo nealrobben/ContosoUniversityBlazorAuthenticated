@@ -27,6 +27,6 @@ public class GetAboutInfoQueryHandler : IRequestHandler<GetAboutInfoQuery, About
                        StudentCount = dateGroup.Count()
                    };
 
-        return new AboutInfoVM(await data.AsNoTracking().ToListAsync());
+        return new AboutInfoVM(await data.AsNoTracking().ToListAsync(cancellationToken));
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -18,10 +19,10 @@ public partial class About
     public HttpClient Http { get; set; }
 
     [Inject]
-    IStringLocalizer<About> Localizer { get; set; }
+    public IStringLocalizer<About> Localizer { get; set; }
 
-    public List<ChartSeries> Series = new List<ChartSeries>();
-    public string[] XAxisLabels = {};
+    public List<ChartSeries> Series { get; set; } = new List<ChartSeries>();
+    public string[] XAxisLabels { get; set; } = Array.Empty<string>();
 
     protected override async Task OnInitializedAsync()
     {

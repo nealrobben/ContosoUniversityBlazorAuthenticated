@@ -25,7 +25,7 @@ public class DeleteInstructorCommandHandler : IRequestHandler<DeleteInstructorCo
     {
         var instructor = await _context.Instructors
             .Include(i => i.CourseAssignments)
-            .SingleOrDefaultAsync(i => i.ID == request.ID);
+            .SingleOrDefaultAsync(i => i.ID == request.ID, cancellationToken);
 
         if (instructor == null)
             throw new NotFoundException(nameof(Instructor), request.ID);
@@ -35,7 +35,7 @@ public class DeleteInstructorCommandHandler : IRequestHandler<DeleteInstructorCo
 
         var departments = await _context.Departments
             .Where(d => d.InstructorID == request.ID)
-            .ToListAsync();
+            .ToListAsync(cancellationToken);
         departments.ForEach(d => d.InstructorID = null);
 
         _context.Instructors.Remove(instructor);

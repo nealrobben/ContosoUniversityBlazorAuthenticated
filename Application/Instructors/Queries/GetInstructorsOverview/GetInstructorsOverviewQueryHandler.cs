@@ -33,7 +33,7 @@ public class GetInstructorsOverviewQueryHandler : IRequestHandler<GetInstructors
             .Search(request.SearchString)
             .Sort(request.SortOrder);
 
-        var totalInstructors = await instructors.CountAsync();
+        var totalInstructors = await instructors.CountAsync(cancellationToken);
 
         var metaData = new MetaData(request.PageNumber ?? 0, totalInstructors,
             request.PageSize ?? _defaultPageSize, request.SortOrder, request.SearchString);

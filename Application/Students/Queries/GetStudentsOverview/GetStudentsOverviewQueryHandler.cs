@@ -33,7 +33,7 @@ public class GetStudentsOverviewQueryHandler : IRequestHandler<GetStudentsOvervi
             .Search(request.SearchString)
             .Sort(request.SortOrder);
 
-        var totalStudents = await students.CountAsync();
+        var totalStudents = await students.CountAsync(cancellationToken);
 
         var metaData = new MetaData(request.PageNumber ?? 0, totalStudents, 
             request.PageSize ?? _defaultPageSize, request.SortOrder, request.SearchString);
