@@ -1,0 +1,9 @@
+@host=http://localhost:5000/api
+
+GET {{host}}/students
+
+###
+
+GET {{host}}/students/1
+
+###

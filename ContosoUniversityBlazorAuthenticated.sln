@@ -29,6 +29,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{1BE5311F-1CCD-4B77-AD84-5420CE33261F}"
+	ProjectSection(SolutionItems) = preProject
+		Course.http = Course.http
+		Department.http = Department.http
+		Instructor.http = Instructor.http
+		Student.http = Student.http
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +88,7 @@ Global
 		{A7923089-B350-40A5-9C8A-8AEEE0FE0FB4} = {2E1F9B44-8DCD-4B65-A078-E9CD94DF9323}
 		{5A1C60EF-4EF2-4196-8B1E-BDF2928C8897} = {AFCDF6E7-6175-41A7-A86D-A05614F21A7D}
 		{010B919A-954E-446B-80BB-A170DD84437A} = {AFCDF6E7-6175-41A7-A86D-A05614F21A7D}
+		{1BE5311F-1CCD-4B77-AD84-5420CE33261F} = {20BD6576-FB02-45BA-8804-19A899A50E40}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BE52E884-3F5A-4736-9990-E8DFB461106E}
