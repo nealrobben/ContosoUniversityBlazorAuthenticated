@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿namespace WebUI.Client.Pages.Instructors;
+
+using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 using System.Threading.Tasks;
@@ -6,8 +8,6 @@ using WebUI.Client.Extensions;
 using WebUI.Client.Services;
 using WebUI.Shared.Common;
 using WebUI.Shared.Instructors.Queries.GetInstructorsOverview;
-
-namespace WebUI.Client.Pages.Instructors;
 
 public partial class Instructors
 {

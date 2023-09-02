@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿namespace WebUI.Client.Components;
 
-namespace WebUI.Client.Components;
+using Microsoft.AspNetCore.Components;
 
 public partial class ProfilePicture
 {

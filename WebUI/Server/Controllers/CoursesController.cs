@@ -1,4 +1,5 @@
-﻿using ContosoUniversityBlazor.Application.Courses.Commands.DeleteCourse;
+﻿
+using ContosoUniversityBlazor.Application.Courses.Commands.DeleteCourse;
 using ContosoUniversityBlazor.Application.Courses.Queries.GetCourseDetails;
 using ContosoUniversityBlazor.Application.Courses.Queries.GetCoursesOverview;
 using Microsoft.AspNetCore.Http;

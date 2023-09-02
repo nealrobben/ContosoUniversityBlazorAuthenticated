@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿namespace WebUI.Client.Shared;
+
+using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 using System.Threading.Tasks;
 using WebUI.Client.Services;
 using WebUI.Client.Settings;
-
-namespace WebUI.Client.Shared;
 
 public partial class MainLayout
 {

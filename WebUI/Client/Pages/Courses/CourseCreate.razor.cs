@@ -1,18 +1,17 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿namespace WebUI.Client.Pages.Courses;
+
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 using Newtonsoft.Json;
-using System.Linq;
 using System.Threading.Tasks;
 using WebUI.Client.Extensions;
 using WebUI.Client.Services;
 using WebUI.Client.Shared;
 using WebUI.Shared.Courses.Commands.CreateCourse;
 using WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
-
-namespace WebUI.Client.Pages.Courses;
 
 public partial class CourseCreate
 {

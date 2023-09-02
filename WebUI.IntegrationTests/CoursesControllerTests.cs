@@ -1,4 +1,6 @@
-﻿using ContosoUniversityBlazor.Application.Common.Interfaces;
+﻿namespace WebUI.IntegrationTests;
+
+using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,8 +10,6 @@ using WebUI.Shared.Courses.Commands.UpdateCourse;
 using WebUI.Shared.Courses.Queries.GetCourseDetails;
 using WebUI.Shared.Courses.Queries.GetCoursesForInstructor;
 using WebUI.Shared.Courses.Queries.GetCoursesOverview;
-
-namespace WebUI.IntegrationTests;
 
 public class CoursesControllerTests : IntegrationTest
 {

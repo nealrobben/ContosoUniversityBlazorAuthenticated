@@ -1,4 +1,5 @@
-﻿using ContosoUniversityBlazor.Application.Students.Commands.DeleteStudent;
+﻿
+using ContosoUniversityBlazor.Application.Students.Commands.DeleteStudent;
 using ContosoUniversityBlazor.Application.Students.Queries.GetStudentDetails;
 using ContosoUniversityBlazor.Application.Students.Queries.GetStudentsForCourse;
 using ContosoUniversityBlazor.Application.Students.Queries.GetStudentsOverview;
@@ -13,7 +14,6 @@ using WebUI.Shared.Students.Queries.GetStudentsForCourse;
 using WebUI.Shared.Students.Queries.GetStudentsOverview;
 
 namespace ContosoUniversityBlazor.WebUI.Controllers;
-
 public class StudentsController : ContosoApiController
 {
     [HttpGet]

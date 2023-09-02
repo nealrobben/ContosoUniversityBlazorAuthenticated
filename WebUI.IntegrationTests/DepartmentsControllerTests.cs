@@ -1,3 +1,5 @@
+namespace WebUI.IntegrationTests;
+
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
 using FluentAssertions;
@@ -8,8 +10,6 @@ using WebUI.Shared.Departments.Queries.GetDepartmentDetails;
 using WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
 using WebUI.Shared.Departments.Queries.GetDepartmentsOverview;
 using WebUI.Shared.Common;
-
-namespace WebUI.IntegrationTests;
 
 public class DepartmentsControllerTests : IntegrationTest
 {
@@ -87,10 +87,10 @@ public class DepartmentsControllerTests : IntegrationTest
         var result = (await response.Content.ReadAsAsync<OverviewVM<DepartmentVM>>());
 
         result.Records.Should().ContainSingle();
-        result.Records.First().DepartmentID.Should().Be(department2.DepartmentID);
-        result.Records.First().Name.Should().Be(department2.Name);
-        result.Records.First().Budget.Should().Be(department2.Budget);
-        result.Records.First().StartDate.Should().Be(department2.StartDate);
+        result.Records[0].DepartmentID.Should().Be(department2.DepartmentID);
+        result.Records[0].Name.Should().Be(department2.Name);
+        result.Records[0].Budget.Should().Be(department2.Budget);
+        result.Records[0].StartDate.Should().Be(department2.StartDate);
     }
 
     [Fact]
@@ -127,10 +127,10 @@ public class DepartmentsControllerTests : IntegrationTest
         var result = (await response.Content.ReadAsAsync<OverviewVM<DepartmentVM>>());
 
         result.Records.Count.Should().Be(2);
-        result.Records.First().DepartmentID.Should().Be(department2.DepartmentID);
-        result.Records.First().Name.Should().Be(department2.Name);
-        result.Records.First().Budget.Should().Be(department2.Budget);
-        result.Records.First().StartDate.Should().Be(department2.StartDate);
+        result.Records[0].DepartmentID.Should().Be(department2.DepartmentID);
+        result.Records[0].Name.Should().Be(department2.Name);
+        result.Records[0].Budget.Should().Be(department2.Budget);
+        result.Records[0].StartDate.Should().Be(department2.StartDate);
     }
 
     [Fact]

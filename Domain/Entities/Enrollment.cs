@@ -1,6 +1,6 @@
-﻿using ContosoUniversityBlazor.Domain.Enums;
+﻿namespace ContosoUniversityBlazor.Domain.Entities;
 
-namespace ContosoUniversityBlazor.Domain.Entities;
+using ContosoUniversityBlazor.Domain.Enums;
 
 public class Enrollment
 {

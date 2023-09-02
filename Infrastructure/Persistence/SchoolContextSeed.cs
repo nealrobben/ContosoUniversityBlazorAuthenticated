@@ -1,11 +1,11 @@
-﻿using ContosoUniversityBlazor.Domain.Entities;
+﻿namespace ContosoUniversityBlazor.Infrastructure.Persistence;
+
+using ContosoUniversityBlazor.Domain.Entities;
 using ContosoUniversityBlazor.Domain.Enums;
 using ContosoUniversityBlazor.Persistence;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-
-namespace ContosoUniversityBlazor.Infrastructure.Persistence;
 
 public static class SchoolContextSeed
 {

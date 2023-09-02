@@ -1,4 +1,6 @@
-﻿using Bunit;
+﻿namespace WebUI.Client.Test.Pages.Courses;
+
+using Bunit;
 using FakeItEasy;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,8 +11,6 @@ using WebUI.Shared.Common;
 using WebUI.Shared.Courses.Queries.GetCoursesOverview;
 using WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
 using Xunit;
-
-namespace WebUI.Client.Test.Pages.Courses;
 
 public class CoursesTests : BunitTestBase
 {

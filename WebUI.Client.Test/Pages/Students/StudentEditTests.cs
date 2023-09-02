@@ -1,4 +1,6 @@
-﻿using AngleSharp.Html.Dom;
+﻿namespace WebUI.Client.Test.Pages.Students;
+
+using AngleSharp.Html.Dom;
 using Bunit;
 using FakeItEasy;
 using FluentAssertions;
@@ -10,8 +12,6 @@ using WebUI.Client.Test.Extensions;
 using WebUI.Shared.Students.Commands.UpdateStudent;
 using WebUI.Shared.Students.Queries.GetStudentDetails;
 using Xunit;
-
-namespace WebUI.Client.Test.Pages.Students;
 
 public class StudentEditTests : BunitTestBase
 {

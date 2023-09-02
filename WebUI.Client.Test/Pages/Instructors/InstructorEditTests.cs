@@ -1,4 +1,6 @@
-﻿using AngleSharp.Html.Dom;
+﻿namespace WebUI.Client.Test.Pages.Instructors;
+
+using AngleSharp.Html.Dom;
 using Bunit;
 using FakeItEasy;
 using FluentAssertions;
@@ -10,8 +12,6 @@ using WebUI.Client.Test.Extensions;
 using WebUI.Shared.Instructors.Commands.UpdateInstructor;
 using WebUI.Shared.Instructors.Queries.GetInstructorDetails;
 using Xunit;
-
-namespace WebUI.Client.Test.Pages.Instructors;
 
 public class InstructorEditTests : BunitTestBase
 {

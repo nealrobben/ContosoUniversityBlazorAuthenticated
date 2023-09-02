@@ -1,6 +1,6 @@
-﻿using MudBlazor;
+﻿namespace WebUI.Client.Extensions;
 
-namespace WebUI.Client.Extensions;
+using MudBlazor;
 
 public static class TableStateExtensions
 {

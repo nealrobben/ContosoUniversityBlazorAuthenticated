@@ -1,4 +1,5 @@
-﻿using ContosoUniversityBlazor.Application.Departments.Commands.DeleteDepartment;
+﻿
+using ContosoUniversityBlazor.Application.Departments.Commands.DeleteDepartment;
 using ContosoUniversityBlazor.Application.Departments.Queries.GetDepartmentDetails;
 using ContosoUniversityBlazor.Application.Departments.Queries.GetDepartmentsOverview;
 using Microsoft.AspNetCore.Http;

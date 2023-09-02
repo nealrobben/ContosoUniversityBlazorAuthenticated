@@ -1,4 +1,5 @@
-﻿using ContosoUniversityBlazor.Application.Instructors.Commands.DeleteInstructor;
+﻿
+using ContosoUniversityBlazor.Application.Instructors.Commands.DeleteInstructor;
 using ContosoUniversityBlazor.Application.Instructors.Queries.GetInstructorDetails;
 using ContosoUniversityBlazor.Application.Instructors.Queries.GetInstructorsLookup;
 using ContosoUniversityCQRS.Application.Instructors.Queries.GetInstructorsOverview;
@@ -13,7 +14,6 @@ using WebUI.Shared.Instructors.Queries.GetInstructorsLookup;
 using WebUI.Shared.Instructors.Queries.GetInstructorsOverview;
 
 namespace ContosoUniversityBlazor.WebUI.Controllers;
-
 public class InstructorsController : ContosoApiController
 {
     [HttpGet]

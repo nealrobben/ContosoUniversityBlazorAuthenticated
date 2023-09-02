@@ -1,9 +1,9 @@
-﻿using ContosoUniversityBlazor.Domain.Common;
+﻿namespace ContosoUniversityBlazor.Domain.ValueObjects;
+
+using ContosoUniversityBlazor.Domain.Common;
 using ContosoUniversityBlazor.Domain.Exceptions;
 using System;
 using System.Collections.Generic;
-
-namespace ContosoUniversityBlazor.Domain.ValueObjects;
 
 public class AdAccount : ValueObject
 {

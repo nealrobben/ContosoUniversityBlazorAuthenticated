@@ -1,4 +1,6 @@
-﻿using AngleSharp.Html.Dom;
+﻿namespace WebUI.Client.Test.Pages.Courses;
+
+using AngleSharp.Html.Dom;
 using Bunit;
 using FakeItEasy;
 using FluentAssertions;
@@ -11,8 +13,6 @@ using WebUI.Shared.Courses.Commands.UpdateCourse;
 using WebUI.Shared.Courses.Queries.GetCourseDetails;
 using WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
 using Xunit;
-
-namespace WebUI.Client.Test.Pages.Courses;
 
 public class CourseEditTests : BunitTestBase
 {

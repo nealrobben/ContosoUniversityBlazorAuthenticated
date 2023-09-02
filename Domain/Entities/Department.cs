@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace ContosoUniversityBlazor.Domain.Entities;
 
-namespace ContosoUniversityBlazor.Domain.Entities;
+using System;
+using System.Collections.Generic;
 
 public class Department
 {

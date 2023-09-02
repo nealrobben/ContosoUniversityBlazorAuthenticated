@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿namespace WebUI.Client.Pages.Courses;
+
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
@@ -10,8 +12,6 @@ using WebUI.Client.Services;
 using WebUI.Client.Shared;
 using WebUI.Shared.Courses.Commands.UpdateCourse;
 using WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
-
-namespace WebUI.Client.Pages.Courses;
 
 public partial class CourseEdit
 {

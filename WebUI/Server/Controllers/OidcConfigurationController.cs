@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
-using Microsoft.AspNetCore.Mvc;
+﻿namespace ContosoUniversityBlazor.WebUI.Controllers;
 
-namespace ContosoUniversityBlazor.WebUI.Controllers;
+using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
+using Microsoft.AspNetCore.Mvc;
 
 [ApiExplorerSettings(IgnoreApi = true)]
 public class OidcConfigurationController : Controller

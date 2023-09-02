@@ -1,4 +1,6 @@
-﻿using System.Net.Http;
+﻿namespace WebUI.Client.Services;
+
+using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using WebUI.Shared.Common;
@@ -7,8 +9,6 @@ using WebUI.Shared.Courses.Commands.UpdateCourse;
 using WebUI.Shared.Courses.Queries.GetCourseDetails;
 using WebUI.Shared.Courses.Queries.GetCoursesForInstructor;
 using WebUI.Shared.Courses.Queries.GetCoursesOverview;
-
-namespace WebUI.Client.Services;
 
 public interface ICourseService 
     : IServiceBase<OverviewVM<CourseVM>, CourseDetailVM,

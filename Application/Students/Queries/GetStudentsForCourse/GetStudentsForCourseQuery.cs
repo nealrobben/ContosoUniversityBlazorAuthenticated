@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿
+using AutoMapper;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using MediatR;
 using System.Collections.Generic;
@@ -9,7 +10,6 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
 namespace ContosoUniversityBlazor.Application.Students.Queries.GetStudentsForCourse;
-
 public class GetStudentsForCourseQuery : IRequest<StudentsForCourseVM>
 {
     public int? ID { get; set; }

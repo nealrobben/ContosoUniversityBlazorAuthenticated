@@ -1,4 +1,5 @@
-﻿using Application.Common.Interfaces;
+﻿
+using Application.Common.Interfaces;
 using ContosoUniversityBlazor.Application.Common.Exceptions;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
@@ -9,7 +10,6 @@ using System.Threading.Tasks;
 using WebUI.Shared.Students.Commands.UpdateStudent;
 
 namespace ContosoUniversityBlazor.Application.Students.Commands.UpdateStudent;
-
 public class UpdateStudentCommandHandler : IRequestHandler<UpdateStudentCommand>
 {
     private readonly ISchoolContext _context;

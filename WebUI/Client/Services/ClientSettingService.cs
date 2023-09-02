@@ -1,9 +1,9 @@
-﻿using Blazored.LocalStorage;
+﻿namespace WebUI.Client.Services;
+
+using Blazored.LocalStorage;
 using MudBlazor;
 using System.Threading.Tasks;
 using WebUI.Client.Settings;
-
-namespace WebUI.Client.Services;
 
 public class ClientSettingService
 {

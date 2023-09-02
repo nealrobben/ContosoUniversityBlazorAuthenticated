@@ -1,11 +1,11 @@
-﻿using ContosoUniversityBlazor.Application.Common.Interfaces;
+﻿namespace ContosoUniversityBlazor.Application.System.Commands.SeedData;
+
+using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
 using ContosoUniversityBlazor.Domain.Enums;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace ContosoUniversityBlazor.Application.System.Commands.SeedData;
+using global::System;
+using global::System.Linq;
+using global::System.Threading.Tasks;
 
 public class DataSeeder
 {

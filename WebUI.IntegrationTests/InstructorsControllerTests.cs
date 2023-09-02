@@ -1,4 +1,6 @@
-﻿using ContosoUniversityBlazor.Application.Common.Interfaces;
+﻿namespace WebUI.IntegrationTests;
+
+using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,8 +10,6 @@ using WebUI.Shared.Instructors.Commands.UpdateInstructor;
 using WebUI.Shared.Instructors.Queries.GetInstructorDetails;
 using WebUI.Shared.Instructors.Queries.GetInstructorsLookup;
 using WebUI.Shared.Instructors.Queries.GetInstructorsOverview;
-
-namespace WebUI.IntegrationTests;
 
 public class InstructorsControllerTests : IntegrationTest
 {
@@ -48,10 +48,10 @@ public class InstructorsControllerTests : IntegrationTest
 
         result.Records.Should().ContainSingle();
 
-        result.Records.First().InstructorID.Should().Be(instructor.ID);
-        result.Records.First().FirstName.Should().Be(instructor.FirstMidName);
-        result.Records.First().LastName.Should().Be(instructor.LastName);
-        result.Records.First().HireDate.Should().Be(instructor.HireDate);
+        result.Records[0].InstructorID.Should().Be(instructor.ID);
+        result.Records[0].FirstName.Should().Be(instructor.FirstMidName);
+        result.Records[0].LastName.Should().Be(instructor.LastName);
+        result.Records[0].HireDate.Should().Be(instructor.HireDate);
     }
 
     [Fact]
@@ -430,7 +430,7 @@ public class InstructorsControllerTests : IntegrationTest
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         var result = (await response.Content.ReadAsAsync<InstructorsLookupVM>());
 
-        result.Instructors.First().ID.Should().Be(instructor.ID);
-        result.Instructors.First().FullName.Should().Be(instructor.FullName);
+        result.Instructors[0].ID.Should().Be(instructor.ID);
+        result.Instructors[0].FullName.Should().Be(instructor.FullName);
     }
 }

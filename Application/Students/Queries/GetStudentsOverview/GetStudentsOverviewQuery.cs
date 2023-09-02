@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿
+using AutoMapper;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using MediatR;
 using System.Collections.Generic;

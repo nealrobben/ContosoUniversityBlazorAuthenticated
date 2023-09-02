@@ -1,4 +1,6 @@
-﻿using Application.Common.Interfaces;
+﻿namespace WebUI.Server.Controllers;
+
+using Application.Common.Interfaces;
 using ContosoUniversityBlazor.WebUI.Controllers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -10,8 +12,6 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using WebUI.Shared;
-
-namespace WebUI.Server.Controllers;
 
 public class FileController : ContosoApiController
 {

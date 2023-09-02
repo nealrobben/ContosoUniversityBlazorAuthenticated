@@ -1,4 +1,6 @@
-﻿using Bunit;
+﻿namespace WebUI.Client.Test.Pages.Students;
+
+using Bunit;
 using FakeItEasy;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,8 +10,6 @@ using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
 using WebUI.Shared.Students.Commands.CreateStudent;
 using Xunit;
-
-namespace WebUI.Client.Test.Pages.Students;
 
 public class StudentCreateTests : BunitTestBase
 {

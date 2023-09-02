@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿
+using AutoMapper;
 using ContosoUniversityBlazor.Application.Common.Exceptions;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
@@ -9,7 +10,6 @@ using WebUI.Shared.Students.Queries.GetStudentDetails;
 using Microsoft.EntityFrameworkCore;
 
 namespace ContosoUniversityBlazor.Application.Students.Queries.GetStudentDetails;
-
 public class GetStudentDetailsQuery : IRequest<StudentDetailsVM>
 {
     public int? ID { get; set; }

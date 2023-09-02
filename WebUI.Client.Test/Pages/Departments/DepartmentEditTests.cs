@@ -1,4 +1,6 @@
-﻿using AngleSharp.Html.Dom;
+﻿namespace WebUI.Client.Test.Pages.Departments;
+
+using AngleSharp.Html.Dom;
 using Bunit;
 using FakeItEasy;
 using FluentAssertions;
@@ -11,8 +13,6 @@ using WebUI.Shared.Departments.Commands.UpdateDepartment;
 using WebUI.Shared.Departments.Queries.GetDepartmentDetails;
 using WebUI.Shared.Instructors.Queries.GetInstructorsLookup;
 using Xunit;
-
-namespace WebUI.Client.Test.Pages.Departments;
 
 public class DepartmentEditTests : BunitTestBase
 {

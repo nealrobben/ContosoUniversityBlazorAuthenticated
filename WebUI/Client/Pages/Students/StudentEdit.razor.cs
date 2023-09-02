@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿namespace WebUI.Client.Pages.Students;
+
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
@@ -7,8 +9,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebUI.Client.Services;
 using WebUI.Shared.Students.Commands.UpdateStudent;
-
-namespace WebUI.Client.Pages.Students;
 
 public partial class StudentEdit
 {

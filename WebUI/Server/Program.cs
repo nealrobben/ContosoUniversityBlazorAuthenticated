@@ -1,4 +1,6 @@
-﻿using ContosoUniversityBlazor.Application.System.Commands.SeedData;
+﻿namespace WebUI.Server;
+
+using ContosoUniversityBlazor.Application.System.Commands.SeedData;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,8 +11,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using WebUI.Server.Extensions;
-
-namespace WebUI.Server;
 
 public static class Program
 {

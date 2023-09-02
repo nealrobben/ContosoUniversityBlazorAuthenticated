@@ -1,3 +1,5 @@
+namespace WebUI.Client;
+
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor.Services;
@@ -10,8 +12,6 @@ using Microsoft.AspNetCore.Components.Web;
 using Blazored.LocalStorage;
 using WebUI.Shared.Departments.Validators;
 using FluentValidation;
-
-namespace WebUI.Client;
 
 public static class Program
 {

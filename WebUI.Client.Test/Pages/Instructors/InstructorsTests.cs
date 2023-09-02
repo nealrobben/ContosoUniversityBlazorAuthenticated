@@ -1,4 +1,6 @@
-﻿using Bunit;
+﻿namespace WebUI.Client.Test.Pages.Instructors;
+
+using Bunit;
 using FakeItEasy;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,8 +12,6 @@ using WebUI.Shared.Courses.Queries.GetCoursesForInstructor;
 using WebUI.Shared.Instructors.Queries.GetInstructorsOverview;
 using WebUI.Shared.Students.Queries.GetStudentsForCourse;
 using Xunit;
-
-namespace WebUI.Client.Test.Pages.Instructors;
 
 public class InstructorsTests : BunitTestBase
 {

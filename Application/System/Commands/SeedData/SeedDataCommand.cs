@@ -1,10 +1,10 @@
-﻿using ContosoUniversityBlazor.Application.Common.Interfaces;
+﻿
+using ContosoUniversityBlazor.Application.Common.Interfaces;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace ContosoUniversityBlazor.Application.System.Commands.SeedData;
-
 public class SeedDataCommand : IRequest
 {
 }

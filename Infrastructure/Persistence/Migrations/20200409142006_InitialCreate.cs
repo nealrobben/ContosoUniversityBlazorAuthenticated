@@ -1,7 +1,7 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿namespace ContosoUniversityBlazor.Infrastructure.Persistence.Migrations;
 
-namespace ContosoUniversityBlazor.Infrastructure.Persistence.Migrations;
+using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 public partial class InitialCreate : Migration
 {

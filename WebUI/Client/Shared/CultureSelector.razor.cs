@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿namespace WebUI.Client.Shared;
+
+using Microsoft.AspNetCore.Components;
 using System.Globalization;
 using System.Threading.Tasks;
 using WebUI.Client.Services;
-
-namespace WebUI.Client.Shared;
 
 public partial class CultureSelector
 {

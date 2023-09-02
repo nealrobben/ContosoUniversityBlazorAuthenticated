@@ -1,9 +1,9 @@
-﻿using System;
+﻿namespace Infrastructure.Migrations;
+
+using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
-
-namespace Infrastructure.Migrations;
 
 public partial class ContosoUniversityTables : Migration
 {

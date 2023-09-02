@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿namespace WebUI.Client.Pages.Home;
+
+using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 using System;
@@ -8,8 +10,6 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using WebUI.Shared.Home.Queries.GetAboutInfo;
-
-namespace WebUI.Client.Pages.Home;
 
 public partial class About
 {

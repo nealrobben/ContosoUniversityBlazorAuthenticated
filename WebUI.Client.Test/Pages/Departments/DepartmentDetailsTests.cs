@@ -1,4 +1,6 @@
-﻿using Bunit;
+﻿namespace WebUI.Client.Test.Pages.Departments;
+
+using Bunit;
 using WebUI.Client.Pages.Departments;
 using Xunit;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,8 +10,6 @@ using MudBlazor;
 using WebUI.Shared.Departments.Queries.GetDepartmentDetails;
 using FluentAssertions;
 using WebUI.Client.Test.Extensions;
-
-namespace WebUI.Client.Test.Pages.Departments;
 
 public class DepartmentDetailsTests : BunitTestBase
 {

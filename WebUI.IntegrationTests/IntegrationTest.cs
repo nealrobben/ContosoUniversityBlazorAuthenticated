@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
+﻿namespace WebUI.IntegrationTests;
+
+using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Configuration;
 using WebUI.Server;
-
-namespace WebUI.IntegrationTests;
 
 public class IntegrationTest
 {

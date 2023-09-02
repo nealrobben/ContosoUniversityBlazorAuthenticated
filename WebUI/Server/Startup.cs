@@ -1,3 +1,5 @@
+namespace WebUI.Server;
+
 using ContosoUniversityBlazor.Application;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Infrastructure;
@@ -11,8 +13,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebUI.Shared;
-
-namespace WebUI.Server;
 
 public class Startup
 {
