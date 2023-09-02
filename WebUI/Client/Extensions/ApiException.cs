@@ -12,8 +12,8 @@ public partial class ApiException : System.Exception
 
     public ApiException(string message, int statusCode, string response, IReadOnlyDictionary<string, 
         IEnumerable<string>> headers, System.Exception innerException)
-        : base(message + "\n\nStatus: " + statusCode + "\nResponse: \n" + ((response == null) ? "(null)" 
-            : response.Substring(0, response.Length >= 512 ? 512 : response.Length)), innerException)
+        : base(message + "\n\nStatus: " + statusCode + "\nResponse: \n" + ((response == null) ? "(null)"
+            : response.Truncate(512), innerException))
     {
         StatusCode = statusCode;
         Response = response;

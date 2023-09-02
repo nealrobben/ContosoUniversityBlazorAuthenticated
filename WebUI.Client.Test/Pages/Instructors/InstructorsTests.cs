@@ -80,8 +80,8 @@ public class InstructorsTests : BunitTestBase
         var comp = Context.RenderComponent<Client.Pages.Instructors.Instructors>();
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("#SearchButton").Should().NotBeNull();
-        comp.Find("#SearchButton").Click();
+        comp.Find("#BackToFullListButton").Should().NotBeNull();
+        comp.Find("#BackToFullListButton").Click();
 
         A.CallTo(() => fakeInstructorService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).MustHaveHappened();
     }

@@ -63,7 +63,7 @@ public class FileController : ContosoApiController
                     {
                         trustedFileNameForFileStorage = (Guid.NewGuid()).ToString() + ".jpg"; //May not actually be a jpeg, fix later
 
-                        await using (MemoryStream ms = new MemoryStream())
+                        await using (var ms = new MemoryStream())
                         {
                             await file.CopyToAsync(ms);
                             await _profilePictureService.WriteImageFile(trustedFileNameForFileStorage, ms);
