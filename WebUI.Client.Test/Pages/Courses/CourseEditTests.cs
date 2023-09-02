@@ -266,8 +266,6 @@ public class CourseEditTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        var dialog = dialogReference?.Dialog as CourseEdit;
-
         comp.Find("#Title").Change("");
         comp.Find("#Credits").Change("");
         comp.Find("#Department").Change("");

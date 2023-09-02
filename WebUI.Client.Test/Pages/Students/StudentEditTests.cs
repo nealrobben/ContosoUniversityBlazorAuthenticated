@@ -23,7 +23,7 @@ public class StudentEditTests : BunitTestBase
             StudentID = 1,
             LastName = "Lastname",
             FirstName = "Firstname",
-            EnrollmentDate = new DateTime(2021, 3, 1)
+            EnrollmentDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc)
         };
 
         var enrollment = new StudentDetailsEnrollmentVM
@@ -71,7 +71,7 @@ public class StudentEditTests : BunitTestBase
             StudentID = 1,
             LastName = "Lastname",
             FirstName = "Firstname",
-            EnrollmentDate = new DateTime(2021, 3, 1)
+            EnrollmentDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc)
         };
 
         var enrollment = new StudentDetailsEnrollmentVM
@@ -116,7 +116,7 @@ public class StudentEditTests : BunitTestBase
             StudentID = 1,
             LastName = "Lastname",
             FirstName = "Firstname",
-            EnrollmentDate = new DateTime(2021, 3, 1)
+            EnrollmentDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc)
         };
 
         var enrollment = new StudentDetailsEnrollmentVM
@@ -165,7 +165,7 @@ public class StudentEditTests : BunitTestBase
             StudentID = 1,
             LastName = "Lastname",
             FirstName = "Firstname",
-            EnrollmentDate = new DateTime(2021, 3, 1)
+            EnrollmentDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc)
         };
 
         var enrollment = new StudentDetailsEnrollmentVM
@@ -216,7 +216,7 @@ public class StudentEditTests : BunitTestBase
             StudentID = 1,
             LastName = "Lastname",
             FirstName = "Firstname",
-            EnrollmentDate = new DateTime(2021, 3, 1)
+            EnrollmentDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc)
         };
 
         var enrollment = new StudentDetailsEnrollmentVM
@@ -270,7 +270,7 @@ public class StudentEditTests : BunitTestBase
             StudentID = 1,
             LastName = "Lastname",
             FirstName = "Firstname",
-            EnrollmentDate = new DateTime(2021, 3, 1)
+            EnrollmentDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc)
         };
 
         var enrollment = new StudentDetailsEnrollmentVM

@@ -23,7 +23,7 @@ public class InstructorEditTests : BunitTestBase
             InstructorID = 1,
             LastName = "Lastname",
             FirstName = "Firstname",
-            HireDate = new DateTime(2021, 3, 1),
+            HireDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc),
             OfficeLocation = "test"
         };
 
@@ -66,7 +66,7 @@ public class InstructorEditTests : BunitTestBase
             InstructorID = 1,
             LastName = "Lastname",
             FirstName = "Firstname",
-            HireDate = new DateTime(2021, 3, 1),
+            HireDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc),
             OfficeLocation = "test"
         };
 
@@ -105,7 +105,7 @@ public class InstructorEditTests : BunitTestBase
             InstructorID = 1,
             LastName = "Lastname",
             FirstName = "Firstname",
-            HireDate = new DateTime(2021, 3, 1),
+            HireDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc),
             OfficeLocation = "test"
         };
 
@@ -149,7 +149,7 @@ public class InstructorEditTests : BunitTestBase
             InstructorID = 1,
             LastName = "Lastname",
             FirstName = "Firstname",
-            HireDate = new DateTime(2021, 3, 1),
+            HireDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc),
             OfficeLocation = "test"
         };
 
@@ -195,7 +195,7 @@ public class InstructorEditTests : BunitTestBase
             InstructorID = 1,
             LastName = "Lastname",
             FirstName = "Firstname",
-            HireDate = new DateTime(2021, 3, 1),
+            HireDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc),
             OfficeLocation = "test"
         };
 
@@ -244,7 +244,7 @@ public class InstructorEditTests : BunitTestBase
             InstructorID = 1,
             LastName = "Lastname",
             FirstName = "Firstname",
-            HireDate = new DateTime(2021, 3, 1),
+            HireDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc),
             OfficeLocation = "test"
         };
 
@@ -271,8 +271,6 @@ public class InstructorEditTests : BunitTestBase
         Assert.NotNull(dialogReference);
 
         Assert.NotEmpty(comp.Markup.Trim());
-
-        var dialog = dialogReference?.Dialog as InstructorEdit;
 
         comp.Find("#LastName").Change("");
         comp.Find("#FirstName").Change("");

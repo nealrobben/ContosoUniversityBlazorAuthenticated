@@ -23,7 +23,7 @@ public class DepartmentEditTests : BunitTestBase
         {
             Name = "TestDepartment",
             Budget = 123,
-            StartDate = new DateTime(2021, 3, 1),
+            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc),
             InstructorID = 1
         };
 
@@ -67,7 +67,7 @@ public class DepartmentEditTests : BunitTestBase
         {
             Name = "TestDepartment",
             Budget = 123,
-            StartDate = new DateTime(2021, 3, 1),
+            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc),
             InstructorID = 1
         };
 
@@ -106,7 +106,7 @@ public class DepartmentEditTests : BunitTestBase
         {
             Name = "TestDepartment",
             Budget = 123,
-            StartDate = new DateTime(2021, 3, 1),
+            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc),
             InstructorID = 1
         };
 
@@ -150,7 +150,7 @@ public class DepartmentEditTests : BunitTestBase
         {
             Name = "TestDepartment",
             Budget = 123,
-            StartDate = new DateTime(2021, 3, 1),
+            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc),
             InstructorID = 1
         };
 
@@ -195,7 +195,7 @@ public class DepartmentEditTests : BunitTestBase
         {
             Name = "TestDepartment",
             Budget = 123,
-            StartDate = new DateTime(2021, 3, 1),
+            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc),
             InstructorID = 1
         };
 
@@ -244,7 +244,7 @@ public class DepartmentEditTests : BunitTestBase
         {
             Name = "TestDepartment",
             Budget = 123,
-            StartDate = new DateTime(2021, 3, 1),
+            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc),
             InstructorID = 1
         };
 

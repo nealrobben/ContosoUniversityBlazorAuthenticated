@@ -21,7 +21,7 @@ public class InstructorDetailsTests : BunitTestBase
             InstructorID = 1,
             LastName = "Lastname",
             FirstName = "Firstname",
-            HireDate = new DateTime(2021, 3, 1)
+            HireDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc)
         };
 
         var fakeInstructorService = A.Fake<IInstructorService>();
@@ -63,7 +63,7 @@ public class InstructorDetailsTests : BunitTestBase
             InstructorID = 1,
             LastName = "Lastname",
             FirstName = "Firstname",
-            HireDate = new DateTime(2021, 3, 1)
+            HireDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc)
         };
 
         var fakeInstructorService = A.Fake<IInstructorService>();

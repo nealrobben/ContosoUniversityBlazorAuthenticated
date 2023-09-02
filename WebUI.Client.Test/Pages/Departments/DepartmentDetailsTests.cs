@@ -20,7 +20,7 @@ public class DepartmentDetailsTests : BunitTestBase
         {
             Name = "TestDepartment",
             Budget = 123,
-            StartDate = new DateTime(2021, 3, 1),
+            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc),
             AdministratorName = "Admin"
         };
         
@@ -64,7 +64,7 @@ public class DepartmentDetailsTests : BunitTestBase
         {
             Name = "TestDepartment",
             Budget = 123,
-            StartDate = new DateTime(2021, 3, 1),
+            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc),
             AdministratorName = "Admin"
         };
 
