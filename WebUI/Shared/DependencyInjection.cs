@@ -1,15 +1,14 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿namespace WebUI.Shared;
+
+using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
-namespace WebUI.Shared
+public static class DependencyInjection
 {
-    public static class DependencyInjection
+    public static IServiceCollection AddShared(this IServiceCollection services)
     {
-        public static IServiceCollection AddShared(this IServiceCollection services)
-        {
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
-            return services;
-        }
+        return services;
     }
 }

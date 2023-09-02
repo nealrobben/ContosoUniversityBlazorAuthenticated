@@ -1,19 +1,18 @@
-﻿using System.Collections.Generic;
+﻿namespace WebUI.Shared.Instructors.Queries.GetInstructorsLookup;
 
-namespace WebUI.Shared.Instructors.Queries.GetInstructorsLookup
+using System.Collections.Generic;
+
+public class InstructorsLookupVM
 {
-    public class InstructorsLookupVM
+    public IList<InstructorLookupVM> Instructors { get; set; }
+
+    public InstructorsLookupVM()
     {
-        public IList<InstructorLookupVM> Instructors { get; set; }
+        Instructors = new List<InstructorLookupVM>();
+    }
 
-        public InstructorsLookupVM()
-        {
-            Instructors = new List<InstructorLookupVM>();
-        }
-
-        public InstructorsLookupVM(IList<InstructorLookupVM> instructors)
-        {
-            Instructors = instructors;
-        }
+    public InstructorsLookupVM(IList<InstructorLookupVM> instructors)
+    {
+        Instructors = instructors;
     }
 }
