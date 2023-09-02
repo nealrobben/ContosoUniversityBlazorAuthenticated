@@ -39,7 +39,7 @@ public partial class DepartmentCreate
     protected override async Task OnInitializedAsync()
     {
         InstructorsLookup = await InstructorService.GetLookupAsync();
-        CreateDepartmentCommand.InstructorID = InstructorsLookup.Instructors.First().ID;
+        CreateDepartmentCommand.InstructorID = InstructorsLookup.Instructors[0].ID;
         StateHasChanged();
     }
 

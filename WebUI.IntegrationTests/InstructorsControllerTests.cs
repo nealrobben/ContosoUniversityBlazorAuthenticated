@@ -89,10 +89,10 @@ public class InstructorsControllerTests : IntegrationTest
 
         result.Records.Should().ContainSingle();
 
-        result.Records.First().InstructorID.Should().Be(instructor2.ID);
-        result.Records.First().FirstName.Should().Be(instructor2.FirstMidName);
-        result.Records.First().LastName.Should().Be(instructor2.LastName);
-        result.Records.First().HireDate.Should().Be(instructor2.HireDate);
+        result.Records[0].InstructorID.Should().Be(instructor2.ID);
+        result.Records[0].FirstName.Should().Be(instructor2.FirstMidName);
+        result.Records[0].LastName.Should().Be(instructor2.LastName);
+        result.Records[0].HireDate.Should().Be(instructor2.HireDate);
     }
 
     [Fact]
@@ -130,10 +130,10 @@ public class InstructorsControllerTests : IntegrationTest
 
         result.Records.Count.Should().Be(2);
 
-        result.Records.First().InstructorID.Should().Be(instructor2.ID);
-        result.Records.First().FirstName.Should().Be(instructor2.FirstMidName);
-        result.Records.First().LastName.Should().Be(instructor2.LastName);
-        result.Records.First().HireDate.Should().Be(instructor2.HireDate);
+        result.Records[0].InstructorID.Should().Be(instructor2.ID);
+        result.Records[0].FirstName.Should().Be(instructor2.FirstMidName);
+        result.Records[0].LastName.Should().Be(instructor2.LastName);
+        result.Records[0].HireDate.Should().Be(instructor2.HireDate);
     }
 
     [Fact]

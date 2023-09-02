@@ -54,7 +54,7 @@ public partial class StudentEdit
             {
                 if (files.Any())
                 {
-                    UpdateStudentCommand.ProfilePictureName = await _fileuploadService.UploadFile(files.First());
+                    UpdateStudentCommand.ProfilePictureName = await _fileuploadService.UploadFile(files[0]);
                 }
 
                 await StudentService.UpdateAsync(UpdateStudentCommand);

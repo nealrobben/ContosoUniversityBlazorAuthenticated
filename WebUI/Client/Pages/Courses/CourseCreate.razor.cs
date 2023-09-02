@@ -37,7 +37,7 @@ public partial class CourseCreate
     protected override async Task OnInitializedAsync()
     {
         DepartmentsLookup = await DepartmentService.GetLookupAsync();
-        CreateCourseCommand.DepartmentID = DepartmentsLookup.Departments.First().DepartmentID;
+        CreateCourseCommand.DepartmentID = DepartmentsLookup.Departments[0].DepartmentID;
         StateHasChanged();
     }
 

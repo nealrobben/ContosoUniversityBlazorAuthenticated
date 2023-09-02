@@ -42,7 +42,7 @@ public partial class StudentCreate
             {
                 if (files.Any())
                 {
-                    CreateStudentCommand.ProfilePictureName = await FileUploadService.UploadFile(files.First());
+                    CreateStudentCommand.ProfilePictureName = await FileUploadService.UploadFile(files[0]);
                 }
 
                 await StudentService.CreateAsync(CreateStudentCommand);

@@ -304,8 +304,6 @@ public class StudentEditTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        var dialog = dialogReference?.Dialog as StudentEdit;
-
         comp.Find("#LastName").Change("");
         comp.Find("#FirstName").Change("");
         comp.Find("#EnrollmentDate").Change("");

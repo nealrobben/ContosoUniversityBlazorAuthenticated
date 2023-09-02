@@ -39,7 +39,7 @@ public class FileuploadService : IFileuploadService
 
         if (newUploadResults.Count != 0)
         {
-            storedFileName = newUploadResults.First().StoredFileName;
+            storedFileName = newUploadResults[0].StoredFileName;
         }
 
         return storedFileName;

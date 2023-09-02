@@ -54,7 +54,7 @@ public partial class InstructorEdit
             {
                 if (files.Any())
                 {
-                    UpdateInstructorCommand.ProfilePictureName = await _fileuploadService.UploadFile(files.First());
+                    UpdateInstructorCommand.ProfilePictureName = await _fileuploadService.UploadFile(files[0]);
                 }
 
                 await InstructorService.UpdateAsync(UpdateInstructorCommand);

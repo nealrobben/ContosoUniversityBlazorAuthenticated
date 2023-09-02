@@ -53,10 +53,10 @@ public class CoursesControllerTests : IntegrationTest
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         var result = (await response.Content.ReadAsAsync<OverviewVM<CourseVM>>());
         result.Records.Should().ContainSingle();
-        result.Records.First().CourseID.Should().Be(course.CourseID);
-        result.Records.First().Title.Should().Be(course.Title);
-        result.Records.First().Credits.Should().Be(course.Credits);
-        result.Records.First().DepartmentName.Should().Be(department.Name);
+        result.Records[0].CourseID.Should().Be(course.CourseID);
+        result.Records[0].Title.Should().Be(course.Title);
+        result.Records[0].Credits.Should().Be(course.Credits);
+        result.Records[0].DepartmentName.Should().Be(department.Name);
     }
 
     [Fact]
@@ -100,10 +100,10 @@ public class CoursesControllerTests : IntegrationTest
         var result = (await response.Content.ReadAsAsync<OverviewVM<CourseVM>>());
 
         result.Records.Should().ContainSingle();
-        result.Records.First().CourseID.Should().Be(course2.CourseID);
-        result.Records.First().Title.Should().Be(course2.Title);
-        result.Records.First().Credits.Should().Be(course2.Credits);
-        result.Records.First().DepartmentName.Should().Be(department.Name);
+        result.Records[0].CourseID.Should().Be(course2.CourseID);
+        result.Records[0].Title.Should().Be(course2.Title);
+        result.Records[0].Credits.Should().Be(course2.Credits);
+        result.Records[0].DepartmentName.Should().Be(department.Name);
     }
 
 
@@ -148,10 +148,10 @@ public class CoursesControllerTests : IntegrationTest
         var result = (await response.Content.ReadAsAsync<OverviewVM<CourseVM>>());
 
         result.Records.Count.Should().Be(2);
-        result.Records.First().CourseID.Should().Be(course2.CourseID);
-        result.Records.First().Title.Should().Be(course2.Title);
-        result.Records.First().Credits.Should().Be(course2.Credits);
-        result.Records.First().DepartmentName.Should().Be(department.Name);
+        result.Records[0].CourseID.Should().Be(course2.CourseID);
+        result.Records[0].Title.Should().Be(course2.Title);
+        result.Records[0].Credits.Should().Be(course2.Credits);
+        result.Records[0].DepartmentName.Should().Be(department.Name);
     }
 
     [Fact]
@@ -507,8 +507,8 @@ public class CoursesControllerTests : IntegrationTest
         var result = (await response.Content.ReadAsAsync<CoursesForInstructorOverviewVM>());
         
         result.Courses.Should().ContainSingle();
-        result.Courses.First().CourseID.Should().Be(course.CourseID);
-        result.Courses.First().Title.Should().Be(course.Title);
-        result.Courses.First().DepartmentName.Should().Be(department.Name);
+        result.Courses[0].CourseID.Should().Be(course.CourseID);
+        result.Courses[0].Title.Should().Be(course.Title);
+        result.Courses[0].DepartmentName.Should().Be(department.Name);
     }
 }

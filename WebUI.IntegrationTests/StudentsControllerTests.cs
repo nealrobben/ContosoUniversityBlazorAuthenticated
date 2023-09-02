@@ -47,10 +47,10 @@ public class StudentsControllerTests : IntegrationTest
         var result = (await response.Content.ReadAsAsync<OverviewVM<StudentOverviewVM>>());
         
         result.Records.Should().ContainSingle();
-        result.Records.First().StudentID.Should().Be(student.ID);
-        result.Records.First().FirstName.Should().Be(student.FirstMidName);
-        result.Records.First().LastName.Should().Be(student.LastName);
-        result.Records.First().EnrollmentDate.Should().Be(student.EnrollmentDate);
+        result.Records[0].StudentID.Should().Be(student.ID);
+        result.Records[0].FirstName.Should().Be(student.FirstMidName);
+        result.Records[0].LastName.Should().Be(student.LastName);
+        result.Records[0].EnrollmentDate.Should().Be(student.EnrollmentDate);
     }
 
     [Fact]
@@ -88,10 +88,10 @@ public class StudentsControllerTests : IntegrationTest
 
         result.Records.Should().ContainSingle();
 
-        result.Records.First().StudentID.Should().Be(student2.ID);
-        result.Records.First().FirstName.Should().Be(student2.FirstMidName);
-        result.Records.First().LastName.Should().Be(student2.LastName);
-        result.Records.First().EnrollmentDate.Should().Be(student2.EnrollmentDate);
+        result.Records[0].StudentID.Should().Be(student2.ID);
+        result.Records[0].FirstName.Should().Be(student2.FirstMidName);
+        result.Records[0].LastName.Should().Be(student2.LastName);
+        result.Records[0].EnrollmentDate.Should().Be(student2.EnrollmentDate);
     }
 
     [Fact]
@@ -450,7 +450,7 @@ public class StudentsControllerTests : IntegrationTest
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         var result = (await response.Content.ReadAsAsync<StudentsForCourseVM>());
         result.Students.Should().ContainSingle();
-        result.Students.First().StudentName.Should().Be(student.FullName);
-        result.Students.First().StudentGrade.Should().Be(enrollment.Grade);
+        result.Students[0].StudentName.Should().Be(student.FullName);
+        result.Students[0].StudentGrade.Should().Be(enrollment.Grade);
     }
 }

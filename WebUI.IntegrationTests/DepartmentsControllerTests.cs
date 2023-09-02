@@ -47,10 +47,10 @@ public class DepartmentsControllerTests : IntegrationTest
         var result = (await response.Content.ReadAsAsync<OverviewVM<DepartmentVM>>());
 
         result.Records.Should().ContainSingle();
-        result.Records.First().DepartmentID.Should().Be(department.DepartmentID);
-        result.Records.First().Name.Should().Be(department.Name);
-        result.Records.First().Budget.Should().Be(department.Budget);
-        result.Records.First().StartDate.Should().Be(department.StartDate);
+        result.Records[0].DepartmentID.Should().Be(department.DepartmentID);
+        result.Records[0].Name.Should().Be(department.Name);
+        result.Records[0].Budget.Should().Be(department.Budget);
+        result.Records[0].StartDate.Should().Be(department.StartDate);
     }
 
     [Fact]
@@ -428,7 +428,7 @@ public class DepartmentsControllerTests : IntegrationTest
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         var result = (await response.Content.ReadAsAsync<DepartmentsLookupVM>());
         result.Departments.Should().ContainSingle();
-        result.Departments.First().DepartmentID.Should().Be(department.DepartmentID);
-        result.Departments.First().Name.Should().Be(department.Name);
+        result.Departments[0].DepartmentID.Should().Be(department.DepartmentID);
+        result.Departments[0].Name.Should().Be(department.Name);
     }
 }

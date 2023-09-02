@@ -41,7 +41,7 @@ public partial class InstructorCreate
             {
                 if (files.Any())
                 {
-                    CreateInstructorCommand.ProfilePictureName = await FileUploadService.UploadFile(files.First());
+                    CreateInstructorCommand.ProfilePictureName = await FileUploadService.UploadFile(files[0]);
                 }
 
                 await InstructorService.CreateAsync(CreateInstructorCommand);
