@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿namespace ContosoUniversityCQRS.Application.Instructors.Queries.GetInstructorsOverview;
+
+using AutoMapper;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using MediatR;
 using System.Collections.Generic;
@@ -6,11 +8,9 @@ using System.Threading.Tasks;
 using System.Threading;
 using WebUI.Shared.Common;
 using WebUI.Shared.Instructors.Queries.GetInstructorsOverview;
-using Application.Common.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-
-namespace ContosoUniversityCQRS.Application.Instructors.Queries.GetInstructorsOverview;
+using global::Application.Common.Extensions;
 
 public class GetInstructorsOverviewQuery : IRequest<OverviewVM<InstructorVM>>
 {

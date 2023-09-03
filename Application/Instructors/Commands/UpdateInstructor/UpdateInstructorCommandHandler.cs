@@ -1,14 +1,14 @@
-﻿using Application.Common.Interfaces;
+﻿namespace ContosoUniversityBlazor.Application.Instructors.Commands.UpdateInstructor;
+
+using Application.Common.Interfaces;
 using ContosoUniversityBlazor.Application.Common.Exceptions;
-using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
+using global::Application.Common.Interfaces;
+using global::System.Threading;
+using global::System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System.Threading;
-using System.Threading.Tasks;
 using WebUI.Shared.Instructors.Commands.UpdateInstructor;
-
-namespace ContosoUniversityBlazor.Application.Instructors.Commands.UpdateInstructor;
 
 public class UpdateInstructorCommandHandler : IRequestHandler<UpdateInstructorCommand>
 {

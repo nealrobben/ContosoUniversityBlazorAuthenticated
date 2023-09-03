@@ -1,9 +1,9 @@
-﻿using AutoMapper;
-using System;
-using System.Linq;
-using System.Reflection;
+﻿namespace ContosoUniversityBlazor.Application.Common.Mappings;
 
-namespace ContosoUniversityBlazor.Application.Common.Mappings;
+using AutoMapper;
+using global::System;
+using global::System.Linq;
+using global::System.Reflection;
 
 public class MappingProfile : Profile
 {

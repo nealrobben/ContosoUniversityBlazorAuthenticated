@@ -1,14 +1,14 @@
-﻿using AutoMapper;
+﻿namespace ContosoUniversityBlazor.Application.Departments.Queries.GetDepartmentDetails;
+
+using AutoMapper;
 using ContosoUniversityBlazor.Application.Common.Exceptions;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
 using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
 using WebUI.Shared.Departments.Queries.GetDepartmentDetails;
 using Microsoft.EntityFrameworkCore;
-
-namespace ContosoUniversityBlazor.Application.Departments.Queries.GetDepartmentDetails;
+using global::System.Threading;
+using global::System.Threading.Tasks;
 
 public class GetDepartmentDetailsQuery : IRequest<DepartmentDetailVM>
 {

@@ -1,6 +1,6 @@
-﻿using AutoMapper;
+﻿namespace ContosoUniversityBlazor.Application.Common.Mappings;
 
-namespace ContosoUniversityBlazor.Application.Common.Mappings;
+using AutoMapper;
 
 public interface IMapFrom<T>
 {   

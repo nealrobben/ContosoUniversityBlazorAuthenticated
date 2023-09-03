@@ -1,10 +1,10 @@
-﻿using MediatR;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
+﻿namespace ContosoUniversityBlazor.Application.Common.Behaviours;
 
-namespace ContosoUniversityBlazor.Application.Common.Behaviours;
+using global::System;
+using global::System.Threading;
+using global::System.Threading.Tasks;
+using MediatR;
+using Microsoft.Extensions.Logging;
 
 public class UnhandledExceptionBehaviour<TRequest, TResponse> 
     : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>

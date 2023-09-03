@@ -1,14 +1,14 @@
-﻿using AutoMapper;
+﻿namespace ContosoUniversityBlazor.Application.Instructors.Queries.GetInstructorsLookup;
+
+using AutoMapper;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using MediatR;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Threading;
 using WebUI.Shared.Instructors.Queries.GetInstructorsLookup;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
-
-namespace ContosoUniversityBlazor.Application.Instructors.Queries.GetInstructorsLookup;
+using global::System.Collections.Generic;
+using global::System.Linq;
+using global::System.Threading;
+using global::System.Threading.Tasks;
 
 public class GetInstructorLookupQuery : IRequest<InstructorsLookupVM>
 {

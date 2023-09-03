@@ -1,11 +1,11 @@
-﻿using ContosoUniversityBlazor.Application.Common.Interfaces;
+﻿namespace Application.Courses.Validators;
+
+using ContosoUniversityBlazor.Application.Common.Interfaces;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 using WebUI.Shared.Courses.Commands.CreateCourse;
-
-namespace Application.Courses.Validators;
 
 public class CreateCourseValidator
     : WebUI.Shared.Courses.Validators.CreateCourseValidator

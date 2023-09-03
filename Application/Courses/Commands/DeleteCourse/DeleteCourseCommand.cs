@@ -1,11 +1,11 @@
-﻿using ContosoUniversityBlazor.Application.Common.Exceptions;
+﻿namespace ContosoUniversityBlazor.Application.Courses.Commands.DeleteCourse;
+
+using ContosoUniversityBlazor.Application.Common.Exceptions;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
 using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
-
-namespace ContosoUniversityBlazor.Application.Courses.Commands.DeleteCourse;
+using global::System.Threading;
+using global::System.Threading.Tasks;
 
 public class DeleteCourseCommand : IRequest
 {

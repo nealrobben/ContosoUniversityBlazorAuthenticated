@@ -1,14 +1,14 @@
-﻿using AutoMapper;
+﻿namespace ContosoUniversityBlazor.Application.Departments.Queries.GetDepartmentsLookup;
+
+using AutoMapper;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using MediatR;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Threading;
 using WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
-
-namespace ContosoUniversityBlazor.Application.Departments.Queries.GetDepartmentsLookup;
+using global::System.Threading;
+using global::System.Linq;
+using global::System.Collections.Generic;
+using global::System.Threading.Tasks;
 
 public class GetDepartmentsLookupQuery : IRequest<DepartmentsLookupVM>
 {

@@ -1,11 +1,11 @@
-﻿using ContosoUniversityBlazor.Application.Common.Interfaces;
-using ContosoUniversityBlazor.Domain.Entities;
-using MediatR;
-using System.Threading;
-using System.Threading.Tasks;
-using WebUI.Shared.Students.Commands.CreateStudent;
+﻿namespace ContosoUniversityBlazor.Application.Students.Commands.CreateStudent;
 
-namespace ContosoUniversityBlazor.Application.Students.Commands.CreateStudent;
+using ContosoUniversityBlazor.Application.Common.Interfaces;
+using ContosoUniversityBlazor.Domain.Entities;
+using global::System.Threading;
+using global::System.Threading.Tasks;
+using MediatR;
+using WebUI.Shared.Students.Commands.CreateStudent;
 
 public class CreateStudentCommandHandler : IRequestHandler<CreateStudentCommand,int>
 {

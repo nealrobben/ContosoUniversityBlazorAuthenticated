@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿namespace ContosoUniversityBlazor.Application.Common.Models;
 
-namespace ContosoUniversityBlazor.Application.Common.Models;
+using global::System;
+using global::System.Collections.Generic;
+using global::System.Linq;
 
 public class Result
 {

@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+﻿namespace ContosoUniversityBlazor.Application.Common.Behaviours;
+
 using FluentValidation;
+using global::System.Collections.Generic;
+using global::System.Linq;
+using global::System.Threading;
+using global::System.Threading.Tasks;
 using MediatR;
 using ValidationException = ContosoUniversityBlazor.Application.Common.Exceptions.ValidationException;
-
-namespace ContosoUniversityBlazor.Application.Common.Behaviours;
 
 public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
