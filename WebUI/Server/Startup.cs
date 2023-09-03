@@ -62,7 +62,7 @@ public class Startup
             app.UseWebAssemblyDebugging();
 
             //Do NOT use this method with .Net 5, it will give an exception when processing a request
-            //app.UseDatabaseErrorPage();
+            //app.UseDatabaseErrorPage(); //NOSONAR
         }
         else
         {

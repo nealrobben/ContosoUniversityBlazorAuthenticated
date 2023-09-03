@@ -15,8 +15,8 @@ public class MappingProfile : Profile
     private void ApplyMappingsFromAssembly(Assembly assembly)
     {
         var types = assembly.GetExportedTypes()
-            .Where(t => t.GetInterfaces().Any(i => 
-                i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IMapFrom<>)))
+            .Where(t => Array.Exists(t.GetInterfaces(),
+                i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IMapFrom<>)))
             .ToList();
 
         foreach (var type in types)
