@@ -4,12 +4,14 @@ using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
 using ContosoUniversityBlazor.Domain.Enums;
 using global::System;
+using global::System.Globalization;
 using global::System.Linq;
 using global::System.Threading.Tasks;
 
 public class DataSeeder
 {
     private readonly ISchoolContext _context;
+    private CultureInfo CultureInfoBE => new("nl-BE");
 
     public DataSeeder(ISchoolContext context)
     {
@@ -110,6 +112,7 @@ public class DataSeeder
                 _context.Enrollments.Add(e);
             }
         }
+
         await _context.SaveChangesAsync();
     }
 
@@ -155,6 +158,7 @@ public class DataSeeder
         {
             _context.CourseAssignments.Add(ci);
         }
+
         await _context.SaveChangesAsync();
     }
 
@@ -177,6 +181,7 @@ public class DataSeeder
         {
             _context.OfficeAssignments.Add(o);
         }
+
         await _context.SaveChangesAsync();
     }
 
@@ -211,7 +216,9 @@ public class DataSeeder
         {
             _context.Courses.Add(c);
         }
+
         await _context.SaveChangesAsync();
+
         return courses;
     }
 
@@ -220,16 +227,16 @@ public class DataSeeder
         var departments = new Department[]
         {
             new Department { Name = "English",     Budget = 350000,
-                StartDate = DateTime.Parse("2007-09-01"),
+                StartDate = DateTime.Parse("01/09/2007", CultureInfoBE),
                 InstructorID  = instructors.Single( i => i.LastName == "Abercrombie").ID },
             new Department { Name = "Mathematics", Budget = 100000,
-                StartDate = DateTime.Parse("2007-09-01"),
+                StartDate = DateTime.Parse("01/09/2007", CultureInfoBE),
                 InstructorID  = instructors.Single( i => i.LastName == "Fakhouri").ID },
             new Department { Name = "Engineering", Budget = 350000,
-                StartDate = DateTime.Parse("2007-09-01"),
+                StartDate = DateTime.Parse("01/09/2007", CultureInfoBE),
                 InstructorID  = instructors.Single( i => i.LastName == "Harui").ID },
             new Department { Name = "Economics",   Budget = 100000,
-                StartDate = DateTime.Parse("2007-09-01"),
+                StartDate = DateTime.Parse("01/09/2007", CultureInfoBE),
                 InstructorID  = instructors.Single( i => i.LastName == "Kapoor").ID }
         };
 
@@ -237,7 +244,9 @@ public class DataSeeder
         {
             _context.Departments.Add(d);
         }
+
         await _context.SaveChangesAsync();
+
         return departments;
     }
 
@@ -245,23 +254,25 @@ public class DataSeeder
     {
         var instructors = new Instructor[]
         {
-            new Instructor { FirstMidName = "Kim",     LastName = "Abercrombie",
-                HireDate = DateTime.Parse("1995-03-11") },
+            new Instructor { FirstMidName = "Kim", LastName = "Abercrombie",
+                HireDate = DateTime.Parse("11/03/1995", CultureInfoBE) },
             new Instructor { FirstMidName = "Fadi",    LastName = "Fakhouri",
-                HireDate = DateTime.Parse("2002-07-06") },
+                HireDate = DateTime.Parse("06/07/2002", CultureInfoBE) },
             new Instructor { FirstMidName = "Roger",   LastName = "Harui",
-                HireDate = DateTime.Parse("1998-07-01") },
+                HireDate = DateTime.Parse("01/07/1998", CultureInfoBE) },
             new Instructor { FirstMidName = "Candace", LastName = "Kapoor",
-                HireDate = DateTime.Parse("2001-01-15") },
+                HireDate = DateTime.Parse("15/01/2001", CultureInfoBE) },
             new Instructor { FirstMidName = "Roger",   LastName = "Zheng",
-                HireDate = DateTime.Parse("2004-02-12") }
+                HireDate = DateTime.Parse("12/02/2004", CultureInfoBE) }
         };
 
         foreach (Instructor i in instructors)
         {
             _context.Instructors.Add(i);
         }
+
         await _context.SaveChangesAsync();
+
         return instructors;
     }
 
@@ -270,28 +281,30 @@ public class DataSeeder
         var students = new Student[]
                     {
             new Student { FirstMidName = "Carson",   LastName = "Alexander",
-                EnrollmentDate = DateTime.Parse("2010-09-01") },
+                EnrollmentDate = DateTime.Parse("01/09/2010", CultureInfoBE) },
             new Student { FirstMidName = "Meredith", LastName = "Alonso",
-                EnrollmentDate = DateTime.Parse("2012-09-01") },
+                EnrollmentDate = DateTime.Parse("01/09/2012", CultureInfoBE) },
             new Student { FirstMidName = "Arturo",   LastName = "Anand",
-                EnrollmentDate = DateTime.Parse("2013-09-01") },
+                EnrollmentDate = DateTime.Parse("01/09/2013", CultureInfoBE) },
             new Student { FirstMidName = "Gytis",    LastName = "Barzdukas",
-                EnrollmentDate = DateTime.Parse("2012-09-01") },
+                EnrollmentDate = DateTime.Parse("01/09/2012", CultureInfoBE) },
             new Student { FirstMidName = "Yan",      LastName = "Li",
-                EnrollmentDate = DateTime.Parse("2012-09-01") },
+                EnrollmentDate = DateTime.Parse("01/09/2012", CultureInfoBE) },
             new Student { FirstMidName = "Peggy",    LastName = "Justice",
-                EnrollmentDate = DateTime.Parse("2011-09-01") },
+                EnrollmentDate = DateTime.Parse("01/09/2011", CultureInfoBE) },
             new Student { FirstMidName = "Laura",    LastName = "Norman",
-                EnrollmentDate = DateTime.Parse("2013-09-01") },
+                EnrollmentDate = DateTime.Parse("01/09/2013", CultureInfoBE) },
             new Student { FirstMidName = "Nino",     LastName = "Olivetto",
-                EnrollmentDate = DateTime.Parse("2005-09-01") }
+                EnrollmentDate = DateTime.Parse("01/09/2005", CultureInfoBE) }
                     };
 
         foreach (Student s in students)
         {
             _context.Students.Add(s);
         }
+
         await _context.SaveChangesAsync();
+
         return students;
     }
 }
