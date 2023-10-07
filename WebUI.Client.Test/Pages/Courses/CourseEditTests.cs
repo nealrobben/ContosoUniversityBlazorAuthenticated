@@ -1,6 +1,7 @@
 ﻿namespace WebUI.Client.Test.Pages.Courses;
 
 using AngleSharp.Html.Dom;
+using AutoFixture;
 using Bunit;
 using FakeItEasy;
 using FluentAssertions;
@@ -19,13 +20,8 @@ public class CourseEditTests : BunitTestBase
     [Fact]
     public async Task CourseEdit_DisplayDialogCorrectly()
     {
-        var courseDetailsVM = new CourseDetailVM
-        {
-            CourseID = 1,
-            Title = "My course",
-            Credits = 2,
-            DepartmentID = 3
-        };
+        var fixture = new Fixture();
+        var courseDetailsVM = fixture.Create<CourseDetailVM>();
 
         var fakeCourseService = A.Fake<ICourseService>();
         A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsVM);
@@ -60,13 +56,8 @@ public class CourseEditTests : BunitTestBase
     [Fact]
     public async Task CourseEdit_WhenCancelButtonClicked_PopupCloses()
     {
-        var courseDetailsVM = new CourseDetailVM
-        {
-            CourseID = 1,
-            Title = "My course",
-            Credits = 2,
-            DepartmentID = 3
-        };
+        var fixture = new Fixture();
+        var courseDetailsVM = fixture.Create<CourseDetailVM>();
 
         var fakeCourseService = A.Fake<ICourseService>();
         A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsVM);
@@ -99,13 +90,8 @@ public class CourseEditTests : BunitTestBase
     [Fact]
     public async Task CourseEdit_WhenEditButtonClicked_PopupCloses()
     {
-        var courseDetailsVM = new CourseDetailVM
-        {
-            CourseID = 1,
-            Title = "My course",
-            Credits = 2,
-            DepartmentID = 3
-        };
+        var fixture = new Fixture();
+        var courseDetailsVM = fixture.Create<CourseDetailVM>();
 
         var fakeCourseService = A.Fake<ICourseService>();
         A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsVM);
@@ -142,13 +128,8 @@ public class CourseEditTests : BunitTestBase
     [Fact]
     public async Task CourseEdit_WhenEditButtonClicked_CourseServiceMustBeCalled()
     {
-        var courseDetailsVM = new CourseDetailVM
-        {
-            CourseID = 1,
-            Title = "My course",
-            Credits = 2,
-            DepartmentID = 3
-        };
+        var fixture = new Fixture();
+        var courseDetailsVM = fixture.Create<CourseDetailVM>();
 
         var fakeCourseService = A.Fake<ICourseService>();
         A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsVM);
@@ -186,13 +167,8 @@ public class CourseEditTests : BunitTestBase
     [Fact]
     public async Task CourseEdit_WhenExceptionCaughtAfterSave_ShowErrorMessage()
     {
-        var courseDetailsVM = new CourseDetailVM
-        {
-            CourseID = 1,
-            Title = "My course",
-            Credits = 2,
-            DepartmentID = 3
-        };
+        var fixture = new Fixture();
+        var courseDetailsVM = fixture.Create<CourseDetailVM>();
 
         var fakeCourseService = A.Fake<ICourseService>();
         A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsVM);
@@ -234,13 +210,8 @@ public class CourseEditTests : BunitTestBase
     [Fact]
     public async Task CourseEdit_WhenValidationFails_ShowErrorMessagesForFields()
     {
-        var courseDetailsVM = new CourseDetailVM
-        {
-            CourseID = 1,
-            Title = "My course",
-            Credits = 2,
-            DepartmentID = 3
-        };
+        var fixture = new Fixture();
+        var courseDetailsVM = fixture.Create<CourseDetailVM>();
 
         var fakeCourseService = A.Fake<ICourseService>();
         A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsVM);

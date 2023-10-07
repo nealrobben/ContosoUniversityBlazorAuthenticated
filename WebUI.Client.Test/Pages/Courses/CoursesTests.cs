@@ -1,5 +1,6 @@
 ﻿namespace WebUI.Client.Test.Pages.Courses;
 
+using AutoFixture;
 using Bunit;
 using FakeItEasy;
 using FluentAssertions;
@@ -10,6 +11,7 @@ using WebUI.Client.Test.Extensions;
 using WebUI.Shared.Common;
 using WebUI.Shared.Courses.Queries.GetCoursesOverview;
 using WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
+using WebUI.Shared.Students.Queries.GetStudentDetails;
 using Xunit;
 
 public class CoursesTests : BunitTestBase
@@ -20,17 +22,8 @@ public class CoursesTests : BunitTestBase
         var fakeCourseService = A.Fake<ICourseService>();
         Context.Services.AddScoped(x => fakeCourseService);
 
-        var departmentsLookupVM = new DepartmentsLookupVM
-        {
-            Departments =
-            {
-                new DepartmentLookupVM
-                {
-                    DepartmentID = 1,
-                    Name = "Course x"
-                }
-            }
-        };
+        var fixture = new Fixture();
+        var departmentsLookupVM = fixture.Create<DepartmentsLookupVM>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
         A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(departmentsLookupVM);
@@ -83,17 +76,8 @@ public class CoursesTests : BunitTestBase
     [Fact]
     public void Courses_ClickDetailsButton_OpensDialog()
     {
-        var coursesOverviewVM = new OverviewVM<CourseVM>
-        {
-            Records =
-            {
-                new CourseVM
-                {
-                    CourseID = 1,
-                    Title = "Course x"
-                }
-            }
-        };
+        var fixture = new Fixture();
+        var coursesOverviewVM = fixture.Create<OverviewVM<CourseVM>>();
 
         var fakeCourseService = A.Fake<ICourseService>();
         A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(coursesOverviewVM);
@@ -114,17 +98,8 @@ public class CoursesTests : BunitTestBase
     [Fact]
     public void Courses_ClickEditButton_OpensDialog()
     {
-        var coursesOverviewVM = new OverviewVM<CourseVM>
-        {
-            Records =
-            {
-                new CourseVM
-                {
-                    CourseID = 1,
-                    Title = "Course x"
-                }
-            }
-        };
+        var fixture = new Fixture();
+        var coursesOverviewVM = fixture.Create<OverviewVM<CourseVM>>();
 
         var fakeCourseService = A.Fake<ICourseService>();
         A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(coursesOverviewVM);
@@ -148,17 +123,8 @@ public class CoursesTests : BunitTestBase
     [Fact]
     public void Courses_ClickDeleteButton_ShowsConfirmationDialog()
     {
-        var coursesOverviewVM = new OverviewVM<CourseVM>
-        {
-            Records =
-            {
-                new CourseVM
-                {
-                    CourseID = 1,
-                    Title = "Course x"
-                }
-            }
-        };
+        var fixture = new Fixture();
+        var coursesOverviewVM = fixture.Create<OverviewVM<CourseVM>>();
 
         var fakeCourseService = A.Fake<ICourseService>();
         A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(coursesOverviewVM);
@@ -178,23 +144,14 @@ public class CoursesTests : BunitTestBase
 
         Assert.NotEmpty(dialog.Markup.Trim());
 
-        dialog.Find(".mud-dialog-content").TrimmedText().Should().Be("Are you sure you want to delete the course Course x?");
+        dialog.Find(".mud-dialog-content").TrimmedText().Should().Be($"Are you sure you want to delete the course {coursesOverviewVM.Records[0].Title}?");
     }
 
     [Fact]
     public void Courses_ClickDeleteButtonAndConfirm_CourseServiceShouldBeCalled()
     {
-        var coursesOverviewVM = new OverviewVM<CourseVM>
-        {
-            Records =
-            {
-                new CourseVM
-                {
-                    CourseID = 1,
-                    Title = "Course x"
-                }
-            }
-        };
+        var fixture = new Fixture();
+        var coursesOverviewVM = fixture.Create<OverviewVM<CourseVM>>();
 
         var fakeCourseService = A.Fake<ICourseService>();
         A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(coursesOverviewVM);

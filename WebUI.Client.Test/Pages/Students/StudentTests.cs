@@ -1,5 +1,6 @@
 ﻿namespace WebUI.Client.Test.Pages.Students;
 
+using AutoFixture;
 using Bunit;
 using FakeItEasy;
 using FluentAssertions;
@@ -8,6 +9,7 @@ using MudBlazor;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
 using WebUI.Shared.Common;
+using WebUI.Shared.Instructors.Queries.GetInstructorsOverview;
 using WebUI.Shared.Students.Queries.GetStudentsOverview;
 using Xunit;
 
@@ -69,18 +71,8 @@ public class StudentTests : BunitTestBase
     [Fact]
     public void Students_ClickDetailsButton_OpensDialog()
     {
-        var studentsOverviewVM = new OverviewVM<StudentOverviewVM>
-        {
-            Records =
-            {
-                new StudentOverviewVM
-                {
-                    StudentID = 1,
-                    FirstName = "Student",
-                    LastName = "X"
-                }
-            }
-        };
+        var fixture = new Fixture();
+        var studentsOverviewVM = fixture.Create<OverviewVM<StudentOverviewVM>>();
 
         var fakeStudentService = A.Fake<IStudentService>();
         A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(studentsOverviewVM);
@@ -101,18 +93,8 @@ public class StudentTests : BunitTestBase
     [Fact]
     public void Students_ClickEditButton_OpensDialog()
     {
-        var studentsOverviewVM = new OverviewVM<StudentOverviewVM>
-        {
-            Records =
-            {
-                new StudentOverviewVM
-                {
-                    StudentID = 1,
-                    FirstName = "Student",
-                    LastName = "X"
-                }
-            }
-        };
+        var fixture = new Fixture();
+        var studentsOverviewVM = fixture.Create<OverviewVM<StudentOverviewVM>>();
 
         var fakeStudentService = A.Fake<IStudentService>();
         A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(studentsOverviewVM);
@@ -136,18 +118,8 @@ public class StudentTests : BunitTestBase
     [Fact]
     public void Students_ClickDeleteButton_ShowsConfirmationDialog()
     {
-        var studentsOverviewVM = new OverviewVM<StudentOverviewVM>
-        {
-            Records =
-            {
-                new StudentOverviewVM
-                {
-                    StudentID = 1,
-                    FirstName = "Student",
-                    LastName = "X"
-                }
-            }
-        };
+        var fixture = new Fixture();
+        var studentsOverviewVM = fixture.Create<OverviewVM<StudentOverviewVM>>();
 
         var fakeStudentService = A.Fake<IStudentService>();
         A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(studentsOverviewVM);
@@ -167,24 +139,14 @@ public class StudentTests : BunitTestBase
 
         Assert.NotEmpty(dialog.Markup.Trim());
 
-        dialog.Find(".mud-dialog-content").TrimmedText().Should().Be("Are you sure you want to delete Student Student X?");
+        dialog.Find(".mud-dialog-content").TrimmedText().Should().Be($"Are you sure you want to delete Student {studentsOverviewVM.Records[0].FirstName} {studentsOverviewVM.Records[0].LastName}?");
     }
 
     [Fact]
     public void Students_ClickDeleteButtonAndConfirm_StudentServiceShouldBeCalled()
     {
-        var studentsOverviewVM = new OverviewVM<StudentOverviewVM>
-        {
-            Records =
-            {
-                new StudentOverviewVM
-                {
-                    StudentID = 1,
-                    FirstName = "Student",
-                    LastName = "X"
-                }
-            }
-        };
+        var fixture = new Fixture();
+        var studentsOverviewVM = fixture.Create<OverviewVM<StudentOverviewVM>>();
 
         var fakeStudentService = A.Fake<IStudentService>();
         A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(studentsOverviewVM);

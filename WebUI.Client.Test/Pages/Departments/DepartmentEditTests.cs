@@ -1,6 +1,7 @@
 ﻿namespace WebUI.Client.Test.Pages.Departments;
 
 using AngleSharp.Html.Dom;
+using AutoFixture;
 using Bunit;
 using FakeItEasy;
 using FluentAssertions;
@@ -19,13 +20,8 @@ public class DepartmentEditTests : BunitTestBase
     [Fact]
     public async Task DepartmentEdit_DisplayDialogCorrectly()
     {
-        var departmentDetailVM = new DepartmentDetailVM
-        {
-            Name = "TestDepartment",
-            Budget = 123,
-            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc),
-            InstructorID = 1
-        };
+        var fixture = new Fixture();
+        var departmentDetailVM = fixture.Create<DepartmentDetailVM>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
         A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailVM);
@@ -63,13 +59,8 @@ public class DepartmentEditTests : BunitTestBase
     [Fact]
     public async Task DepartmentEdit_WhenCancelButtonClicked_PopupCloses()
     {
-        var departmentDetailVM = new DepartmentDetailVM
-        {
-            Name = "TestDepartment",
-            Budget = 123,
-            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc),
-            InstructorID = 1
-        };
+        var fixture = new Fixture();
+        var departmentDetailVM = fixture.Create<DepartmentDetailVM>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
         A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailVM);
@@ -102,13 +93,8 @@ public class DepartmentEditTests : BunitTestBase
     [Fact]
     public async Task DepartmentEdit_WhenEditButtonClicked_PopupCloses()
     {
-        var departmentDetailVM = new DepartmentDetailVM
-        {
-            Name = "TestDepartment",
-            Budget = 123,
-            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc),
-            InstructorID = 1
-        };
+        var fixture = new Fixture();
+        var departmentDetailVM = fixture.Create<DepartmentDetailVM>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
         A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailVM);
@@ -146,13 +132,8 @@ public class DepartmentEditTests : BunitTestBase
     [Fact]
     public async Task DepartmentEdit_WhenEditButtonClicked_DepartmentServiceMustBeCalled()
     {
-        var departmentDetailVM = new DepartmentDetailVM
-        {
-            Name = "TestDepartment",
-            Budget = 123,
-            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc),
-            InstructorID = 1
-        };
+        var fixture = new Fixture();
+        var departmentDetailVM = fixture.Create<DepartmentDetailVM>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
         A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailVM);
@@ -191,13 +172,8 @@ public class DepartmentEditTests : BunitTestBase
     [Fact]
     public async Task DepartmentEdit_WhenExceptionCaughtAfterSave_ShowErrorMessage()
     {
-        var departmentDetailVM = new DepartmentDetailVM
-        {
-            Name = "TestDepartment",
-            Budget = 123,
-            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc),
-            InstructorID = 1
-        };
+        var fixture = new Fixture();
+        var departmentDetailVM = fixture.Create<DepartmentDetailVM>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
         A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailVM);
@@ -240,13 +216,8 @@ public class DepartmentEditTests : BunitTestBase
     [Fact]
     public async Task DepartmentEdit_WhenValidationFails_ShowErrorMessagesForFields()
     {
-        var departmentDetailVM = new DepartmentDetailVM
-        {
-            Name = "TestDepartment",
-            Budget = 123,
-            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc),
-            InstructorID = 1
-        };
+        var fixture = new Fixture();
+        var departmentDetailVM = fixture.Create<DepartmentDetailVM>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
         A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailVM);

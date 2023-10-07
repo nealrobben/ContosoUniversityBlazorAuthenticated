@@ -1,6 +1,7 @@
 ﻿namespace WebUI.Client.Test.Pages.Students;
 
 using AngleSharp.Html.Dom;
+using AutoFixture;
 using Bunit;
 using FakeItEasy;
 using FluentAssertions;
@@ -18,20 +19,10 @@ public class StudentEditTests : BunitTestBase
     [Fact]
     public async Task StudentDetails_DisplayDetailsCorrectly()
     {
-        var studentDetailsVM = new StudentDetailsVM
-        {
-            StudentID = 1,
-            LastName = "Lastname",
-            FirstName = "Firstname",
-            EnrollmentDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc)
-        };
-
-        var enrollment = new StudentDetailsEnrollmentVM
-        {
-            CourseTitle = "My title",
-            Grade = ContosoUniversityBlazor.Domain.Enums.Grade.A
-        };
-        studentDetailsVM.Enrollments.Add(enrollment);
+        var fixture = new Fixture();
+        var studentDetailsVM = fixture.Create<StudentDetailsVM>();
+        var enrollment = fixture.Create<StudentDetailsEnrollmentVM>();
+        studentDetailsVM.Enrollments = new List<StudentDetailsEnrollmentVM> { enrollment };
 
         var fakeStudentService = A.Fake<IStudentService>();
         A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsVM);
@@ -66,20 +57,10 @@ public class StudentEditTests : BunitTestBase
     [Fact]
     public async Task StudentDetails_WhenCancelButtonClicked_PopupCloses()
     {
-        var studentDetailsVM = new StudentDetailsVM
-        {
-            StudentID = 1,
-            LastName = "Lastname",
-            FirstName = "Firstname",
-            EnrollmentDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc)
-        };
-
-        var enrollment = new StudentDetailsEnrollmentVM
-        {
-            CourseTitle = "My title",
-            Grade = ContosoUniversityBlazor.Domain.Enums.Grade.A
-        };
-        studentDetailsVM.Enrollments.Add(enrollment);
+        var fixture = new Fixture();
+        var studentDetailsVM = fixture.Create<StudentDetailsVM>();
+        var enrollment = fixture.Create<StudentDetailsEnrollmentVM>();
+        studentDetailsVM.Enrollments = new List<StudentDetailsEnrollmentVM> { enrollment };
 
         var fakeStudentService = A.Fake<IStudentService>();
         A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsVM);
@@ -111,20 +92,10 @@ public class StudentEditTests : BunitTestBase
     [Fact]
     public async Task StudentDetails_WhenEditButtonClicked_PopupCloses()
     {
-        var studentDetailsVM = new StudentDetailsVM
-        {
-            StudentID = 1,
-            LastName = "Lastname",
-            FirstName = "Firstname",
-            EnrollmentDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc)
-        };
-
-        var enrollment = new StudentDetailsEnrollmentVM
-        {
-            CourseTitle = "My title",
-            Grade = ContosoUniversityBlazor.Domain.Enums.Grade.A
-        };
-        studentDetailsVM.Enrollments.Add(enrollment);
+        var fixture = new Fixture();
+        var studentDetailsVM = fixture.Create<StudentDetailsVM>();
+        var enrollment = fixture.Create<StudentDetailsEnrollmentVM>();
+        studentDetailsVM.Enrollments = new List<StudentDetailsEnrollmentVM> { enrollment };
 
         var fakeStudentService = A.Fake<IStudentService>();
         A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsVM);
@@ -160,20 +131,10 @@ public class StudentEditTests : BunitTestBase
     [Fact]
     public async Task StudentDetails_WhenEditButtonClicked_StudentServiceMustBeCalled()
     {
-        var studentDetailsVM = new StudentDetailsVM
-        {
-            StudentID = 1,
-            LastName = "Lastname",
-            FirstName = "Firstname",
-            EnrollmentDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc)
-        };
-
-        var enrollment = new StudentDetailsEnrollmentVM
-        {
-            CourseTitle = "My title",
-            Grade = ContosoUniversityBlazor.Domain.Enums.Grade.A
-        };
-        studentDetailsVM.Enrollments.Add(enrollment);
+        var fixture = new Fixture();
+        var studentDetailsVM = fixture.Create<StudentDetailsVM>();
+        var enrollment = fixture.Create<StudentDetailsEnrollmentVM>();
+        studentDetailsVM.Enrollments = new List<StudentDetailsEnrollmentVM> { enrollment };
 
         var fakeStudentService = A.Fake<IStudentService>();
         A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsVM);
@@ -211,20 +172,10 @@ public class StudentEditTests : BunitTestBase
     [Fact]
     public async Task StudentDetails_WhenExceptionCaughtAfterSave_ShowErrorMessage()
     {
-        var studentDetailsVM = new StudentDetailsVM
-        {
-            StudentID = 1,
-            LastName = "Lastname",
-            FirstName = "Firstname",
-            EnrollmentDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc)
-        };
-
-        var enrollment = new StudentDetailsEnrollmentVM
-        {
-            CourseTitle = "My title",
-            Grade = ContosoUniversityBlazor.Domain.Enums.Grade.A
-        };
-        studentDetailsVM.Enrollments.Add(enrollment);
+        var fixture = new Fixture();
+        var studentDetailsVM = fixture.Create<StudentDetailsVM>();
+        var enrollment = fixture.Create<StudentDetailsEnrollmentVM>();
+        studentDetailsVM.Enrollments = new List<StudentDetailsEnrollmentVM> { enrollment };
 
         var fakeStudentService = A.Fake<IStudentService>();
         A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsVM);
@@ -265,20 +216,10 @@ public class StudentEditTests : BunitTestBase
     [Fact]
     public async Task StudentDetails_WhenValidationFails_ShowErrorMessagesForFields()
     {
-        var studentDetailsVM = new StudentDetailsVM
-        {
-            StudentID = 1,
-            LastName = "Lastname",
-            FirstName = "Firstname",
-            EnrollmentDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc)
-        };
-
-        var enrollment = new StudentDetailsEnrollmentVM
-        {
-            CourseTitle = "My title",
-            Grade = ContosoUniversityBlazor.Domain.Enums.Grade.A
-        };
-        studentDetailsVM.Enrollments.Add(enrollment);
+        var fixture = new Fixture();
+        var studentDetailsVM = fixture.Create<StudentDetailsVM>();
+        var enrollment = fixture.Create<StudentDetailsEnrollmentVM>();
+        studentDetailsVM.Enrollments = new List<StudentDetailsEnrollmentVM> { enrollment };
 
         var fakeStudentService = A.Fake<IStudentService>();
         A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsVM);

@@ -1,6 +1,7 @@
 ﻿namespace WebUI.Client.Test.Pages.Instructors;
 
 using AngleSharp.Html.Dom;
+using AutoFixture;
 using Bunit;
 using FakeItEasy;
 using FluentAssertions;
@@ -18,14 +19,8 @@ public class InstructorEditTests : BunitTestBase
     [Fact]
     public async Task InstructorEdit_DisplayDialogCorrectly()
     {
-        var instructorDetailsVM = new InstructorDetailsVM
-        {
-            InstructorID = 1,
-            LastName = "Lastname",
-            FirstName = "Firstname",
-            HireDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc),
-            OfficeLocation = "test"
-        };
+        var fixture = new Fixture();
+        var instructorDetailsVM = fixture.Create<InstructorDetailsVM>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
         A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsVM);
@@ -61,14 +56,8 @@ public class InstructorEditTests : BunitTestBase
     [Fact]
     public async Task InstructorEdit_WhenCancelButtonClicked_PopupCloses()
     {
-        var instructorDetailsVM = new InstructorDetailsVM
-        {
-            InstructorID = 1,
-            LastName = "Lastname",
-            FirstName = "Firstname",
-            HireDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc),
-            OfficeLocation = "test"
-        };
+        var fixture = new Fixture();
+        var instructorDetailsVM = fixture.Create<InstructorDetailsVM>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
         A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsVM);
@@ -100,14 +89,8 @@ public class InstructorEditTests : BunitTestBase
     [Fact]
     public async Task InstructorEdit_WhenEditButtonClicked_PopupCloses()
     {
-        var instructorDetailsVM = new InstructorDetailsVM
-        {
-            InstructorID = 1,
-            LastName = "Lastname",
-            FirstName = "Firstname",
-            HireDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc),
-            OfficeLocation = "test"
-        };
+        var fixture = new Fixture();
+        var instructorDetailsVM = fixture.Create<InstructorDetailsVM>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
         A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsVM);
@@ -144,14 +127,8 @@ public class InstructorEditTests : BunitTestBase
     [Fact]
     public async Task InstructorEdit_WhenEditButtonClicked_InstructorServiceMustBeCalled()
     {
-        var instructorDetailsVM = new InstructorDetailsVM
-        {
-            InstructorID = 1,
-            LastName = "Lastname",
-            FirstName = "Firstname",
-            HireDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc),
-            OfficeLocation = "test"
-        };
+        var fixture = new Fixture();
+        var instructorDetailsVM = fixture.Create<InstructorDetailsVM>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
         A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsVM);
@@ -190,14 +167,8 @@ public class InstructorEditTests : BunitTestBase
     [Fact]
     public async Task InstructorEdit_WhenExceptionCaughtAfterSave_ShowErrorMessage()
     {
-        var instructorDetailsVM = new InstructorDetailsVM
-        {
-            InstructorID = 1,
-            LastName = "Lastname",
-            FirstName = "Firstname",
-            HireDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc),
-            OfficeLocation = "test"
-        };
+        var fixture = new Fixture();
+        var instructorDetailsVM = fixture.Create<InstructorDetailsVM>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
         A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsVM);
@@ -239,14 +210,8 @@ public class InstructorEditTests : BunitTestBase
     [Fact]
     public async Task InstructorEdit_WhenValidationFails_ShowErrorMessagesForFields()
     {
-        var instructorDetailsVM = new InstructorDetailsVM
-        {
-            InstructorID = 1,
-            LastName = "Lastname",
-            FirstName = "Firstname",
-            HireDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc),
-            OfficeLocation = "test"
-        };
+        var fixture = new Fixture();
+        var instructorDetailsVM = fixture.Create<InstructorDetailsVM>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
         A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsVM);
