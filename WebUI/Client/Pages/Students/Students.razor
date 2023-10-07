@@ -61,7 +61,7 @@
                            Color="Color.Primary" Size="Size.Small"
                            Class="OpenStudentDetailsButton">
             </MudIconButton>
-            <MudIconButton OnClick=@(e => DeleteStudent(context.StudentID, $"{context.FirstName} {context.LastName}"))
+            <MudIconButton OnClick=@(e => DeleteStudent(context.StudentID, $"{context.FullName}"))
                            Title="@Localizer["Delete"]"
                            Variant="Variant.Filled"
                            Icon="fas fa-trash-alt"

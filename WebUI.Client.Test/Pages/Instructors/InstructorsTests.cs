@@ -177,7 +177,7 @@ public class InstructorsTests : BunitTestBase
 
         Assert.NotEmpty(dialog.Markup.Trim());
 
-        dialog.Find(".mud-dialog-content").TrimmedText().Should().Be($"Are you sure you want to delete Instructor {instructorsOverviewVM.Records[0].FirstName} {instructorsOverviewVM.Records[0].LastName}?");
+        dialog.Find(".mud-dialog-content").TrimmedText().Should().Be($"Are you sure you want to delete Instructor {instructorsOverviewVM.Records[0].FullName}?");
     }
 
     [Fact]

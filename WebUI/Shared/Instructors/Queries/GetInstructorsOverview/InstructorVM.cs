@@ -14,6 +14,8 @@ public class InstructorVM : IMapFrom<Instructor>
 
     public string FirstName { get; set; }
 
+    public string FullName => $"{FirstName} {LastName}";
+
     public DateTime HireDate { get; set; }
 
     public string OfficeLocation { get; set; }

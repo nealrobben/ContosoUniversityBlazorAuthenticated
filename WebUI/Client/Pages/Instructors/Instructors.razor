@@ -73,7 +73,7 @@
                            Class="OpenInstructorDetailsButton">
             </MudIconButton>
             <MudIconButton OnClick=@(e =>
-                DeleteInstructor(context.InstructorID, $"{context.FirstName} {context.LastName}"))
+                           DeleteInstructor(context.InstructorID, $"{context.FullName}"))
                            Title="@Localizer["Delete"]"
                            Variant="Variant.Filled"
                            Icon="fas fa-trash-alt"
