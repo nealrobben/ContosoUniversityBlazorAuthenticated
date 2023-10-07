@@ -1,5 +1,6 @@
 ﻿namespace WebUI.Client.Test.Pages.Instructors;
 
+using AutoFixture;
 using Bunit;
 using FakeItEasy;
 using FluentAssertions;
@@ -8,6 +9,7 @@ using MudBlazor;
 using WebUI.Client.Pages.Instructors;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
+using WebUI.Shared.Departments.Queries.GetDepartmentDetails;
 using WebUI.Shared.Instructors.Queries.GetInstructorDetails;
 using Xunit;
 
@@ -16,13 +18,8 @@ public class InstructorDetailsTests : BunitTestBase
     [Fact]
     public async Task InstructorDetails_DisplayDetailsCorrectly()
     {
-        var instructorDetailsVM = new InstructorDetailsVM
-        {
-            InstructorID = 1,
-            LastName = "Lastname",
-            FirstName = "Firstname",
-            HireDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc)
-        };
+        var fixture = new Fixture();
+        var instructorDetailsVM = fixture.Create<InstructorDetailsVM>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
         A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsVM);
@@ -58,13 +55,8 @@ public class InstructorDetailsTests : BunitTestBase
     [Fact]
     public async Task InstructorDetails_WhenOkButtonClicked_PopupCloses()
     {
-        var instructorDetailsVM = new InstructorDetailsVM
-        {
-            InstructorID = 1,
-            LastName = "Lastname",
-            FirstName = "Firstname",
-            HireDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc)
-        };
+        var fixture = new Fixture();
+        var instructorDetailsVM = fixture.Create<InstructorDetailsVM>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
         A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsVM);

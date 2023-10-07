@@ -10,20 +10,16 @@ using MudBlazor;
 using WebUI.Shared.Departments.Queries.GetDepartmentDetails;
 using FluentAssertions;
 using WebUI.Client.Test.Extensions;
+using AutoFixture;
 
 public class DepartmentDetailsTests : BunitTestBase
 {
     [Fact]
     public async Task DepartmentDetails_DisplayDetailsCorrectly()
     {
-        var departmentDetailVM = new DepartmentDetailVM
-        {
-            Name = "TestDepartment",
-            Budget = 123,
-            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc),
-            AdministratorName = "Admin"
-        };
-        
+        var fixture = new Fixture();
+        var departmentDetailVM = fixture.Create<DepartmentDetailVM>();
+
         var fakeDepartmentService = A.Fake<IDepartmentService>();
         A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailVM);
         Context.Services.AddScoped(x => fakeDepartmentService);
@@ -60,13 +56,8 @@ public class DepartmentDetailsTests : BunitTestBase
     [Fact]
     public async Task DepartmentDetails_WhenOkButtonClicked_PopupCloses()
     {
-        var departmentDetailVM = new DepartmentDetailVM
-        {
-            Name = "TestDepartment",
-            Budget = 123,
-            StartDate = new DateTime(2021, 3, 1, 0, 0, 0, DateTimeKind.Utc),
-            AdministratorName = "Admin"
-        };
+        var fixture = new Fixture();
+        var departmentDetailVM = fixture.Create<DepartmentDetailVM>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
         A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailVM);

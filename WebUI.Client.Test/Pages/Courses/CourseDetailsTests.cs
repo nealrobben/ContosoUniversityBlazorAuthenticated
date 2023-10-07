@@ -1,5 +1,6 @@
 ﻿namespace WebUI.Client.Test.Pages.Courses;
 
+using AutoFixture;
 using Bunit;
 using FakeItEasy;
 using FluentAssertions;
@@ -16,13 +17,8 @@ public class CourseDetailsTests : BunitTestBase
     [Fact]
     public async Task CourseDetails_DisplayDetailsCorrectly()
     {
-        var courseDetailsVM = new CourseDetailVM
-        {
-            CourseID = 1,
-            Title = "My course",
-            Credits = 2,
-            DepartmentID = 3
-        };
+        var fixture = new Fixture();
+        var courseDetailsVM = fixture.Create<CourseDetailVM>();
 
         var fakeCourseService = A.Fake<ICourseService>();
         A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsVM);
@@ -58,13 +54,8 @@ public class CourseDetailsTests : BunitTestBase
     [Fact]
     public async Task CourseDetails_WhenOkButtonClicked_PopupCloses()
     {
-        var courseDetailsVM = new CourseDetailVM
-        {
-            CourseID = 1,
-            Title = "My course",
-            Credits = 2,
-            DepartmentID = 3
-        };
+        var fixture = new Fixture();
+        var courseDetailsVM = fixture.Create<CourseDetailVM>();
 
         var fakeCourseService = A.Fake<ICourseService>();
         A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsVM);
