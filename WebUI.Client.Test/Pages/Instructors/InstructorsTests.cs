@@ -10,13 +10,19 @@ using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
 using WebUI.Shared.Common;
 using WebUI.Shared.Courses.Queries.GetCoursesForInstructor;
-using WebUI.Shared.Departments.Queries.GetDepartmentsOverview;
 using WebUI.Shared.Instructors.Queries.GetInstructorsOverview;
 using WebUI.Shared.Students.Queries.GetStudentsForCourse;
 using Xunit;
 
 public class InstructorsTests : BunitTestBase
 {
+    private readonly Fixture _fixture;
+
+    public InstructorsTests()
+    {
+        _fixture = new Fixture();
+    }
+
     [Fact]
     public void Instructors_ClickCreateButton_OpensDialog()
     {
@@ -91,8 +97,7 @@ public class InstructorsTests : BunitTestBase
     [Fact]
     public void Instructor_ClickDetailsButton_OpensDialog()
     {
-        var fixture = new Fixture();
-        var instructorsOverviewVM = fixture.Create<OverviewVM<InstructorVM>>();
+        var instructorsOverviewVM = _fixture.Create<OverviewVM<InstructorVM>>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
         A.CallTo(() => fakeInstructorService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(instructorsOverviewVM);
@@ -119,8 +124,7 @@ public class InstructorsTests : BunitTestBase
     [Fact]
     public void Instructor_ClickEditButton_OpensDialog()
     {
-        var fixture = new Fixture();
-        var instructorsOverviewVM = fixture.Create<OverviewVM<InstructorVM>>();
+        var instructorsOverviewVM = _fixture.Create<OverviewVM<InstructorVM>>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
         A.CallTo(() => fakeInstructorService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(instructorsOverviewVM);
@@ -150,8 +154,7 @@ public class InstructorsTests : BunitTestBase
     [Fact]
     public void Instructor_ClickDeleteButton_ShowsConfirmationDialog()
     {
-        var fixture = new Fixture();
-        var instructorsOverviewVM = fixture.Create<OverviewVM<InstructorVM>>();
+        var instructorsOverviewVM = _fixture.Create<OverviewVM<InstructorVM>>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
         A.CallTo(() => fakeInstructorService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(instructorsOverviewVM);
@@ -180,8 +183,7 @@ public class InstructorsTests : BunitTestBase
     [Fact]
     public void Instructor_ClickDeleteButtonAndConfirm_InstructorServiceShouldBeCalled()
     {
-        var fixture = new Fixture();
-        var instructorsOverviewVM = fixture.Create<OverviewVM<InstructorVM>>();
+        var instructorsOverviewVM = _fixture.Create<OverviewVM<InstructorVM>>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
         A.CallTo(() => fakeInstructorService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(instructorsOverviewVM);
@@ -213,14 +215,13 @@ public class InstructorsTests : BunitTestBase
     [Fact]
     public void Instructor_ClickSelectButton_ShowsCoursesForInstructor()
     {
-        var fixture = new Fixture();
-        var instructorsOverviewVM = fixture.Create<OverviewVM<InstructorVM>>();
+        var instructorsOverviewVM = _fixture.Create<OverviewVM<InstructorVM>>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
         A.CallTo(() => fakeInstructorService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(instructorsOverviewVM);
         Context.Services.AddScoped(x => fakeInstructorService);
 
-        var coursesForInstructorOverview = fixture.Create<CoursesForInstructorOverviewVM>();
+        var coursesForInstructorOverview = _fixture.Create<CoursesForInstructorOverviewVM>();
 
         var fakeCourseService = A.Fake<ICourseService>();
         A.CallTo(() => fakeCourseService.GetCoursesForInstructor(A<string>.Ignored)).Returns(coursesForInstructorOverview);
@@ -243,14 +244,13 @@ public class InstructorsTests : BunitTestBase
     [Fact]
     public void Instructor_ClickSelectButtonOnCoursesForInstructor_ShowsStudentsForCourse()
     {
-        var fixture = new Fixture();
-        var instructorsOverviewVM = fixture.Create<OverviewVM<InstructorVM>>();
+        var instructorsOverviewVM = _fixture.Create<OverviewVM<InstructorVM>>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
         A.CallTo(() => fakeInstructorService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(instructorsOverviewVM);
         Context.Services.AddScoped(x => fakeInstructorService);
 
-        var coursesForInstructorOverview = fixture.Create<CoursesForInstructorOverviewVM>();
+        var coursesForInstructorOverview = _fixture.Create<CoursesForInstructorOverviewVM>();
 
         var fakeCourseService = A.Fake<ICourseService>();
         A.CallTo(() => fakeCourseService.GetCoursesForInstructor(A<string>.Ignored)).Returns(coursesForInstructorOverview);

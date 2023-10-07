@@ -9,12 +9,18 @@ using MudBlazor;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
 using WebUI.Shared.Common;
-using WebUI.Shared.Instructors.Queries.GetInstructorsOverview;
 using WebUI.Shared.Students.Queries.GetStudentsOverview;
 using Xunit;
 
 public class StudentTests : BunitTestBase
 {
+    private readonly Fixture _fixture;
+
+    public StudentTests()
+    {
+        _fixture = new Fixture();
+    }
+
     [Fact]
     public void Students_ClickCreateButton_OpensDialog()
     {
@@ -71,8 +77,7 @@ public class StudentTests : BunitTestBase
     [Fact]
     public void Students_ClickDetailsButton_OpensDialog()
     {
-        var fixture = new Fixture();
-        var studentsOverviewVM = fixture.Create<OverviewVM<StudentOverviewVM>>();
+        var studentsOverviewVM = _fixture.Create<OverviewVM<StudentOverviewVM>>();
 
         var fakeStudentService = A.Fake<IStudentService>();
         A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(studentsOverviewVM);
@@ -93,8 +98,7 @@ public class StudentTests : BunitTestBase
     [Fact]
     public void Students_ClickEditButton_OpensDialog()
     {
-        var fixture = new Fixture();
-        var studentsOverviewVM = fixture.Create<OverviewVM<StudentOverviewVM>>();
+        var studentsOverviewVM = _fixture.Create<OverviewVM<StudentOverviewVM>>();
 
         var fakeStudentService = A.Fake<IStudentService>();
         A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(studentsOverviewVM);
@@ -118,8 +122,7 @@ public class StudentTests : BunitTestBase
     [Fact]
     public void Students_ClickDeleteButton_ShowsConfirmationDialog()
     {
-        var fixture = new Fixture();
-        var studentsOverviewVM = fixture.Create<OverviewVM<StudentOverviewVM>>();
+        var studentsOverviewVM = _fixture.Create<OverviewVM<StudentOverviewVM>>();
 
         var fakeStudentService = A.Fake<IStudentService>();
         A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(studentsOverviewVM);
@@ -145,8 +148,7 @@ public class StudentTests : BunitTestBase
     [Fact]
     public void Students_ClickDeleteButtonAndConfirm_StudentServiceShouldBeCalled()
     {
-        var fixture = new Fixture();
-        var studentsOverviewVM = fixture.Create<OverviewVM<StudentOverviewVM>>();
+        var studentsOverviewVM = _fixture.Create<OverviewVM<StudentOverviewVM>>();
 
         var fakeStudentService = A.Fake<IStudentService>();
         A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(studentsOverviewVM);

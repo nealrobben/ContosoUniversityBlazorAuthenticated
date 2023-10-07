@@ -16,11 +16,17 @@ using Xunit;
 
 public class InstructorEditTests : BunitTestBase
 {
+    private readonly Fixture _fixture;
+
+    public InstructorEditTests()
+    {
+        _fixture = new Fixture();
+    }
+
     [Fact]
     public async Task InstructorEdit_DisplayDialogCorrectly()
     {
-        var fixture = new Fixture();
-        var instructorDetailsVM = fixture.Create<InstructorDetailsVM>();
+        var instructorDetailsVM = _fixture.Create<InstructorDetailsVM>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
         A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsVM);
@@ -56,8 +62,7 @@ public class InstructorEditTests : BunitTestBase
     [Fact]
     public async Task InstructorEdit_WhenCancelButtonClicked_PopupCloses()
     {
-        var fixture = new Fixture();
-        var instructorDetailsVM = fixture.Create<InstructorDetailsVM>();
+        var instructorDetailsVM = _fixture.Create<InstructorDetailsVM>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
         A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsVM);
@@ -89,8 +94,7 @@ public class InstructorEditTests : BunitTestBase
     [Fact]
     public async Task InstructorEdit_WhenEditButtonClicked_PopupCloses()
     {
-        var fixture = new Fixture();
-        var instructorDetailsVM = fixture.Create<InstructorDetailsVM>();
+        var instructorDetailsVM = _fixture.Create<InstructorDetailsVM>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
         A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsVM);
@@ -127,8 +131,7 @@ public class InstructorEditTests : BunitTestBase
     [Fact]
     public async Task InstructorEdit_WhenEditButtonClicked_InstructorServiceMustBeCalled()
     {
-        var fixture = new Fixture();
-        var instructorDetailsVM = fixture.Create<InstructorDetailsVM>();
+        var instructorDetailsVM = _fixture.Create<InstructorDetailsVM>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
         A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsVM);
@@ -167,8 +170,7 @@ public class InstructorEditTests : BunitTestBase
     [Fact]
     public async Task InstructorEdit_WhenExceptionCaughtAfterSave_ShowErrorMessage()
     {
-        var fixture = new Fixture();
-        var instructorDetailsVM = fixture.Create<InstructorDetailsVM>();
+        var instructorDetailsVM = _fixture.Create<InstructorDetailsVM>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
         A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsVM);
@@ -210,8 +212,7 @@ public class InstructorEditTests : BunitTestBase
     [Fact]
     public async Task InstructorEdit_WhenValidationFails_ShowErrorMessagesForFields()
     {
-        var fixture = new Fixture();
-        var instructorDetailsVM = fixture.Create<InstructorDetailsVM>();
+        var instructorDetailsVM = _fixture.Create<InstructorDetailsVM>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
         A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsVM);

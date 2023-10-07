@@ -17,11 +17,17 @@ using Xunit;
 
 public class DepartmentEditTests : BunitTestBase
 {
+    private readonly Fixture _fixture;
+
+    public DepartmentEditTests()
+    {
+        _fixture = new Fixture();
+    }
+
     [Fact]
     public async Task DepartmentEdit_DisplayDialogCorrectly()
     {
-        var fixture = new Fixture();
-        var departmentDetailVM = fixture.Create<DepartmentDetailVM>();
+        var departmentDetailVM = _fixture.Create<DepartmentDetailVM>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
         A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailVM);
@@ -59,8 +65,7 @@ public class DepartmentEditTests : BunitTestBase
     [Fact]
     public async Task DepartmentEdit_WhenCancelButtonClicked_PopupCloses()
     {
-        var fixture = new Fixture();
-        var departmentDetailVM = fixture.Create<DepartmentDetailVM>();
+        var departmentDetailVM = _fixture.Create<DepartmentDetailVM>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
         A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailVM);
@@ -93,8 +98,7 @@ public class DepartmentEditTests : BunitTestBase
     [Fact]
     public async Task DepartmentEdit_WhenEditButtonClicked_PopupCloses()
     {
-        var fixture = new Fixture();
-        var departmentDetailVM = fixture.Create<DepartmentDetailVM>();
+        var departmentDetailVM = _fixture.Create<DepartmentDetailVM>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
         A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailVM);
@@ -132,8 +136,7 @@ public class DepartmentEditTests : BunitTestBase
     [Fact]
     public async Task DepartmentEdit_WhenEditButtonClicked_DepartmentServiceMustBeCalled()
     {
-        var fixture = new Fixture();
-        var departmentDetailVM = fixture.Create<DepartmentDetailVM>();
+        var departmentDetailVM = _fixture.Create<DepartmentDetailVM>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
         A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailVM);
@@ -172,8 +175,7 @@ public class DepartmentEditTests : BunitTestBase
     [Fact]
     public async Task DepartmentEdit_WhenExceptionCaughtAfterSave_ShowErrorMessage()
     {
-        var fixture = new Fixture();
-        var departmentDetailVM = fixture.Create<DepartmentDetailVM>();
+        var departmentDetailVM = _fixture.Create<DepartmentDetailVM>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
         A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailVM);
@@ -216,8 +218,7 @@ public class DepartmentEditTests : BunitTestBase
     [Fact]
     public async Task DepartmentEdit_WhenValidationFails_ShowErrorMessagesForFields()
     {
-        var fixture = new Fixture();
-        var departmentDetailVM = fixture.Create<DepartmentDetailVM>();
+        var departmentDetailVM = _fixture.Create<DepartmentDetailVM>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
         A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailVM);

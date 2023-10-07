@@ -9,17 +9,22 @@ using MudBlazor;
 using WebUI.Client.Pages.Instructors;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
-using WebUI.Shared.Departments.Queries.GetDepartmentDetails;
 using WebUI.Shared.Instructors.Queries.GetInstructorDetails;
 using Xunit;
 
 public class InstructorDetailsTests : BunitTestBase
 {
+    private readonly Fixture _fixture;
+
+    public InstructorDetailsTests()
+    {
+        _fixture = new Fixture();
+    }
+
     [Fact]
     public async Task InstructorDetails_DisplayDetailsCorrectly()
     {
-        var fixture = new Fixture();
-        var instructorDetailsVM = fixture.Create<InstructorDetailsVM>();
+        var instructorDetailsVM = _fixture.Create<InstructorDetailsVM>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
         A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsVM);
@@ -55,8 +60,7 @@ public class InstructorDetailsTests : BunitTestBase
     [Fact]
     public async Task InstructorDetails_WhenOkButtonClicked_PopupCloses()
     {
-        var fixture = new Fixture();
-        var instructorDetailsVM = fixture.Create<InstructorDetailsVM>();
+        var instructorDetailsVM = _fixture.Create<InstructorDetailsVM>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
         A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsVM);

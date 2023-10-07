@@ -17,11 +17,17 @@ using Xunit;
 
 public class CourseEditTests : BunitTestBase
 {
+    private readonly Fixture _fixture;
+
+    public CourseEditTests()
+    {
+        _fixture = new Fixture();
+    }
+
     [Fact]
     public async Task CourseEdit_DisplayDialogCorrectly()
     {
-        var fixture = new Fixture();
-        var courseDetailsVM = fixture.Create<CourseDetailVM>();
+        var courseDetailsVM = _fixture.Create<CourseDetailVM>();
 
         var fakeCourseService = A.Fake<ICourseService>();
         A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsVM);
@@ -56,8 +62,7 @@ public class CourseEditTests : BunitTestBase
     [Fact]
     public async Task CourseEdit_WhenCancelButtonClicked_PopupCloses()
     {
-        var fixture = new Fixture();
-        var courseDetailsVM = fixture.Create<CourseDetailVM>();
+        var courseDetailsVM = _fixture.Create<CourseDetailVM>();
 
         var fakeCourseService = A.Fake<ICourseService>();
         A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsVM);
@@ -90,8 +95,7 @@ public class CourseEditTests : BunitTestBase
     [Fact]
     public async Task CourseEdit_WhenEditButtonClicked_PopupCloses()
     {
-        var fixture = new Fixture();
-        var courseDetailsVM = fixture.Create<CourseDetailVM>();
+        var courseDetailsVM = _fixture.Create<CourseDetailVM>();
 
         var fakeCourseService = A.Fake<ICourseService>();
         A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsVM);
@@ -128,8 +132,7 @@ public class CourseEditTests : BunitTestBase
     [Fact]
     public async Task CourseEdit_WhenEditButtonClicked_CourseServiceMustBeCalled()
     {
-        var fixture = new Fixture();
-        var courseDetailsVM = fixture.Create<CourseDetailVM>();
+        var courseDetailsVM = _fixture.Create<CourseDetailVM>();
 
         var fakeCourseService = A.Fake<ICourseService>();
         A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsVM);
@@ -167,8 +170,7 @@ public class CourseEditTests : BunitTestBase
     [Fact]
     public async Task CourseEdit_WhenExceptionCaughtAfterSave_ShowErrorMessage()
     {
-        var fixture = new Fixture();
-        var courseDetailsVM = fixture.Create<CourseDetailVM>();
+        var courseDetailsVM = _fixture.Create<CourseDetailVM>();
 
         var fakeCourseService = A.Fake<ICourseService>();
         A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsVM);
@@ -210,8 +212,7 @@ public class CourseEditTests : BunitTestBase
     [Fact]
     public async Task CourseEdit_WhenValidationFails_ShowErrorMessagesForFields()
     {
-        var fixture = new Fixture();
-        var courseDetailsVM = fixture.Create<CourseDetailVM>();
+        var courseDetailsVM = _fixture.Create<CourseDetailVM>();
 
         var fakeCourseService = A.Fake<ICourseService>();
         A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsVM);

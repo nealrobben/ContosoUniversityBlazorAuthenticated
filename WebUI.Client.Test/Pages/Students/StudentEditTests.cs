@@ -16,12 +16,18 @@ using Xunit;
 
 public class StudentEditTests : BunitTestBase
 {
+    private readonly Fixture _fixture;
+
+    public StudentEditTests()
+    {
+        _fixture = new Fixture();
+    }
+
     [Fact]
     public async Task StudentDetails_DisplayDetailsCorrectly()
     {
-        var fixture = new Fixture();
-        var studentDetailsVM = fixture.Create<StudentDetailsVM>();
-        var enrollment = fixture.Create<StudentDetailsEnrollmentVM>();
+        var studentDetailsVM = _fixture.Create<StudentDetailsVM>();
+        var enrollment = _fixture.Create<StudentDetailsEnrollmentVM>();
         studentDetailsVM.Enrollments = new List<StudentDetailsEnrollmentVM> { enrollment };
 
         var fakeStudentService = A.Fake<IStudentService>();
@@ -57,9 +63,8 @@ public class StudentEditTests : BunitTestBase
     [Fact]
     public async Task StudentDetails_WhenCancelButtonClicked_PopupCloses()
     {
-        var fixture = new Fixture();
-        var studentDetailsVM = fixture.Create<StudentDetailsVM>();
-        var enrollment = fixture.Create<StudentDetailsEnrollmentVM>();
+        var studentDetailsVM = _fixture.Create<StudentDetailsVM>();
+        var enrollment = _fixture.Create<StudentDetailsEnrollmentVM>();
         studentDetailsVM.Enrollments = new List<StudentDetailsEnrollmentVM> { enrollment };
 
         var fakeStudentService = A.Fake<IStudentService>();
@@ -92,9 +97,8 @@ public class StudentEditTests : BunitTestBase
     [Fact]
     public async Task StudentDetails_WhenEditButtonClicked_PopupCloses()
     {
-        var fixture = new Fixture();
-        var studentDetailsVM = fixture.Create<StudentDetailsVM>();
-        var enrollment = fixture.Create<StudentDetailsEnrollmentVM>();
+        var studentDetailsVM = _fixture.Create<StudentDetailsVM>();
+        var enrollment = _fixture.Create<StudentDetailsEnrollmentVM>();
         studentDetailsVM.Enrollments = new List<StudentDetailsEnrollmentVM> { enrollment };
 
         var fakeStudentService = A.Fake<IStudentService>();
@@ -131,9 +135,8 @@ public class StudentEditTests : BunitTestBase
     [Fact]
     public async Task StudentDetails_WhenEditButtonClicked_StudentServiceMustBeCalled()
     {
-        var fixture = new Fixture();
-        var studentDetailsVM = fixture.Create<StudentDetailsVM>();
-        var enrollment = fixture.Create<StudentDetailsEnrollmentVM>();
+        var studentDetailsVM = _fixture.Create<StudentDetailsVM>();
+        var enrollment = _fixture.Create<StudentDetailsEnrollmentVM>();
         studentDetailsVM.Enrollments = new List<StudentDetailsEnrollmentVM> { enrollment };
 
         var fakeStudentService = A.Fake<IStudentService>();
@@ -172,9 +175,8 @@ public class StudentEditTests : BunitTestBase
     [Fact]
     public async Task StudentDetails_WhenExceptionCaughtAfterSave_ShowErrorMessage()
     {
-        var fixture = new Fixture();
-        var studentDetailsVM = fixture.Create<StudentDetailsVM>();
-        var enrollment = fixture.Create<StudentDetailsEnrollmentVM>();
+        var studentDetailsVM = _fixture.Create<StudentDetailsVM>();
+        var enrollment = _fixture.Create<StudentDetailsEnrollmentVM>();
         studentDetailsVM.Enrollments = new List<StudentDetailsEnrollmentVM> { enrollment };
 
         var fakeStudentService = A.Fake<IStudentService>();
@@ -216,9 +218,8 @@ public class StudentEditTests : BunitTestBase
     [Fact]
     public async Task StudentDetails_WhenValidationFails_ShowErrorMessagesForFields()
     {
-        var fixture = new Fixture();
-        var studentDetailsVM = fixture.Create<StudentDetailsVM>();
-        var enrollment = fixture.Create<StudentDetailsEnrollmentVM>();
+        var studentDetailsVM = _fixture.Create<StudentDetailsVM>();
+        var enrollment = _fixture.Create<StudentDetailsEnrollmentVM>();
         studentDetailsVM.Enrollments = new List<StudentDetailsEnrollmentVM> { enrollment };
 
         var fakeStudentService = A.Fake<IStudentService>();

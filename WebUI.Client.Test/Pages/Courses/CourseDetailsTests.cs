@@ -14,11 +14,17 @@ using Xunit;
 
 public class CourseDetailsTests : BunitTestBase
 {
+    private readonly Fixture _fixture;
+
+    public CourseDetailsTests()
+    {
+        _fixture = new Fixture();
+    }
+
     [Fact]
     public async Task CourseDetails_DisplayDetailsCorrectly()
     {
-        var fixture = new Fixture();
-        var courseDetailsVM = fixture.Create<CourseDetailVM>();
+        var courseDetailsVM = _fixture.Create<CourseDetailVM>();
 
         var fakeCourseService = A.Fake<ICourseService>();
         A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsVM);
@@ -54,8 +60,7 @@ public class CourseDetailsTests : BunitTestBase
     [Fact]
     public async Task CourseDetails_WhenOkButtonClicked_PopupCloses()
     {
-        var fixture = new Fixture();
-        var courseDetailsVM = fixture.Create<CourseDetailVM>();
+        var courseDetailsVM = _fixture.Create<CourseDetailVM>();
 
         var fakeCourseService = A.Fake<ICourseService>();
         A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsVM);

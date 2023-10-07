@@ -14,11 +14,17 @@ using AutoFixture;
 
 public class DepartmentDetailsTests : BunitTestBase
 {
+    private readonly Fixture _fixture;
+
+    public DepartmentDetailsTests()
+    {
+        _fixture = new Fixture();
+    }
+
     [Fact]
     public async Task DepartmentDetails_DisplayDetailsCorrectly()
     {
-        var fixture = new Fixture();
-        var departmentDetailVM = fixture.Create<DepartmentDetailVM>();
+        var departmentDetailVM = _fixture.Create<DepartmentDetailVM>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
         A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailVM);
@@ -56,8 +62,7 @@ public class DepartmentDetailsTests : BunitTestBase
     [Fact]
     public async Task DepartmentDetails_WhenOkButtonClicked_PopupCloses()
     {
-        var fixture = new Fixture();
-        var departmentDetailVM = fixture.Create<DepartmentDetailVM>();
+        var departmentDetailVM = _fixture.Create<DepartmentDetailVM>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
         A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailVM);

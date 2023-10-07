@@ -9,13 +9,19 @@ using MudBlazor;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
 using WebUI.Shared.Common;
-using WebUI.Shared.Courses.Queries.GetCoursesOverview;
 using WebUI.Shared.Departments.Queries.GetDepartmentsOverview;
 using WebUI.Shared.Instructors.Queries.GetInstructorsLookup;
 using Xunit;
 
 public class DepartmentsTests : BunitTestBase
 {
+    private readonly Fixture _fixture;
+
+    public DepartmentsTests()
+    {
+        _fixture = new Fixture();
+    }
+
     [Fact]
     public void Departments_ClickCreateButton_OpensDialog()
     {
@@ -76,8 +82,7 @@ public class DepartmentsTests : BunitTestBase
     [Fact]
     public void Departments_ClickDetailsButton_OpensDialog()
     {
-        var fixture = new Fixture();
-        var departmentsOverviewVM = fixture.Create<OverviewVM<DepartmentVM>>();
+        var departmentsOverviewVM = _fixture.Create<OverviewVM<DepartmentVM>>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
         A.CallTo(() => fakeDepartmentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(departmentsOverviewVM);
@@ -98,8 +103,7 @@ public class DepartmentsTests : BunitTestBase
     [Fact]
     public void Departments_ClickEditButton_OpensDialog()
     {
-        var fixture = new Fixture();
-        var departmentsOverviewVM = fixture.Create<OverviewVM<DepartmentVM>>();
+        var departmentsOverviewVM = _fixture.Create<OverviewVM<DepartmentVM>>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
         A.CallTo(() => fakeDepartmentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(departmentsOverviewVM);
@@ -123,8 +127,7 @@ public class DepartmentsTests : BunitTestBase
     [Fact]
     public void Departments_ClickDeleteButton_ShowsConfirmationDialog()
     {
-        var fixture = new Fixture();
-        var departmentsOverviewVM = fixture.Create<OverviewVM<DepartmentVM>>();
+        var departmentsOverviewVM = _fixture.Create<OverviewVM<DepartmentVM>>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
         A.CallTo(() => fakeDepartmentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(departmentsOverviewVM);
@@ -150,8 +153,7 @@ public class DepartmentsTests : BunitTestBase
     [Fact]
     public void Departments_ClickDeleteButtonAndConfirm_DepartmentServiceShouldBeCalled()
     {
-        var fixture = new Fixture();
-        var departmentsOverviewVM = fixture.Create<OverviewVM<DepartmentVM>>();
+        var departmentsOverviewVM = _fixture.Create<OverviewVM<DepartmentVM>>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
         A.CallTo(() => fakeDepartmentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(departmentsOverviewVM);

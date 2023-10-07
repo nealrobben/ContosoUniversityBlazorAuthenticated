@@ -9,18 +9,23 @@ using MudBlazor;
 using WebUI.Client.Pages.Students;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
-using WebUI.Shared.Instructors.Queries.GetInstructorDetails;
 using WebUI.Shared.Students.Queries.GetStudentDetails;
 using Xunit;
 
 public class StudentDetailsTests : BunitTestBase
 {
+    private readonly Fixture _fixture;
+
+    public StudentDetailsTests()
+    {
+        _fixture = new Fixture();
+    }
+
     [Fact]
     public async Task StudentDetails_DisplayDetailsCorrectly()
     {
-        var fixture = new Fixture();
-        var studentDetailsVM = fixture.Create<StudentDetailsVM>();
-        var enrollment = fixture.Create<StudentDetailsEnrollmentVM>();
+        var studentDetailsVM = _fixture.Create<StudentDetailsVM>();
+        var enrollment = _fixture.Create<StudentDetailsEnrollmentVM>();
         studentDetailsVM.Enrollments = new List<StudentDetailsEnrollmentVM> { enrollment };
 
         var fakeStudentService = A.Fake<IStudentService>();
@@ -62,9 +67,8 @@ public class StudentDetailsTests : BunitTestBase
     [Fact]
     public async Task StudentDetails_WhenOkButtonClicked_PopupCloses()
     {
-        var fixture = new Fixture();
-        var studentDetailsVM = fixture.Create<StudentDetailsVM>();
-        var enrollment = fixture.Create<StudentDetailsEnrollmentVM>();
+        var studentDetailsVM = _fixture.Create<StudentDetailsVM>();
+        var enrollment = _fixture.Create<StudentDetailsEnrollmentVM>();
         studentDetailsVM.Enrollments = new List<StudentDetailsEnrollmentVM> { enrollment };
 
         var fakeStudentService = A.Fake<IStudentService>();

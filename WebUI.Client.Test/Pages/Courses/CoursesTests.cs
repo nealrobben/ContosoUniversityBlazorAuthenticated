@@ -16,6 +16,13 @@ using Xunit;
 
 public class CoursesTests : BunitTestBase
 {
+    private readonly Fixture _fixture;
+
+    public CoursesTests()
+    {
+        _fixture = new Fixture();
+    }
+
     [Fact]
     public void Courses_ClickCreateButton_OpensDialog()
     {
@@ -76,8 +83,7 @@ public class CoursesTests : BunitTestBase
     [Fact]
     public void Courses_ClickDetailsButton_OpensDialog()
     {
-        var fixture = new Fixture();
-        var coursesOverviewVM = fixture.Create<OverviewVM<CourseVM>>();
+        var coursesOverviewVM = _fixture.Create<OverviewVM<CourseVM>>();
 
         var fakeCourseService = A.Fake<ICourseService>();
         A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(coursesOverviewVM);
@@ -98,8 +104,7 @@ public class CoursesTests : BunitTestBase
     [Fact]
     public void Courses_ClickEditButton_OpensDialog()
     {
-        var fixture = new Fixture();
-        var coursesOverviewVM = fixture.Create<OverviewVM<CourseVM>>();
+        var coursesOverviewVM = _fixture.Create<OverviewVM<CourseVM>>();
 
         var fakeCourseService = A.Fake<ICourseService>();
         A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(coursesOverviewVM);
@@ -123,8 +128,7 @@ public class CoursesTests : BunitTestBase
     [Fact]
     public void Courses_ClickDeleteButton_ShowsConfirmationDialog()
     {
-        var fixture = new Fixture();
-        var coursesOverviewVM = fixture.Create<OverviewVM<CourseVM>>();
+        var coursesOverviewVM = _fixture.Create<OverviewVM<CourseVM>>();
 
         var fakeCourseService = A.Fake<ICourseService>();
         A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(coursesOverviewVM);
@@ -150,8 +154,7 @@ public class CoursesTests : BunitTestBase
     [Fact]
     public void Courses_ClickDeleteButtonAndConfirm_CourseServiceShouldBeCalled()
     {
-        var fixture = new Fixture();
-        var coursesOverviewVM = fixture.Create<OverviewVM<CourseVM>>();
+        var coursesOverviewVM = _fixture.Create<OverviewVM<CourseVM>>();
 
         var fakeCourseService = A.Fake<ICourseService>();
         A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(coursesOverviewVM);
