@@ -111,7 +111,7 @@ public static class Themes
 
     private static readonly MudTheme defaultTheme = new()
     {
-        Palette = new Palette()
+        Palette = new PaletteLight()
         {
             Primary = "#1E88E5",
             AppbarBackground = "#1E88E5",
@@ -126,7 +126,7 @@ public static class Themes
 
     private static readonly MudTheme darkTheme = new MudTheme()
     {
-        Palette = new Palette()
+        Palette = new PaletteDark()
         {
             Primary = "#1E88E5",
             Success = "#007E33",
