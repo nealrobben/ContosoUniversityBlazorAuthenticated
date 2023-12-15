@@ -40,10 +40,8 @@ public class GetStudentDetailsQueryHandler : IRequestHandler<GetStudentDetailsQu
             .Include(s => s.Enrollments)
             .ThenInclude(e => e.Course)
             .AsNoTracking()
-            .FirstOrDefaultAsync(m => m.ID == request.ID, cancellationToken);
-
-        if (student == null)
-            throw new NotFoundException(nameof(Student), request.ID);
+            .FirstOrDefaultAsync(m => m.ID == request.ID, cancellationToken)
+            ?? throw new NotFoundException(nameof(Student), request.ID);
 
         return _mapper.Map<StudentDetailsVM>(student);
     }

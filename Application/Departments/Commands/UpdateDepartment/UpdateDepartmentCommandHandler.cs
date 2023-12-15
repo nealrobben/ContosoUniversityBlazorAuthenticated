@@ -25,11 +25,9 @@ public class UpdateDepartmentCommandHandler : IRequestHandler<UpdateDepartmentCo
 
         var departmentToUpdate = await _context.Departments
             .Include(i => i.Administrator)
-            .FirstOrDefaultAsync(m => m.DepartmentID == request.DepartmentID, cancellationToken);
-
-        if (departmentToUpdate == null)
-            throw new NotFoundException(nameof(Department), request.DepartmentID);
-
+            .FirstOrDefaultAsync(m => m.DepartmentID == request.DepartmentID, cancellationToken) 
+            ?? throw new NotFoundException(nameof(Department), request.DepartmentID);
+        
         departmentToUpdate.Name = request.Name;
         departmentToUpdate.Budget = request.Budget;
         departmentToUpdate.StartDate = request.StartDate;

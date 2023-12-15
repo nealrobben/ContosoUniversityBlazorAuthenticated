@@ -312,16 +312,14 @@ public class DepartmentsControllerTests : IntegrationTest
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.Created);
 
-        using (var scope = _appFactory.Services.CreateScope())
-        {
-            var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
+        using var scope = _appFactory.Services.CreateScope();
+        var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
 
-            schoolContext.Departments.Should().ContainSingle();
-            schoolContext.Departments.First().Name.Should().Be(department.Name);
-            schoolContext.Departments.First().Budget.Should().Be(department.Budget);
-            schoolContext.Departments.First().StartDate.Should().Be(department.StartDate);
-            schoolContext.Departments.First().InstructorID.Should().Be(department.InstructorID);
-        }
+        schoolContext.Departments.Should().ContainSingle();
+        schoolContext.Departments.First().Name.Should().Be(department.Name);
+        schoolContext.Departments.First().Budget.Should().Be(department.Budget);
+        schoolContext.Departments.First().StartDate.Should().Be(department.StartDate);
+        schoolContext.Departments.First().InstructorID.Should().Be(department.InstructorID);
     }
 
     [Fact]
@@ -334,24 +332,22 @@ public class DepartmentsControllerTests : IntegrationTest
     [Fact]
     public async Task Delete_WithExistingId_DeletesDepartment()
     {
-        using (var scope = _appFactory.Services.CreateScope())
+        using var scope = _appFactory.Services.CreateScope();
+        var department = new Department
         {
-            var department = new Department
-            {
-                Name = "Test 1",
-                Budget = 123,
-                StartDate = DateTime.UtcNow
-            };
+            Name = "Test 1",
+            Budget = 123,
+            StartDate = DateTime.UtcNow
+        };
 
-            var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
-            schoolContext.Departments.Add(department);
-            await schoolContext.SaveChangesAsync();
+        var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
+        schoolContext.Departments.Add(department);
+        await schoolContext.SaveChangesAsync();
 
-            var response = await _client.DeleteAsync("/api/departments/1");
-            response.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
+        var response = await _client.DeleteAsync("/api/departments/1");
+        response.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
 
-            schoolContext.Departments.Should().BeEmpty();
-        }
+        schoolContext.Departments.Should().BeEmpty();
     }
 
     [Fact]

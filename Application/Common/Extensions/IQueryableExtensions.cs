@@ -42,77 +42,53 @@ public static class IQueryableExtensions
 
     public static IQueryable<Student> Sort(this IQueryable<Student> value, string sortString)
     {
-        switch (sortString?.ToLower() ?? "")
+        return (sortString?.ToLower() ?? "") switch
         {
-            case "lastname_asc":
-                return value.OrderBy(s => s.LastName);
-            case "lastname_desc":
-                return value.OrderByDescending(s => s.LastName);
-            case "firstname_asc":
-                return value.OrderBy(s => s.FirstMidName);
-            case "firstname_desc":
-                return value.OrderByDescending(s => s.FirstMidName);
-            case "enrollmentdate_asc":
-                return value.OrderBy(s => s.EnrollmentDate);
-            case "enrollmentdate_desc":
-                return value.OrderByDescending(s => s.EnrollmentDate);
-            default:
-                return value.OrderBy(s => s.LastName);
-        }
+            "lastname_asc" => value.OrderBy(s => s.LastName),
+            "lastname_desc" => value.OrderByDescending(s => s.LastName),
+            "firstname_asc" => value.OrderBy(s => s.FirstMidName),
+            "firstname_desc" => value.OrderByDescending(s => s.FirstMidName),
+            "enrollmentdate_asc" => value.OrderBy(s => s.EnrollmentDate),
+            "enrollmentdate_desc" => value.OrderByDescending(s => s.EnrollmentDate),
+            _ => value.OrderBy(s => s.LastName),
+        };
     }
 
     public static IQueryable<Department> Sort(this IQueryable<Department> value, string sortString)
     {
-        switch (sortString?.ToLower() ?? "")
+        return (sortString?.ToLower() ?? "") switch
         {
-            case "name_asc":
-                return value.OrderBy(s => s.Name);
-            case "name_desc":
-                return value.OrderByDescending(s => s.Name);
-            default:
-                return value.OrderBy(s => s.Name);
-        }
+            "name_asc" => value.OrderBy(s => s.Name),
+            "name_desc" => value.OrderByDescending(s => s.Name),
+            _ => value.OrderBy(s => s.Name),
+        };
     }
 
     public static IQueryable<Instructor> Sort(this IQueryable<Instructor> value, string sortString)
     {
-        switch (sortString?.ToLower() ?? "")
+        return (sortString?.ToLower() ?? "") switch
         {
-            case "lastname_asc":
-                return value.OrderBy(s => s.LastName);
-            case "lastname_desc":
-                return value.OrderByDescending(s => s.LastName);
-            case "firstname_asc":
-                return value.OrderBy(s => s.FirstMidName);
-            case "firstname_desc":
-                return value.OrderByDescending(s => s.FirstMidName);
-            case "hiredate_asc":
-                return value.OrderBy(s => s.HireDate);
-            case "hiredate_desc":
-                return value.OrderByDescending(s => s.HireDate);
-            default:
-                return value.OrderBy(s => s.LastName);
-        }
+            "lastname_asc" => value.OrderBy(s => s.LastName),
+            "lastname_desc" => value.OrderByDescending(s => s.LastName),
+            "firstname_asc" => value.OrderBy(s => s.FirstMidName),
+            "firstname_desc" => value.OrderByDescending(s => s.FirstMidName),
+            "hiredate_asc" => value.OrderBy(s => s.HireDate),
+            "hiredate_desc" => value.OrderByDescending(s => s.HireDate),
+            _ => value.OrderBy(s => s.LastName),
+        };
     }
 
     public static IQueryable<Course> Sort(this IQueryable<Course> value, string sortString)
     {
-        switch (sortString?.ToLower() ?? "")
+        return (sortString?.ToLower() ?? "") switch
         {
-            case "title_asc":
-                return value.OrderBy(s => s.Title);
-            case "title_desc":
-                return value.OrderByDescending(s => s.Title);
-            case "courseid_asc":
-                return value.OrderBy(s => s.CourseID);
-            case "courseid_desc":
-                return value.OrderByDescending(s => s.CourseID);
-            case "credits_asc":
-                return value.OrderBy(s => s.Credits);
-            case "credits_desc":
-                return value.OrderByDescending(s => s.Credits);
-            default:
-                return value.OrderBy(s => s.Title);
-        }
+            "title_asc" => value.OrderBy(s => s.Title),
+            "title_desc" => value.OrderByDescending(s => s.Title),
+            "courseid_asc" => value.OrderBy(s => s.CourseID),
+            "courseid_desc" => value.OrderByDescending(s => s.CourseID),
+            "credits_asc" => value.OrderBy(s => s.Credits),
+            "credits_desc" => value.OrderByDescending(s => s.Credits),
+            _ => value.OrderBy(s => s.Title),
+        };
     }
 }

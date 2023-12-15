@@ -28,7 +28,7 @@ public class StudentEditTests : BunitTestBase
     {
         var studentDetailsVM = _fixture.Create<StudentDetailsVM>();
         var enrollment = _fixture.Create<StudentDetailsEnrollmentVM>();
-        studentDetailsVM.Enrollments = new List<StudentDetailsEnrollmentVM> { enrollment };
+        studentDetailsVM.Enrollments = [enrollment];
 
         var fakeStudentService = A.Fake<IStudentService>();
         A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsVM);
@@ -44,8 +44,10 @@ public class StudentEditTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var parameters = new DialogParameters();
-        parameters.Add("StudentId", 1);
+        var parameters = new DialogParameters
+        {
+            { "StudentId", 1 }
+        };
 
         var title = "Edit Student";
         await comp.InvokeAsync(() => dialogReference = service?.Show<StudentEdit>(title, parameters));
@@ -65,7 +67,7 @@ public class StudentEditTests : BunitTestBase
     {
         var studentDetailsVM = _fixture.Create<StudentDetailsVM>();
         var enrollment = _fixture.Create<StudentDetailsEnrollmentVM>();
-        studentDetailsVM.Enrollments = new List<StudentDetailsEnrollmentVM> { enrollment };
+        studentDetailsVM.Enrollments = [enrollment];
 
         var fakeStudentService = A.Fake<IStudentService>();
         A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsVM);
@@ -81,8 +83,10 @@ public class StudentEditTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var parameters = new DialogParameters();
-        parameters.Add("StudentId", 1);
+        var parameters = new DialogParameters
+        {
+            { "StudentId", 1 }
+        };
 
         var title = "Edit Student";
         await comp.InvokeAsync(() => dialogReference = service?.Show<StudentEdit>(title, parameters));
@@ -99,7 +103,7 @@ public class StudentEditTests : BunitTestBase
     {
         var studentDetailsVM = _fixture.Create<StudentDetailsVM>();
         var enrollment = _fixture.Create<StudentDetailsEnrollmentVM>();
-        studentDetailsVM.Enrollments = new List<StudentDetailsEnrollmentVM> { enrollment };
+        studentDetailsVM.Enrollments = [enrollment];
 
         var fakeStudentService = A.Fake<IStudentService>();
         A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsVM);
@@ -115,8 +119,10 @@ public class StudentEditTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var parameters = new DialogParameters();
-        parameters.Add("StudentId", 1);
+        var parameters = new DialogParameters
+        {
+            { "StudentId", 1 }
+        };
 
         var title = "Edit Student";
         await comp.InvokeAsync(() => dialogReference = service?.Show<StudentEdit>(title, parameters));
@@ -137,7 +143,7 @@ public class StudentEditTests : BunitTestBase
     {
         var studentDetailsVM = _fixture.Create<StudentDetailsVM>();
         var enrollment = _fixture.Create<StudentDetailsEnrollmentVM>();
-        studentDetailsVM.Enrollments = new List<StudentDetailsEnrollmentVM> { enrollment };
+        studentDetailsVM.Enrollments = [enrollment];
 
         var fakeStudentService = A.Fake<IStudentService>();
         A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsVM);
@@ -153,8 +159,10 @@ public class StudentEditTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var parameters = new DialogParameters();
-        parameters.Add("StudentId", 1);
+        var parameters = new DialogParameters
+        {
+            { "StudentId", 1 }
+        };
 
         var title = "Edit Student";
         await comp.InvokeAsync(() => dialogReference = service?.Show<StudentEdit>(title, parameters));
@@ -177,7 +185,7 @@ public class StudentEditTests : BunitTestBase
     {
         var studentDetailsVM = _fixture.Create<StudentDetailsVM>();
         var enrollment = _fixture.Create<StudentDetailsEnrollmentVM>();
-        studentDetailsVM.Enrollments = new List<StudentDetailsEnrollmentVM> { enrollment };
+        studentDetailsVM.Enrollments = [enrollment];
 
         var fakeStudentService = A.Fake<IStudentService>();
         A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsVM);
@@ -194,8 +202,10 @@ public class StudentEditTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var parameters = new DialogParameters();
-        parameters.Add("StudentId", 1);
+        var parameters = new DialogParameters
+        {
+            { "StudentId", 1 }
+        };
 
         var title = "Edit Student";
         await comp.InvokeAsync(() => dialogReference = service?.Show<StudentEdit>(title, parameters));
@@ -220,7 +230,7 @@ public class StudentEditTests : BunitTestBase
     {
         var studentDetailsVM = _fixture.Create<StudentDetailsVM>();
         var enrollment = _fixture.Create<StudentDetailsEnrollmentVM>();
-        studentDetailsVM.Enrollments = new List<StudentDetailsEnrollmentVM> { enrollment };
+        studentDetailsVM.Enrollments = [enrollment];
 
         var fakeStudentService = A.Fake<IStudentService>();
         A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsVM);
@@ -237,8 +247,10 @@ public class StudentEditTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var parameters = new DialogParameters();
-        parameters.Add("StudentId", 1);
+        var parameters = new DialogParameters
+        {
+            { "StudentId", 1 }
+        };
 
         var title = "Edit Student";
         await comp.InvokeAsync(() => dialogReference = service?.Show<StudentEdit>(title, parameters));

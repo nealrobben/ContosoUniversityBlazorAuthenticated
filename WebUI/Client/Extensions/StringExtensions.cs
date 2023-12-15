@@ -26,6 +26,6 @@ public static class StringExtensions
 
     public static string Truncate(this string value, int maxLength)
     {
-        return value.Substring(0, value.Length >= maxLength ? maxLength : value.Length);
+        return value[..(value.Length >= maxLength ? maxLength : value.Length)];
     }
 }

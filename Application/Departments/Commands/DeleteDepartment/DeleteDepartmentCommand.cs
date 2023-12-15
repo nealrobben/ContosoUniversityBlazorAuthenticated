@@ -6,6 +6,7 @@ using ContosoUniversityBlazor.Domain.Entities;
 using global::System.Threading;
 using global::System.Threading.Tasks;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 public class DeleteDepartmentCommand : IRequest
 {
@@ -28,11 +29,9 @@ public class DeleteDepartmentCommandHandler : IRequestHandler<DeleteDepartmentCo
 
     public async Task<Unit> Handle(DeleteDepartmentCommand request, CancellationToken cancellationToken)
     {
-        var department = await _context.Departments.FindAsync(request.ID, cancellationToken);
-
-        if (department == null)
-            throw new NotFoundException(nameof(Department), request.ID);
-
+        var department = await _context.Departments.SingleOrDefaultAsync(x => x.DepartmentID == request.ID, cancellationToken) 
+            ?? throw new NotFoundException(nameof(Department), request.ID);
+        
         _context.Departments.Remove(department);
         await _context.SaveChangesAsync(cancellationToken);
 

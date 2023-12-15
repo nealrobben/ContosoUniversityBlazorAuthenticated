@@ -61,20 +61,24 @@ public partial class Courses
 
     public void OpenCourseDetails(int courseId)
     {
-        var parameters = new DialogParameters();
-        parameters.Add("CourseId", courseId);
+        var parameters = new DialogParameters
+        {
+            { "CourseId", courseId }
+        };
 
-        DialogOptions options = new DialogOptions() { MaxWidth = MaxWidth.ExtraSmall };
+        var options = new DialogOptions() { MaxWidth = MaxWidth.ExtraSmall };
 
         DialogService.Show<CourseDetails>(Localizer["CourseDetails"], parameters, options);
     }
 
     public async Task OpenCourseEdit(int courseId)
     {
-        var parameters = new DialogParameters();
-        parameters.Add("CourseId", courseId);
+        var parameters = new DialogParameters
+        {
+            { "CourseId", courseId }
+        };
 
-        DialogOptions options = new DialogOptions() { MaxWidth = MaxWidth.ExtraSmall };
+        var options = new DialogOptions() { MaxWidth = MaxWidth.ExtraSmall };
 
         var dialog = DialogService.Show<CourseEdit>(Localizer["CourseEdit"], parameters, options);
 
@@ -88,7 +92,7 @@ public partial class Courses
 
     public async Task OpenCourseCreate()
     {
-        DialogOptions options = new DialogOptions() { MaxWidth = MaxWidth.Large };
+        var options = new DialogOptions() { MaxWidth = MaxWidth.Large };
 
         var dialog = DialogService.Show<CourseCreate>(Localizer["CreateCourse"], options);
         var result = await dialog.Result;

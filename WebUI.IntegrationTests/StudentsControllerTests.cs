@@ -318,15 +318,13 @@ public class StudentsControllerTests : IntegrationTest
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.Created);
 
-        using (var scope = _appFactory.Services.CreateScope())
-        {
-            var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
+        using var scope = _appFactory.Services.CreateScope();
+        var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
 
-            schoolContext.Students.Should().ContainSingle();
-            schoolContext.Students.First().FirstMidName.Should().Be(student.FirstName);
-            schoolContext.Students.First().LastName.Should().Be(student.LastName);
-            schoolContext.Students.First().EnrollmentDate.Should().Be(student.EnrollmentDate);
-        }
+        schoolContext.Students.Should().ContainSingle();
+        schoolContext.Students.First().FirstMidName.Should().Be(student.FirstName);
+        schoolContext.Students.First().LastName.Should().Be(student.LastName);
+        schoolContext.Students.First().EnrollmentDate.Should().Be(student.EnrollmentDate);
     }
 
     [Fact]
@@ -339,25 +337,23 @@ public class StudentsControllerTests : IntegrationTest
     [Fact]
     public async Task Delete_WithExistingId_DeletesStudent()
     {
-        using (var scope = _appFactory.Services.CreateScope())
+        using var scope = _appFactory.Services.CreateScope();
+        var student = new Student
         {
-            var student = new Student
-            {
-                ID = 1,
-                FirstMidName = "First name",
-                LastName = "Last name",
-                EnrollmentDate = DateTime.UtcNow
-            };
+            ID = 1,
+            FirstMidName = "First name",
+            LastName = "Last name",
+            EnrollmentDate = DateTime.UtcNow
+        };
 
-            var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
-            schoolContext.Students.Add(student);
-            await schoolContext.SaveChangesAsync();
+        var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
+        schoolContext.Students.Add(student);
+        await schoolContext.SaveChangesAsync();
 
-            var response = await _client.DeleteAsync("/api/students/1");
-            response.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
+        var response = await _client.DeleteAsync("/api/students/1");
+        response.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
 
-            schoolContext.Students.Should().BeEmpty();
-        }
+        schoolContext.Students.Should().BeEmpty();
     }
 
     [Fact]

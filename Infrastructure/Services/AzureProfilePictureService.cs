@@ -50,11 +50,9 @@ public class AzureProfilePictureService : IProfilePictureService
 
         var blobClient = containerClient.GetBlobClient(fileName);
 
-        using (var ms = new MemoryStream())
-        {
-            await blobClient.DownloadToAsync(ms);
-            return ms.ToArray();
-        }
+        using var ms = new MemoryStream();
+        await blobClient.DownloadToAsync(ms);
+        return ms.ToArray();
     }
 
     public async Task WriteImageFile(string name, MemoryStream ms)

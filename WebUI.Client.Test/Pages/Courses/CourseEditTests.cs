@@ -44,8 +44,10 @@ public class CourseEditTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var parameters = new DialogParameters();
-        parameters.Add("CourseId", 1);
+        var parameters = new DialogParameters
+        {
+            { "CourseId", 1 }
+        };
 
         var title = "Edit Course";
         await comp.InvokeAsync(() => dialogReference = service?.Show<CourseEdit>(title, parameters));
@@ -79,8 +81,10 @@ public class CourseEditTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var parameters = new DialogParameters();
-        parameters.Add("CourseId", 1);
+        var parameters = new DialogParameters
+        {
+            { "CourseId", 1 }
+        };
 
         var title = "Edit Course";
         await comp.InvokeAsync(() => dialogReference = service?.Show<CourseEdit>(title, parameters));
@@ -112,8 +116,10 @@ public class CourseEditTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var parameters = new DialogParameters();
-        parameters.Add("CourseId", 1);
+        var parameters = new DialogParameters
+        {
+            { "CourseId", 1 }
+        };
 
         var title = "Edit Course";
         await comp.InvokeAsync(() => dialogReference = service?.Show<CourseEdit>(title, parameters));
@@ -149,8 +155,10 @@ public class CourseEditTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var parameters = new DialogParameters();
-        parameters.Add("CourseId", 1);
+        var parameters = new DialogParameters
+        {
+            { "CourseId", 1 }
+        };
 
         var title = "Edit Course";
         await comp.InvokeAsync(() => dialogReference = service?.Show<CourseEdit>(title, parameters));
@@ -188,8 +196,10 @@ public class CourseEditTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var parameters = new DialogParameters();
-        parameters.Add("CourseId", 1);
+        var parameters = new DialogParameters
+        {
+            { "CourseId", 1 }
+        };
 
         var title = "Edit Course";
         await comp.InvokeAsync(() => dialogReference = service?.Show<CourseEdit>(title, parameters));
@@ -229,8 +239,10 @@ public class CourseEditTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var parameters = new DialogParameters();
-        parameters.Add("CourseId", 1);
+        var parameters = new DialogParameters
+        {
+            { "CourseId", 1 }
+        };
 
         var title = "Edit Course";
         await comp.InvokeAsync(() => dialogReference = service?.Show<CourseEdit>(title, parameters));
@@ -252,18 +264,15 @@ public class CourseEditTests : BunitTestBase
     {
         return new DepartmentsLookupVM(new List<DepartmentLookupVM>
         {
-            new DepartmentLookupVM
-            {
+            new() {
                 DepartmentID = 1,
                 Name = "Department One"
             },
-            new DepartmentLookupVM
-            {
+            new() {
                 DepartmentID = 2,
                 Name = "Department Two"
             },
-            new DepartmentLookupVM
-            {
+            new() {
                 DepartmentID = 3,
                 Name = "Department Three"
             }

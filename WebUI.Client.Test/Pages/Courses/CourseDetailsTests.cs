@@ -37,8 +37,10 @@ public class CourseDetailsTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var parameters = new DialogParameters();
-        parameters.Add("CourseId", 1);
+        var parameters = new DialogParameters
+        {
+            { "CourseId", 1 }
+        };
 
         var title = "Course Details";
         await comp.InvokeAsync(() => dialogReference = service?.Show<CourseDetails>(title, parameters));
@@ -73,8 +75,10 @@ public class CourseDetailsTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var parameters = new DialogParameters();
-        parameters.Add("CourseId", 1);
+        var parameters = new DialogParameters
+        {
+            { "CourseId", 1 }
+        };
 
         var title = "Course Details";
         await comp.InvokeAsync(() => dialogReference = service?.Show<CourseDetails>(title, parameters));

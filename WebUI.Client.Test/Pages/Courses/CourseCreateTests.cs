@@ -209,18 +209,15 @@ public class CourseCreateTests : BunitTestBase
     {
         return new DepartmentsLookupVM(new List<DepartmentLookupVM>
         {
-            new DepartmentLookupVM
-            {
+            new() {
                 DepartmentID = 1,
                 Name = "Department One"
             },
-            new DepartmentLookupVM
-            {
+            new() {
                 DepartmentID = 2,
                 Name = "Department Two"
             },
-            new DepartmentLookupVM
-            {
+            new() {
                 DepartmentID = 3,
                 Name = "Department Three"
             }

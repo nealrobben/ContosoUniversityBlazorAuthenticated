@@ -211,13 +211,11 @@ public class DepartmentCreateTests : BunitTestBase
     {
         return new InstructorsLookupVM(new List<InstructorLookupVM>
         {
-            new InstructorLookupVM
-            {
+            new() {
                 ID = 1,
                 FullName = "Test One"
             },
-            new InstructorLookupVM
-            {
+            new() {
                 ID = 2,
                 FullName = "Test Two"
             }

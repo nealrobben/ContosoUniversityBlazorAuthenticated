@@ -13,7 +13,7 @@ using WebUI.Shared.Students.Commands.UpdateStudent;
 public partial class StudentEdit
 {
     [Inject]
-    public IFileuploadService _fileuploadService { get; set; }
+    public IFileuploadService FileuploadService { get; set; }
 
     [Inject]
     public IStringLocalizer<StudentEdit> Localizer { get; set; }
@@ -31,7 +31,7 @@ public partial class StudentEdit
 
     public bool ErrorVisible { get; set; }
 
-    public IList<IBrowserFile> files { get; set; } = new List<IBrowserFile>();
+    public IList<IBrowserFile> Files { get; set; } = new List<IBrowserFile>();
 
     protected override async Task OnParametersSetAsync()
     {
@@ -52,9 +52,9 @@ public partial class StudentEdit
         {
             try
             {
-                if (files.Any())
+                if (Files.Any())
                 {
-                    UpdateStudentCommand.ProfilePictureName = await _fileuploadService.UploadFile(files[0]);
+                    UpdateStudentCommand.ProfilePictureName = await FileuploadService.UploadFile(Files[0]);
                 }
 
                 await StudentService.UpdateAsync(UpdateStudentCommand);
@@ -76,7 +76,7 @@ public partial class StudentEdit
     {
         foreach (var file in e.GetMultipleFiles())
         {
-            files.Add(file);
+            Files.Add(file);
         }
     }
 }

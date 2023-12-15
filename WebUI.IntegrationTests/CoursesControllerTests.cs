@@ -390,25 +390,23 @@ public class CoursesControllerTests : IntegrationTest
     [Fact]
     public async Task Delete_WithExistingId_DeletesCourse()
     {
-        using (var scope = _appFactory.Services.CreateScope())
+        using var scope = _appFactory.Services.CreateScope();
+        var course = new Course
         {
-            var course = new Course
-            {
-                CourseID = 1,
-                Title = "Test 1",
-                Credits = 2,
-                DepartmentID = 3
-            };
+            CourseID = 1,
+            Title = "Test 1",
+            Credits = 2,
+            DepartmentID = 3
+        };
 
-            var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
-            schoolContext.Courses.Add(course);
-            await schoolContext.SaveChangesAsync();
+        var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
+        schoolContext.Courses.Add(course);
+        await schoolContext.SaveChangesAsync();
 
-            var response = await _client.DeleteAsync("/api/courses/1");
-            response.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
+        var response = await _client.DeleteAsync("/api/courses/1");
+        response.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
 
-            schoolContext.Courses.Should().BeEmpty();
-        }
+        schoolContext.Courses.Should().BeEmpty();
     }
 
 

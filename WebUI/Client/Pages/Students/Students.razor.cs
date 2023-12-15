@@ -15,13 +15,13 @@ public partial class Students
     public IStringLocalizer<Students> Localizer { get; set; }
 
     [Inject]
-    public IDialogService _dialogService { get; set; }
+    public IDialogService DialogService { get; set; }
 
     [Inject]
     public IStudentService StudentService { get; set; }
 
     [Inject]
-    public ISnackbar _snackbar { get; set; }
+    public ISnackbar Snackbar { get; set; }
 
     private MudTable<StudentOverviewVM> Table;
 
@@ -29,8 +29,8 @@ public partial class Students
 
     protected override void OnInitialized()
     {
-        _snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
-        _snackbar.Configuration.ClearAfterNavigation = true;
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+        Snackbar.Configuration.ClearAfterNavigation = true;
     }
 
     private async Task GetStudents()
@@ -40,7 +40,7 @@ public partial class Students
 
     public async Task DeleteStudent(int studentId, string name)
     {
-        bool? dialogResult = await _dialogService.ShowMessageBox(Localizer["Confirm"], Localizer["DeleteConfirmation", name],
+        bool? dialogResult = await DialogService.ShowMessageBox(Localizer["Confirm"], Localizer["DeleteConfirmation", name],
             yesText: Localizer["Delete"], cancelText: Localizer["Cancel"]);
 
         if (dialogResult == true)
@@ -49,12 +49,12 @@ public partial class Students
             {
                 await StudentService.DeleteAsync(studentId.ToString());
 
-                _snackbar.Add(Localizer["DeleteFeedback", name], Severity.Success);
+                Snackbar.Add(Localizer["DeleteFeedback", name], Severity.Success);
                 await GetStudents();
             }
             catch (System.Exception)
             {
-                _snackbar.Add(Localizer["DeleteErrorFeedback", name], Severity.Error);
+                Snackbar.Add(Localizer["DeleteErrorFeedback", name], Severity.Error);
             }
         }
     }
@@ -72,22 +72,26 @@ public partial class Students
 
     public void OpenStudentDetails(int studentId)
     {
-        var parameters = new DialogParameters();
-        parameters.Add("StudentId", studentId);
+        var parameters = new DialogParameters
+        {
+            { "StudentId", studentId }
+        };
 
-        DialogOptions options = new DialogOptions() { MaxWidth = MaxWidth.Large };
+        var options = new DialogOptions() { MaxWidth = MaxWidth.Large };
 
-        _dialogService.Show<StudentDetails>(Localizer["StudentDetails"], parameters, options);
+        DialogService.Show<StudentDetails>(Localizer["StudentDetails"], parameters, options);
     }
 
     public async Task OpenStudentEdit(int studentId)
     {
-        var parameters = new DialogParameters();
-        parameters.Add("StudentId", studentId);
+        var parameters = new DialogParameters
+        {
+            { "StudentId", studentId }
+        };
 
-        DialogOptions options = new DialogOptions() { MaxWidth = MaxWidth.Large };
+        var options = new DialogOptions() { MaxWidth = MaxWidth.Large };
 
-        var dialog = _dialogService.Show<StudentEdit>(Localizer["StudentEdit"], parameters, options);
+        var dialog = DialogService.Show<StudentEdit>(Localizer["StudentEdit"], parameters, options);
 
         var result = await dialog.Result;
 
@@ -99,9 +103,9 @@ public partial class Students
 
     public async Task OpenStudentCreate()
     {
-        DialogOptions options = new DialogOptions() { MaxWidth = MaxWidth.Large };
+        var options = new DialogOptions() { MaxWidth = MaxWidth.Large };
 
-        var dialog = _dialogService.Show<StudentCreate>(Localizer["CreateStudent"], options);
+        var dialog = DialogService.Show<StudentCreate>(Localizer["CreateStudent"], options);
         var result = await dialog.Result;
 
         if (result.Data != null && (bool)result.Data)

@@ -39,10 +39,8 @@ public class GetCourseDetailsQueryHandler : IRequestHandler<GetCourseDetailsQuer
         var course = await _context.Courses
             .Include(c => c.Department)
             .AsNoTracking()
-            .FirstOrDefaultAsync(m => m.CourseID == request.ID, cancellationToken);
-
-        if (course == null)
-            throw new NotFoundException(nameof(Course), request.ID);
+            .FirstOrDefaultAsync(m => m.CourseID == request.ID, cancellationToken)
+            ?? throw new NotFoundException(nameof(Course), request.ID);
 
         return _mapper.Map<CourseDetailVM>(course);
     }

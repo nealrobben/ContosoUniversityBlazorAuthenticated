@@ -25,7 +25,7 @@ public class StudentDetailsVM : IMapFrom<Student>
 
     public StudentDetailsVM()
     {
-        Enrollments = new List<StudentDetailsEnrollmentVM>();
+        Enrollments = [];
     }
 
     public void Mapping(Profile profile)

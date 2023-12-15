@@ -34,7 +34,7 @@ public class Program
         builder.Services.AddRazorComponents().AddInteractiveWebAssemblyComponents();
 
         builder.Services.AddApplication();
-        builder.Services.AddInfrastructure(builder.Configuration, builder.Environment);
+        builder.Services.AddInfrastructure(builder.Configuration);
         builder.Services.AddShared();
 
         builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
@@ -109,25 +109,23 @@ public class Program
 
     private static async Task MigrateDatabase(IServiceProvider services)
     {
-        using (var scope = services.CreateScope())
+        using var scope = services.CreateScope();
+        var serviceProvider = scope.ServiceProvider;
+
+        try
         {
-            var serviceProvider = scope.ServiceProvider;
+            var context = serviceProvider.GetRequiredService<ContosoUniversityBlazor.Persistence.SchoolContext>();
 
-            try
-            {
-                var context = serviceProvider.GetRequiredService<ContosoUniversityBlazor.Persistence.SchoolContext>();
+            context.Database.EnsureCreated();
 
-                context.Database.EnsureCreated();
+            var mediator = serviceProvider.GetRequiredService<IMediator>();
+            await mediator.Send(new SeedDataCommand(), CancellationToken.None);
+        }
+        catch (Exception ex)
+        {
+            var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+            logger.LogError(ex, "An error occurred while migrating or seeding the database.");
 
-                var mediator = serviceProvider.GetRequiredService<IMediator>();
-                await mediator.Send(new SeedDataCommand(), CancellationToken.None);
-            }
-            catch (Exception ex)
-            {
-                var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-                logger.LogError(ex, "An error occurred while migrating or seeding the database.");
-
-            }
         }
     }
 }

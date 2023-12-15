@@ -33,7 +33,7 @@ public class FileController : ContosoApiController
         const long maxFileSize = 1024 * 1024 * 15;
         var filesProcessed = 0;
         var resourcePath = new Uri($"{Request.Scheme}://{Request.Host}/");
-        List<UploadResult> uploadResults = new();
+        List<UploadResult> uploadResults = [];
 
         foreach (var file in files)
         {

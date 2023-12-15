@@ -35,10 +35,8 @@ public class DeleteInstructorCommandHandler : IRequestHandler<DeleteInstructorCo
     {
         var instructor = await _context.Instructors
             .Include(i => i.CourseAssignments)
-            .SingleOrDefaultAsync(i => i.ID == request.ID, cancellationToken);
-
-        if (instructor == null)
-            throw new NotFoundException(nameof(Instructor), request.ID);
+            .SingleOrDefaultAsync(i => i.ID == request.ID, cancellationToken)
+            ?? throw new NotFoundException(nameof(Instructor), request.ID);
 
         if (!string.IsNullOrWhiteSpace(instructor.ProfilePictureName))
             _profilePictureService.DeleteImageFile(instructor.ProfilePictureName);

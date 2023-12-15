@@ -29,7 +29,7 @@ public partial class StudentCreate
 
     public bool ErrorVisible { get; set; }
 
-    public IList<IBrowserFile> files { get; set; } = new List<IBrowserFile>();
+    public IList<IBrowserFile> Files { get; set; } = new List<IBrowserFile>();
 
     public async Task FormSubmitted(EditContext editContext)
     {
@@ -40,9 +40,9 @@ public partial class StudentCreate
         {
             try
             {
-                if (files.Any())
+                if (Files.Any())
                 {
-                    CreateStudentCommand.ProfilePictureName = await FileUploadService.UploadFile(files[0]);
+                    CreateStudentCommand.ProfilePictureName = await FileUploadService.UploadFile(Files[0]);
                 }
 
                 await StudentService.CreateAsync(CreateStudentCommand);
@@ -66,7 +66,7 @@ public partial class StudentCreate
     {
         foreach (var file in e.GetMultipleFiles())
         {
-            files.Add(file);
+            Files.Add(file);
         }
     }
 }

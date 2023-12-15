@@ -21,8 +21,8 @@ public partial class About
     [Inject]
     public IStringLocalizer<About> Localizer { get; set; }
 
-    public List<ChartSeries> Series { get; set; } = new List<ChartSeries>();
-    public string[] XAxisLabels { get; set; } = Array.Empty<string>();
+    public List<ChartSeries> Series { get; set; } = [];
+    public string[] XAxisLabels { get; set; } = [];
 
     protected override async Task OnInitializedAsync()
     {
@@ -30,6 +30,6 @@ public partial class About
 
         XAxisLabels = aboutInfo.Items.Select(x => x.EnrollmentDate.Value.ToShortDateString()).ToArray();
         var chartSeries = new ChartSeries() { Name = "Students", Data = aboutInfo.Items.Select(x => (double)x.StudentCount).ToArray() };
-        Series = new List<ChartSeries> { chartSeries };
+        Series = [chartSeries];
     }
 }

@@ -13,11 +13,11 @@ public partial class CultureSelector
     [Inject]
     public ClientSettingService ClientPreferenceService { get; set; }
 
-    private CultureInfo[] supportedCultures = new[]
-    {
+    private readonly CultureInfo[] supportedCultures =
+    [
         new CultureInfo("en-US"),
         new CultureInfo("nl-NL"),
-    };
+    ];
 
     private async Task ChangeLanguageAsync(CultureInfo culture)
     {

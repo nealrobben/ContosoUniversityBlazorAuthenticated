@@ -42,8 +42,10 @@ public class InstructorEditTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var parameters = new DialogParameters();
-        parameters.Add("InstructorId", 1);
+        var parameters = new DialogParameters
+        {
+            { "InstructorId", 1 }
+        };
 
         var title = "Edit Instructor";
         await comp.InvokeAsync(() => dialogReference = service?.Show<InstructorEdit>(title, parameters));
@@ -78,8 +80,10 @@ public class InstructorEditTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var parameters = new DialogParameters();
-        parameters.Add("InstructorId", 1);
+        var parameters = new DialogParameters
+        {
+            { "InstructorId", 1 }
+        };
 
         var title = "Edit Instructor";
         await comp.InvokeAsync(() => dialogReference = service?.Show<InstructorEdit>(title, parameters));
@@ -110,8 +114,10 @@ public class InstructorEditTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var parameters = new DialogParameters();
-        parameters.Add("InstructorId", 1);
+        var parameters = new DialogParameters
+        {
+            { "InstructorId", 1 }
+        };
 
         var title = "Edit Instructor";
         await comp.InvokeAsync(() => dialogReference = service?.Show<InstructorEdit>(title, parameters));
@@ -147,8 +153,10 @@ public class InstructorEditTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var parameters = new DialogParameters();
-        parameters.Add("InstructorId", 1);
+        var parameters = new DialogParameters
+        {
+            { "InstructorId", 1 }
+        };
 
         var title = "Edit Instructor";
         await comp.InvokeAsync(() => dialogReference = service?.Show<InstructorEdit>(title, parameters));
@@ -187,8 +195,10 @@ public class InstructorEditTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var parameters = new DialogParameters();
-        parameters.Add("InstructorId", 1);
+        var parameters = new DialogParameters
+        {
+            { "InstructorId", 1 }
+        };
 
         var title = "Edit Instructor";
         await comp.InvokeAsync(() => dialogReference = service?.Show<InstructorEdit>(title, parameters));
@@ -229,8 +239,10 @@ public class InstructorEditTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var parameters = new DialogParameters();
-        parameters.Add("InstructorId", 1);
+        var parameters = new DialogParameters
+        {
+            { "InstructorId", 1 }
+        };
 
         var title = "Edit Instructor";
         await comp.InvokeAsync(() => dialogReference = service?.Show<InstructorEdit>(title, parameters));

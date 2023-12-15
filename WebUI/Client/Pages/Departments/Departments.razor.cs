@@ -61,20 +61,24 @@ public partial class Departments
 
     public void OpenDepartmentDetails(int departmentId)
     {
-        var parameters = new DialogParameters();
-        parameters.Add("DepartmentId", departmentId);
+        var parameters = new DialogParameters
+        {
+            { "DepartmentId", departmentId }
+        };
 
-        DialogOptions options = new DialogOptions() { MaxWidth = MaxWidth.ExtraSmall };
+        var options = new DialogOptions() { MaxWidth = MaxWidth.ExtraSmall };
 
         DialogService.Show<DepartmentDetails>(Localizer["DepartmentDetails"], parameters, options);
     }
 
     public async Task OpenDepartmentEdit(int departmentId)
     {
-        var parameters = new DialogParameters();
-        parameters.Add("DepartmentId", departmentId);
+        var parameters = new DialogParameters
+        {
+            { "DepartmentId", departmentId }
+        };
 
-        DialogOptions options = new DialogOptions() { MaxWidth = MaxWidth.ExtraSmall };
+        var options = new DialogOptions() { MaxWidth = MaxWidth.ExtraSmall };
 
         var dialog = DialogService.Show<DepartmentEdit>(Localizer["DepartmentEdit"], parameters, options);
 
@@ -88,7 +92,7 @@ public partial class Departments
 
     public async Task OpenDepartmentCreate()
     {
-        DialogOptions options = new DialogOptions() { MaxWidth = MaxWidth.Large };
+        var options = new DialogOptions() { MaxWidth = MaxWidth.Large };
 
         var dialog = DialogService.Show<DepartmentCreate>(Localizer["CreateDepartment"], options);
         var result = await dialog.Result;

@@ -21,7 +21,7 @@ public partial class Instructors
     public ISnackbar SnackBar { get; set; }
 
     [Inject]
-    public IDialogService _dialogService { get; set; }
+    public IDialogService DialogService { get; set; }
 
     private MudTable<InstructorVM> Table;
 
@@ -43,7 +43,7 @@ public partial class Instructors
 
     public async Task DeleteInstructor(int instructorId, string name)
     {
-        bool? dialogResult = await _dialogService.ShowMessageBox(Localizer["Confirm"], Localizer["DeleteConfirmation", name],
+        bool? dialogResult = await DialogService.ShowMessageBox(Localizer["Confirm"], Localizer["DeleteConfirmation", name],
             yesText: Localizer["Delete"], cancelText: Localizer["Cancel"]);
 
         if (dialogResult == true)
@@ -75,22 +75,26 @@ public partial class Instructors
 
     public void OpenInstructorDetails(int instructorId)
     {
-        var parameters = new DialogParameters();
-        parameters.Add("InstructorId", instructorId);
+        var parameters = new DialogParameters
+        {
+            { "InstructorId", instructorId }
+        };
 
-        DialogOptions options = new DialogOptions() { MaxWidth = MaxWidth.Medium };
+        var options = new DialogOptions() { MaxWidth = MaxWidth.Medium };
 
-        _dialogService.Show<InstructorDetails>(Localizer["InstructorDetails"], parameters, options);
+        DialogService.Show<InstructorDetails>(Localizer["InstructorDetails"], parameters, options);
     }
 
     public async Task OpenInstructorEdit(int instructorId)
     {
-        var parameters = new DialogParameters();
-        parameters.Add("InstructorId", instructorId);
+        var parameters = new DialogParameters
+        {
+            { "InstructorId", instructorId }
+        };
 
-        DialogOptions options = new DialogOptions() { MaxWidth = MaxWidth.Medium };
+        var options = new DialogOptions() { MaxWidth = MaxWidth.Medium };
 
-        var dialog = _dialogService.Show<InstructorEdit>(Localizer["InstructorEdit"], parameters, options);
+        var dialog = DialogService.Show<InstructorEdit>(Localizer["InstructorEdit"], parameters, options);
 
         var result = await dialog.Result;
 
@@ -102,9 +106,9 @@ public partial class Instructors
 
     public async Task OpenCreateInstructor()
     {
-        DialogOptions options = new DialogOptions() { MaxWidth = MaxWidth.Medium };
+        var options = new DialogOptions() { MaxWidth = MaxWidth.Medium };
 
-        var dialog = _dialogService.Show<InstructorCreate>(Localizer["CreateInstructor"], options);
+        var dialog = DialogService.Show<InstructorCreate>(Localizer["CreateInstructor"], options);
         var result = await dialog.Result;
 
         if (result.Data != null && (bool)result.Data)

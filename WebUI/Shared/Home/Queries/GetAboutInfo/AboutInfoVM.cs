@@ -8,7 +8,7 @@ public class AboutInfoVM
 
     public AboutInfoVM()
     {
-        Items = new List<EnrollmentDateGroup>();
+        Items = [];
     }
 
     public AboutInfoVM(List<EnrollmentDateGroup> items)

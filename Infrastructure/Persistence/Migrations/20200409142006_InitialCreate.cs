@@ -241,10 +241,12 @@ public partial class InitialCreate : Migration
             table: "PersistedGrants",
             column: "Expiration");
 
+#pragma warning disable CA1861 // Avoid constant arrays as arguments
         migrationBuilder.CreateIndex(
             name: "IX_PersistedGrants_SubjectId_ClientId_Type",
             table: "PersistedGrants",
             columns: new[] { "SubjectId", "ClientId", "Type" });
+#pragma warning restore CA1861 // Avoid constant arrays as arguments
     }
 
     protected override void Down(MigrationBuilder migrationBuilder)

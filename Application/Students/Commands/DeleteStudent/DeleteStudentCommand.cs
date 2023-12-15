@@ -7,6 +7,7 @@ using global::Application.Common.Interfaces;
 using global::System.Threading;
 using global::System.Threading.Tasks;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 public class DeleteStudentCommand : IRequest
 {
@@ -31,10 +32,8 @@ public class DeleteStudentCommandHandler : IRequestHandler<DeleteStudentCommand>
 
     public async Task<Unit> Handle(DeleteStudentCommand request, CancellationToken cancellationToken)
     {
-        var student = await _context.Students.FindAsync(request.ID, cancellationToken);
-
-        if (student == null)
-            throw new NotFoundException(nameof(Student), request.ID);
+        var student = await _context.Students.SingleOrDefaultAsync(x => x.ID == request.ID, cancellationToken) 
+            ?? throw new NotFoundException(nameof(Student), request.ID);
 
         if (!string.IsNullOrWhiteSpace(student.ProfilePictureName))
             _profilePictureService.DeleteImageFile(student.ProfilePictureName);

@@ -30,12 +30,10 @@ public class UpdateInstructorCommandHandler : IRequestHandler<UpdateInstructorCo
             .Include(i => i.OfficeAssignment)
             .Include(i => i.CourseAssignments)
             .ThenInclude(i => i.Course)
-            .FirstOrDefaultAsync(m => m.ID == request.InstructorID, cancellationToken);
+            .FirstOrDefaultAsync(m => m.ID == request.InstructorID, cancellationToken)
+            ?? throw new NotFoundException(nameof(Instructor), request.InstructorID);
 
-        if (instructorToUpdate == null)
-            throw new NotFoundException(nameof(Instructor), request.InstructorID);
-
-        if(!Equals(instructorToUpdate.ProfilePictureName, request.ProfilePictureName))
+        if (!Equals(instructorToUpdate.ProfilePictureName, request.ProfilePictureName))
             _profilePictureService.DeleteImageFile(instructorToUpdate.ProfilePictureName);
 
         instructorToUpdate.LastName = request.LastName;
@@ -43,8 +41,7 @@ public class UpdateInstructorCommandHandler : IRequestHandler<UpdateInstructorCo
         instructorToUpdate.HireDate = request.HireDate;
         instructorToUpdate.ProfilePictureName = request.ProfilePictureName;
 
-        if (instructorToUpdate.OfficeAssignment == null)
-            instructorToUpdate.OfficeAssignment = new OfficeAssignment();
+        instructorToUpdate.OfficeAssignment ??= new OfficeAssignment();
 
         instructorToUpdate.OfficeAssignment.Location = request.OfficeLocation;
 

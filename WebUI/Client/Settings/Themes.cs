@@ -4,7 +4,7 @@ using MudBlazor;
 
 public static class Themes
 {
-    private static Typography DefaultTypography = new Typography()
+    private static readonly Typography DefaultTypography = new()
     {
         Default = new Default()
         {
@@ -104,7 +104,7 @@ public static class Themes
         }
     };
 
-    private static LayoutProperties DefaultLayoutProperties = new LayoutProperties()
+    private static readonly LayoutProperties DefaultLayoutProperties = new()
     {
         DefaultBorderRadius = "3px"
     };
@@ -124,7 +124,7 @@ public static class Themes
         LayoutProperties = DefaultLayoutProperties
     };
 
-    private static readonly MudTheme darkTheme = new MudTheme()
+    private static readonly MudTheme darkTheme = new()
     {
         Palette = new PaletteDark()
         {
