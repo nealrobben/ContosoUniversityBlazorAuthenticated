@@ -21,7 +21,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
 namespace WebUI.Server;
+#pragma warning disable S1118 // Utility classes should not have public constructors
 public class Program
+#pragma warning restore S1118 // Utility classes should not have public constructors
 {
     public async static Task Main(string[] args)
     {
