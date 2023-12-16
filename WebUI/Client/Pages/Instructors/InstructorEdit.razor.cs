@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebUI.Client.Services;
@@ -29,7 +28,7 @@ public partial class InstructorEdit
 
     public bool ErrorVisible { get; set; }
 
-    public IList<IBrowserFile> Files { get; set; } = new List<IBrowserFile>();
+    public IBrowserFile File { get; set; } = null;
     public UpdateInstructorCommand UpdateInstructorCommand { get; set; } = new UpdateInstructorCommand();
 
     protected override async Task OnParametersSetAsync()
@@ -52,9 +51,9 @@ public partial class InstructorEdit
         {
             try
             {
-                if (Files.Any())
+                if (File != null)
                 {
-                    UpdateInstructorCommand.ProfilePictureName = await FileuploadService.UploadFile(Files[0]);
+                    UpdateInstructorCommand.ProfilePictureName = await FileuploadService.UploadFile(File);
                 }
 
                 await InstructorService.UpdateAsync(UpdateInstructorCommand);
@@ -74,9 +73,6 @@ public partial class InstructorEdit
 
     public void UploadFiles(InputFileChangeEventArgs e)
     {
-        foreach (var file in e.GetMultipleFiles())
-        {
-            Files.Add(file);
-        }
+        File = e.GetMultipleFiles()[0];
     }
 }
