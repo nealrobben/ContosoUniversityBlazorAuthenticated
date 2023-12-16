@@ -37,6 +37,7 @@ public class GetInstructorDetailsQueryHandler : IRequestHandler<GetInstructorDet
             throw new NotFoundException(nameof(Instructor), request.ID);
 
         var instructor = await _context.Instructors
+            .Include(x => x.OfficeAssignment)
             .AsNoTracking()
             .FirstOrDefaultAsync(m => m.ID == request.ID, cancellationToken) 
             ?? throw new NotFoundException(nameof(Instructor), request.ID);
