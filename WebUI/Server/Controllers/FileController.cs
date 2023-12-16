@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net;
 using System.Threading.Tasks;
 using WebUI.Shared;
 
@@ -38,25 +37,23 @@ public class FileController : ContosoApiController
 
         foreach (var file in files)
         {
-            var uploadResult = new UploadResult();
-
-            var untrustedFileName = file.FileName;
-            uploadResult.FileName = untrustedFileName;
-            var trustedFileNameForDisplay =
-                WebUtility.HtmlEncode(untrustedFileName);
+            var uploadResult = new UploadResult
+            {
+                FileName = file.FileName
+            };
 
             if (filesProcessed < maxAllowedFiles)
             {
                 if (file.Length == 0)
                 {
                     _logger.LogInformation("{FileName} length is 0 (Err: 1)",
-                        trustedFileNameForDisplay);
+                        file.FileName);
                 }
                 else if (file.Length > maxFileSize)
                 {
                     _logger.LogInformation("{FileName} of {Length} bytes is " +
                         "larger than the limit of {Limit} bytes (Err: 2)",
-                        trustedFileNameForDisplay, file.Length, maxFileSize);
+                        file.FileName, file.Length, maxFileSize);
                 }
                 else
                 {
@@ -71,14 +68,14 @@ public class FileController : ContosoApiController
                         }
 
                         _logger.LogInformation("{FileName} saved",
-                            trustedFileNameForDisplay);
+                            file.FileName);
                         uploadResult.Uploaded = true;
                         uploadResult.StoredFileName = trustedFileNameForFileStorage;
                     }
                     catch (IOException ex)
                     {
                         _logger.LogError("{FileName} error on upload (Err: 3): {Message}",
-                            trustedFileNameForDisplay, ex.Message);
+                            file.FileName, ex.Message);
                         uploadResult.ErrorCode = 3;
                     }
                 }
@@ -89,7 +86,7 @@ public class FileController : ContosoApiController
             {
                 _logger.LogInformation("{FileName} not uploaded because the " +
                     "request exceeded the allowed {Count} of files (Err: 4)",
-                    trustedFileNameForDisplay, maxAllowedFiles);
+                    file.FileName, maxAllowedFiles);
                 uploadResult.ErrorCode = 4;
             }
 
