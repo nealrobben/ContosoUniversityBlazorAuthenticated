@@ -1,11 +1,12 @@
-﻿namespace ContosoUniversityBlazor.Application.Common.Behaviours;
-
+﻿
 using MediatR;
 using Microsoft.Extensions.Logging;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
-using global::System.Diagnostics;
-using global::System.Threading.Tasks;
-using global::System.Threading;
+using System.Diagnostics;
+using System.Threading.Tasks;
+using System.Threading;
+
+namespace ContosoUniversityBlazor.Application.Common.Behaviours;
 
 public class PerformanceBehaviour<TRequest, TResponse> 
     : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>

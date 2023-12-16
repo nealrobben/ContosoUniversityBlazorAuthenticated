@@ -1,10 +1,11 @@
-﻿namespace ContosoUniversityBlazor.Application;
-
+﻿
 using ContosoUniversityBlazor.Application.Common.Behaviours;
 using FluentValidation;
-using global::System.Reflection;
+using System.Reflection;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+
+namespace ContosoUniversityBlazor.Application;
 
 public static class DependencyInjection
 {

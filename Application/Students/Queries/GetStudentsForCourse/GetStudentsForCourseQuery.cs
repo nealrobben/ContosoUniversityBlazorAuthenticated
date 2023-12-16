@@ -1,14 +1,15 @@
-﻿namespace ContosoUniversityBlazor.Application.Students.Queries.GetStudentsForCourse;
-
+﻿
 using AutoMapper;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using MediatR;
 using WebUI.Shared.Students.Queries.GetStudentsForCourse;
 using Microsoft.EntityFrameworkCore;
-using global::System.Threading;
-using global::System.Threading.Tasks;
-using global::System.Collections.Generic;
-using global::System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace ContosoUniversityBlazor.Application.Students.Queries.GetStudentsForCourse;
 
 public class GetStudentsForCourseQuery : IRequest<StudentsForCourseVM>
 {

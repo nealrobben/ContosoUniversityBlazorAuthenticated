@@ -1,11 +1,12 @@
-﻿namespace ContosoUniversityBlazor.Application.Departments.Commands.CreateDepartment;
-
+﻿
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
-using global::System.Threading;
-using global::System.Threading.Tasks;
+using System.Threading;
+using System.Threading.Tasks;
 using MediatR;
 using WebUI.Shared.Departments.Commands.CreateDepartment;
+
+namespace ContosoUniversityBlazor.Application.Departments.Commands.CreateDepartment;
 
 public class CreateDepartmentCommandHandler : IRequestHandler<CreateDepartmentCommand, int>
 {

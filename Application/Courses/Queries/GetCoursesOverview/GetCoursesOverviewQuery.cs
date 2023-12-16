@@ -1,16 +1,17 @@
-﻿namespace ContosoUniversityBlazor.Application.Courses.Queries.GetCoursesOverview;
-
+﻿
 using AutoMapper;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using MediatR;
 using WebUI.Shared.Common;
 using WebUI.Shared.Courses.Queries.GetCoursesOverview;
 using Microsoft.EntityFrameworkCore;
-using global::System.Collections.Generic;
-using global::System.Threading;
-using global::System.Threading.Tasks;
-using global::Application.Common.Extensions;
-using global::System.Linq;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using Application.Common.Extensions;
+using System.Linq;
+
+namespace ContosoUniversityBlazor.Application.Courses.Queries.GetCoursesOverview;
 
 public class GetCoursesOverviewQuery : IRequest<OverviewVM<CourseVM>>
 {

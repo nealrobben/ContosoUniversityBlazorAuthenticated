@@ -1,9 +1,10 @@
-﻿namespace ContosoUniversityBlazor.Application.Common.Exceptions;
-
+﻿
 using FluentValidation.Results;
-using global::System;
-using global::System.Collections.Generic;
-using global::System.Linq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace ContosoUniversityBlazor.Application.Common.Exceptions;
 
 public class ValidationException : Exception
 {

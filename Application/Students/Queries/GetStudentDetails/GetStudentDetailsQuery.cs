@@ -1,5 +1,4 @@
-﻿namespace ContosoUniversityBlazor.Application.Students.Queries.GetStudentDetails;
-
+﻿
 using AutoMapper;
 using ContosoUniversityBlazor.Application.Common.Exceptions;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
@@ -7,8 +6,10 @@ using ContosoUniversityBlazor.Domain.Entities;
 using MediatR;
 using WebUI.Shared.Students.Queries.GetStudentDetails;
 using Microsoft.EntityFrameworkCore;
-using global::System.Threading.Tasks;
-using global::System.Threading;
+using System.Threading.Tasks;
+using System.Threading;
+
+namespace ContosoUniversityBlazor.Application.Students.Queries.GetStudentDetails;
 
 public class GetStudentDetailsQuery : IRequest<StudentDetailsVM>
 {

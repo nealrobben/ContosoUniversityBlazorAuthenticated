@@ -1,12 +1,13 @@
-﻿namespace ContosoUniversityBlazor.Application.Departments.Commands.DeleteDepartment;
-
+﻿
 using ContosoUniversityBlazor.Application.Common.Exceptions;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
-using global::System.Threading;
-using global::System.Threading.Tasks;
+using System.Threading;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+
+namespace ContosoUniversityBlazor.Application.Departments.Commands.DeleteDepartment;
 
 public class DeleteDepartmentCommand : IRequest
 {

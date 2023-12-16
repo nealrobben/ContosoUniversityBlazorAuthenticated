@@ -1,5 +1,4 @@
-﻿namespace ContosoUniversityBlazor.Application.Courses.Queries.GetCourseDetails;
-
+﻿
 using AutoMapper;
 using ContosoUniversityBlazor.Application.Common.Exceptions;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
@@ -7,8 +6,10 @@ using ContosoUniversityBlazor.Domain.Entities;
 using MediatR;
 using WebUI.Shared.Courses.Queries.GetCourseDetails;
 using Microsoft.EntityFrameworkCore;
-using global::System.Threading;
-using global::System.Threading.Tasks;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace ContosoUniversityBlazor.Application.Courses.Queries.GetCourseDetails;
 
 public class GetCourseDetailsQuery : IRequest<CourseDetailVM>
 {

@@ -1,13 +1,14 @@
-﻿namespace ContosoUniversityBlazor.Application.Students.Commands.DeleteStudent;
-
+﻿
 using Application.Common.Interfaces;
 using ContosoUniversityBlazor.Application.Common.Exceptions;
 using ContosoUniversityBlazor.Domain.Entities;
-using global::Application.Common.Interfaces;
-using global::System.Threading;
-using global::System.Threading.Tasks;
+using System.Threading;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using ContosoUniversityBlazor.Application.Common.Interfaces;
+
+namespace ContosoUniversityBlazor.Application.Students.Commands.DeleteStudent;
 
 public class DeleteStudentCommand : IRequest
 {

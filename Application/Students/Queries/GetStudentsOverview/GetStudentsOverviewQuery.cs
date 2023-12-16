@@ -1,16 +1,17 @@
-﻿namespace ContosoUniversityBlazor.Application.Students.Queries.GetStudentsOverview;
-
+﻿
 using AutoMapper;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using MediatR;
 using WebUI.Shared.Common;
 using WebUI.Shared.Students.Queries.GetStudentsOverview;
 using Microsoft.EntityFrameworkCore;
-using global::Application.Common.Extensions;
-using global::System.Collections.Generic;
-using global::System.Threading;
-using global::System.Threading.Tasks;
-using global::System.Linq;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Linq;
+using Application.Common.Extensions;
+
+namespace ContosoUniversityBlazor.Application.Students.Queries.GetStudentsOverview;
 
 public class GetStudentsOverviewQuery : IRequest<OverviewVM<StudentOverviewVM>>
 {

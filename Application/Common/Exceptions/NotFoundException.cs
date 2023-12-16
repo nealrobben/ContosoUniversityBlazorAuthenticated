@@ -1,6 +1,7 @@
-﻿namespace ContosoUniversityBlazor.Application.Common.Exceptions;
+﻿
+using System;
 
-using global::System;
+namespace ContosoUniversityBlazor.Application.Common.Exceptions;
 
 public class NotFoundException : Exception
 {

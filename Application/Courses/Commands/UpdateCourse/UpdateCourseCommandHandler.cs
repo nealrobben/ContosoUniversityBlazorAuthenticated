@@ -1,13 +1,14 @@
-﻿namespace ContosoUniversityBlazor.Application.Courses.Commands.UpdateCourse;
-
+﻿
 using ContosoUniversityBlazor.Application.Common.Exceptions;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
-using global::System.Threading;
-using global::System.Threading.Tasks;
+using System.Threading;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using WebUI.Shared.Courses.Commands.UpdateCourse;
+
+namespace ContosoUniversityBlazor.Application.Courses.Commands.UpdateCourse;
 
 public class UpdateCourseCommandHandler : IRequestHandler<UpdateCourseCommand>
 {

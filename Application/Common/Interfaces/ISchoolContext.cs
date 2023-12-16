@@ -1,10 +1,11 @@
-﻿namespace ContosoUniversityBlazor.Application.Common.Interfaces;
-
+﻿
 using ContosoUniversityBlazor.Domain.Entities;
-using global::System.Threading;
-using global::System.Threading.Tasks;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+
+namespace ContosoUniversityBlazor.Application.Common.Interfaces;
 
 public interface ISchoolContext
 {

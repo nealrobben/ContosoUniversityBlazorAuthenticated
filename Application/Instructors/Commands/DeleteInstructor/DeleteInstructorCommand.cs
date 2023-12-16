@@ -1,14 +1,15 @@
-﻿namespace ContosoUniversityBlazor.Application.Instructors.Commands.DeleteInstructor;
-
+﻿
 using Application.Common.Interfaces;
 using ContosoUniversityBlazor.Application.Common.Exceptions;
 using ContosoUniversityBlazor.Domain.Entities;
-using global::Application.Common.Interfaces;
-using global::System.Linq;
-using global::System.Threading;
-using global::System.Threading.Tasks;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using ContosoUniversityBlazor.Application.Common.Interfaces;
+
+namespace ContosoUniversityBlazor.Application.Instructors.Commands.DeleteInstructor;
 
 public class DeleteInstructorCommand : IRequest
 {

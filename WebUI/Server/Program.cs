@@ -1,5 +1,5 @@
 ﻿
-using ContosoUniversityBlazor.Application.System.Commands.SeedData;
+using ContosoUniversityBlazor.Application.Program.Commands.SeedData;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

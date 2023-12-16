@@ -1,12 +1,13 @@
-﻿namespace ContosoUniversityBlazor.Application.Home.Queries.GetAboutInfo;
-
+﻿
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using MediatR;
 using WebUI.Shared.Home.Queries.GetAboutInfo;
 using Microsoft.EntityFrameworkCore;
-using global::System.Threading;
-using global::System.Threading.Tasks;
-using global::System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Linq;
+
+namespace ContosoUniversityBlazor.Application.Home.Queries.GetAboutInfo;
 
 public class GetAboutInfoQuery : IRequest<AboutInfoVM>
 {

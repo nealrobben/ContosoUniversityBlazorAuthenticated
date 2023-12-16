@@ -1,5 +1,4 @@
-﻿namespace ContosoUniversityBlazor.Application.Instructors.Queries.GetInstructorDetails;
-
+﻿
 using AutoMapper;
 using ContosoUniversityBlazor.Application.Common.Exceptions;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
@@ -7,9 +6,10 @@ using ContosoUniversityBlazor.Domain.Entities;
 using MediatR;
 using WebUI.Shared.Instructors.Queries.GetInstructorDetails;
 using Microsoft.EntityFrameworkCore;
-using global::System.Threading.Tasks;
-using global::System.Threading;
+using System.Threading.Tasks;
+using System.Threading;
 
+namespace ContosoUniversityBlazor.Application.Instructors.Queries.GetInstructorDetails;
 public class GetInstructorDetailsQuery : IRequest<InstructorDetailsVM>
 {
     public int? ID { get; set; }

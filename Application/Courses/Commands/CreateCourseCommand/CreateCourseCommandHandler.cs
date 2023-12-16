@@ -1,11 +1,12 @@
-﻿namespace ContosoUniversityBlazor.Application.Courses.Commands.CreateCourse;
-
+﻿
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
-using global::System.Threading;
-using global::System.Threading.Tasks;
+using System.Threading;
+using System.Threading.Tasks;
 using MediatR;
 using WebUI.Shared.Courses.Commands.CreateCourse;
+
+namespace ContosoUniversityBlazor.Application.Courses.Commands.CreateCourse;
 
 public class CreateCourseCommandHandler : IRequestHandler<CreateCourseCommand,int>
 {
