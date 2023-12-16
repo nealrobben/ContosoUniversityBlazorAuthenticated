@@ -1,6 +1,4 @@
-﻿namespace WebUI.Server.Controllers;
-
-using Application.Common.Interfaces;
+﻿using Application.Common.Interfaces;
 using ContosoUniversityBlazor.WebUI.Controllers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -13,11 +11,16 @@ using System.Net;
 using System.Threading.Tasks;
 using WebUI.Shared;
 
+namespace WebUI.Server.Controllers;
+
 public class FileController : ContosoApiController
 {
     private readonly IWebHostEnvironment _env;
     private readonly ILogger<FileController> _logger;
     private readonly IProfilePictureService _profilePictureService;
+
+    private const int maxAllowedFiles = 3;
+    private const long maxFileSize = 1024 * 1024 * 15;
 
     public FileController(IWebHostEnvironment env, ILogger<FileController> logger, IProfilePictureService profilePictureService)
     {
@@ -29,8 +32,6 @@ public class FileController : ContosoApiController
     [HttpPost]
     public async Task<ActionResult<IList<UploadResult>>> UploadFile([FromForm] IEnumerable<IFormFile> files)
     {
-        const int maxAllowedFiles = 3;
-        const long maxFileSize = 1024 * 1024 * 15;
         var filesProcessed = 0;
         var resourcePath = new Uri($"{Request.Scheme}://{Request.Host}/");
         List<UploadResult> uploadResults = [];
@@ -38,7 +39,7 @@ public class FileController : ContosoApiController
         foreach (var file in files)
         {
             var uploadResult = new UploadResult();
-            string trustedFileNameForFileStorage;
+
             var untrustedFileName = file.FileName;
             uploadResult.FileName = untrustedFileName;
             var trustedFileNameForDisplay =
@@ -61,7 +62,7 @@ public class FileController : ContosoApiController
                 {
                     try
                     {
-                        trustedFileNameForFileStorage = (Guid.NewGuid()).ToString() + ".jpg"; //May not actually be a jpeg, fix later
+                        var trustedFileNameForFileStorage = (Guid.NewGuid()).ToString() + ".jpg"; //May not actually be a jpeg, fix later
 
                         await using (var ms = new MemoryStream())
                         {

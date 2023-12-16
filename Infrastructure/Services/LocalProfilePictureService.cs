@@ -30,6 +30,9 @@ public class LocalProfilePictureService : IProfilePictureService
 
     public void DeleteImageFile(string name)
     {
+        if (string.IsNullOrWhiteSpace(name))
+            return;
+
         var fullName = Path.Combine(_path, name);
 
         if (File.Exists(fullName))

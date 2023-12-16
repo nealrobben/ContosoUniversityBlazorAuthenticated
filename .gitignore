@@ -350,3 +350,4 @@ MigrationBackup/
 .ionide/
 /ContosoUniversityBlazorExtended/WebUI/Client/wwwroot/img/ProfilePictures
 /.sonarqube
+/WebUI/Server/Img/ProfilePictures
