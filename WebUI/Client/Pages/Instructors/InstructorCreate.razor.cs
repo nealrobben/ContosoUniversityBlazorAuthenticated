@@ -1,15 +1,14 @@
-﻿namespace WebUI.Client.Pages.Instructors;
-
+﻿
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using WebUI.Client.Services;
 using WebUI.Shared.Instructors.Commands.CreateInstructor;
+
+namespace WebUI.Client.Pages.Instructors;
 
 public partial class InstructorCreate
 {
@@ -27,7 +26,7 @@ public partial class InstructorCreate
 
     public bool ErrorVisible { get; set; }
 
-    public IList<IBrowserFile> Files { get; set; } = new List<IBrowserFile>();
+    public IBrowserFile File { get; set; } = null;
     public CreateInstructorCommand CreateInstructorCommand { get; set; } = new CreateInstructorCommand() { HireDate = DateTime.Now.Date };
 
     public async Task FormSubmitted(EditContext editContext)
@@ -39,9 +38,9 @@ public partial class InstructorCreate
         {
             try
             {
-                if (Files.Any())
+                if (File != null)
                 {
-                    CreateInstructorCommand.ProfilePictureName = await FileUploadService.UploadFile(Files[0]);
+                    CreateInstructorCommand.ProfilePictureName = await FileUploadService.UploadFile(File);
                 }
 
                 await InstructorService.CreateAsync(CreateInstructorCommand);
@@ -49,8 +48,9 @@ public partial class InstructorCreate
                 CreateInstructorCommand = new CreateInstructorCommand();
                 MudDialog.Close(DialogResult.Ok(true));
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Console.WriteLine(e);
                 ErrorVisible = true;
             }
         }
@@ -63,9 +63,6 @@ public partial class InstructorCreate
 
     public void UploadFiles(InputFileChangeEventArgs e)
     {
-        foreach (var file in e.GetMultipleFiles())
-        {
-            Files.Add(file);
-        }
+        File = e.GetMultipleFiles()[0];
     }
 }

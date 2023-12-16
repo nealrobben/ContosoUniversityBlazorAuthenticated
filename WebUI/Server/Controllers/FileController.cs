@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using WebUI.Shared;
 
@@ -27,9 +28,9 @@ public class FileController : ContosoApiController
     public async Task<ActionResult<IList<UploadResult>>> UploadFiles([FromForm] IEnumerable<IFormFile> files)
     {
         var resourcePath = new Uri($"{Request.Scheme}://{Request.Host}/");
-        IList<UploadResult> uploadResults = await Mediator.Send(new UploadFilesCommand(files));
+        var uploadResult = await Mediator.Send(new UploadFileCommand(files.First()));
 
-        return new CreatedResult(resourcePath, uploadResults);
+        return new CreatedResult(resourcePath, uploadResult);
     }
 
     [HttpGet("{id}")]

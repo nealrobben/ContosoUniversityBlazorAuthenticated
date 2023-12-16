@@ -1,7 +1,6 @@
 ﻿namespace WebUI.Client.Services;
 
 using Microsoft.AspNetCore.Components.Forms;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -33,11 +32,11 @@ public class FileuploadService : IFileuploadService
 
         var response = await _http.PostAsync("api/File", content);
 
-        var newUploadResults = await response.Content.ReadFromJsonAsync<IList<UploadResult>>();
+        var newUploadResult = await response.Content.ReadFromJsonAsync<UploadResult>();
 
-        if (newUploadResults.Count != 0)
+        if (newUploadResult != null)
         {
-            storedFileName = newUploadResults[0].StoredFileName;
+            storedFileName = newUploadResult.StoredFileName;
         }
 
         return storedFileName;
