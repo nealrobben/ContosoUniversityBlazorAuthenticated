@@ -33,17 +33,14 @@
                                    for="fileInput">
                             @Localizer["UploadFiles"]
                         </MudButton>
-                        @if (Files != null)
-                        {
-                            <MudList>
-                                @foreach (var file in Files)
-                                {
-                                    <MudListItem Icon="@Icons.Material.Filled.AttachFile" @key="@file">
-                                        @file.Name <code>@file.Size bytes</code>
+                        @if (File != null)
+                            {
+                                <MudList>
+                                    <MudListItem Icon="@Icons.Material.Filled.AttachFile" @key="@File">
+                                            @File.Name <code>@File.Size bytes</code>
                                     </MudListItem>
-                                }
-                            </MudList>
-                        }
+                                </MudList>
+                            }
                     </div>
                     <MudButton ButtonType="ButtonType.Submit"
                                StartIcon="fas fa-save"

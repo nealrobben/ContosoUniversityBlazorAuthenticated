@@ -31,7 +31,7 @@ public partial class StudentEdit
 
     public bool ErrorVisible { get; set; }
 
-    public IList<IBrowserFile> Files { get; set; } = new List<IBrowserFile>();
+    public IBrowserFile File { get; set; } = null;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -52,9 +52,9 @@ public partial class StudentEdit
         {
             try
             {
-                if (Files.Any())
+                if (File != null)
                 {
-                    UpdateStudentCommand.ProfilePictureName = await FileuploadService.UploadFile(Files[0]);
+                    UpdateStudentCommand.ProfilePictureName = await FileuploadService.UploadFile(File);
                 }
 
                 await StudentService.UpdateAsync(UpdateStudentCommand);
@@ -74,9 +74,6 @@ public partial class StudentEdit
 
     public void UploadFiles(InputFileChangeEventArgs e)
     {
-        foreach (var file in e.GetMultipleFiles())
-        {
-            Files.Add(file);
-        }
+        File = e.GetMultipleFiles()[0];
     }
 }
