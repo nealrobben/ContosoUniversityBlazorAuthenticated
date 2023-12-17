@@ -1,5 +1,4 @@
-﻿namespace WebUI.Client.Pages.Students;
-
+﻿
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
@@ -8,6 +7,8 @@ using WebUI.Client.Extensions;
 using WebUI.Client.Services;
 using WebUI.Shared.Common;
 using WebUI.Shared.Students.Queries.GetStudentsOverview;
+
+namespace WebUI.Client.Pages.Students;
 
 public partial class Students
 {

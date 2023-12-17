@@ -1,9 +1,10 @@
-﻿namespace Infrastructure.Services;
-
+﻿
 using Application.Common.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using System.Threading.Tasks;
+
+namespace Infrastructure.Services;
 
 public class LocalProfilePictureService : IProfilePictureService
 {

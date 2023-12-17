@@ -1,10 +1,11 @@
-﻿namespace WebUI.Client.Test;
-
+﻿
 using Bunit;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor.Services;
 using WebUI.Shared.Departments.Validators;
+
+namespace WebUI.Client.Test;
 
 public abstract class BunitTestBase
 {

@@ -1,7 +1,8 @@
-﻿namespace WebUI.Shared.Instructors.Commands.CreateInstructor;
-
+﻿
 using MediatR;
 using System;
+
+namespace WebUI.Shared.Instructors.Commands.CreateInstructor;
 
 public class CreateInstructorCommand : IRequest<int>
 {

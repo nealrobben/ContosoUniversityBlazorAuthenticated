@@ -1,10 +1,11 @@
-﻿namespace WebUI.Client.Services;
-
+﻿
 using Microsoft.AspNetCore.Components.Forms;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using WebUI.Shared;
+
+namespace WebUI.Client.Services;
 
 public interface IFileuploadService
 {

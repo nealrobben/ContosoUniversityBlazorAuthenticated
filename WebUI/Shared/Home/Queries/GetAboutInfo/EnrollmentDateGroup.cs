@@ -1,7 +1,8 @@
-﻿namespace WebUI.Shared.Home.Queries.GetAboutInfo;
-
+﻿
 using System;
 using System.ComponentModel.DataAnnotations;
+
+namespace WebUI.Shared.Home.Queries.GetAboutInfo;
 
 public class EnrollmentDateGroup
 {

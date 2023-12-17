@@ -1,6 +1,7 @@
-﻿namespace WebUI.Shared.Common;
-
+﻿
 using System;
+
+namespace WebUI.Shared.Common;
 
 public class MetaData
 {

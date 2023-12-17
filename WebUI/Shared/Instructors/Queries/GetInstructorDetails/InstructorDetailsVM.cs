@@ -1,9 +1,10 @@
-﻿namespace WebUI.Shared.Instructors.Queries.GetInstructorDetails;
-
+﻿
 using AutoMapper;
 using ContosoUniversityBlazor.Domain.Entities;
 using System;
 using WebUI.Shared.Common.Mappings;
+
+namespace WebUI.Shared.Instructors.Queries.GetInstructorDetails;
 
 public class InstructorDetailsVM : IMapFrom<Instructor>
 {

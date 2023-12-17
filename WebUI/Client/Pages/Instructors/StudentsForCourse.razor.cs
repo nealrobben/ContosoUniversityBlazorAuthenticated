@@ -1,10 +1,11 @@
-﻿namespace WebUI.Client.Pages.Instructors;
-
+﻿
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using System.Threading.Tasks;
 using WebUI.Client.Services;
 using WebUI.Shared.Students.Queries.GetStudentsForCourse;
+
+namespace WebUI.Client.Pages.Instructors;
 
 public partial class StudentsForCourse
 {

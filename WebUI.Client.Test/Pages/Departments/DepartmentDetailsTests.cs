@@ -1,5 +1,4 @@
-﻿namespace WebUI.Client.Test.Pages.Departments;
-
+﻿
 using Bunit;
 using WebUI.Client.Pages.Departments;
 using Xunit;
@@ -11,6 +10,8 @@ using WebUI.Shared.Departments.Queries.GetDepartmentDetails;
 using FluentAssertions;
 using WebUI.Client.Test.Extensions;
 using AutoFixture;
+
+namespace WebUI.Client.Test.Pages.Departments;
 
 public class DepartmentDetailsTests : BunitTestBase
 {

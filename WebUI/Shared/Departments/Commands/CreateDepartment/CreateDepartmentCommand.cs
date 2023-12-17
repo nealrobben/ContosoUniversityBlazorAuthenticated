@@ -1,7 +1,8 @@
-﻿namespace WebUI.Shared.Departments.Commands.CreateDepartment;
-
+﻿
 using MediatR;
 using System;
+
+namespace WebUI.Shared.Departments.Commands.CreateDepartment;
 
 public class CreateDepartmentCommand : IRequest<int>
 {

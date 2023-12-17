@@ -1,5 +1,4 @@
-﻿namespace WebUI.Client.Test.Pages.Departments;
-
+﻿
 using Bunit;
 using FakeItEasy;
 using FluentAssertions;
@@ -11,6 +10,8 @@ using WebUI.Client.Test.Extensions;
 using WebUI.Shared.Departments.Commands.CreateDepartment;
 using WebUI.Shared.Instructors.Queries.GetInstructorsLookup;
 using Xunit;
+
+namespace WebUI.Client.Test.Pages.Departments;
 
 public class DepartmentCreateTests : BunitTestBase
 {

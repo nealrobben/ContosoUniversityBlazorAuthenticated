@@ -1,6 +1,7 @@
-﻿namespace WebUI.Shared.Home.Queries.GetAboutInfo;
-
+﻿
 using System.Collections.Generic;
+
+namespace WebUI.Shared.Home.Queries.GetAboutInfo;
 
 public class AboutInfoVM
 {

@@ -1,5 +1,4 @@
-﻿namespace ContosoUniversityBlazor.Persistence;
-
+﻿
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Common;
 using ContosoUniversityBlazor.Domain.Entities;
@@ -9,6 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage;
 using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
+
+namespace ContosoUniversityBlazor.Persistence;
 
 public class SchoolContext : DbContext, ISchoolContext
 {

@@ -1,5 +1,4 @@
-﻿namespace WebUI.Client.Services;
-
+﻿
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -9,6 +8,8 @@ using WebUI.Shared.Departments.Commands.UpdateDepartment;
 using WebUI.Shared.Departments.Queries.GetDepartmentDetails;
 using WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
 using WebUI.Shared.Departments.Queries.GetDepartmentsOverview;
+
+namespace WebUI.Client.Services;
 
 public interface IDepartmentService
     : IServiceBase<OverviewVM<DepartmentVM>, DepartmentDetailVM,

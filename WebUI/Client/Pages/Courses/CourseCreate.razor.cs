@@ -1,5 +1,4 @@
-﻿namespace WebUI.Client.Pages.Courses;
-
+﻿
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +11,8 @@ using WebUI.Client.Services;
 using WebUI.Client.Shared;
 using WebUI.Shared.Courses.Commands.CreateCourse;
 using WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
+
+namespace WebUI.Client.Pages.Courses;
 
 public partial class CourseCreate
 {

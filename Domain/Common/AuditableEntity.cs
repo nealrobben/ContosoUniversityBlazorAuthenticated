@@ -1,6 +1,7 @@
-﻿namespace ContosoUniversityBlazor.Domain.Common;
-
+﻿
 using System;
+
+namespace ContosoUniversityBlazor.Domain.Common;
 
 public abstract class AuditableEntity
 {

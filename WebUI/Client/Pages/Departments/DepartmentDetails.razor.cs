@@ -1,11 +1,12 @@
-﻿namespace WebUI.Client.Pages.Departments;
-
+﻿
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 using System.Threading.Tasks;
 using WebUI.Client.Services;
 using WebUI.Shared.Departments.Queries.GetDepartmentDetails;
+
+namespace WebUI.Client.Pages.Departments;
 
 public partial class DepartmentDetails
 {

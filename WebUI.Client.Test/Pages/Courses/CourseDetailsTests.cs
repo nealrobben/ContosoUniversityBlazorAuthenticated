@@ -1,5 +1,4 @@
-﻿namespace WebUI.Client.Test.Pages.Courses;
-
+﻿
 using AutoFixture;
 using Bunit;
 using FakeItEasy;
@@ -11,6 +10,8 @@ using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
 using WebUI.Shared.Courses.Queries.GetCourseDetails;
 using Xunit;
+
+namespace WebUI.Client.Test.Pages.Courses;
 
 public class CourseDetailsTests : BunitTestBase
 {

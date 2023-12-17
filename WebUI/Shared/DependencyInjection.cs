@@ -1,7 +1,8 @@
-﻿namespace WebUI.Shared;
-
+﻿
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+
+namespace WebUI.Shared;
 
 public static class DependencyInjection
 {

@@ -1,11 +1,12 @@
-﻿namespace WebUI.Client.Pages.Courses;
-
+﻿
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 using System.Threading.Tasks;
 using WebUI.Client.Services;
 using WebUI.Shared.Courses.Queries.GetCourseDetails;
+
+namespace WebUI.Client.Pages.Courses;
 
 public partial class CourseDetails
 {

@@ -1,10 +1,11 @@
-﻿namespace Infrastructure.Services;
-
+﻿
 using Application.Common.Interfaces;
 using System.IO;
 using System.Threading.Tasks;
 using Azure.Storage.Blobs;
 using Microsoft.Extensions.Configuration;
+
+namespace Infrastructure.Services;
 
 public class AzureProfilePictureService : IProfilePictureService
 {

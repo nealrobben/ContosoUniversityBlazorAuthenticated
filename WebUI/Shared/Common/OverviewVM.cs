@@ -1,6 +1,7 @@
-﻿namespace WebUI.Shared.Common;
-
+﻿
 using System.Collections.Generic;
+
+namespace WebUI.Shared.Common;
 
 public class OverviewVM<T>
 {

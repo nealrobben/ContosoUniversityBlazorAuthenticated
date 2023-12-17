@@ -1,7 +1,8 @@
-﻿namespace WebUI.Shared.Instructors.Queries.GetInstructorsOverview;
-
+﻿
 using AutoMapper;
 using WebUI.Shared.Common.Mappings;
+
+namespace WebUI.Shared.Instructors.Queries.GetInstructorsOverview;
 
 public class CourseAssignmentVM : IMapFrom<ContosoUniversityBlazor.Domain.Entities.CourseAssignment>
 {

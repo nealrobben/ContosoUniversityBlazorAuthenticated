@@ -1,5 +1,4 @@
-﻿namespace WebUI.Client.Test.Pages.Students;
-
+﻿
 using AngleSharp.Html.Dom;
 using AutoFixture;
 using Bunit;
@@ -13,6 +12,8 @@ using WebUI.Client.Test.Extensions;
 using WebUI.Shared.Students.Commands.UpdateStudent;
 using WebUI.Shared.Students.Queries.GetStudentDetails;
 using Xunit;
+
+namespace WebUI.Client.Test.Pages.Students;
 
 public class StudentEditTests : BunitTestBase
 {

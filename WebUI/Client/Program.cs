@@ -1,4 +1,3 @@
-namespace WebUI.Client;
 
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,10 +7,11 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using WebUI.Client.Services;
 using System.Globalization;
-using Microsoft.AspNetCore.Components.Web;
 using Blazored.LocalStorage;
 using WebUI.Shared.Departments.Validators;
 using FluentValidation;
+
+namespace WebUI.Client;
 
 public static class Program
 {

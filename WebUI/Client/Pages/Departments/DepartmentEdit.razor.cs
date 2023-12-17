@@ -1,5 +1,4 @@
-﻿namespace WebUI.Client.Pages.Departments;
-
+﻿
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +12,8 @@ using WebUI.Client.Services;
 using WebUI.Client.Shared;
 using WebUI.Shared.Departments.Commands.UpdateDepartment;
 using WebUI.Shared.Instructors.Queries.GetInstructorsLookup;
+
+namespace WebUI.Client.Pages.Departments;
 
 public partial class DepartmentEdit
 {

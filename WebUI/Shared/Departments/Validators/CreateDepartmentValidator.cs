@@ -1,7 +1,8 @@
-﻿namespace WebUI.Shared.Departments.Validators;
-
+﻿
 using FluentValidation;
 using WebUI.Shared.Departments.Commands.CreateDepartment;
+
+namespace WebUI.Shared.Departments.Validators;
 
 public class CreateDepartmentValidator : AbstractValidator<CreateDepartmentCommand>
 {

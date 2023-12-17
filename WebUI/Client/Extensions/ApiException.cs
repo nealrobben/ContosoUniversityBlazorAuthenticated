@@ -1,6 +1,7 @@
-﻿namespace WebUI.Client.Extensions;
-
+﻿
 using System.Collections.Generic;
+
+namespace WebUI.Client.Extensions;
 
 public partial class ApiException : System.Exception
 {

@@ -1,7 +1,8 @@
-﻿namespace WebUI.Shared.Students.Commands.CreateStudent;
-
+﻿
 using MediatR;
 using System;
+
+namespace WebUI.Shared.Students.Commands.CreateStudent;
 
 public class CreateStudentCommand : IRequest<int>
 {

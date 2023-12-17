@@ -1,6 +1,7 @@
-﻿namespace WebUI.Shared.Common.Mappings;
-
+﻿
 using AutoMapper;
+
+namespace WebUI.Shared.Common.Mappings;
 
 public interface IMapFrom<T>
 {   

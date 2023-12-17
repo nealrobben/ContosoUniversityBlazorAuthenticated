@@ -1,8 +1,9 @@
-﻿namespace WebUI.Shared.Instructors.Queries.GetInstructorsLookup;
-
+﻿
 using AutoMapper;
 using ContosoUniversityBlazor.Domain.Entities;
 using WebUI.Shared.Common.Mappings;
+
+namespace WebUI.Shared.Instructors.Queries.GetInstructorsLookup;
 
 public class InstructorLookupVM : IMapFrom<Instructor>
 {

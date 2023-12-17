@@ -1,5 +1,4 @@
-﻿namespace WebUI.Client.Test.Pages.Instructors;
-
+﻿
 using AngleSharp.Html.Dom;
 using AutoFixture;
 using Bunit;
@@ -13,6 +12,8 @@ using WebUI.Client.Test.Extensions;
 using WebUI.Shared.Instructors.Commands.UpdateInstructor;
 using WebUI.Shared.Instructors.Queries.GetInstructorDetails;
 using Xunit;
+
+namespace WebUI.Client.Test.Pages.Instructors;
 
 public class InstructorEditTests : BunitTestBase
 {

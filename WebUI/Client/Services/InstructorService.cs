@@ -1,5 +1,4 @@
-﻿namespace WebUI.Client.Services;
-
+﻿
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -9,6 +8,8 @@ using WebUI.Shared.Instructors.Commands.UpdateInstructor;
 using WebUI.Shared.Instructors.Queries.GetInstructorDetails;
 using WebUI.Shared.Instructors.Queries.GetInstructorsLookup;
 using WebUI.Shared.Instructors.Queries.GetInstructorsOverview;
+
+namespace WebUI.Client.Services;
 
 public interface IInstructorService 
     : IServiceBase<OverviewVM<InstructorVM>, InstructorDetailsVM,

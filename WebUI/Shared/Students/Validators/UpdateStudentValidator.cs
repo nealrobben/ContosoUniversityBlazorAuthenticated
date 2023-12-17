@@ -1,7 +1,8 @@
-﻿namespace WebUI.Shared.Students.Validators;
-
+﻿
 using FluentValidation;
 using WebUI.Shared.Students.Commands.UpdateStudent;
+
+namespace WebUI.Shared.Students.Validators;
 
 public class UpdateStudentValidator : AbstractValidator<UpdateStudentCommand>
 {

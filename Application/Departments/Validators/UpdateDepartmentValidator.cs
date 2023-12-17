@@ -1,11 +1,12 @@
-﻿namespace Application.Departments.Validators;
-
+﻿
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 using WebUI.Shared.Departments.Commands.UpdateDepartment;
+
+namespace Application.Departments.Validators;
 
 public class UpdateDepartmentValidator 
     : WebUI.Shared.Departments.Validators.UpdateDepartmentValidator

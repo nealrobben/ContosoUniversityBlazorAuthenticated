@@ -1,7 +1,8 @@
-﻿namespace ContosoUniversityBlazor.Infrastructure.Services;
-
+﻿
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using System;
+
+namespace ContosoUniversityBlazor.Infrastructure.Services;
 
 public class DateTimeService : IDateTime
 {

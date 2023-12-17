@@ -1,5 +1,4 @@
-﻿namespace WebUI.Client.Test.Pages.Instructors;
-
+﻿
 using AutoFixture;
 using Bunit;
 using FakeItEasy;
@@ -13,6 +12,8 @@ using WebUI.Shared.Courses.Queries.GetCoursesForInstructor;
 using WebUI.Shared.Instructors.Queries.GetInstructorsOverview;
 using WebUI.Shared.Students.Queries.GetStudentsForCourse;
 using Xunit;
+
+namespace WebUI.Client.Test.Pages.Instructors;
 
 public class InstructorsTests : BunitTestBase
 {

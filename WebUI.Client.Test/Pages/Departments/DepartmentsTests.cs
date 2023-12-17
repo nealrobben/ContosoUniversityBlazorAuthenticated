@@ -1,5 +1,4 @@
-﻿namespace WebUI.Client.Test.Pages.Departments;
-
+﻿
 using AutoFixture;
 using Bunit;
 using FakeItEasy;
@@ -12,6 +11,8 @@ using WebUI.Shared.Common;
 using WebUI.Shared.Departments.Queries.GetDepartmentsOverview;
 using WebUI.Shared.Instructors.Queries.GetInstructorsLookup;
 using Xunit;
+
+namespace WebUI.Client.Test.Pages.Departments;
 
 public class DepartmentsTests : BunitTestBase
 {

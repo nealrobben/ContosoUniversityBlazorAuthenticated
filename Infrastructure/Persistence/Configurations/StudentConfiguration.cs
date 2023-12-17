@@ -1,8 +1,9 @@
-﻿namespace ContosoUniversityBlazor.Persistence.Configurations;
-
+﻿
 using ContosoUniversityBlazor.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace ContosoUniversityBlazor.Persistence.Configurations;
 
 public class StudentConfiguration : IEntityTypeConfiguration<Student>
 {

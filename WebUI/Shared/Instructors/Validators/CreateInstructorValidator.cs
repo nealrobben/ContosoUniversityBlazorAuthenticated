@@ -1,7 +1,8 @@
-﻿namespace WebUI.Shared.Instructors.Validators;
-
+﻿
 using FluentValidation;
 using WebUI.Shared.Instructors.Commands.CreateInstructor;
+
+namespace WebUI.Shared.Instructors.Validators;
 
 public class CreateInstructorValidator : AbstractValidator<CreateInstructorCommand>
 {

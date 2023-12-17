@@ -1,6 +1,7 @@
-﻿namespace WebUI.Shared.Courses.Commands.CreateCourse;
-
+﻿
 using MediatR;
+
+namespace WebUI.Shared.Courses.Commands.CreateCourse;
 
 public class CreateCourseCommand : IRequest<int>
 {

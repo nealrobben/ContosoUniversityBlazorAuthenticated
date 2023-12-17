@@ -1,6 +1,7 @@
-﻿namespace WebUI.Client.Test.Extensions;
-
+﻿
 using AngleSharp.Dom;
+
+namespace WebUI.Client.Test.Extensions;
 
 public static class AngleSharpExtensions
 {

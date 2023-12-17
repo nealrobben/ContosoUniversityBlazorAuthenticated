@@ -1,9 +1,10 @@
-﻿namespace WebUI.Shared.Common.Mappings;
-
+﻿
 using AutoMapper;
 using System;
 using System.Linq;
 using System.Reflection;
+
+namespace WebUI.Shared.Common.Mappings;
 
 public class MappingProfile : Profile
 {

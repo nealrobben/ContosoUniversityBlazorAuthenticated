@@ -1,4 +1,3 @@
-namespace WebUI.IntegrationTests;
 
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
@@ -10,6 +9,8 @@ using WebUI.Shared.Departments.Queries.GetDepartmentDetails;
 using WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
 using WebUI.Shared.Departments.Queries.GetDepartmentsOverview;
 using WebUI.Shared.Common;
+
+namespace WebUI.IntegrationTests;
 
 public class DepartmentsControllerTests : IntegrationTest
 {

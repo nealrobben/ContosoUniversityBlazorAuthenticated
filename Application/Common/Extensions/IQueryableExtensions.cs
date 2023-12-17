@@ -1,8 +1,9 @@
-﻿namespace Application.Common.Extensions;
-
+﻿
 using ContosoUniversityBlazor.Domain.Entities;
 using System;
 using System.Linq;
+
+namespace Application.Common.Extensions;
 
 public static class IQueryableExtensions
 {

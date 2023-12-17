@@ -1,5 +1,4 @@
-﻿namespace WebUI.Client.Test.Pages.Instructors;
-
+﻿
 using Bunit;
 using FakeItEasy;
 using FluentAssertions;
@@ -10,6 +9,8 @@ using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
 using WebUI.Shared.Instructors.Commands.CreateInstructor;
 using Xunit;
+
+namespace WebUI.Client.Test.Pages.Instructors;
 
 public class InstructorCreateTests : BunitTestBase
 {

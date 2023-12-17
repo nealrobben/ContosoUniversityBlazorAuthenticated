@@ -1,6 +1,7 @@
-﻿namespace WebUI.Client.Settings;
-
+﻿
 using MudBlazor;
+
+namespace WebUI.Client.Settings;
 
 public static class Themes
 {

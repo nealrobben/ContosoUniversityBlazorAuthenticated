@@ -1,6 +1,7 @@
-﻿namespace ContosoUniversityBlazor.Domain.Entities;
-
+﻿
 using System.Collections.Generic;
+
+namespace ContosoUniversityBlazor.Domain.Entities;
 
 public class Course
 {

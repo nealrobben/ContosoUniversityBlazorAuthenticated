@@ -1,9 +1,10 @@
-﻿namespace WebUI.Shared.Departments.Queries.GetDepartmentsOverview;
-
+﻿
 using AutoMapper;
 using ContosoUniversityBlazor.Domain.Entities;
 using System;
 using WebUI.Shared.Common.Mappings;
+
+namespace WebUI.Shared.Departments.Queries.GetDepartmentsOverview;
 
 public class DepartmentVM : IMapFrom<Department>
 {

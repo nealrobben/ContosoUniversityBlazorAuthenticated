@@ -1,6 +1,7 @@
-﻿namespace WebUI.Shared.Courses.Queries.GetCoursesForInstructor;
-
+﻿
 using System.Collections.Generic;
+
+namespace WebUI.Shared.Courses.Queries.GetCoursesForInstructor;
 
 public class CoursesForInstructorOverviewVM
 {

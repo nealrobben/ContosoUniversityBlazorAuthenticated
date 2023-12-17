@@ -1,8 +1,9 @@
-﻿namespace WebUI.Server.Extensions;
-
+﻿
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+
+namespace WebUI.Server.Extensions;
 
 public static class HostBuilderExtensions
 {

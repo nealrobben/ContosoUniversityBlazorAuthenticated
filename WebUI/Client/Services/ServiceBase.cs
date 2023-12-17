@@ -1,9 +1,10 @@
-﻿namespace WebUI.Client.Services;
-
+﻿
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using WebUI.Client.Extensions;
+
+namespace WebUI.Client.Services;
 
 public interface IServiceBase<TOverviewVM, TDetailsVM, TCreateCommand, TUpdateCommand>
 {

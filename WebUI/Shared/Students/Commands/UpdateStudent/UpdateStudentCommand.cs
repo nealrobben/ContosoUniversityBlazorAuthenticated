@@ -1,7 +1,8 @@
-﻿namespace WebUI.Shared.Students.Commands.UpdateStudent;
-
+﻿
 using MediatR;
 using System;
+
+namespace WebUI.Shared.Students.Commands.UpdateStudent;
 
 public class UpdateStudentCommand : IRequest
 {

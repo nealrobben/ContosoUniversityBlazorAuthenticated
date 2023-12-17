@@ -1,6 +1,7 @@
-﻿namespace WebUI.Shared.Instructors.Queries.GetInstructorsLookup;
-
+﻿
 using System.Collections.Generic;
+
+namespace WebUI.Shared.Instructors.Queries.GetInstructorsLookup;
 
 public class InstructorsLookupVM
 {

@@ -1,7 +1,8 @@
-﻿namespace WebUI.Shared.Instructors.Commands.UpdateInstructor;
-
+﻿
 using MediatR;
 using System;
+
+namespace WebUI.Shared.Instructors.Commands.UpdateInstructor;
 
 public class UpdateInstructorCommand : IRequest
 {

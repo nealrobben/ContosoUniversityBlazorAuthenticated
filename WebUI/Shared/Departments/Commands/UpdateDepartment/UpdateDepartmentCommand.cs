@@ -1,7 +1,8 @@
-﻿namespace WebUI.Shared.Departments.Commands.UpdateDepartment;
-
+﻿
 using MediatR;
 using System;
+
+namespace WebUI.Shared.Departments.Commands.UpdateDepartment;
 
 public class UpdateDepartmentCommand : IRequest
 {

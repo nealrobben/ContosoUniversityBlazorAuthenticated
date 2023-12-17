@@ -1,6 +1,7 @@
-﻿namespace WebUI.Shared.Courses.Commands.UpdateCourse;
-
+﻿
 using MediatR;
+
+namespace WebUI.Shared.Courses.Commands.UpdateCourse;
 
 public class UpdateCourseCommand : IRequest
 {

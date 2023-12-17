@@ -1,5 +1,4 @@
-﻿namespace WebUI.IntegrationTests;
-
+﻿
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
 using FluentAssertions;
@@ -10,6 +9,8 @@ using WebUI.Shared.Students.Commands.UpdateStudent;
 using WebUI.Shared.Students.Queries.GetStudentDetails;
 using WebUI.Shared.Students.Queries.GetStudentsForCourse;
 using WebUI.Shared.Students.Queries.GetStudentsOverview;
+
+namespace WebUI.IntegrationTests;
 
 public class StudentsControllerTests : IntegrationTest
 {
