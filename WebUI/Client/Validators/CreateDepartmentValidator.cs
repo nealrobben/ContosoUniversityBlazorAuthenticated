@@ -1,10 +1,9 @@
-﻿
-using FluentValidation;
-using WebUI.Shared.Departments.Commands.CreateDepartment;
+﻿using FluentValidation;
+using WebUI.Client.InputModels.Departments;
 
-namespace WebUI.Shared.Departments.Validators;
+namespace WebUI.Client.Validators;
 
-public class CreateDepartmentValidator : AbstractValidator<CreateDepartmentCommand>
+public class CreateDepartmentValidator : AbstractValidator<CreateDepartmentInputModel>
 {
     public CreateDepartmentValidator()
     {

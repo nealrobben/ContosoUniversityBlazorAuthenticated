@@ -6,27 +6,27 @@
         }
         <div class="row">
             <div class="col-md-12">
-                <EditForm Model=@CreateDepartmentCommand OnSubmit=@FormSubmitted>
+                <EditForm Model=@CreateDepartmentInputModel OnSubmit=@FormSubmitted>
                     <FluentValidationValidator DisableAssemblyScanning="true" />
                     <CustomValidation @ref="_customValidation" Localizer="Localizer" />
                     <div class="form-group">
                         <label for="Name">@Localizer["Name"]</label>
-                        <InputText @bind-Value=CreateDepartmentCommand.Name class="form-control" id="Name" />
-                        <ValidationMessage For="() => CreateDepartmentCommand.Name" />
+                        <InputText @bind-Value=CreateDepartmentInputModel.Name class="form-control" id="Name" />
+                        <ValidationMessage For="() => CreateDepartmentInputModel.Name" />
                     </div>
                     <div class="form-group">
                         <label for="Budget">@Localizer["Budget"]</label>
-                        <InputNumber @bind-Value=CreateDepartmentCommand.Budget class="form-control" id="Budget" />
-                        <ValidationMessage For="() => CreateDepartmentCommand.Budget" />
+                        <InputNumber @bind-Value=CreateDepartmentInputModel.Budget class="form-control" id="Budget" />
+                        <ValidationMessage For="() => CreateDepartmentInputModel.Budget" />
                     </div>
                     <div class="form-group">
                         <label for="StartDate">@Localizer["StartDate"]</label>
-                        <InputDate @bind-Value=CreateDepartmentCommand.StartDate class="form-control" id="StartDate" />
-                        <ValidationMessage For="() => CreateDepartmentCommand.StartDate" />
+                        <InputDate @bind-Value=CreateDepartmentInputModel.StartDate class="form-control" id="StartDate" />
+                        <ValidationMessage For="() => CreateDepartmentInputModel.StartDate" />
                     </div>
                     <div class="form-group">
                         <label for="InstructorID">@Localizer["AdministratorName"]</label>
-                        <MudSelect T="int" AnchorOrigin="Origin.BottomCenter" @bind-Value=CreateDepartmentCommand.InstructorID class="form-control" id="InstructorID">
+                        <MudSelect T="int" AnchorOrigin="Origin.BottomCenter" @bind-Value=CreateDepartmentInputModel.InstructorID class="form-control" id="InstructorID">
                             @if (InstructorsLookup != null)
                             {
                                 @foreach (var instructor in InstructorsLookup.Instructors)
@@ -36,7 +36,7 @@
                             }
 
                         </MudSelect>
-                        <ValidationMessage For="() => CreateDepartmentCommand.InstructorID" />
+                        <ValidationMessage For="() => CreateDepartmentInputModel.InstructorID" />
                     </div>
                     <MudButton ButtonType="ButtonType.Submit"
                                StartIcon="fas fa-save"

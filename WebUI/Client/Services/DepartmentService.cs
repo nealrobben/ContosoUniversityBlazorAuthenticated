@@ -2,8 +2,8 @@
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using WebUI.Client.Dtos.Departments;
 using WebUI.Shared.Common;
-using WebUI.Shared.Departments.Commands.CreateDepartment;
 using WebUI.Shared.Departments.Commands.UpdateDepartment;
 using WebUI.Shared.Departments.Queries.GetDepartmentDetails;
 using WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
@@ -13,14 +13,14 @@ namespace WebUI.Client.Services;
 
 public interface IDepartmentService
     : IServiceBase<OverviewVM<DepartmentVM>, DepartmentDetailVM,
-        CreateDepartmentCommand, UpdateDepartmentCommand>
+        CreateDepartmentDto, UpdateDepartmentCommand>
 {
     Task<DepartmentsLookupVM> GetLookupAsync();
 }
 
 public class DepartmentService
-    : ServiceBase<OverviewVM<DepartmentVM>, DepartmentDetailVM, 
-        CreateDepartmentCommand, UpdateDepartmentCommand>, IDepartmentService
+    : ServiceBase<OverviewVM<DepartmentVM>, DepartmentDetailVM,
+        CreateDepartmentDto, UpdateDepartmentCommand>, IDepartmentService
 {
     public DepartmentService(HttpClient http)
         : base(http, "departments")

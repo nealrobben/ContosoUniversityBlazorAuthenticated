@@ -1,12 +1,23 @@
 ﻿
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
-using System.Threading;
-using System.Threading.Tasks;
 using MediatR;
-using WebUI.Shared.Departments.Commands.CreateDepartment;
+using System;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace ContosoUniversityBlazor.Application.Departments.Commands.CreateDepartment;
+
+public class CreateDepartmentCommand : IRequest<int>
+{
+    public string Name { get; set; }
+
+    public decimal Budget { get; set; }
+
+    public DateTime StartDate { get; set; }
+
+    public int InstructorID { get; set; }
+}
 
 public class CreateDepartmentCommandHandler : IRequestHandler<CreateDepartmentCommand, int>
 {

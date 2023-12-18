@@ -4,10 +4,10 @@ using FakeItEasy;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
+using WebUI.Client.Dtos.Departments;
 using WebUI.Client.Pages.Departments;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
-using WebUI.Shared.Departments.Commands.CreateDepartment;
 using WebUI.Shared.Instructors.Queries.GetInstructorsLookup;
 using Xunit;
 
@@ -135,14 +135,14 @@ public class DepartmentCreateTests : BunitTestBase
 
         comp.Find("button[type='submit']").Click();
 
-        A.CallTo(() => fakeDepartmentService.CreateAsync(A<CreateDepartmentCommand>.That.IsInstanceOf(typeof(CreateDepartmentCommand)))).MustHaveHappened();
+        A.CallTo(() => fakeDepartmentService.CreateAsync(A<CreateDepartmentDto>.That.IsInstanceOf(typeof(CreateDepartmentDto)))).MustHaveHappened();
     }
 
     [Fact]
     public async Task DepartmentCreate_WhenExceptionCaughtAfterSave_ShowErrorMessage()
     {
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.CreateAsync(A<CreateDepartmentCommand>.Ignored)).ThrowsAsync(new Exception("error"));
+        A.CallTo(() => fakeDepartmentService.CreateAsync(A<CreateDepartmentDto>.Ignored)).ThrowsAsync(new Exception("error"));
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var fakeInstructorService = A.Fake<IInstructorService>();

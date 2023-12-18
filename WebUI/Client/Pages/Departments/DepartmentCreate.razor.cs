@@ -7,10 +7,11 @@ using MudBlazor;
 using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
+using WebUI.Client.Dtos.Departments;
 using WebUI.Client.Extensions;
+using WebUI.Client.InputModels.Departments;
 using WebUI.Client.Services;
 using WebUI.Client.Shared;
-using WebUI.Shared.Departments.Commands.CreateDepartment;
 using WebUI.Shared.Instructors.Queries.GetInstructorsLookup;
 
 namespace WebUI.Client.Pages.Departments;
@@ -31,7 +32,7 @@ public partial class DepartmentCreate
 
     private CustomValidation _customValidation;
 
-    public CreateDepartmentCommand CreateDepartmentCommand { get; set; } = new CreateDepartmentCommand() { StartDate = DateTime.UtcNow.Date };
+    public CreateDepartmentInputModel CreateDepartmentInputModel { get; set; } = new CreateDepartmentInputModel() { StartDate = DateTime.UtcNow.Date };
     public InstructorsLookupVM InstructorsLookup { get; set; }
 
     public bool ErrorVisible { get; set; }
@@ -39,7 +40,7 @@ public partial class DepartmentCreate
     protected override async Task OnInitializedAsync()
     {
         InstructorsLookup = await InstructorService.GetLookupAsync();
-        CreateDepartmentCommand.InstructorID = InstructorsLookup.Instructors[0].ID;
+        CreateDepartmentInputModel.InstructorID = InstructorsLookup.Instructors[0].ID;
         StateHasChanged();
     }
 
@@ -53,9 +54,15 @@ public partial class DepartmentCreate
         {
             try
             {
-                await DepartmentService.CreateAsync(CreateDepartmentCommand);
+                await DepartmentService.CreateAsync(new CreateDepartmentDto
+                {
+                    Name = CreateDepartmentInputModel.Name,
+                    Budget = CreateDepartmentInputModel.Budget,
+                    StartDate = CreateDepartmentInputModel.StartDate,
+                    InstructorID = CreateDepartmentInputModel.InstructorID
+                });
 
-                CreateDepartmentCommand = new CreateDepartmentCommand();
+                CreateDepartmentInputModel = new CreateDepartmentInputModel();
                 MudDialog.Close(DialogResult.Ok(true));
             }
             catch (ApiException ex)

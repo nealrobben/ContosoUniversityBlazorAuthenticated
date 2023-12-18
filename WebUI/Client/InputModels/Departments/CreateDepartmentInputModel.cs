@@ -1,10 +1,8 @@
-﻿
-using MediatR;
-using System;
+﻿using System;
 
-namespace WebUI.Shared.Departments.Commands.CreateDepartment;
+namespace WebUI.Client.InputModels.Departments;
 
-public class CreateDepartmentCommand : IRequest<int>
+public class CreateDepartmentInputModel
 {
     public string Name { get; set; }
 

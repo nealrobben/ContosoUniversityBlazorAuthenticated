@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 using ContosoUniversityBlazor.Application.Departments.Queries.GetDepartmentsLookup;
 using WebUI.Shared.Departments.Queries.GetDepartmentsOverview;
 using WebUI.Shared.Departments.Queries.GetDepartmentDetails;
-using WebUI.Shared.Departments.Commands.CreateDepartment;
 using WebUI.Shared.Departments.Commands.UpdateDepartment;
 using WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
 using WebUI.Shared.Common;
+using WebUI.Client.Dtos.Departments;
+using ContosoUniversityBlazor.Application.Departments.Commands.CreateDepartment;
 
 namespace ContosoUniversityBlazor.WebUI.Controllers;
 
@@ -38,9 +39,15 @@ public class DepartmentsController : ContosoApiController
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesDefaultResponseType]
-    public async Task<IActionResult> Create([FromBody] CreateDepartmentCommand command)
+    public async Task<IActionResult> Create([FromBody] CreateDepartmentDto dto)
     {
-        var departmentID = await Mediator.Send(command);
+        var departmentID = await Mediator.Send(new CreateDepartmentCommand
+        {
+            Name = dto.Name,
+            Budget = dto.Budget,
+            StartDate = dto.StartDate,
+            InstructorID = dto.InstructorID
+        });
         var result = await Mediator.Send(new GetDepartmentDetailsQuery(departmentID));
 
         return CreatedAtRoute("GetDepartment", new { id = departmentID.ToString() }, result);

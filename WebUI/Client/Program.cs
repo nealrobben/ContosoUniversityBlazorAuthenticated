@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 using WebUI.Client.Services;
 using System.Globalization;
 using Blazored.LocalStorage;
-using WebUI.Shared.Departments.Validators;
 using FluentValidation;
 using WebUI.Client.InputModels.Courses;
+using WebUI.Shared.Students.Validators;
 
 namespace WebUI.Client;
 
@@ -29,7 +29,7 @@ public static class Program
         builder.Services.AddLocalization(opts => { opts.ResourcesPath = "Localization"; });
 
         builder.Services.AddBlazoredLocalStorage();
-        builder.Services.AddValidatorsFromAssemblyContaining<CreateDepartmentValidator>(); //TODO: Remove after shared project has been removed
+        builder.Services.AddValidatorsFromAssemblyContaining<CreateStudentValidator>(); //TODO: Remove after shared project has been removed
         builder.Services.AddValidatorsFromAssemblyContaining<CreateCourseInputModel>();
 
         var host = builder.Build();
