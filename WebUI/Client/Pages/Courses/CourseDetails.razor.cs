@@ -4,7 +4,7 @@ using Microsoft.Extensions.Localization;
 using MudBlazor;
 using System.Threading.Tasks;
 using WebUI.Client.Services;
-using WebUI.Shared.Courses.Queries.GetCourseDetails;
+using WebUI.Client.ViewModels.Courses;
 
 namespace WebUI.Client.Pages.Courses;
 
@@ -26,7 +26,15 @@ public partial class CourseDetails
 
     protected override async Task OnParametersSetAsync()
     {
-        Course = await CourseService.GetAsync(CourseId.ToString());
+        var courseDto = await CourseService.GetAsync(CourseId.ToString());
+
+        Course = new CourseDetailVM
+        {
+            CourseID = courseDto.CourseID,
+            Title = courseDto.Title,
+            Credits = courseDto.Credits,
+            DepartmentID = courseDto.DepartmentID
+        };
     }
 
     public void Close()

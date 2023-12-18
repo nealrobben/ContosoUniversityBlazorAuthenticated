@@ -10,7 +10,6 @@ using WebUI.Client.Dtos.Courses;
 using WebUI.Client.Pages.Courses;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
-using WebUI.Shared.Courses.Queries.GetCourseDetails;
 using WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
 using Xunit;
 
@@ -28,10 +27,10 @@ public class CourseEditTests : BunitTestBase
     [Fact]
     public async Task CourseEdit_DisplayDialogCorrectly()
     {
-        var courseDetailsVM = _fixture.Create<CourseDetailVM>();
+        var courseDetailsDto = _fixture.Create<CourseDetailDto>();
 
         var fakeCourseService = A.Fake<ICourseService>();
-        A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsVM);
+        A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsDto);
         Context.Services.AddScoped(x => fakeCourseService);
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
@@ -56,8 +55,8 @@ public class CourseEditTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        ((IHtmlInputElement)comp.FindAll("input")[0]).Value.Should().Be(courseDetailsVM.Title);
-        ((IHtmlInputElement)comp.FindAll("input")[1]).Value.Should().Be(courseDetailsVM.Credits.ToString());
+        ((IHtmlInputElement)comp.FindAll("input")[0]).Value.Should().Be(courseDetailsDto.Title);
+        ((IHtmlInputElement)comp.FindAll("input")[1]).Value.Should().Be(courseDetailsDto.Credits.ToString());
 
         //DepartmentID is an IHtmlSelectElement. For some reason the value is parsed as NULL by AngleSharp even when it is filled in so we can't check this field
     }
@@ -65,10 +64,10 @@ public class CourseEditTests : BunitTestBase
     [Fact]
     public async Task CourseEdit_WhenCancelButtonClicked_PopupCloses()
     {
-        var courseDetailsVM = _fixture.Create<CourseDetailVM>();
+        var courseDetailsDto = _fixture.Create<CourseDetailDto>();
 
         var fakeCourseService = A.Fake<ICourseService>();
-        A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsVM);
+        A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsDto);
         Context.Services.AddScoped(x => fakeCourseService);
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
@@ -100,10 +99,10 @@ public class CourseEditTests : BunitTestBase
     [Fact]
     public async Task CourseEdit_WhenEditButtonClicked_PopupCloses()
     {
-        var courseDetailsVM = _fixture.Create<CourseDetailVM>();
+        var courseDetailsDto = _fixture.Create<CourseDetailDto>();
 
         var fakeCourseService = A.Fake<ICourseService>();
-        A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsVM);
+        A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsDto);
         Context.Services.AddScoped(x => fakeCourseService);
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
@@ -139,10 +138,10 @@ public class CourseEditTests : BunitTestBase
     [Fact]
     public async Task CourseEdit_WhenEditButtonClicked_CourseServiceMustBeCalled()
     {
-        var courseDetailsVM = _fixture.Create<CourseDetailVM>();
+        var courseDetailsDto = _fixture.Create<CourseDetailDto>();
 
         var fakeCourseService = A.Fake<ICourseService>();
-        A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsVM);
+        A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsDto);
         Context.Services.AddScoped(x => fakeCourseService);
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
@@ -179,10 +178,10 @@ public class CourseEditTests : BunitTestBase
     [Fact]
     public async Task CourseEdit_WhenExceptionCaughtAfterSave_ShowErrorMessage()
     {
-        var courseDetailsVM = _fixture.Create<CourseDetailVM>();
+        var courseDetailsDto = _fixture.Create<CourseDetailDto>();
 
         var fakeCourseService = A.Fake<ICourseService>();
-        A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsVM);
+        A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsDto);
         A.CallTo(() => fakeCourseService.UpdateAsync(A<UpdateCourseDto>.Ignored)).ThrowsAsync(new Exception("error"));
         Context.Services.AddScoped(x => fakeCourseService);
 
@@ -223,10 +222,10 @@ public class CourseEditTests : BunitTestBase
     [Fact]
     public async Task CourseEdit_WhenValidationFails_ShowErrorMessagesForFields()
     {
-        var courseDetailsVM = _fixture.Create<CourseDetailVM>();
+        var courseDetailsDto = _fixture.Create<CourseDetailDto>();
 
         var fakeCourseService = A.Fake<ICourseService>();
-        A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsVM);
+        A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsDto);
         Context.Services.AddScoped(x => fakeCourseService);
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();

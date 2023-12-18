@@ -1,17 +1,16 @@
 ﻿
-using AutoMapper;
 using ContosoUniversityBlazor.Application.Common.Exceptions;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
 using MediatR;
-using WebUI.Shared.Courses.Queries.GetCourseDetails;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
+using Domain.Entities.Projections.Courses;
 
 namespace ContosoUniversityBlazor.Application.Courses.Queries.GetCourseDetails;
 
-public class GetCourseDetailsQuery : IRequest<CourseDetailVM>
+public class GetCourseDetailsQuery : IRequest<CourseDetail>
 {
     public int? ID { get; set; }
 
@@ -21,18 +20,16 @@ public class GetCourseDetailsQuery : IRequest<CourseDetailVM>
     }
 }
 
-public class GetCourseDetailsQueryHandler : IRequestHandler<GetCourseDetailsQuery, CourseDetailVM>
+public class GetCourseDetailsQueryHandler : IRequestHandler<GetCourseDetailsQuery, CourseDetail>
 {
     private readonly ISchoolContext _context;
-    private readonly IMapper _mapper;
 
-    public GetCourseDetailsQueryHandler(ISchoolContext context, IMapper mapper)
+    public GetCourseDetailsQueryHandler(ISchoolContext context)
     {
         _context = context;
-        _mapper = mapper;
     }
 
-    public async Task<CourseDetailVM> Handle(GetCourseDetailsQuery request, CancellationToken cancellationToken)
+    public async Task<CourseDetail> Handle(GetCourseDetailsQuery request, CancellationToken cancellationToken)
     {
         if (request.ID == null)
             throw new NotFoundException(nameof(Course), request.ID);
@@ -43,6 +40,12 @@ public class GetCourseDetailsQueryHandler : IRequestHandler<GetCourseDetailsQuer
             .FirstOrDefaultAsync(m => m.CourseID == request.ID, cancellationToken)
             ?? throw new NotFoundException(nameof(Course), request.ID);
 
-        return _mapper.Map<CourseDetailVM>(course);
+        return new CourseDetail
+        {
+            CourseID = course.CourseID,
+            Title = course.Title,
+            Credits = course.Credits,
+            DepartmentID = course.DepartmentID
+        };
     }
 }

@@ -5,10 +5,10 @@ using FakeItEasy;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
+using WebUI.Client.Dtos.Courses;
 using WebUI.Client.Pages.Courses;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
-using WebUI.Shared.Courses.Queries.GetCourseDetails;
 using Xunit;
 
 namespace WebUI.Client.Test.Pages.Courses;
@@ -25,10 +25,10 @@ public class CourseDetailsTests : BunitTestBase
     [Fact]
     public async Task CourseDetails_DisplayDetailsCorrectly()
     {
-        var courseDetailsVM = _fixture.Create<CourseDetailVM>();
+        var courseDetailsDto = _fixture.Create<CourseDetailDto>();
 
         var fakeCourseService = A.Fake<ICourseService>();
-        A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsVM);
+        A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsDto);
         Context.Services.AddScoped(x => fakeCourseService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -55,18 +55,18 @@ public class CourseDetailsTests : BunitTestBase
         comp.FindAll("dt")[1].TrimmedText().Should().Be("Credits");
         comp.FindAll("dt")[2].TrimmedText().Should().Be("Department");
 
-        comp.FindAll("dd")[0].TrimmedText().Should().Be(courseDetailsVM.Title);
-        comp.FindAll("dd")[1].TrimmedText().Should().Be(courseDetailsVM.Credits.ToString());
-        comp.FindAll("dd")[2].TrimmedText().Should().Be(courseDetailsVM.DepartmentID.ToString());
+        comp.FindAll("dd")[0].TrimmedText().Should().Be(courseDetailsDto.Title);
+        comp.FindAll("dd")[1].TrimmedText().Should().Be(courseDetailsDto.Credits.ToString());
+        comp.FindAll("dd")[2].TrimmedText().Should().Be(courseDetailsDto.DepartmentID.ToString());
     }
 
     [Fact]
     public async Task CourseDetails_WhenOkButtonClicked_PopupCloses()
     {
-        var courseDetailsVM = _fixture.Create<CourseDetailVM>();
+        var courseDetailsDto = _fixture.Create<CourseDetailDto>();
 
         var fakeCourseService = A.Fake<ICourseService>();
-        A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsVM);
+        A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsDto);
         Context.Services.AddScoped(x => fakeCourseService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();

@@ -7,10 +7,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using WebUI.Client.Dtos.Courses;
-using WebUI.Client.InputModels.Courses;
 using WebUI.Shared.Common;
 using WebUI.Shared.Courses.Commands.CreateCourse;
-using WebUI.Shared.Courses.Queries.GetCourseDetails;
 using WebUI.Shared.Courses.Queries.GetCoursesForInstructor;
 using WebUI.Shared.Courses.Queries.GetCoursesOverview;
 
@@ -29,11 +27,17 @@ public class CoursesController : ContosoApiController
     [HttpGet("{id}", Name = "GetCourse")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<CourseDetailVM>> Get(string id)
+    public async Task<ActionResult<CourseDetailDto>> Get(string id)
     {
-        var vm = await Mediator.Send(new GetCourseDetailsQuery(int.Parse(id)));
+        var course = await Mediator.Send(new GetCourseDetailsQuery(int.Parse(id)));
 
-        return Ok(vm);
+        return Ok(new CourseDetailDto
+        {
+            CourseID = course.CourseID,
+            Title = course.Title,
+            Credits = course.Credits,
+            DepartmentID = course.DepartmentID
+        });
     }
 
     [HttpPost]
