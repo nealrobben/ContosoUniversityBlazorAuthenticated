@@ -6,28 +6,28 @@
         }
         <div class="row">
             <div class="col-md-12">
-                <EditForm Model=@UpdateCourseCommand OnSubmit=@FormSubmitted>
+                <EditForm Model=@UpdateCourseInputModel OnSubmit=@FormSubmitted>
                     <FluentValidationValidator DisableAssemblyScanning="true" />
                     <CustomValidation @ref="_customValidation" Localizer="Localizer" />
                     <div class="form-group">
                         <label for="CourseID">@Localizer["CourseID"]</label>
                         <div>
-                            @UpdateCourseCommand.CourseID
+                            @UpdateCourseInputModel.CourseID
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="Title">@Localizer["Title"]</label>
-                        <InputText @bind-Value=@UpdateCourseCommand.Title class="form-control" id="Title" />
-                        <ValidationMessage For="() => UpdateCourseCommand.Title" />
+                        <InputText @bind-Value=@UpdateCourseInputModel.Title class="form-control" id="Title" />
+                        <ValidationMessage For="() => UpdateCourseInputModel.Title" />
                     </div>
                     <div class="form-group">
                         <label for="Credits">@Localizer["Credits"]</label>
-                        <InputNumber @bind-Value=UpdateCourseCommand.Credits class="form-control" id="Credits" />
-                        <ValidationMessage For="() => UpdateCourseCommand.Credits" />
+                        <InputNumber @bind-Value=UpdateCourseInputModel.Credits class="form-control" id="Credits" />
+                        <ValidationMessage For="() => UpdateCourseInputModel.Credits" />
                     </div>
                     <div class="form-group">
                         <label for="Department">@Localizer["Department"]</label>
-                        <MudSelect T="int" AnchorOrigin="Origin.BottomCenter" @bind-Value=UpdateCourseCommand.DepartmentID class="form-control" id="Department">
+                        <MudSelect T="int" AnchorOrigin="Origin.BottomCenter" @bind-Value=UpdateCourseInputModel.DepartmentID class="form-control" id="Department">
                             @if (DepartmentsLookup != null)
                             {
                                 @foreach (var department in DepartmentsLookup.Departments)
@@ -36,7 +36,7 @@
                                 }
                             }
                         </MudSelect>
-                        <ValidationMessage For="() => UpdateCourseCommand.DepartmentID" />
+                        <ValidationMessage For="() => UpdateCourseInputModel.DepartmentID" />
                     </div>
                     <MudButton ButtonType="ButtonType.Submit"
                                StartIcon="fas fa-save"

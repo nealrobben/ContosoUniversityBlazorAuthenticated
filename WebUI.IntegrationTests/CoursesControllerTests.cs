@@ -5,8 +5,6 @@ using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using WebUI.Client.Dtos.Courses;
 using WebUI.Shared.Common;
-using WebUI.Shared.Courses.Commands.CreateCourse;
-using WebUI.Shared.Courses.Commands.UpdateCourse;
 using WebUI.Shared.Courses.Queries.GetCourseDetails;
 using WebUI.Shared.Courses.Queries.GetCoursesForInstructor;
 using WebUI.Shared.Courses.Queries.GetCoursesOverview;
@@ -430,7 +428,7 @@ public class CoursesControllerTests : IntegrationTest
             await schoolContext.SaveChangesAsync();
         }
 
-        var updateCourseCommand = new UpdateCourseCommand
+        var updateCourseCommand = new UpdateCourseDto
         {
             CourseID = 1,
             Title = "Title 2",

@@ -6,10 +6,10 @@ using FakeItEasy;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
+using WebUI.Client.Dtos.Courses;
 using WebUI.Client.Pages.Courses;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
-using WebUI.Shared.Courses.Commands.UpdateCourse;
 using WebUI.Shared.Courses.Queries.GetCourseDetails;
 using WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
 using Xunit;
@@ -173,7 +173,7 @@ public class CourseEditTests : BunitTestBase
 
         comp.Find("button[type='submit']").Click();
 
-        A.CallTo(() => fakeCourseService.UpdateAsync(A<UpdateCourseCommand>.That.IsInstanceOf(typeof(UpdateCourseCommand)))).MustHaveHappened();
+        A.CallTo(() => fakeCourseService.UpdateAsync(A<UpdateCourseDto>.That.IsInstanceOf(typeof(UpdateCourseDto)))).MustHaveHappened();
     }
 
     [Fact]
@@ -183,7 +183,7 @@ public class CourseEditTests : BunitTestBase
 
         var fakeCourseService = A.Fake<ICourseService>();
         A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsVM);
-        A.CallTo(() => fakeCourseService.UpdateAsync(A<UpdateCourseCommand>.Ignored)).ThrowsAsync(new Exception("error"));
+        A.CallTo(() => fakeCourseService.UpdateAsync(A<UpdateCourseDto>.Ignored)).ThrowsAsync(new Exception("error"));
         Context.Services.AddScoped(x => fakeCourseService);
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();

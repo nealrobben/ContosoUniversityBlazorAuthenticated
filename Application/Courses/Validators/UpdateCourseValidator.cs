@@ -1,21 +1,26 @@
 ﻿
 using ContosoUniversityBlazor.Application.Common.Interfaces;
+using ContosoUniversityBlazor.Application.Courses.Commands.UpdateCourse;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
-using WebUI.Shared.Courses.Commands.UpdateCourse;
 
 namespace Application.Courses.Validators;
 
 public class UpdateCourseValidator
-    : WebUI.Shared.Courses.Validators.UpdateCourseValidator
+    : AbstractValidator<UpdateCourseCommand>
 {
     private readonly ISchoolContext _context;
 
     public UpdateCourseValidator(ISchoolContext context) : base()
     {
         _context = context;
+
+        RuleFor(p => p.CourseID).NotEmpty();
+        RuleFor(p => p.Title).NotEmpty().MaximumLength(50);
+        RuleFor(p => p.Credits).NotEmpty().GreaterThan(0);
+        RuleFor(p => p.DepartmentID).NotEmpty();
 
         RuleFor(v => v.Title)
             .MustAsync(BeUniqueTitle)

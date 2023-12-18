@@ -4,7 +4,6 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using WebUI.Client.Dtos.Courses;
 using WebUI.Shared.Common;
-using WebUI.Shared.Courses.Commands.UpdateCourse;
 using WebUI.Shared.Courses.Queries.GetCourseDetails;
 using WebUI.Shared.Courses.Queries.GetCoursesForInstructor;
 using WebUI.Shared.Courses.Queries.GetCoursesOverview;
@@ -13,14 +12,14 @@ namespace WebUI.Client.Services;
 
 public interface ICourseService 
     : IServiceBase<OverviewVM<CourseVM>, CourseDetailVM,
-        CreateCourseDto, UpdateCourseCommand>
+        CreateCourseDto, UpdateCourseDto>
 {
     Task<CoursesForInstructorOverviewVM> GetCoursesForInstructor(string instructorId);
 }
 
 public class CourseService 
     : ServiceBase<OverviewVM<CourseVM>, CourseDetailVM,
-        CreateCourseDto, UpdateCourseCommand>, ICourseService
+        CreateCourseDto, UpdateCourseDto>, ICourseService
 {
     public CourseService(HttpClient http) 
         : base(http, "courses")

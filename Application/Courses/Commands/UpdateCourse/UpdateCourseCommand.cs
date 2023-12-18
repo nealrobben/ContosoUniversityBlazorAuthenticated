@@ -2,13 +2,23 @@
 using ContosoUniversityBlazor.Application.Common.Exceptions;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
-using System.Threading;
-using System.Threading.Tasks;
 using MediatR;
+using System.Threading.Tasks;
+using System.Threading;
 using Microsoft.EntityFrameworkCore;
-using WebUI.Shared.Courses.Commands.UpdateCourse;
 
 namespace ContosoUniversityBlazor.Application.Courses.Commands.UpdateCourse;
+
+public class UpdateCourseCommand : IRequest
+{
+    public int? CourseID { get; set; }
+
+    public string Title { get; set; }
+
+    public int Credits { get; set; }
+
+    public int DepartmentID { get; set; }
+}
 
 public class UpdateCourseCommandHandler : IRequestHandler<UpdateCourseCommand>
 {

@@ -6,10 +6,11 @@ using Microsoft.Extensions.Localization;
 using MudBlazor;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using WebUI.Client.Dtos.Courses;
 using WebUI.Client.Extensions;
+using WebUI.Client.InputModels.Courses;
 using WebUI.Client.Services;
 using WebUI.Client.Shared;
-using WebUI.Shared.Courses.Commands.UpdateCourse;
 using WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
 
 namespace WebUI.Client.Pages.Courses;
@@ -35,17 +36,17 @@ public partial class CourseEdit
 
     public bool ErrorVisible { get; set; }
 
-    public UpdateCourseCommand UpdateCourseCommand { get; set; } = new UpdateCourseCommand();
+    public UpdateCourseInputModel UpdateCourseInputModel { get; set; } = new UpdateCourseInputModel();
     public DepartmentsLookupVM DepartmentsLookup { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {
         var course = await CourseService.GetAsync(CourseId.ToString());
 
-        UpdateCourseCommand.CourseID = course.CourseID;
-        UpdateCourseCommand.Credits = course.Credits;
-        UpdateCourseCommand.DepartmentID = course.DepartmentID;
-        UpdateCourseCommand.Title = course.Title;
+        UpdateCourseInputModel.CourseID = course.CourseID;
+        UpdateCourseInputModel.Credits = course.Credits;
+        UpdateCourseInputModel.DepartmentID = course.DepartmentID;
+        UpdateCourseInputModel.Title = course.Title;
 
         DepartmentsLookup = await DepartmentService.GetLookupAsync();
     }
@@ -60,7 +61,13 @@ public partial class CourseEdit
         {
             try
             {
-                await CourseService.UpdateAsync(UpdateCourseCommand);
+                await CourseService.UpdateAsync(new UpdateCourseDto
+                {
+                    CourseID = UpdateCourseInputModel.CourseID,
+                    Title = UpdateCourseInputModel.Title,
+                    Credits = UpdateCourseInputModel.Credits,
+                    DepartmentID = UpdateCourseInputModel.DepartmentID
+                });
                 MudDialog.Close(DialogResult.Ok(true));
             }
             catch (ApiException ex)

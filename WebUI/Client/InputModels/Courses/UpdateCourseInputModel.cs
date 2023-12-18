@@ -1,9 +1,6 @@
-﻿
-using MediatR;
+﻿namespace WebUI.Client.InputModels.Courses;
 
-namespace WebUI.Shared.Courses.Commands.UpdateCourse;
-
-public class UpdateCourseCommand : IRequest
+public class UpdateCourseInputModel
 {
     public int? CourseID { get; set; }
 

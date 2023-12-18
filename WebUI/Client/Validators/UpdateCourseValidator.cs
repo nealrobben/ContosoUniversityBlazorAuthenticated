@@ -1,10 +1,10 @@
-﻿
-using FluentValidation;
-using WebUI.Shared.Courses.Commands.UpdateCourse;
+﻿using FluentValidation;
+using WebUI.Client.InputModels.Courses;
 
-namespace WebUI.Shared.Courses.Validators;
+namespace WebUI.Client.Validators;
 
-public class UpdateCourseValidator : AbstractValidator<UpdateCourseCommand>
+public class UpdateCourseValidator 
+    : AbstractValidator<UpdateCourseInputModel>
 {
     public UpdateCourseValidator()
     {
