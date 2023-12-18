@@ -6,22 +6,22 @@
         }
         <div class="row">
             <div class="col-md-12">
-                <EditForm Model=@CreateStudentCommand OnSubmit=@FormSubmitted>
+                <EditForm Model=@CreateStudentInputModel OnSubmit=@FormSubmitted>
                     <FluentValidationValidator DisableAssemblyScanning="true" />
                     <div class="form-group">
                         <label for="LastName">@Localizer["LastName"]</label>
-                        <InputText @bind-Value=CreateStudentCommand.LastName class="form-control" id="LastName" />
-                        <ValidationMessage For="() => CreateStudentCommand.LastName" />
+                        <InputText @bind-Value=CreateStudentInputModel.LastName class="form-control" id="LastName" />
+                        <ValidationMessage For="() => CreateStudentInputModel.LastName" />
                     </div>
                     <div class="form-group">
                         <label for="FirstName">@Localizer["FirstName"]</label>
-                        <InputText @bind-Value=CreateStudentCommand.FirstName class="form-control" id="FirstName" />
-                        <ValidationMessage For="() => CreateStudentCommand.FirstName" />
+                        <InputText @bind-Value=CreateStudentInputModel.FirstName class="form-control" id="FirstName" />
+                        <ValidationMessage For="() => CreateStudentInputModel.FirstName" />
                     </div>
                     <div class="form-group">
                         <label for="EnrollmentDate">@Localizer["EnrollmentDate"]</label>
-                        <InputDate @bind-Value=CreateStudentCommand.EnrollmentDate class="form-control" id="EnrollmentDate" />
-                        <ValidationMessage For="() => CreateStudentCommand.EnrollmentDate" />
+                        <InputDate @bind-Value=CreateStudentInputModel.EnrollmentDate class="form-control" id="EnrollmentDate" />
+                        <ValidationMessage For="() => CreateStudentInputModel.EnrollmentDate" />
                     </div>
                     <div>
                         <InputFile id="fileInput" OnChange="UploadFiles" hidden />

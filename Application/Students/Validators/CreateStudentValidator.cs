@@ -1,8 +1,7 @@
-﻿
+﻿using ContosoUniversityBlazor.Application.Students.Commands.CreateStudent;
 using FluentValidation;
-using WebUI.Shared.Students.Commands.CreateStudent;
 
-namespace WebUI.Shared.Students.Validators;
+namespace Application.Students.Validators;
 
 public class CreateStudentValidator : AbstractValidator<CreateStudentCommand>
 {

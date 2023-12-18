@@ -1,4 +1,5 @@
 ﻿
+using ContosoUniversityBlazor.Application.Students.Commands.CreateStudent;
 using ContosoUniversityBlazor.Application.Students.Commands.DeleteStudent;
 using ContosoUniversityBlazor.Application.Students.Queries.GetStudentDetails;
 using ContosoUniversityBlazor.Application.Students.Queries.GetStudentsForCourse;
@@ -6,8 +7,8 @@ using ContosoUniversityBlazor.Application.Students.Queries.GetStudentsOverview;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using WebUI.Client.Dtos.Students;
 using WebUI.Shared.Common;
-using WebUI.Shared.Students.Commands.CreateStudent;
 using WebUI.Shared.Students.Commands.UpdateStudent;
 using WebUI.Shared.Students.Queries.GetStudentDetails;
 using WebUI.Shared.Students.Queries.GetStudentsForCourse;
@@ -39,9 +40,15 @@ public class StudentsController : ContosoApiController
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesDefaultResponseType]
-    public async Task<IActionResult> Create([FromBody] CreateStudentCommand command)
+    public async Task<IActionResult> Create([FromBody] CreateStudentDto dto)
     {
-        var studentId = await Mediator.Send(command);
+        var studentId = await Mediator.Send(new CreateStudentCommand
+        {
+            FirstName = dto.FirstName,
+            LastName = dto.LastName,
+            EnrollmentDate = dto.EnrollmentDate,
+            ProfilePictureName = dto.ProfilePictureName
+        });
 
         var result = await Mediator.Send(new GetStudentDetailsQuery(studentId));
 

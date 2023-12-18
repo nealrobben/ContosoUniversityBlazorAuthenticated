@@ -4,10 +4,10 @@ using FakeItEasy;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
+using WebUI.Client.Dtos.Students;
 using WebUI.Client.Pages.Students;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
-using WebUI.Shared.Students.Commands.CreateStudent;
 using Xunit;
 
 namespace WebUI.Client.Test.Pages.Students;
@@ -127,14 +127,14 @@ public class StudentCreateTests : BunitTestBase
 
         comp.Find("button[type='submit']").Click();
 
-        A.CallTo(() => fakeStudentService.CreateAsync(A<CreateStudentCommand>.That.IsInstanceOf(typeof(CreateStudentCommand)))).MustHaveHappened();
+        A.CallTo(() => fakeStudentService.CreateAsync(A<CreateStudentDto>.That.IsInstanceOf(typeof(CreateStudentDto)))).MustHaveHappened();
     }
 
     [Fact]
     public async Task StudentCreate_WhenExceptionCaughtAfterSave_ShowErrorMessage()
     {
         var fakeStudentService = A.Fake<IStudentService>();
-        A.CallTo(() => fakeStudentService.CreateAsync(A<CreateStudentCommand>.Ignored)).ThrowsAsync(new Exception("error"));
+        A.CallTo(() => fakeStudentService.CreateAsync(A<CreateStudentDto>.Ignored)).ThrowsAsync(new Exception("error"));
         Context.Services.AddScoped(x => fakeStudentService);
 
         var fakeUploadService = A.Fake<IFileuploadService>();

@@ -5,8 +5,9 @@ using Microsoft.Extensions.Localization;
 using MudBlazor;
 using System;
 using System.Threading.Tasks;
+using WebUI.Client.Dtos.Students;
+using WebUI.Client.InputModels.Students;
 using WebUI.Client.Services;
-using WebUI.Shared.Students.Commands.CreateStudent;
 
 namespace WebUI.Client.Pages.Students;
 
@@ -24,7 +25,7 @@ public partial class StudentCreate
     [CascadingParameter]
     MudDialogInstance MudDialog { get; set; }
 
-    public CreateStudentCommand CreateStudentCommand { get; set; } = new CreateStudentCommand { EnrollmentDate = DateTime.Now.Date };
+    public CreateStudentInputModel CreateStudentInputModel { get; set; } = new CreateStudentInputModel { EnrollmentDate = DateTime.Now.Date };
 
     public bool ErrorVisible { get; set; }
 
@@ -41,12 +42,18 @@ public partial class StudentCreate
             {
                 if (File != null)
                 {
-                    CreateStudentCommand.ProfilePictureName = await FileUploadService.UploadFile(File);
+                    CreateStudentInputModel.ProfilePictureName = await FileUploadService.UploadFile(File);
                 }
 
-                await StudentService.CreateAsync(CreateStudentCommand);
+                await StudentService.CreateAsync(new CreateStudentDto
+                {
+                    FirstName = CreateStudentInputModel.FirstName,
+                    LastName = CreateStudentInputModel.LastName,
+                    EnrollmentDate = CreateStudentInputModel.EnrollmentDate,
+                    ProfilePictureName = CreateStudentInputModel.ProfilePictureName
+                });
 
-                CreateStudentCommand = new CreateStudentCommand();
+                CreateStudentInputModel = new CreateStudentInputModel();
                 MudDialog.Close(DialogResult.Ok(true));
             }
             catch (Exception)

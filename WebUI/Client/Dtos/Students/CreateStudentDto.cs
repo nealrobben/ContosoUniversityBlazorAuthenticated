@@ -1,10 +1,8 @@
-﻿
-using MediatR;
-using System;
+﻿using System;
 
-namespace WebUI.Shared.Students.Commands.CreateStudent;
+namespace WebUI.Client.Dtos.Students;
 
-public class CreateStudentCommand : IRequest<int>
+public class CreateStudentDto
 {
     public string LastName { get; set; }
 

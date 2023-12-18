@@ -3,8 +3,8 @@ using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
+using WebUI.Client.Dtos.Students;
 using WebUI.Shared.Common;
-using WebUI.Shared.Students.Commands.CreateStudent;
 using WebUI.Shared.Students.Commands.UpdateStudent;
 using WebUI.Shared.Students.Queries.GetStudentDetails;
 using WebUI.Shared.Students.Queries.GetStudentsForCourse;
@@ -308,7 +308,7 @@ public class StudentsControllerTests : IntegrationTest
     [Fact]
     public async Task Create_CreatesStudent()
     {
-        var student = new CreateStudentCommand
+        var student = new CreateStudentDto
         {
             FirstName = "First name",
             LastName = "Last name",
