@@ -33,4 +33,8 @@
     <ProjectReference Include="..\Shared\WebUI.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
 </Project>

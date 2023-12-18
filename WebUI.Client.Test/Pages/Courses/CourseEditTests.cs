@@ -50,7 +50,7 @@ public class CourseEditTests : BunitTestBase
             { "CourseId", 1 }
         };
 
-        var title = "Edit Course";
+        const string title = "Edit Course";
         await comp.InvokeAsync(() => dialogReference = service?.Show<CourseEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 
@@ -87,7 +87,7 @@ public class CourseEditTests : BunitTestBase
             { "CourseId", 1 }
         };
 
-        var title = "Edit Course";
+        const string title = "Edit Course";
         await comp.InvokeAsync(() => dialogReference = service?.Show<CourseEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 
@@ -122,7 +122,7 @@ public class CourseEditTests : BunitTestBase
             { "CourseId", 1 }
         };
 
-        var title = "Edit Course";
+        const string title = "Edit Course";
         await comp.InvokeAsync(() => dialogReference = service?.Show<CourseEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 
@@ -161,7 +161,7 @@ public class CourseEditTests : BunitTestBase
             { "CourseId", 1 }
         };
 
-        var title = "Edit Course";
+        const string title = "Edit Course";
         await comp.InvokeAsync(() => dialogReference = service?.Show<CourseEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 
@@ -202,7 +202,7 @@ public class CourseEditTests : BunitTestBase
             { "CourseId", 1 }
         };
 
-        var title = "Edit Course";
+        const string title = "Edit Course";
         await comp.InvokeAsync(() => dialogReference = service?.Show<CourseEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 
@@ -245,7 +245,7 @@ public class CourseEditTests : BunitTestBase
             { "CourseId", 1 }
         };
 
-        var title = "Edit Course";
+        const string title = "Edit Course";
         await comp.InvokeAsync(() => dialogReference = service?.Show<CourseEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 

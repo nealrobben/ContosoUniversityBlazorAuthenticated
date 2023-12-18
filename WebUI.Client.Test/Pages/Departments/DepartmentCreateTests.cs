@@ -32,7 +32,7 @@ public class DepartmentCreateTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var title = "Create Department";
+        const string title = "Create Department";
         await comp.InvokeAsync(() => dialogReference = service?.Show<DepartmentCreate>(title));
         Assert.NotNull(dialogReference);
 
@@ -63,7 +63,7 @@ public class DepartmentCreateTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var title = "Create Department";
+        const string title = "Create Department";
         await comp.InvokeAsync(() => dialogReference = service?.Show<DepartmentCreate>(title));
         Assert.NotNull(dialogReference);
 
@@ -90,7 +90,7 @@ public class DepartmentCreateTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var title = "Create Department";
+        const string title = "Create Department";
         await comp.InvokeAsync(() => dialogReference = service?.Show<DepartmentCreate>(title));
         Assert.NotNull(dialogReference);
 
@@ -122,7 +122,7 @@ public class DepartmentCreateTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var title = "Create Department";
+        const string title = "Create Department";
         await comp.InvokeAsync(() => dialogReference = service?.Show<DepartmentCreate>(title));
         Assert.NotNull(dialogReference);
 
@@ -156,7 +156,7 @@ public class DepartmentCreateTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var title = "Create Department";
+        const string title = "Create Department";
         await comp.InvokeAsync(() => dialogReference = service?.Show<DepartmentCreate>(title));
         Assert.NotNull(dialogReference);
 
@@ -192,7 +192,7 @@ public class DepartmentCreateTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var title = "Create Department";
+        const string title = "Create Department";
         await comp.InvokeAsync(() => dialogReference = service?.Show<DepartmentCreate>(title));
         Assert.NotNull(dialogReference);
 

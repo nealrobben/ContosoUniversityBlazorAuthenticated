@@ -50,7 +50,7 @@ public class StudentEditTests : BunitTestBase
             { "StudentId", 1 }
         };
 
-        var title = "Edit Student";
+        const string title = "Edit Student";
         await comp.InvokeAsync(() => dialogReference = service?.Show<StudentEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 
@@ -89,7 +89,7 @@ public class StudentEditTests : BunitTestBase
             { "StudentId", 1 }
         };
 
-        var title = "Edit Student";
+        const string title = "Edit Student";
         await comp.InvokeAsync(() => dialogReference = service?.Show<StudentEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 
@@ -125,7 +125,7 @@ public class StudentEditTests : BunitTestBase
             { "StudentId", 1 }
         };
 
-        var title = "Edit Student";
+        const string title = "Edit Student";
         await comp.InvokeAsync(() => dialogReference = service?.Show<StudentEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 
@@ -165,7 +165,7 @@ public class StudentEditTests : BunitTestBase
             { "StudentId", 1 }
         };
 
-        var title = "Edit Student";
+        const string title = "Edit Student";
         await comp.InvokeAsync(() => dialogReference = service?.Show<StudentEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 
@@ -208,7 +208,7 @@ public class StudentEditTests : BunitTestBase
             { "StudentId", 1 }
         };
 
-        var title = "Edit Student";
+        const string title = "Edit Student";
         await comp.InvokeAsync(() => dialogReference = service?.Show<StudentEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 
@@ -253,7 +253,7 @@ public class StudentEditTests : BunitTestBase
             { "StudentId", 1 }
         };
 
-        var title = "Edit Student";
+        const string title = "Edit Student";
         await comp.InvokeAsync(() => dialogReference = service?.Show<StudentEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 

@@ -43,7 +43,7 @@ public class InstructorDetailsTests : BunitTestBase
             { "InstructorId", 1 }
         };
 
-        var title = "Instructor Details";
+        const string title = "Instructor Details";
         await comp.InvokeAsync(() => dialogReference = service?.Show<InstructorDetails>(title, parameters));
         Assert.NotNull(dialogReference);
 
@@ -81,7 +81,7 @@ public class InstructorDetailsTests : BunitTestBase
             { "InstructorId", 1 }
         };
 
-        var title = "Instructor Details";
+        const string title = "Instructor Details";
         await comp.InvokeAsync(() => dialogReference = service?.Show<InstructorDetails>(title, parameters));
         Assert.NotNull(dialogReference);
 

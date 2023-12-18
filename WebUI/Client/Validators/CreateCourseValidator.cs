@@ -1,10 +1,9 @@
-﻿
-using FluentValidation;
-using WebUI.Shared.Courses.Commands.CreateCourse;
+﻿using FluentValidation;
+using WebUI.Client.InputModels.Courses;
 
-namespace WebUI.Shared.Courses.Validators;
+namespace WebUI.Client.Validators;
 
-public class CreateCourseValidator : AbstractValidator<CreateCourseCommand>
+public class CreateCourseValidator : AbstractValidator<CreateCourseInputModel>
 {
     public CreateCourseValidator()
     {

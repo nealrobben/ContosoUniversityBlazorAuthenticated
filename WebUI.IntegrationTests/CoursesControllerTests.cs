@@ -3,6 +3,7 @@ using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
+using WebUI.Client.Dtos.Courses;
 using WebUI.Shared.Common;
 using WebUI.Shared.Courses.Commands.CreateCourse;
 using WebUI.Shared.Courses.Commands.UpdateCourse;
@@ -349,7 +350,7 @@ public class CoursesControllerTests : IntegrationTest
             Name = "Name 1"
         };
 
-        var course = new CreateCourseCommand
+        var course = new CreateCourseDto
         {
             CourseID = 1,
             Title = "Title 1",

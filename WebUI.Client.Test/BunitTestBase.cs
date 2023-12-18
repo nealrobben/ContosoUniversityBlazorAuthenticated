@@ -3,6 +3,7 @@ using Bunit;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor.Services;
+using WebUI.Client.InputModels.Courses;
 using WebUI.Shared.Departments.Validators;
 
 namespace WebUI.Client.Test;
@@ -25,6 +26,7 @@ public abstract class BunitTestBase
 
         Context.Services.AddLocalization(opts => { opts.ResourcesPath = "Localization"; });
 
-        Context.Services.AddValidatorsFromAssemblyContaining<CreateDepartmentValidator>();
+        Context.Services.AddValidatorsFromAssemblyContaining<CreateDepartmentValidator>(); //TODO: Remove after shared project has been removed
+        Context.Services.AddValidatorsFromAssemblyContaining<CreateCourseInputModel>();
     }
 }

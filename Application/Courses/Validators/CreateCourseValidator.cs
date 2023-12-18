@@ -8,14 +8,19 @@ using WebUI.Shared.Courses.Commands.CreateCourse;
 
 namespace Application.Courses.Validators;
 
-public class CreateCourseValidator
-    : WebUI.Shared.Courses.Validators.CreateCourseValidator
+public class CreateCourseValidator 
+    : AbstractValidator<CreateCourseCommand>
 {
     private readonly ISchoolContext _context;
 
     public CreateCourseValidator(ISchoolContext context) : base()
     {
         _context = context;
+
+        RuleFor(p => p.CourseID).NotEmpty();
+        RuleFor(p => p.Title).NotEmpty().MaximumLength(50);
+        RuleFor(p => p.Credits).NotEmpty().GreaterThan(0);
+        RuleFor(p => p.DepartmentID).NotEmpty();
 
         RuleFor(v => v.Title)
             .MustAsync(BeUniqueTitle)

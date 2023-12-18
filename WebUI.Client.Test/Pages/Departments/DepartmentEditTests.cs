@@ -50,7 +50,7 @@ public class DepartmentEditTests : BunitTestBase
             { "DepartmentId", 1 }
         };
 
-        var title = "Edit Department";
+        const string title = "Edit Department";
         await comp.InvokeAsync(() => dialogReference = service?.Show<DepartmentEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 
@@ -90,7 +90,7 @@ public class DepartmentEditTests : BunitTestBase
             { "DepartmentId", 1 }
         };
 
-        var title = "Edit Department";
+        const string title = "Edit Department";
         await comp.InvokeAsync(() => dialogReference = service?.Show<DepartmentEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 
@@ -125,7 +125,7 @@ public class DepartmentEditTests : BunitTestBase
             { "DepartmentId", 1 }
         };
 
-        var title = "Edit Department";
+        const string title = "Edit Department";
         await comp.InvokeAsync(() => dialogReference = service?.Show<DepartmentEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 
@@ -165,7 +165,7 @@ public class DepartmentEditTests : BunitTestBase
             { "DepartmentId", 1 }
         };
 
-        var title = "Edit Department";
+        const string title = "Edit Department";
         await comp.InvokeAsync(() => dialogReference = service?.Show<DepartmentEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 
@@ -207,7 +207,7 @@ public class DepartmentEditTests : BunitTestBase
             { "DepartmentId", 1 }
         };
 
-        var title = "Edit Department";
+        const string title = "Edit Department";
         await comp.InvokeAsync(() => dialogReference = service?.Show<DepartmentEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 
@@ -251,7 +251,7 @@ public class DepartmentEditTests : BunitTestBase
             { "DepartmentId", 1 }
         };
 
-        var title = "Edit Department";
+        const string title = "Edit Department";
         await comp.InvokeAsync(() => dialogReference = service?.Show<DepartmentEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 

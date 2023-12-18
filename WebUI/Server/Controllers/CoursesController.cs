@@ -5,6 +5,7 @@ using ContosoUniversityBlazor.Application.Courses.Queries.GetCoursesOverview;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using WebUI.Client.Dtos.Courses;
 using WebUI.Shared.Common;
 using WebUI.Shared.Courses.Commands.CreateCourse;
 using WebUI.Shared.Courses.Commands.UpdateCourse;
@@ -37,9 +38,15 @@ public class CoursesController : ContosoApiController
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesDefaultResponseType]
-    public async Task<IActionResult> Create([FromBody] CreateCourseCommand command)
+    public async Task<IActionResult> Create([FromBody] CreateCourseDto dto)
     {
-        var courseID = await Mediator.Send(command);
+        var courseID = await Mediator.Send(new CreateCourseCommand
+        {
+            CourseID = dto.CourseID,
+            Title = dto.Title,
+            Credits = dto.Credits,
+            DepartmentID = dto.DepartmentID,
+        });
 
         var result = await Mediator.Send(new GetCourseDetailsQuery(courseID));
 

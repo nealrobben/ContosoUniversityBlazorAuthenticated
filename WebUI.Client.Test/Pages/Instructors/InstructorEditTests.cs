@@ -48,7 +48,7 @@ public class InstructorEditTests : BunitTestBase
             { "InstructorId", 1 }
         };
 
-        var title = "Edit Instructor";
+        const string title = "Edit Instructor";
         await comp.InvokeAsync(() => dialogReference = service?.Show<InstructorEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 
@@ -86,7 +86,7 @@ public class InstructorEditTests : BunitTestBase
             { "InstructorId", 1 }
         };
 
-        var title = "Edit Instructor";
+        const string title = "Edit Instructor";
         await comp.InvokeAsync(() => dialogReference = service?.Show<InstructorEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 
@@ -120,7 +120,7 @@ public class InstructorEditTests : BunitTestBase
             { "InstructorId", 1 }
         };
 
-        var title = "Edit Instructor";
+        const string title = "Edit Instructor";
         await comp.InvokeAsync(() => dialogReference = service?.Show<InstructorEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 
@@ -159,7 +159,7 @@ public class InstructorEditTests : BunitTestBase
             { "InstructorId", 1 }
         };
 
-        var title = "Edit Instructor";
+        const string title = "Edit Instructor";
         await comp.InvokeAsync(() => dialogReference = service?.Show<InstructorEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 
@@ -201,7 +201,7 @@ public class InstructorEditTests : BunitTestBase
             { "InstructorId", 1 }
         };
 
-        var title = "Edit Instructor";
+        const string title = "Edit Instructor";
         await comp.InvokeAsync(() => dialogReference = service?.Show<InstructorEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 
@@ -245,7 +245,7 @@ public class InstructorEditTests : BunitTestBase
             { "InstructorId", 1 }
         };
 
-        var title = "Edit Instructor";
+        const string title = "Edit Instructor";
         await comp.InvokeAsync(() => dialogReference = service?.Show<InstructorEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 

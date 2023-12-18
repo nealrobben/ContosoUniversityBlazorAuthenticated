@@ -6,10 +6,11 @@ using Microsoft.Extensions.Localization;
 using MudBlazor;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using WebUI.Client.Dtos.Courses;
 using WebUI.Client.Extensions;
+using WebUI.Client.InputModels.Courses;
 using WebUI.Client.Services;
 using WebUI.Client.Shared;
-using WebUI.Shared.Courses.Commands.CreateCourse;
 using WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
 
 namespace WebUI.Client.Pages.Courses;
@@ -30,14 +31,14 @@ public partial class CourseCreate
 
     [CascadingParameter]
     MudDialogInstance MudDialog { get; set; }
-    public CreateCourseCommand CreateCourseCommand { get; set; } = new CreateCourseCommand();
+    public CreateCourseInputModel CreateCourseInputModel { get; set; } = new CreateCourseInputModel();
 
     private CustomValidation _customValidation;
 
     protected override async Task OnInitializedAsync()
     {
         DepartmentsLookup = await DepartmentService.GetLookupAsync();
-        CreateCourseCommand.DepartmentID = DepartmentsLookup.Departments[0].DepartmentID;
+        CreateCourseInputModel.DepartmentID = DepartmentsLookup.Departments[0].DepartmentID;
         StateHasChanged();
     }
 
@@ -51,9 +52,15 @@ public partial class CourseCreate
         {
             try
             {
-                await CourseService.CreateAsync(CreateCourseCommand);
+                await CourseService.CreateAsync(new CreateCourseDto
+                {
+                    CourseID = CreateCourseInputModel.CourseID,
+                    Title = CreateCourseInputModel.Title,
+                    Credits = CreateCourseInputModel.Credits,
+                    DepartmentID = CreateCourseInputModel.DepartmentID
+                });
 
-                CreateCourseCommand = new CreateCourseCommand();
+                CreateCourseInputModel = new CreateCourseInputModel();
                 MudDialog.Close(DialogResult.Ok(true));
             }
             catch (ApiException ex)

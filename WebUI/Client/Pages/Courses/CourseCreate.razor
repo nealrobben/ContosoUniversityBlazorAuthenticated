@@ -6,27 +6,27 @@
         }
         <div class="row">
             <div class="col-md-12">
-                <EditForm Model=@CreateCourseCommand OnSubmit=@FormSubmitted>
+                <EditForm Model=@CreateCourseInputModel OnSubmit=@FormSubmitted>
                     <FluentValidationValidator DisableAssemblyScanning="true" />
                     <CustomValidation @ref="_customValidation" Localizer="Localizer" />
                     <div class="form-group">
                         <label for="CourseID">@Localizer["CourseID"]</label>
-                        <InputNumber @bind-Value=CreateCourseCommand.CourseID class="form-control" id="CourseID" />
-                        <ValidationMessage For="() => CreateCourseCommand.CourseID" />
+                        <InputNumber @bind-Value=CreateCourseInputModel.CourseID class="form-control" id="CourseID" />
+                        <ValidationMessage For="() => CreateCourseInputModel.CourseID" />
                     </div>
                     <div class="form-group">
                         <label for="Title">@Localizer["Title"]</label>
-                        <InputText @bind-Value=CreateCourseCommand.Title class="form-control" id="Title" />
-                        <ValidationMessage For="() => CreateCourseCommand.Title" />
+                        <InputText @bind-Value=CreateCourseInputModel.Title class="form-control" id="Title" />
+                        <ValidationMessage For="() => CreateCourseInputModel.Title" />
                     </div>
                     <div class="form-group">
                         <label for="Credits">@Localizer["Credits"]</label>
-                        <InputNumber @bind-Value=CreateCourseCommand.Credits class="form-control" id="Credits" />
-                        <ValidationMessage For="() => CreateCourseCommand.Credits" />
+                        <InputNumber @bind-Value=CreateCourseInputModel.Credits class="form-control" id="Credits" />
+                        <ValidationMessage For="() => CreateCourseInputModel.Credits" />
                     </div>
                     <div class="form-group">
                         <label for="Department">@Localizer["Department"]</label>
-                        <MudSelect T="int" AnchorOrigin="Origin.BottomCenter" @bind-Value=CreateCourseCommand.DepartmentID class="form-control" id="Department">
+                        <MudSelect T="int" AnchorOrigin="Origin.BottomCenter" @bind-Value=CreateCourseInputModel.DepartmentID class="form-control" id="Department">
                             @if (DepartmentsLookup != null)
                             {
                                 @foreach (var department in DepartmentsLookup.Departments)
@@ -35,7 +35,7 @@
                                 }
                             }
                         </MudSelect>
-                        <ValidationMessage For="() => CreateCourseCommand.DepartmentID" />
+                        <ValidationMessage For="() => CreateCourseInputModel.DepartmentID" />
                     </div>
                     <div class="form-group">
                         <MudButton ButtonType="ButtonType.Submit"

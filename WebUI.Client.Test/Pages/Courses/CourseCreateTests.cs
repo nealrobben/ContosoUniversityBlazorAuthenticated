@@ -4,10 +4,10 @@ using FakeItEasy;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
+using WebUI.Client.Dtos.Courses;
 using WebUI.Client.Pages.Courses;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
-using WebUI.Shared.Courses.Commands.CreateCourse;
 using WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
 using Xunit;
 
@@ -32,7 +32,7 @@ public class CourseCreateTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var title = "Create Course";
+        const string title = "Create Course";
         await comp.InvokeAsync(() => dialogReference = service?.Show<CourseCreate>(title));
         Assert.NotNull(dialogReference);
 
@@ -63,7 +63,7 @@ public class CourseCreateTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var title = "Create Course";
+        const string title = "Create Course";
         await comp.InvokeAsync(() => dialogReference = service?.Show<CourseCreate>(title));
         Assert.NotNull(dialogReference);
 
@@ -90,7 +90,7 @@ public class CourseCreateTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var title = "Create Course";
+        const string title = "Create Course";
         await comp.InvokeAsync(() => dialogReference = service?.Show<CourseCreate>(title));
         Assert.NotNull(dialogReference);
 
@@ -122,7 +122,7 @@ public class CourseCreateTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var title = "Create Course";
+        const string title = "Create Course";
         await comp.InvokeAsync(() => dialogReference = service?.Show<CourseCreate>(title));
         Assert.NotNull(dialogReference);
 
@@ -135,7 +135,7 @@ public class CourseCreateTests : BunitTestBase
 
         comp.Find("button[type='submit']").Click();
 
-        A.CallTo(() => fakeCourseService.CreateAsync(A<CreateCourseCommand>.That.IsInstanceOf(typeof(CreateCourseCommand)))).MustHaveHappened();
+        A.CallTo(() => fakeCourseService.CreateAsync(A<CreateCourseDto>.That.IsInstanceOf(typeof(CreateCourseDto)))).MustHaveHappened();
     }
 
     [Fact]
@@ -146,7 +146,7 @@ public class CourseCreateTests : BunitTestBase
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var fakeCourseService = A.Fake<ICourseService>();
-        A.CallTo(() => fakeCourseService.CreateAsync(A<CreateCourseCommand>.Ignored)).ThrowsAsync(new Exception("error"));
+        A.CallTo(() => fakeCourseService.CreateAsync(A<CreateCourseDto>.Ignored)).ThrowsAsync(new Exception("error"));
         Context.Services.AddScoped(x => fakeCourseService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -156,7 +156,7 @@ public class CourseCreateTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var title = "Create Course";
+        const string title = "Create Course";
         await comp.InvokeAsync(() => dialogReference = service?.Show<CourseCreate>(title));
         Assert.NotNull(dialogReference);
 
@@ -192,7 +192,7 @@ public class CourseCreateTests : BunitTestBase
         Assert.NotNull(service);
         IDialogReference? dialogReference = null;
 
-        var title = "Create Course";
+        const string title = "Create Course";
         await comp.InvokeAsync(() => dialogReference = service?.Show<CourseCreate>(title));
         Assert.NotNull(dialogReference);
 
