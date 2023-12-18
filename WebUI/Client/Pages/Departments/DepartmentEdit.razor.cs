@@ -7,10 +7,11 @@ using MudBlazor;
 using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
+using WebUI.Client.Dtos.Departments;
 using WebUI.Client.Extensions;
+using WebUI.Client.InputModels.Departments;
 using WebUI.Client.Services;
 using WebUI.Client.Shared;
-using WebUI.Shared.Departments.Commands.UpdateDepartment;
 using WebUI.Shared.Instructors.Queries.GetInstructorsLookup;
 
 namespace WebUI.Client.Pages.Departments;
@@ -36,21 +37,21 @@ public partial class DepartmentEdit
 
     public bool ErrorVisible { get; set; }
 
-    public UpdateDepartmentCommand UpdateDepartmentCommand { get; set; } = new UpdateDepartmentCommand();
+    public UpdateDepartmentInputModel UpdateDepartmentInputModel { get; set; } = new UpdateDepartmentInputModel();
     public InstructorsLookupVM InstructorsLookup { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {
+        InstructorsLookup = await InstructorService.GetLookupAsync();
+
         var department = await DepartmentService.GetAsync(DepartmentId.ToString());
 
-        UpdateDepartmentCommand.DepartmentID = department.DepartmentID;
-        UpdateDepartmentCommand.Budget = department.Budget;
-        UpdateDepartmentCommand.InstructorID = department.InstructorID ?? 0;
-        UpdateDepartmentCommand.Name = department.Name;
-        UpdateDepartmentCommand.StartDate = department.StartDate;
-        UpdateDepartmentCommand.RowVersion = department.RowVersion;
-
-        InstructorsLookup = await InstructorService.GetLookupAsync();
+        UpdateDepartmentInputModel.DepartmentID = department.DepartmentID;
+        UpdateDepartmentInputModel.Budget = department.Budget;
+        UpdateDepartmentInputModel.InstructorID = department.InstructorID ?? 0;
+        UpdateDepartmentInputModel.Name = department.Name;
+        UpdateDepartmentInputModel.StartDate = department.StartDate;
+        UpdateDepartmentInputModel.RowVersion = department.RowVersion;
     }
 
     public async Task FormSubmitted(EditContext editContext)
@@ -63,7 +64,15 @@ public partial class DepartmentEdit
         {
             try
             {
-                await DepartmentService.UpdateAsync(UpdateDepartmentCommand);
+                await DepartmentService.UpdateAsync(new UpdateDepartmentDto
+                {
+                    DepartmentID = UpdateDepartmentInputModel.DepartmentID,
+                    Name = UpdateDepartmentInputModel.Name,
+                    Budget = UpdateDepartmentInputModel.Budget,
+                    StartDate = UpdateDepartmentInputModel.StartDate,
+                    RowVersion = UpdateDepartmentInputModel.RowVersion,
+                    InstructorID = UpdateDepartmentInputModel.InstructorID
+                });
                 MudDialog.Close(DialogResult.Ok(true));
             }
             catch (ApiException ex)

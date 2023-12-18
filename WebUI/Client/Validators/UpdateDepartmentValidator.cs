@@ -1,10 +1,9 @@
-﻿
-using FluentValidation;
-using WebUI.Shared.Departments.Commands.UpdateDepartment;
+﻿using FluentValidation;
+using WebUI.Client.InputModels.Departments;
 
-namespace WebUI.Shared.Departments.Validators;
+namespace WebUI.Client.Validators;
 
-public class UpdateDepartmentValidator : AbstractValidator<UpdateDepartmentCommand>
+public class UpdateDepartmentValidator : AbstractValidator<UpdateDepartmentInputModel>
 {
     public UpdateDepartmentValidator()
     {

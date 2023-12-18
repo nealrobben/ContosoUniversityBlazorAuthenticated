@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 using ContosoUniversityBlazor.Application.Departments.Queries.GetDepartmentsLookup;
 using WebUI.Shared.Departments.Queries.GetDepartmentsOverview;
 using WebUI.Shared.Departments.Queries.GetDepartmentDetails;
-using WebUI.Shared.Departments.Commands.UpdateDepartment;
 using WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
 using WebUI.Shared.Common;
 using WebUI.Client.Dtos.Departments;
 using ContosoUniversityBlazor.Application.Departments.Commands.CreateDepartment;
+using ContosoUniversityBlazor.Application.Departments.Commands.UpdateDepartment;
 
 namespace ContosoUniversityBlazor.WebUI.Controllers;
 
@@ -66,9 +66,17 @@ public class DepartmentsController : ContosoApiController
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesDefaultResponseType]
-    public async Task<IActionResult> Update([FromBody] UpdateDepartmentCommand command)
+    public async Task<IActionResult> Update([FromBody] UpdateDepartmentDto dto)
     {
-        await Mediator.Send(command);
+        await Mediator.Send(new UpdateDepartmentCommand
+        {
+            DepartmentID = dto.DepartmentID,
+            Name = dto.Name,
+            Budget = dto.Budget,
+            StartDate = dto.StartDate,
+            RowVersion = dto.RowVersion,
+            InstructorID = dto.InstructorID
+        });
 
         return NoContent();
     }

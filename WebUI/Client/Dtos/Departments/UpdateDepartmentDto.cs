@@ -1,10 +1,8 @@
-﻿
-using MediatR;
-using System;
+﻿using System;
 
-namespace WebUI.Shared.Departments.Commands.UpdateDepartment;
+namespace WebUI.Client.Dtos.Departments;
 
-public class UpdateDepartmentCommand : IRequest
+public class UpdateDepartmentDto
 {
     public int DepartmentID { get; set; }
 

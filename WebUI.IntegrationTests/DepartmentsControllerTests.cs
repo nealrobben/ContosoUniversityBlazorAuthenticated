@@ -3,7 +3,6 @@ using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
-using WebUI.Shared.Departments.Commands.UpdateDepartment;
 using WebUI.Shared.Departments.Queries.GetDepartmentDetails;
 using WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
 using WebUI.Shared.Departments.Queries.GetDepartmentsOverview;
@@ -370,7 +369,7 @@ public class DepartmentsControllerTests : IntegrationTest
             await schoolContext.SaveChangesAsync();
         }
         
-        var updateDepartmentCommand = new UpdateDepartmentCommand
+        var updateDepartmentCommand = new UpdateDepartmentDto
         {
             DepartmentID = 1,
             Name = "Test 2",
