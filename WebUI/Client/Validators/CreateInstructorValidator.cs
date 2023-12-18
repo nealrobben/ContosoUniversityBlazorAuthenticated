@@ -1,10 +1,9 @@
-﻿
-using FluentValidation;
-using WebUI.Shared.Instructors.Commands.CreateInstructor;
+﻿using FluentValidation;
+using WebUI.Client.InputModels.Instructors;
 
-namespace WebUI.Shared.Instructors.Validators;
+namespace WebUI.Client.Validators;
 
-public class CreateInstructorValidator : AbstractValidator<CreateInstructorCommand>
+public class CreateInstructorValidator : AbstractValidator<CreateInstructorInputModel>
 {
     public CreateInstructorValidator()
     {

@@ -1,10 +1,8 @@
-﻿
-using MediatR;
-using System;
+﻿using System;
 
-namespace WebUI.Shared.Instructors.Commands.CreateInstructor;
+namespace WebUI.Client.Dtos.Instructors;
 
-public class CreateInstructorCommand : IRequest<int>
+public class CreateInstructorDto
 {
     public string FirstName { get; set; }
 

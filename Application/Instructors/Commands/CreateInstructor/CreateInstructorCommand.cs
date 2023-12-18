@@ -1,14 +1,25 @@
 ﻿
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
-using System.Threading;
-using System.Threading.Tasks;
 using MediatR;
-using WebUI.Shared.Instructors.Commands.CreateInstructor;
+using System;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace ContosoUniversityBlazor.Application.Instructors.Commands.CreateInstructor;
 
-public class CreateInstructorCommandHandler : IRequestHandler<CreateInstructorCommand,int>
+public class CreateInstructorCommand : IRequest<int>
+{
+    public string FirstName { get; set; }
+
+    public string LastName { get; set; }
+
+    public DateTime HireDate { get; set; }
+
+    public string ProfilePictureName { get; set; }
+}
+
+public class CreateInstructorCommandHandler : IRequestHandler<CreateInstructorCommand, int>
 {
     private readonly ISchoolContext _context;
 

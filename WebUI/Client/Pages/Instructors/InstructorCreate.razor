@@ -6,22 +6,22 @@
         }
         <div class="row">
             <div class="col-md-12">
-                <EditForm Model=@CreateInstructorCommand OnSubmit=@FormSubmitted>
+                <EditForm Model=@CreateInstructorInputModel OnSubmit=@FormSubmitted>
                     <FluentValidationValidator DisableAssemblyScanning="true" />
                     <div class="form-group">
                         <label for="LastName">@Localizer["LastName"]</label>
-                        <InputText @bind-Value=CreateInstructorCommand.LastName class="form-control" id="LastName" />
-                        <ValidationMessage For="() => CreateInstructorCommand.LastName" />
+                        <InputText @bind-Value=CreateInstructorInputModel.LastName class="form-control" id="LastName" />
+                        <ValidationMessage For="() => CreateInstructorInputModel.LastName" />
                     </div>
                     <div class="form-group">
                         <label for="FirstName">@Localizer["FirstName"]</label>
-                        <InputText @bind-Value=CreateInstructorCommand.FirstName class="form-control" id="FirstName" />
-                        <ValidationMessage For="() => CreateInstructorCommand.FirstName" />
+                        <InputText @bind-Value=CreateInstructorInputModel.FirstName class="form-control" id="FirstName" />
+                        <ValidationMessage For="() => CreateInstructorInputModel.FirstName" />
                     </div>
                     <div class="form-group">
                         <label for="HireDate">@Localizer["HireDate"]</label>
-                        <InputDate @bind-Value=CreateInstructorCommand.HireDate class="form-control" id="HireDate" />
-                        <ValidationMessage For="() => CreateInstructorCommand.HireDate" />
+                        <InputDate @bind-Value=CreateInstructorInputModel.HireDate class="form-control" id="HireDate" />
+                        <ValidationMessage For="() => CreateInstructorInputModel.HireDate" />
                     </div>
                     <div>
                         <InputFile id="fileInput" OnChange="UploadFiles" hidden />

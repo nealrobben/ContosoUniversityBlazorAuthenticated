@@ -4,10 +4,10 @@ using FakeItEasy;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
+using WebUI.Client.Dtos.Instructors;
 using WebUI.Client.Pages.Instructors;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
-using WebUI.Shared.Instructors.Commands.CreateInstructor;
 using Xunit;
 
 namespace WebUI.Client.Test.Pages.Instructors;
@@ -127,14 +127,14 @@ public class InstructorCreateTests : BunitTestBase
 
         comp.Find("button[type='submit']").Click();
 
-        A.CallTo(() => fakeInstructorService.CreateAsync(A<CreateInstructorCommand>.That.IsInstanceOf(typeof(CreateInstructorCommand)))).MustHaveHappened();
+        A.CallTo(() => fakeInstructorService.CreateAsync(A<CreateInstructorDto>.That.IsInstanceOf(typeof(CreateInstructorDto)))).MustHaveHappened();
     }
 
     [Fact]
     public async Task InstructorCreate_WhenExceptionCaughtAfterSave_ShowErrorMessage()
     {
         var fakeInstructorService = A.Fake<IInstructorService>();
-        A.CallTo(() => fakeInstructorService.CreateAsync(A<CreateInstructorCommand>.Ignored)).ThrowsAsync(new Exception("error"));
+        A.CallTo(() => fakeInstructorService.CreateAsync(A<CreateInstructorDto>.Ignored)).ThrowsAsync(new Exception("error"));
         Context.Services.AddScoped(x => fakeInstructorService);
 
         var fakeUploadService = A.Fake<IFileuploadService>();

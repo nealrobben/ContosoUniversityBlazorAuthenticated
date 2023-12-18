@@ -5,8 +5,9 @@ using Microsoft.Extensions.Localization;
 using MudBlazor;
 using System;
 using System.Threading.Tasks;
+using WebUI.Client.Dtos.Instructors;
+using WebUI.Client.InputModels.Instructors;
 using WebUI.Client.Services;
-using WebUI.Shared.Instructors.Commands.CreateInstructor;
 
 namespace WebUI.Client.Pages.Instructors;
 
@@ -27,7 +28,7 @@ public partial class InstructorCreate
     public bool ErrorVisible { get; set; }
 
     public IBrowserFile File { get; set; } = null;
-    public CreateInstructorCommand CreateInstructorCommand { get; set; } = new CreateInstructorCommand() { HireDate = DateTime.Now.Date };
+    public CreateInstructorInputModel CreateInstructorInputModel { get; set; } = new CreateInstructorInputModel() { HireDate = DateTime.Now.Date };
 
     public async Task FormSubmitted(EditContext editContext)
     {
@@ -40,12 +41,18 @@ public partial class InstructorCreate
             {
                 if (File != null)
                 {
-                    CreateInstructorCommand.ProfilePictureName = await FileUploadService.UploadFile(File);
+                    CreateInstructorInputModel.ProfilePictureName = await FileUploadService.UploadFile(File);
                 }
 
-                await InstructorService.CreateAsync(CreateInstructorCommand);
+                await InstructorService.CreateAsync(new CreateInstructorDto
+                {
+                    FirstName = CreateInstructorInputModel.FirstName,
+                    LastName = CreateInstructorInputModel.LastName,
+                    HireDate = CreateInstructorInputModel.HireDate,
+                    ProfilePictureName = CreateInstructorInputModel.ProfilePictureName
+                });
 
-                CreateInstructorCommand = new CreateInstructorCommand();
+                CreateInstructorInputModel = new CreateInstructorInputModel();
                 MudDialog.Close(DialogResult.Ok(true));
             }
             catch (Exception e)

@@ -3,8 +3,8 @@ using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
+using WebUI.Client.Dtos.Instructors;
 using WebUI.Shared.Common;
-using WebUI.Shared.Instructors.Commands.CreateInstructor;
 using WebUI.Shared.Instructors.Commands.UpdateInstructor;
 using WebUI.Shared.Instructors.Queries.GetInstructorDetails;
 using WebUI.Shared.Instructors.Queries.GetInstructorsLookup;
@@ -305,7 +305,7 @@ public class InstructorsControllerTests : IntegrationTest
     [Fact]
     public async Task Create_CreatesInstructor()
     {
-        var instructor = new CreateInstructorCommand
+        var instructor = new CreateInstructorDto
         {
             FirstName = "First name",
             LastName = "Last name",
