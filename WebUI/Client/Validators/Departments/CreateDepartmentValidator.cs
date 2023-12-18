@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using WebUI.Client.InputModels.Departments;
 
-namespace WebUI.Client.Validators;
+namespace WebUI.Client.Validators.Departments;
 
 public class CreateDepartmentValidator : AbstractValidator<CreateDepartmentInputModel>
 {

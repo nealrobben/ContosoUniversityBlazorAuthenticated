@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using WebUI.Client.InputModels.Students;
 
-namespace WebUI.Client.Validators;
+namespace WebUI.Client.Validators.Students;
 
 public class CreateStudentValidator : AbstractValidator<CreateStudentInputModel>
 {

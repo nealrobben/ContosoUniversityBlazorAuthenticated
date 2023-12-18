@@ -1,12 +1,11 @@
 ﻿using FluentValidation;
 using WebUI.Client.InputModels.Courses;
 
-namespace WebUI.Client.Validators;
+namespace WebUI.Client.Validators.Courses;
 
-public class UpdateCourseValidator 
-    : AbstractValidator<UpdateCourseInputModel>
+public class CreateCourseValidator : AbstractValidator<CreateCourseInputModel>
 {
-    public UpdateCourseValidator()
+    public CreateCourseValidator()
     {
         RuleFor(p => p.CourseID).NotEmpty();
         RuleFor(p => p.Title).NotEmpty().MaximumLength(50);

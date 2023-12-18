@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
 using WebUI.Client.InputModels.Instructors;
 
-namespace WebUI.Client.Validators;
+namespace WebUI.Client.Validators.Instructors;
 
-public class CreateInstructorValidator : AbstractValidator<CreateInstructorInputModel>
+public class UpdateInstructorValidator : AbstractValidator<UpdateInstructorInputModel>
 {
-    public CreateInstructorValidator()
+    public UpdateInstructorValidator()
     {
         RuleFor(p => p.FirstName).NotEmpty().MaximumLength(50);
         RuleFor(p => p.LastName).NotEmpty().MaximumLength(50);
