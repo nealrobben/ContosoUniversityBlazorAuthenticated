@@ -1,18 +1,18 @@
 ﻿
 using System.Collections.Generic;
 
-namespace WebUI.Shared.Home.Queries.GetAboutInfo;
+namespace WebUI.CLient.ViewModels.Home;
 
 public class AboutInfoVM
 {
-    public List<EnrollmentDateGroup> Items { get; set; }
+    public List<EnrollmentDateGroupVM> Items { get; set; }
 
     public AboutInfoVM()
     {
         Items = [];
     }
 
-    public AboutInfoVM(List<EnrollmentDateGroup> items)
+    public AboutInfoVM(List<EnrollmentDateGroupVM> items)
     {
         Items = items;
     }

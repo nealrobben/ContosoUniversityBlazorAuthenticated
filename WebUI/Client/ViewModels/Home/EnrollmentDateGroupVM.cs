@@ -2,9 +2,9 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace WebUI.Shared.Home.Queries.GetAboutInfo;
+namespace WebUI.CLient.ViewModels.Home;
 
-public class EnrollmentDateGroup
+public class EnrollmentDateGroupVM
 {
     [DataType(DataType.Date)]
     public DateTime? EnrollmentDate { get; set; }

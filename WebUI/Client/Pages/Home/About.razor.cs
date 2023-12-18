@@ -7,7 +7,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using WebUI.Shared.Home.Queries.GetAboutInfo;
+using WebUI.CLient.ViewModels.Home;
 
 namespace WebUI.Client.Pages.Home;
 
@@ -26,7 +26,16 @@ public partial class About
 
     protected override async Task OnInitializedAsync()
     {
-        aboutInfo = await Http.GetFromJsonAsync<AboutInfoVM>("/api/about");
+        var aboutInfoDto = await Http.GetFromJsonAsync<AboutInfoVM>("/api/about");
+
+        aboutInfo = new AboutInfoVM
+        {
+            Items = aboutInfoDto.Items.Select(x => new EnrollmentDateGroupVM
+            {
+                EnrollmentDate = x.EnrollmentDate,
+                StudentCount = x.StudentCount
+            }).ToList()
+        };
 
         XAxisLabels = aboutInfo.Items.Select(x => x.EnrollmentDate.Value.ToShortDateString()).ToArray();
         var chartSeries = new ChartSeries() { Name = "Students", Data = aboutInfo.Items.Select(x => (double)x.StudentCount).ToArray() };

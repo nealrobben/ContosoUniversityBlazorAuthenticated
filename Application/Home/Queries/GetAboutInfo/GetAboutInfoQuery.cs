@@ -1,19 +1,19 @@
 ﻿
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using MediatR;
-using WebUI.Shared.Home.Queries.GetAboutInfo;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
+using Domain.Entities.Projections.Home;
 
 namespace ContosoUniversityBlazor.Application.Home.Queries.GetAboutInfo;
 
-public class GetAboutInfoQuery : IRequest<AboutInfoVM>
+public class GetAboutInfoQuery : IRequest<AboutInfo>
 {
 }
 
-public class GetAboutInfoQueryHandler : IRequestHandler<GetAboutInfoQuery, AboutInfoVM>
+public class GetAboutInfoQueryHandler : IRequestHandler<GetAboutInfoQuery, AboutInfo>
 {
     private readonly ISchoolContext _context;
 
@@ -22,7 +22,7 @@ public class GetAboutInfoQueryHandler : IRequestHandler<GetAboutInfoQuery, About
         _context = context;
     }
 
-    public async Task<AboutInfoVM> Handle(GetAboutInfoQuery request, CancellationToken cancellationToken)
+    public async Task<AboutInfo> Handle(GetAboutInfoQuery request, CancellationToken cancellationToken)
     {
         var data = from student in _context.Students
                    group student by student.EnrollmentDate into dateGroup
@@ -32,6 +32,6 @@ public class GetAboutInfoQueryHandler : IRequestHandler<GetAboutInfoQuery, About
                        StudentCount = dateGroup.Count()
                    };
 
-        return new AboutInfoVM(await data.AsNoTracking().ToListAsync(cancellationToken));
+        return new AboutInfo(await data.AsNoTracking().ToListAsync(cancellationToken));
     }
 }
