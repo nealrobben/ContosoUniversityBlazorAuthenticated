@@ -5,7 +5,6 @@ using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using WebUI.Client.Dtos.Instructors;
 using WebUI.Shared.Common;
-using WebUI.Shared.Instructors.Commands.UpdateInstructor;
 using WebUI.Shared.Instructors.Queries.GetInstructorDetails;
 using WebUI.Shared.Instructors.Queries.GetInstructorsLookup;
 using WebUI.Shared.Instructors.Queries.GetInstructorsOverview;
@@ -372,7 +371,7 @@ public class InstructorsControllerTests : IntegrationTest
             await schoolContext.SaveChangesAsync();
         }
 
-        var updateInstructorCommand = new UpdateInstructorCommand
+        var updateInstructorCommand = new UpdateInstructorDto
         {
             InstructorID = 1,
             FirstName = "First name 2",

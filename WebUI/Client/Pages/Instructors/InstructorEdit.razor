@@ -8,27 +8,27 @@
         }
         <div class="row">
             <div class="col">
-                <EditForm Model=@UpdateInstructorCommand OnSubmit=@FormSubmitted>
+                <EditForm Model=@UpdateInstructorInputModel OnSubmit=@FormSubmitted>
                         <FluentValidationValidator DisableAssemblyScanning="true" />
                         <div class="form-group">
                             <label for="LastName">@Localizer["LastName"]</label>
-                            <InputText @bind-Value=UpdateInstructorCommand.LastName class="form-control" id="LastName" />
-                            <ValidationMessage For="() => UpdateInstructorCommand.LastName" />
+                            <InputText @bind-Value=UpdateInstructorInputModel.LastName class="form-control" id="LastName" />
+                            <ValidationMessage For="() => UpdateInstructorInputModel.LastName" />
                         </div>
                         <div class="form-group">
                             <label for="FirstName">@Localizer["FirstName"]</label>
-                            <InputText @bind-Value=UpdateInstructorCommand.FirstName class="form-control" id="FirstName" />
-                            <ValidationMessage For="() => UpdateInstructorCommand.FirstName" />
+                            <InputText @bind-Value=UpdateInstructorInputModel.FirstName class="form-control" id="FirstName" />
+                            <ValidationMessage For="() => UpdateInstructorInputModel.FirstName" />
                         </div>
                         <div class="form-group">
                             <label for="HireDate">@Localizer["HireDate"]</label>
-                            <InputDate @bind-Value=UpdateInstructorCommand.HireDate class="form-control" id="HireDate" />
-                            <ValidationMessage For="() => UpdateInstructorCommand.HireDate" />
+                            <InputDate @bind-Value=UpdateInstructorInputModel.HireDate class="form-control" id="HireDate" />
+                            <ValidationMessage For="() => UpdateInstructorInputModel.HireDate" />
                         </div>
                         <div class="form-group">
                             <label for="OfficeLocation">@Localizer["OfficeLocation"]</label>
-                            <InputText @bind-Value=UpdateInstructorCommand.OfficeLocation class="form-control" id="OfficeLocation" />
-                            <ValidationMessage For="() => UpdateInstructorCommand.OfficeLocation" />
+                            <InputText @bind-Value=UpdateInstructorInputModel.OfficeLocation class="form-control" id="OfficeLocation" />
+                            <ValidationMessage For="() => UpdateInstructorInputModel.OfficeLocation" />
                         </div>
                         <div>
                             <InputFile id="fileInput" OnChange="UploadFiles" hidden />
@@ -54,7 +54,7 @@
                     </EditForm>
             </div>
             <div class="col">
-                <ProfilePicture FileName="@UpdateInstructorCommand?.ProfilePictureName" />
+                <ProfilePicture FileName="@UpdateInstructorInputModel?.ProfilePictureName" />
             </div>
         </div>
     </DialogContent>

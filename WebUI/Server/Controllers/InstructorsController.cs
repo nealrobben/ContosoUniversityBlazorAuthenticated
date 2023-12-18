@@ -1,6 +1,7 @@
 ﻿
 using ContosoUniversityBlazor.Application.Instructors.Commands.CreateInstructor;
 using ContosoUniversityBlazor.Application.Instructors.Commands.DeleteInstructor;
+using ContosoUniversityBlazor.Application.Instructors.Commands.UpdateInstructor;
 using ContosoUniversityBlazor.Application.Instructors.Queries.GetInstructorDetails;
 using ContosoUniversityBlazor.Application.Instructors.Queries.GetInstructorsLookup;
 using ContosoUniversityCQRS.Application.Instructors.Queries.GetInstructorsOverview;
@@ -9,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using WebUI.Client.Dtos.Instructors;
 using WebUI.Shared.Common;
-using WebUI.Shared.Instructors.Commands.UpdateInstructor;
 using WebUI.Shared.Instructors.Queries.GetInstructorDetails;
 using WebUI.Shared.Instructors.Queries.GetInstructorsLookup;
 using WebUI.Shared.Instructors.Queries.GetInstructorsOverview;
@@ -66,9 +66,17 @@ public class InstructorsController : ContosoApiController
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesDefaultResponseType]
-    public async Task<IActionResult> Update([FromBody] UpdateInstructorCommand command)
+    public async Task<IActionResult> Update([FromBody] UpdateInstructorDto dto)
     {
-        await Mediator.Send(command);
+        await Mediator.Send(new UpdateInstructorCommand
+        {
+            InstructorID = dto.InstructorID,
+            LastName = dto.LastName,
+            FirstName = dto.FirstName,
+            HireDate = dto.HireDate,
+            OfficeLocation = dto.OfficeLocation,
+            ProfilePictureName = dto.ProfilePictureName
+        });
 
         return NoContent();
     }

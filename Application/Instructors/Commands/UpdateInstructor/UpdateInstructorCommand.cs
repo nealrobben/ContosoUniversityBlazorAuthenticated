@@ -1,15 +1,30 @@
 ﻿
 using Application.Common.Interfaces;
 using ContosoUniversityBlazor.Application.Common.Exceptions;
-using ContosoUniversityBlazor.Domain.Entities;
-using System.Threading;
-using System.Threading.Tasks;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-using WebUI.Shared.Instructors.Commands.UpdateInstructor;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
+using ContosoUniversityBlazor.Domain.Entities;
+using MediatR;
+using System;
+using System.Threading.Tasks;
+using System.Threading;
+using Microsoft.EntityFrameworkCore;
 
 namespace ContosoUniversityBlazor.Application.Instructors.Commands.UpdateInstructor;
+
+public class UpdateInstructorCommand : IRequest
+{
+    public int? InstructorID { get; set; }
+
+    public string LastName { get; set; }
+
+    public string FirstName { get; set; }
+
+    public DateTime HireDate { get; set; }
+
+    public string OfficeLocation { get; set; }
+
+    public string ProfilePictureName { get; set; }
+}
 
 public class UpdateInstructorCommandHandler : IRequestHandler<UpdateInstructorCommand>
 {

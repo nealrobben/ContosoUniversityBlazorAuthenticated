@@ -4,8 +4,9 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 using System.Threading.Tasks;
+using WebUI.Client.Dtos.Instructors;
+using WebUI.Client.InputModels.Instructors;
 using WebUI.Client.Services;
-using WebUI.Shared.Instructors.Commands.UpdateInstructor;
 
 namespace WebUI.Client.Pages.Instructors;
 
@@ -29,18 +30,18 @@ public partial class InstructorEdit
     public bool ErrorVisible { get; set; }
 
     public IBrowserFile File { get; set; } = null;
-    public UpdateInstructorCommand UpdateInstructorCommand { get; set; } = new UpdateInstructorCommand();
+    public UpdateInstructorInputModel UpdateInstructorInputModel { get; set; } = new UpdateInstructorInputModel();
 
     protected override async Task OnParametersSetAsync()
     {
         var instructor = await InstructorService.GetAsync(InstructorId.ToString());
 
-        UpdateInstructorCommand.InstructorID = instructor.InstructorID;
-        UpdateInstructorCommand.FirstName = instructor.FirstName;
-        UpdateInstructorCommand.LastName = instructor.LastName;
-        UpdateInstructorCommand.HireDate = instructor.HireDate;
-        UpdateInstructorCommand.OfficeLocation = instructor.OfficeLocation;
-        UpdateInstructorCommand.ProfilePictureName = instructor.ProfilePictureName;
+        UpdateInstructorInputModel.InstructorID = instructor.InstructorID;
+        UpdateInstructorInputModel.FirstName = instructor.FirstName;
+        UpdateInstructorInputModel.LastName = instructor.LastName;
+        UpdateInstructorInputModel.HireDate = instructor.HireDate;
+        UpdateInstructorInputModel.OfficeLocation = instructor.OfficeLocation;
+        UpdateInstructorInputModel.ProfilePictureName = instructor.ProfilePictureName;
     }
 
     public async Task FormSubmitted(EditContext editContext)
@@ -53,10 +54,18 @@ public partial class InstructorEdit
             {
                 if (File != null)
                 {
-                    UpdateInstructorCommand.ProfilePictureName = await FileuploadService.UploadFile(File);
+                    UpdateInstructorInputModel.ProfilePictureName = await FileuploadService.UploadFile(File);
                 }
 
-                await InstructorService.UpdateAsync(UpdateInstructorCommand);
+                await InstructorService.UpdateAsync(new UpdateInstructorDto
+                {
+                    InstructorID = UpdateInstructorInputModel.InstructorID,
+                    LastName = UpdateInstructorInputModel.LastName,
+                    FirstName = UpdateInstructorInputModel.FirstName,
+                    HireDate = UpdateInstructorInputModel.HireDate,
+                    OfficeLocation = UpdateInstructorInputModel.OfficeLocation,
+                    ProfilePictureName = UpdateInstructorInputModel.ProfilePictureName
+                });
                 MudDialog.Close(DialogResult.Ok(true));
             }
             catch (System.Exception)

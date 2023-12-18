@@ -1,10 +1,8 @@
-﻿
-using MediatR;
-using System;
+﻿using System;
 
-namespace WebUI.Shared.Instructors.Commands.UpdateInstructor;
+namespace WebUI.Client.Dtos.Instructors;
 
-public class UpdateInstructorCommand : IRequest
+public class UpdateInstructorDto
 {
     public int? InstructorID { get; set; }
 

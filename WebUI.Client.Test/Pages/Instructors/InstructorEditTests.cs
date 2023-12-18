@@ -6,10 +6,10 @@ using FakeItEasy;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
+using WebUI.Client.Dtos.Instructors;
 using WebUI.Client.Pages.Instructors;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
-using WebUI.Shared.Instructors.Commands.UpdateInstructor;
 using WebUI.Shared.Instructors.Queries.GetInstructorDetails;
 using Xunit;
 
@@ -173,7 +173,7 @@ public class InstructorEditTests : BunitTestBase
         comp.Find("button[type='submit']").Click();
         comp.Markup.Trim().Should().BeEmpty();
 
-        A.CallTo(() => fakeInstructorService.UpdateAsync(A<UpdateInstructorCommand>.That.IsInstanceOf(typeof(UpdateInstructorCommand)))).MustHaveHappened();
+        A.CallTo(() => fakeInstructorService.UpdateAsync(A<UpdateInstructorDto>.That.IsInstanceOf(typeof(UpdateInstructorDto)))).MustHaveHappened();
     }
 
     [Fact]
@@ -183,7 +183,7 @@ public class InstructorEditTests : BunitTestBase
 
         var fakeInstructorService = A.Fake<IInstructorService>();
         A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsVM);
-        A.CallTo(() => fakeInstructorService.UpdateAsync(A<UpdateInstructorCommand>.Ignored)).ThrowsAsync(new Exception("error"));
+        A.CallTo(() => fakeInstructorService.UpdateAsync(A<UpdateInstructorDto>.Ignored)).ThrowsAsync(new Exception("error"));
         Context.Services.AddScoped(x => fakeInstructorService);
 
         var uploadService = A.Fake<IFileuploadService>();
@@ -227,7 +227,7 @@ public class InstructorEditTests : BunitTestBase
 
         var fakeInstructorService = A.Fake<IInstructorService>();
         A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsVM);
-        A.CallTo(() => fakeInstructorService.UpdateAsync(A<UpdateInstructorCommand>.Ignored)).ThrowsAsync(new Exception("error"));
+        A.CallTo(() => fakeInstructorService.UpdateAsync(A<UpdateInstructorDto>.Ignored)).ThrowsAsync(new Exception("error"));
         Context.Services.AddScoped(x => fakeInstructorService);
 
         var uploadService = A.Fake<IFileuploadService>();
