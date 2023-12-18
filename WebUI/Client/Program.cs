@@ -10,7 +10,6 @@ using System.Globalization;
 using Blazored.LocalStorage;
 using FluentValidation;
 using WebUI.Client.InputModels.Courses;
-using WebUI.Shared.Students.Validators;
 using WebUI.Shared.Common;
 
 namespace WebUI.Client;

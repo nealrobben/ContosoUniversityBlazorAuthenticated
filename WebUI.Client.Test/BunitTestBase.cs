@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using MudBlazor.Services;
 using WebUI.Client.InputModels.Courses;
 using WebUI.Shared.Common;
-using WebUI.Shared.Students.Validators;
 
 namespace WebUI.Client.Test;
 

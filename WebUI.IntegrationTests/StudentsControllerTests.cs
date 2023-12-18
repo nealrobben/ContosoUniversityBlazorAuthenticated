@@ -5,7 +5,6 @@ using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using WebUI.Client.Dtos.Students;
 using WebUI.Shared.Common;
-using WebUI.Shared.Students.Commands.UpdateStudent;
 using WebUI.Shared.Students.Queries.GetStudentDetails;
 using WebUI.Shared.Students.Queries.GetStudentsForCourse;
 using WebUI.Shared.Students.Queries.GetStudentsOverview;
@@ -375,7 +374,7 @@ public class StudentsControllerTests : IntegrationTest
             await schoolContext.SaveChangesAsync();
         }
 
-        var updateStudentCommand = new UpdateStudentCommand
+        var updateStudentCommand = new UpdateStudentDto
         {
             StudentID = 1,
             FirstName = "First name 2",

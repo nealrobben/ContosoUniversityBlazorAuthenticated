@@ -1,10 +1,8 @@
-﻿
-using MediatR;
-using System;
+﻿using System;
 
-namespace WebUI.Shared.Students.Commands.UpdateStudent;
+namespace WebUI.Client.Dtos.Students;
 
-public class UpdateStudentCommand : IRequest
+public class UpdateStudentDto
 {
     public int? StudentID { get; set; }
 

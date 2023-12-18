@@ -4,8 +4,9 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 using System.Threading.Tasks;
+using WebUI.Client.Dtos.Students;
+using WebUI.Client.InputModels.Students;
 using WebUI.Client.Services;
-using WebUI.Shared.Students.Commands.UpdateStudent;
 
 namespace WebUI.Client.Pages.Students;
 
@@ -26,7 +27,7 @@ public partial class StudentEdit
     [CascadingParameter]
     MudDialogInstance MudDialog { get; set; }
 
-    public UpdateStudentCommand UpdateStudentCommand { get; set; } = new UpdateStudentCommand();
+    public UpdateStudentInputModel UpdateStudentInputModel { get; set; } = new UpdateStudentInputModel();
 
     public bool ErrorVisible { get; set; }
 
@@ -36,11 +37,11 @@ public partial class StudentEdit
     {
         var student = await StudentService.GetAsync(StudentId.ToString());
 
-        UpdateStudentCommand.StudentID = student.StudentID;
-        UpdateStudentCommand.FirstName = student.FirstName;
-        UpdateStudentCommand.LastName = student.LastName;
-        UpdateStudentCommand.EnrollmentDate = student.EnrollmentDate;
-        UpdateStudentCommand.ProfilePictureName = student.ProfilePictureName;
+        UpdateStudentInputModel.StudentID = student.StudentID;
+        UpdateStudentInputModel.FirstName = student.FirstName;
+        UpdateStudentInputModel.LastName = student.LastName;
+        UpdateStudentInputModel.EnrollmentDate = student.EnrollmentDate;
+        UpdateStudentInputModel.ProfilePictureName = student.ProfilePictureName;
     }
 
     public async Task FormSubmitted(EditContext editContext)
@@ -53,10 +54,17 @@ public partial class StudentEdit
             {
                 if (File != null)
                 {
-                    UpdateStudentCommand.ProfilePictureName = await FileuploadService.UploadFile(File);
+                    UpdateStudentInputModel.ProfilePictureName = await FileuploadService.UploadFile(File);
                 }
 
-                await StudentService.UpdateAsync(UpdateStudentCommand);
+                await StudentService.UpdateAsync(new UpdateStudentDto
+                {
+                    StudentID = UpdateStudentInputModel.StudentID,
+                    LastName = UpdateStudentInputModel.LastName,
+                    FirstName = UpdateStudentInputModel.FirstName,
+                    EnrollmentDate = UpdateStudentInputModel.EnrollmentDate,
+                    ProfilePictureName = UpdateStudentInputModel.ProfilePictureName
+                });
                 MudDialog.Close(DialogResult.Ok(true));
             }
             catch (System.Exception)

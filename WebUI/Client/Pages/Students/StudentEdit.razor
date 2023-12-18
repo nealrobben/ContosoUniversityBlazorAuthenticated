@@ -8,22 +8,22 @@
         }
         <div class="row">
             <div class="col">
-                <EditForm Model=@UpdateStudentCommand OnSubmit=@FormSubmitted>
+                <EditForm Model=@UpdateStudentInputModel OnSubmit=@FormSubmitted>
                     <FluentValidationValidator DisableAssemblyScanning="true" />
                     <div class="form-group">
                         <label for="LastName">@Localizer["LastName"]</label>
-                        <InputText @bind-Value=UpdateStudentCommand.LastName class="form-control" id="LastName" />
-                        <ValidationMessage For="() => UpdateStudentCommand.LastName" />
+                        <InputText @bind-Value=UpdateStudentInputModel.LastName class="form-control" id="LastName" />
+                        <ValidationMessage For="() => UpdateStudentInputModel.LastName" />
                     </div>
                     <div class="form-group">
                         <label for="FirstName">@Localizer["FirstName"]</label>
-                        <InputText @bind-Value=UpdateStudentCommand.FirstName class="form-control" id="FirstName" />
-                        <ValidationMessage For="() => UpdateStudentCommand.FirstName" />
+                        <InputText @bind-Value=UpdateStudentInputModel.FirstName class="form-control" id="FirstName" />
+                        <ValidationMessage For="() => UpdateStudentInputModel.FirstName" />
                     </div>
                     <div class="form-group">
                         <label for="EnrollmentDate">@Localizer["EnrollmentDate"]</label>
-                        <InputDate @bind-Value=UpdateStudentCommand.EnrollmentDate class="form-control" id="EnrollmentDate" />
-                        <ValidationMessage For="() => UpdateStudentCommand.EnrollmentDate" />
+                        <InputDate @bind-Value=UpdateStudentInputModel.EnrollmentDate class="form-control" id="EnrollmentDate" />
+                        <ValidationMessage For="() => UpdateStudentInputModel.EnrollmentDate" />
                     </div>
                     <div>
                         <InputFile id="fileInput" OnChange="UploadFiles" hidden />
@@ -49,7 +49,7 @@
                 </EditForm>
             </div>
             <div class="col">
-                <ProfilePicture FileName="@UpdateStudentCommand?.ProfilePictureName" />
+                <ProfilePicture FileName="@UpdateStudentInputModel?.ProfilePictureName" />
             </div>
         </div>
     </DialogContent>

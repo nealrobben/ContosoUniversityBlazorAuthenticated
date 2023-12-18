@@ -6,10 +6,10 @@ using FakeItEasy;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
+using WebUI.Client.Dtos.Students;
 using WebUI.Client.Pages.Students;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
-using WebUI.Shared.Students.Commands.UpdateStudent;
 using WebUI.Shared.Students.Queries.GetStudentDetails;
 using Xunit;
 
@@ -178,7 +178,7 @@ public class StudentEditTests : BunitTestBase
         comp.Find("button[type='submit']").Click();
         comp.Markup.Trim().Should().BeEmpty();
 
-        A.CallTo(() => fakeStudentService.UpdateAsync(A<UpdateStudentCommand>.That.IsInstanceOf(typeof(UpdateStudentCommand)))).MustHaveHappened();
+        A.CallTo(() => fakeStudentService.UpdateAsync(A<UpdateStudentDto>.That.IsInstanceOf(typeof(UpdateStudentDto)))).MustHaveHappened();
     }
 
     [Fact]
@@ -190,7 +190,7 @@ public class StudentEditTests : BunitTestBase
 
         var fakeStudentService = A.Fake<IStudentService>();
         A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsVM);
-        A.CallTo(() => fakeStudentService.UpdateAsync(A<UpdateStudentCommand>.Ignored)).ThrowsAsync(new Exception("error"));
+        A.CallTo(() => fakeStudentService.UpdateAsync(A<UpdateStudentDto>.Ignored)).ThrowsAsync(new Exception("error"));
         Context.Services.AddScoped(x => fakeStudentService);
 
         var uploadService = A.Fake<IFileuploadService>();
@@ -235,7 +235,7 @@ public class StudentEditTests : BunitTestBase
 
         var fakeStudentService = A.Fake<IStudentService>();
         A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsVM);
-        A.CallTo(() => fakeStudentService.UpdateAsync(A<UpdateStudentCommand>.Ignored)).ThrowsAsync(new Exception("error"));
+        A.CallTo(() => fakeStudentService.UpdateAsync(A<UpdateStudentDto>.Ignored)).ThrowsAsync(new Exception("error"));
         Context.Services.AddScoped(x => fakeStudentService);
 
         var uploadService = A.Fake<IFileuploadService>();

@@ -1,6 +1,7 @@
 ﻿
 using ContosoUniversityBlazor.Application.Students.Commands.CreateStudent;
 using ContosoUniversityBlazor.Application.Students.Commands.DeleteStudent;
+using ContosoUniversityBlazor.Application.Students.Commands.UpdateStudent;
 using ContosoUniversityBlazor.Application.Students.Queries.GetStudentDetails;
 using ContosoUniversityBlazor.Application.Students.Queries.GetStudentsForCourse;
 using ContosoUniversityBlazor.Application.Students.Queries.GetStudentsOverview;
@@ -9,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using WebUI.Client.Dtos.Students;
 using WebUI.Shared.Common;
-using WebUI.Shared.Students.Commands.UpdateStudent;
 using WebUI.Shared.Students.Queries.GetStudentDetails;
 using WebUI.Shared.Students.Queries.GetStudentsForCourse;
 using WebUI.Shared.Students.Queries.GetStudentsOverview;
@@ -76,9 +76,16 @@ public class StudentsController : ContosoApiController
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesDefaultResponseType]
-    public async Task<IActionResult> Update([FromBody] UpdateStudentCommand command)
+    public async Task<IActionResult> Update([FromBody] UpdateStudentDto dto)
     {
-        await Mediator.Send(command);
+        await Mediator.Send(new UpdateStudentCommand
+        {
+            StudentID = dto.StudentID,
+            LastName = dto.LastName,
+            FirstName = dto.FirstName,
+            EnrollmentDate = dto.EnrollmentDate,
+            ProfilePictureName = dto.ProfilePictureName
+        });
 
         return NoContent();
     }
