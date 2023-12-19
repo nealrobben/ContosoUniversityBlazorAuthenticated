@@ -2,9 +2,10 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
+using System.Linq;
 using System.Threading.Tasks;
 using WebUI.Client.Services;
-using WebUI.Shared.Students.Queries.GetStudentDetails;
+using WebUI.Client.ViewModels.Students;
 
 namespace WebUI.Client.Pages.Students;
 
@@ -22,11 +23,25 @@ public partial class StudentDetails
     [Parameter]
     public int StudentId { get; set; }
 
-    public StudentDetailsVM Student { get; set; }
+    public StudentDetailVM Student { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {
-        Student = await StudentService.GetAsync(StudentId.ToString());
+        var student = await StudentService.GetAsync(StudentId.ToString());
+
+        Student = new StudentDetailVM
+        {
+            StudentID = student.StudentID,
+            LastName = student.LastName,
+            FirstName = student.FirstName,
+            EnrollmentDate = student.EnrollmentDate,
+            ProfilePictureName = student.ProfilePictureName,
+            Enrollments = student.Enrollments.Select(x => new StudentDetailEnrollmentVM
+            {
+                CourseTitle = x.CourseTitle,
+                Grade = x.Grade,
+            }).ToList()
+        };
     }
 
     public void Close()

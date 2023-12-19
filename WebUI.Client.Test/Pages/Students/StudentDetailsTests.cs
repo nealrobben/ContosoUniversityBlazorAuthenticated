@@ -5,10 +5,10 @@ using FakeItEasy;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
+using WebUI.Client.Dtos.Students;
 using WebUI.Client.Pages.Students;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
-using WebUI.Shared.Students.Queries.GetStudentDetails;
 using Xunit;
 
 namespace WebUI.Client.Test.Pages.Students;
@@ -25,12 +25,12 @@ public class StudentDetailsTests : BunitTestBase
     [Fact]
     public async Task StudentDetails_DisplayDetailsCorrectly()
     {
-        var studentDetailsVM = _fixture.Create<StudentDetailsVM>();
-        var enrollment = _fixture.Create<StudentDetailsEnrollmentVM>();
-        studentDetailsVM.Enrollments = [enrollment];
+        var studentDetailDto = _fixture.Create<StudentDetailDto>();
+        var enrollment = _fixture.Create<StudentDetailEnrollmentDto>();
+        studentDetailDto.Enrollments = [enrollment];
 
         var fakeStudentService = A.Fake<IStudentService>();
-        A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsVM);
+        A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailDto);
         Context.Services.AddScoped(x => fakeStudentService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -57,9 +57,9 @@ public class StudentDetailsTests : BunitTestBase
         comp.FindAll("dt")[1].TrimmedText().Should().Be("First name");
         comp.FindAll("dt")[2].TrimmedText().Should().Be("Enrollment date");
 
-        comp.FindAll("dd")[0].TrimmedText().Should().Be(studentDetailsVM.LastName);
-        comp.FindAll("dd")[1].TrimmedText().Should().Be(studentDetailsVM.FirstName);
-        comp.FindAll("dd")[2].TrimmedText().Should().Be(studentDetailsVM.EnrollmentDate.ToShortDateString());
+        comp.FindAll("dd")[0].TrimmedText().Should().Be(studentDetailDto.LastName);
+        comp.FindAll("dd")[1].TrimmedText().Should().Be(studentDetailDto.FirstName);
+        comp.FindAll("dd")[2].TrimmedText().Should().Be(studentDetailDto.EnrollmentDate.ToShortDateString());
 
         var enrollmentsTable = comp.Find("table");
         var row = ((AngleSharp.Html.Dom.IHtmlTableSectionElement)enrollmentsTable.Children[0]).Rows[1];
@@ -70,12 +70,12 @@ public class StudentDetailsTests : BunitTestBase
     [Fact]
     public async Task StudentDetails_WhenOkButtonClicked_PopupCloses()
     {
-        var studentDetailsVM = _fixture.Create<StudentDetailsVM>();
-        var enrollment = _fixture.Create<StudentDetailsEnrollmentVM>();
-        studentDetailsVM.Enrollments = [enrollment];
+        var studentDetailDto = _fixture.Create<StudentDetailDto>();
+        var enrollment = _fixture.Create<StudentDetailEnrollmentDto>();
+        studentDetailDto.Enrollments = [enrollment];
 
         var fakeStudentService = A.Fake<IStudentService>();
-        A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsVM);
+        A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailDto);
         Context.Services.AddScoped(x => fakeStudentService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();

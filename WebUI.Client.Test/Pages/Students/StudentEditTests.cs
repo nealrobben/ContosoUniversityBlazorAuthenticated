@@ -10,7 +10,6 @@ using WebUI.Client.Dtos.Students;
 using WebUI.Client.Pages.Students;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
-using WebUI.Shared.Students.Queries.GetStudentDetails;
 using Xunit;
 
 namespace WebUI.Client.Test.Pages.Students;
@@ -27,12 +26,12 @@ public class StudentEditTests : BunitTestBase
     [Fact]
     public async Task StudentDetails_DisplayDetailsCorrectly()
     {
-        var studentDetailsVM = _fixture.Create<StudentDetailsVM>();
-        var enrollment = _fixture.Create<StudentDetailsEnrollmentVM>();
-        studentDetailsVM.Enrollments = [enrollment];
+        var studentDetailsDto = _fixture.Create<StudentDetailDto>();
+        var enrollment = _fixture.Create<StudentDetailEnrollmentDto>();
+        studentDetailsDto.Enrollments = [enrollment];
 
         var fakeStudentService = A.Fake<IStudentService>();
-        A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsVM);
+        A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsDto);
         Context.Services.AddScoped(x => fakeStudentService);
 
         var uploadService = A.Fake<IFileuploadService>();
@@ -58,20 +57,20 @@ public class StudentEditTests : BunitTestBase
 
         comp.Find("h6").TrimmedText().Should().Be(title);
 
-        ((IHtmlInputElement)comp.FindAll("input")[0]).Value.Should().Be(studentDetailsVM.LastName);
-        ((IHtmlInputElement)comp.FindAll("input")[1]).Value.Should().Be(studentDetailsVM.FirstName);
-        ((IHtmlInputElement)comp.FindAll("input")[2]).Value.Should().Be(studentDetailsVM.EnrollmentDate.ToString("yyyy-MM-dd"));
+        ((IHtmlInputElement)comp.FindAll("input")[0]).Value.Should().Be(studentDetailsDto.LastName);
+        ((IHtmlInputElement)comp.FindAll("input")[1]).Value.Should().Be(studentDetailsDto.FirstName);
+        ((IHtmlInputElement)comp.FindAll("input")[2]).Value.Should().Be(studentDetailsDto.EnrollmentDate.ToString("yyyy-MM-dd"));
     }
 
     [Fact]
     public async Task StudentDetails_WhenCancelButtonClicked_PopupCloses()
     {
-        var studentDetailsVM = _fixture.Create<StudentDetailsVM>();
-        var enrollment = _fixture.Create<StudentDetailsEnrollmentVM>();
-        studentDetailsVM.Enrollments = [enrollment];
+        var studentDetailsDto = _fixture.Create<StudentDetailDto>();
+        var enrollment = _fixture.Create<StudentDetailEnrollmentDto>();
+        studentDetailsDto.Enrollments = [enrollment];
 
         var fakeStudentService = A.Fake<IStudentService>();
-        A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsVM);
+        A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsDto);
         Context.Services.AddScoped(x => fakeStudentService);
 
         var uploadService = A.Fake<IFileuploadService>();
@@ -102,12 +101,12 @@ public class StudentEditTests : BunitTestBase
     [Fact]
     public async Task StudentDetails_WhenEditButtonClicked_PopupCloses()
     {
-        var studentDetailsVM = _fixture.Create<StudentDetailsVM>();
-        var enrollment = _fixture.Create<StudentDetailsEnrollmentVM>();
-        studentDetailsVM.Enrollments = [enrollment];
+        var studentDetailsDto = _fixture.Create<StudentDetailDto>();
+        var enrollment = _fixture.Create<StudentDetailEnrollmentDto>();
+        studentDetailsDto.Enrollments = [enrollment];
 
         var fakeStudentService = A.Fake<IStudentService>();
-        A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsVM);
+        A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsDto);
         Context.Services.AddScoped(x => fakeStudentService);
 
         var uploadService = A.Fake<IFileuploadService>();
@@ -142,12 +141,12 @@ public class StudentEditTests : BunitTestBase
     [Fact]
     public async Task StudentDetails_WhenEditButtonClicked_StudentServiceMustBeCalled()
     {
-        var studentDetailsVM = _fixture.Create<StudentDetailsVM>();
-        var enrollment = _fixture.Create<StudentDetailsEnrollmentVM>();
-        studentDetailsVM.Enrollments = [enrollment];
+        var studentDetailsDto = _fixture.Create<StudentDetailDto>();
+        var enrollment = _fixture.Create<StudentDetailEnrollmentDto>();
+        studentDetailsDto.Enrollments = [enrollment];
 
         var fakeStudentService = A.Fake<IStudentService>();
-        A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsVM);
+        A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsDto);
         Context.Services.AddScoped(x => fakeStudentService);
 
         var uploadService = A.Fake<IFileuploadService>();
@@ -184,12 +183,12 @@ public class StudentEditTests : BunitTestBase
     [Fact]
     public async Task StudentDetails_WhenExceptionCaughtAfterSave_ShowErrorMessage()
     {
-        var studentDetailsVM = _fixture.Create<StudentDetailsVM>();
-        var enrollment = _fixture.Create<StudentDetailsEnrollmentVM>();
-        studentDetailsVM.Enrollments = [enrollment];
+        var studentDetailsDto = _fixture.Create<StudentDetailDto>();
+        var enrollment = _fixture.Create<StudentDetailEnrollmentDto>();
+        studentDetailsDto.Enrollments = [enrollment];
 
         var fakeStudentService = A.Fake<IStudentService>();
-        A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsVM);
+        A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsDto);
         A.CallTo(() => fakeStudentService.UpdateAsync(A<UpdateStudentDto>.Ignored)).ThrowsAsync(new Exception("error"));
         Context.Services.AddScoped(x => fakeStudentService);
 
@@ -229,12 +228,12 @@ public class StudentEditTests : BunitTestBase
     [Fact]
     public async Task StudentDetails_WhenValidationFails_ShowErrorMessagesForFields()
     {
-        var studentDetailsVM = _fixture.Create<StudentDetailsVM>();
-        var enrollment = _fixture.Create<StudentDetailsEnrollmentVM>();
-        studentDetailsVM.Enrollments = [enrollment];
+        var studentDetailsDto = _fixture.Create<StudentDetailDto>();
+        var enrollment = _fixture.Create<StudentDetailEnrollmentDto>();
+        studentDetailsDto.Enrollments = [enrollment];
 
         var fakeStudentService = A.Fake<IStudentService>();
-        A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsVM);
+        A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsDto);
         A.CallTo(() => fakeStudentService.UpdateAsync(A<UpdateStudentDto>.Ignored)).ThrowsAsync(new Exception("error"));
         Context.Services.AddScoped(x => fakeStudentService);
 

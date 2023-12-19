@@ -7,10 +7,10 @@ using ContosoUniversityBlazor.Application.Students.Queries.GetStudentsForCourse;
 using ContosoUniversityBlazor.Application.Students.Queries.GetStudentsOverview;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Threading.Tasks;
 using WebUI.Client.Dtos.Students;
 using WebUI.Shared.Common;
-using WebUI.Shared.Students.Queries.GetStudentDetails;
 using WebUI.Shared.Students.Queries.GetStudentsForCourse;
 using WebUI.Shared.Students.Queries.GetStudentsOverview;
 
@@ -30,11 +30,23 @@ public class StudentsController : ContosoApiController
     [HttpGet("{id}", Name = "GetStudent")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<StudentDetailsVM>> Get(string id)
+    public async Task<ActionResult<StudentDetailDto>> Get(string id)
     {
-        var vm = await Mediator.Send(new GetStudentDetailsQuery(int.Parse(id)));
+        var student = await Mediator.Send(new GetStudentDetailsQuery(int.Parse(id)));
 
-        return Ok(vm);
+        return Ok(new StudentDetailDto
+        {
+            StudentID = student.StudentID,
+            LastName = student.LastName,
+            FirstName = student.FirstName,
+            EnrollmentDate = student.EnrollmentDate,
+            ProfilePictureName = student.ProfilePictureName,
+            Enrollments = student.Enrollments.Select(x => new StudentDetailEnrollmentDto
+            {
+                CourseTitle = x.CourseTitle,
+                Grade = x.Grade,
+            }).ToList()
+        });
     }
 
     [HttpPost]

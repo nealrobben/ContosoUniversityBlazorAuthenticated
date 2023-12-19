@@ -1,17 +1,17 @@
 ﻿
-using AutoMapper;
 using ContosoUniversityBlazor.Application.Common.Exceptions;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
 using MediatR;
-using WebUI.Shared.Students.Queries.GetStudentDetails;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Threading;
+using Domain.Entities.Projections.Students;
+using System.Linq;
 
 namespace ContosoUniversityBlazor.Application.Students.Queries.GetStudentDetails;
 
-public class GetStudentDetailsQuery : IRequest<StudentDetailsVM>
+public class GetStudentDetailsQuery : IRequest<StudentDetail>
 {
     public int? ID { get; set; }
 
@@ -21,18 +21,16 @@ public class GetStudentDetailsQuery : IRequest<StudentDetailsVM>
     }
 }
 
-public class GetStudentDetailsQueryHandler : IRequestHandler<GetStudentDetailsQuery, StudentDetailsVM>
+public class GetStudentDetailsQueryHandler : IRequestHandler<GetStudentDetailsQuery, StudentDetail>
 {
     private readonly ISchoolContext _context;
-    private readonly IMapper _mapper;
 
-    public GetStudentDetailsQueryHandler(ISchoolContext context, IMapper mapper)
+    public GetStudentDetailsQueryHandler(ISchoolContext context)
     {
         _context = context;
-        _mapper = mapper;
     }
 
-    public async Task<StudentDetailsVM> Handle(GetStudentDetailsQuery request, CancellationToken cancellationToken)
+    public async Task<StudentDetail> Handle(GetStudentDetailsQuery request, CancellationToken cancellationToken)
     {
         if (request.ID == null)
             throw new NotFoundException(nameof(Student), request.ID);
@@ -44,6 +42,18 @@ public class GetStudentDetailsQueryHandler : IRequestHandler<GetStudentDetailsQu
             .FirstOrDefaultAsync(m => m.ID == request.ID, cancellationToken)
             ?? throw new NotFoundException(nameof(Student), request.ID);
 
-        return _mapper.Map<StudentDetailsVM>(student);
+        return new StudentDetail
+        {
+            StudentID = student.ID,
+            LastName = student.LastName,
+            FirstName = student.FirstMidName,
+            EnrollmentDate = student.EnrollmentDate,
+            ProfilePictureName = student.ProfilePictureName,
+            Enrollments = student.Enrollments.Select(x => new StudentDetailEnrollment
+            {
+                CourseTitle = x.Course.Title,
+                Grade = x.Grade,
+            }).ToList()
+        };
     }
 }

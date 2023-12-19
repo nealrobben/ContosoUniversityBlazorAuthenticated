@@ -5,6 +5,7 @@ using FakeItEasy;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
+using WebUI.Client.Dtos.Students;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
 using WebUI.Shared.Common;
@@ -82,6 +83,12 @@ public class StudentTests : BunitTestBase
 
         var fakeStudentService = A.Fake<IStudentService>();
         A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(studentsOverviewVM);
+
+        var studentDetailDto = _fixture.Create<StudentDetailDto>();
+        var enrollment = _fixture.Create<StudentDetailEnrollmentDto>();
+        studentDetailDto.Enrollments = [enrollment];
+        A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailDto);
+
         Context.Services.AddScoped(x => fakeStudentService);
 
         var dialog = Context.RenderComponent<MudDialogProvider>();

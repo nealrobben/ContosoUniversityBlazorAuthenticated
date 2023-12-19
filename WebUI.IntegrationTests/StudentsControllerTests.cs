@@ -5,7 +5,6 @@ using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using WebUI.Client.Dtos.Students;
 using WebUI.Shared.Common;
-using WebUI.Shared.Students.Queries.GetStudentDetails;
 using WebUI.Shared.Students.Queries.GetStudentsForCourse;
 using WebUI.Shared.Students.Queries.GetStudentsOverview;
 
@@ -296,7 +295,7 @@ public class StudentsControllerTests : IntegrationTest
 
         var response = await _client.GetAsync("/api/students/1");
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<StudentDetailsVM>());
+        var result = (await response.Content.ReadAsAsync<StudentDetailDto>());
 
         result.StudentID.Should().Be(student.ID);
         result.FirstName.Should().Be(student.FirstMidName);
