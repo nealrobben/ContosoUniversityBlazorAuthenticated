@@ -1,13 +1,9 @@
-﻿
-using AutoMapper;
-using ContosoUniversityBlazor.Domain.Entities;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using WebUI.Shared.Common.Mappings;
 
-namespace WebUI.Shared.Departments.Queries.GetDepartmentDetails;
+namespace WebUI.Client.ViewModels.Departments;
 
-public class DepartmentDetailVM : IMapFrom<Department>
+public class DepartmentDetailVM
 {
     public int DepartmentID { get; set; }
 
@@ -25,12 +21,6 @@ public class DepartmentDetailVM : IMapFrom<Department>
     public int? InstructorID { get; set; }
 
     public byte[] RowVersion { get; set; }
-
-    public void Mapping(Profile profile)
-    {
-        profile.CreateMap<Department, DepartmentDetailVM>()
-            .ForMember(d => d.AdministratorName, opt => opt.MapFrom(s => s.Administrator != null ? s.Administrator.FullName : string.Empty));
-    }
 
     public override string ToString()
     {

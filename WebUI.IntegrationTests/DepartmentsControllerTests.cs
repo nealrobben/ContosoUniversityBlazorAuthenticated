@@ -3,7 +3,6 @@ using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
-using WebUI.Shared.Departments.Queries.GetDepartmentDetails;
 using WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
 using WebUI.Shared.Departments.Queries.GetDepartmentsOverview;
 using WebUI.Shared.Common;
@@ -290,7 +289,7 @@ public class DepartmentsControllerTests : IntegrationTest
         var response = await _client.GetAsync("/api/departments/1");
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<DepartmentDetailVM>());
+        var result = (await response.Content.ReadAsAsync<DepartmentDetailDto>());
         result.DepartmentID.Should().Be(department.DepartmentID);
         result.Name.Should().Be(department.Name);
         result.Budget.Should().Be(department.Budget);

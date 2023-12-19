@@ -1,17 +1,16 @@
 ﻿
-using AutoMapper;
 using ContosoUniversityBlazor.Application.Common.Exceptions;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
 using MediatR;
-using WebUI.Shared.Departments.Queries.GetDepartmentDetails;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
+using Domain.Entities.Projections.Departments;
 
 namespace ContosoUniversityBlazor.Application.Departments.Queries.GetDepartmentDetails;
 
-public class GetDepartmentDetailsQuery : IRequest<DepartmentDetailVM>
+public class GetDepartmentDetailsQuery : IRequest<DepartmentDetail>
 {
     public int? ID { get; set; }
 
@@ -21,18 +20,16 @@ public class GetDepartmentDetailsQuery : IRequest<DepartmentDetailVM>
     }
 }
 
-public class GetDepartmentDetailsQueryHandler : IRequestHandler<GetDepartmentDetailsQuery, DepartmentDetailVM>
+public class GetDepartmentDetailsQueryHandler : IRequestHandler<GetDepartmentDetailsQuery, DepartmentDetail>
 {
     private readonly ISchoolContext _context;
-    private readonly IMapper _mapper;
 
-    public GetDepartmentDetailsQueryHandler(ISchoolContext context, IMapper mapper)
+    public GetDepartmentDetailsQueryHandler(ISchoolContext context)
     {
         _context = context;
-        _mapper = mapper;
     }
 
-    public async Task<DepartmentDetailVM> Handle(GetDepartmentDetailsQuery request, CancellationToken cancellationToken)
+    public async Task<DepartmentDetail> Handle(GetDepartmentDetailsQuery request, CancellationToken cancellationToken)
     {
         if (request.ID == null)
             throw new NotFoundException(nameof(Department), request.ID);
@@ -43,6 +40,15 @@ public class GetDepartmentDetailsQueryHandler : IRequestHandler<GetDepartmentDet
             .FirstOrDefaultAsync(m => m.DepartmentID == request.ID, cancellationToken) 
             ?? throw new NotFoundException(nameof(Department), request.ID);
 
-        return _mapper.Map<DepartmentDetailVM>(department);
+        return new DepartmentDetail
+        {
+            DepartmentID = department.DepartmentID,
+            Name = department.Name,
+            Budget = department.Budget,
+            StartDate = department.StartDate,
+            AdministratorName = department.Administrator?.FullName ?? string.Empty,
+            InstructorID = department.InstructorID,
+            RowVersion = department.RowVersion
+        };
     }
 }

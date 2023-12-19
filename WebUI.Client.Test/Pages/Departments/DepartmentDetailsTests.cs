@@ -6,10 +6,10 @@ using Microsoft.Extensions.DependencyInjection;
 using WebUI.Client.Services;
 using FakeItEasy;
 using MudBlazor;
-using WebUI.Shared.Departments.Queries.GetDepartmentDetails;
 using FluentAssertions;
 using WebUI.Client.Test.Extensions;
 using AutoFixture;
+using WebUI.Client.Dtos.Departments;
 
 namespace WebUI.Client.Test.Pages.Departments;
 
@@ -25,10 +25,10 @@ public class DepartmentDetailsTests : BunitTestBase
     [Fact]
     public async Task DepartmentDetails_DisplayDetailsCorrectly()
     {
-        var departmentDetailVM = _fixture.Create<DepartmentDetailVM>();
+        var departmentDetailDto = _fixture.Create<DepartmentDetailDto>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailVM);
+        A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailDto);
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -56,19 +56,19 @@ public class DepartmentDetailsTests : BunitTestBase
         comp.FindAll("dt")[2].TrimmedText().Should().Be("Start date");
         comp.FindAll("dt")[3].TrimmedText().Should().Be("Administrator");
 
-        comp.FindAll("dd")[0].TrimmedText().Should().Be(departmentDetailVM.Name);
-        comp.FindAll("dd")[1].TrimmedText().Should().Be(departmentDetailVM.Budget.ToString("F"));
-        comp.FindAll("dd")[2].TrimmedText().Should().Be(departmentDetailVM.StartDate.ToShortDateString());
-        comp.FindAll("dd")[3].TrimmedText().Should().Be(departmentDetailVM.AdministratorName);
+        comp.FindAll("dd")[0].TrimmedText().Should().Be(departmentDetailDto.Name);
+        comp.FindAll("dd")[1].TrimmedText().Should().Be(departmentDetailDto.Budget.ToString("F"));
+        comp.FindAll("dd")[2].TrimmedText().Should().Be(departmentDetailDto.StartDate.ToShortDateString());
+        comp.FindAll("dd")[3].TrimmedText().Should().Be(departmentDetailDto.AdministratorName);
     }
 
     [Fact]
     public async Task DepartmentDetails_WhenOkButtonClicked_PopupCloses()
     {
-        var departmentDetailVM = _fixture.Create<DepartmentDetailVM>();
+        var departmentDetailDto = _fixture.Create<DepartmentDetailDto>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailVM);
+        A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailDto);
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();

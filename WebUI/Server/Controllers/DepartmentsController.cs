@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using ContosoUniversityBlazor.Application.Departments.Queries.GetDepartmentsLookup;
 using WebUI.Shared.Departments.Queries.GetDepartmentsOverview;
-using WebUI.Shared.Departments.Queries.GetDepartmentDetails;
 using WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
 using WebUI.Shared.Common;
 using WebUI.Client.Dtos.Departments;
@@ -29,11 +28,20 @@ public class DepartmentsController : ContosoApiController
     [HttpGet("{id}", Name = "GetDepartment")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<DepartmentDetailVM>> Get(string id)
+    public async Task<ActionResult<DepartmentDetailDto>> Get(string id)
     {
-        var vm = await Mediator.Send(new GetDepartmentDetailsQuery(int.Parse(id)));
+        var department = await Mediator.Send(new GetDepartmentDetailsQuery(int.Parse(id)));
 
-        return Ok(vm);
+        return Ok(new DepartmentDetailDto
+        {
+            DepartmentID = department.DepartmentID,
+            Name = department.Name,
+            Budget = department.Budget,
+            StartDate = department.StartDate,
+            AdministratorName = department.AdministratorName,
+            InstructorID = department.InstructorID,
+            RowVersion = department.RowVersion
+        });
     }
 
     [HttpPost]

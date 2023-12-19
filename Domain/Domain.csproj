@@ -6,7 +6,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Entities\Projections\Departments\" />
     <Folder Include="Entities\Projections\Instructors\" />
     <Folder Include="Entities\Projections\Students\" />
     <Folder Include="ValueObjects\" />

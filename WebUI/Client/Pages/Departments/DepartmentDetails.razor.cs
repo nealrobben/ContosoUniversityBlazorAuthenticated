@@ -4,7 +4,7 @@ using Microsoft.Extensions.Localization;
 using MudBlazor;
 using System.Threading.Tasks;
 using WebUI.Client.Services;
-using WebUI.Shared.Departments.Queries.GetDepartmentDetails;
+using WebUI.Client.ViewModels.Departments;
 
 namespace WebUI.Client.Pages.Departments;
 
@@ -26,7 +26,18 @@ public partial class DepartmentDetails
 
     protected async override Task OnParametersSetAsync()
     {
-        Department = await DepartmentService.GetAsync(DepartmentId.ToString());
+        var dto = await DepartmentService.GetAsync(DepartmentId.ToString());
+
+        Department = new DepartmentDetailVM
+        {
+            DepartmentID = dto.DepartmentID,
+            Name = dto.Name,
+            Budget = dto.Budget,
+            StartDate = dto.StartDate,
+            AdministratorName = dto.AdministratorName,
+            InstructorID = dto.InstructorID,
+            RowVersion = dto.RowVersion
+        };
     }
 
     public void Close()

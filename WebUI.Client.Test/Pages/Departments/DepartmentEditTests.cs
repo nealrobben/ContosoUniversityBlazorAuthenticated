@@ -10,7 +10,6 @@ using WebUI.Client.Dtos.Departments;
 using WebUI.Client.Pages.Departments;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
-using WebUI.Shared.Departments.Queries.GetDepartmentDetails;
 using WebUI.Shared.Instructors.Queries.GetInstructorsLookup;
 using Xunit;
 
@@ -28,10 +27,10 @@ public class DepartmentEditTests : BunitTestBase
     [Fact]
     public async Task DepartmentEdit_DisplayDialogCorrectly()
     {
-        var departmentDetailVM = _fixture.Create<DepartmentDetailVM>();
+        var departmentDetailDto = _fixture.Create<DepartmentDetailDto>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailVM);
+        A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailDto);
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var fakeInstructorService = A.Fake<IInstructorService>();
@@ -58,9 +57,9 @@ public class DepartmentEditTests : BunitTestBase
 
         comp.Find("h6").TrimmedText().Should().Be(title);
 
-        ((IHtmlInputElement)comp.FindAll("input")[0]).Value.Should().Be(departmentDetailVM.Name);
-        ((IHtmlInputElement)comp.FindAll("input")[1]).Value.Should().Be(departmentDetailVM.Budget.ToString());
-        ((IHtmlInputElement)comp.FindAll("input")[2]).Value.Should().Be(departmentDetailVM.StartDate.ToString("yyyy-MM-dd"));
+        ((IHtmlInputElement)comp.FindAll("input")[0]).Value.Should().Be(departmentDetailDto.Name);
+        ((IHtmlInputElement)comp.FindAll("input")[1]).Value.Should().Be(departmentDetailDto.Budget.ToString());
+        ((IHtmlInputElement)comp.FindAll("input")[2]).Value.Should().Be(departmentDetailDto.StartDate.ToString("yyyy-MM-dd"));
 
         //InstructorID is an IHtmlSelectElement. For some reason the value is parsed as NULL by AngleSharp even when it is filled in so we can't check this field
     }
@@ -68,10 +67,10 @@ public class DepartmentEditTests : BunitTestBase
     [Fact]
     public async Task DepartmentEdit_WhenCancelButtonClicked_PopupCloses()
     {
-        var departmentDetailVM = _fixture.Create<DepartmentDetailVM>();
+        var departmentDetailDto = _fixture.Create<DepartmentDetailDto>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailVM);
+        A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailDto);
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var fakeInstructorService = A.Fake<IInstructorService>();
@@ -103,10 +102,10 @@ public class DepartmentEditTests : BunitTestBase
     [Fact]
     public async Task DepartmentEdit_WhenEditButtonClicked_PopupCloses()
     {
-        var departmentDetailVM = _fixture.Create<DepartmentDetailVM>();
+        var departmentDetailDto = _fixture.Create<DepartmentDetailDto>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailVM);
+        A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailDto);
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var fakeInstructorService = A.Fake<IInstructorService>();
@@ -143,10 +142,10 @@ public class DepartmentEditTests : BunitTestBase
     [Fact]
     public async Task DepartmentEdit_WhenEditButtonClicked_DepartmentServiceMustBeCalled()
     {
-        var departmentDetailVM = _fixture.Create<DepartmentDetailVM>();
+        var departmentDetailDto = _fixture.Create<DepartmentDetailDto>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailVM);
+        A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailDto);
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var fakeInstructorService = A.Fake<IInstructorService>();
@@ -184,10 +183,10 @@ public class DepartmentEditTests : BunitTestBase
     [Fact]
     public async Task DepartmentEdit_WhenExceptionCaughtAfterSave_ShowErrorMessage()
     {
-        var departmentDetailVM = _fixture.Create<DepartmentDetailVM>();
+        var departmentDetailDto = _fixture.Create<DepartmentDetailDto>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailVM);
+        A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailDto);
         A.CallTo(() => fakeDepartmentService.UpdateAsync(A<UpdateDepartmentDto>.Ignored)).ThrowsAsync(new Exception("error"));
         Context.Services.AddScoped(x => fakeDepartmentService);
 
@@ -229,10 +228,10 @@ public class DepartmentEditTests : BunitTestBase
     [Fact]
     public async Task DepartmentEdit_WhenValidationFails_ShowErrorMessagesForFields()
     {
-        var departmentDetailVM = _fixture.Create<DepartmentDetailVM>();
+        var departmentDetailDto = _fixture.Create<DepartmentDetailDto>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailVM);
+        A.CallTo(() => fakeDepartmentService.GetAsync(A<string>.Ignored)).Returns(departmentDetailDto);
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var fakeInstructorService = A.Fake<IInstructorService>();
