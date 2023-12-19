@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using WebUI.Client.Dtos.Instructors;
 using WebUI.Shared.Common;
-using WebUI.Shared.Instructors.Queries.GetInstructorDetails;
 using WebUI.Shared.Instructors.Queries.GetInstructorsLookup;
 using WebUI.Shared.Instructors.Queries.GetInstructorsOverview;
 
@@ -28,11 +27,19 @@ public class InstructorsController : ContosoApiController
     [HttpGet("{id}", Name = "GetInstructor")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<InstructorDetailsVM>> Get(string id)
+    public async Task<ActionResult<InstructorDetailDto>> Get(string id)
     {
-        var vm = await Mediator.Send(new GetInstructorDetailsQuery(int.Parse(id)));
+        var instructor = await Mediator.Send(new GetInstructorDetailsQuery(int.Parse(id)));
 
-        return Ok(vm);
+        return Ok(new InstructorDetailDto
+        {
+            InstructorID = instructor.InstructorID,
+            LastName = instructor.LastName,
+            FirstName = instructor.FirstName,
+            HireDate = instructor.HireDate,
+            OfficeLocation = instructor.OfficeLocation,
+            ProfilePictureName = instructor.ProfilePictureName,
+        });
     }
 
     [HttpPost]

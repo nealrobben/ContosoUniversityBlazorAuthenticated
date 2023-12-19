@@ -34,7 +34,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\Instructors\" />
     <Folder Include="ViewModels\Students\" />
   </ItemGroup>
 

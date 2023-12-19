@@ -4,7 +4,7 @@ using Microsoft.Extensions.Localization;
 using MudBlazor;
 using System.Threading.Tasks;
 using WebUI.Client.Services;
-using WebUI.Shared.Instructors.Queries.GetInstructorDetails;
+using WebUI.Client.ViewModels.Instructors;
 
 namespace WebUI.Client.Pages.Instructors;
 
@@ -22,11 +22,21 @@ public partial class InstructorDetails
     [Parameter]
     public int InstructorId { get; set; }
 
-    public InstructorDetailsVM Instructor { get; set; }
+    public InstructorDetailVM Instructor { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {
-        Instructor = await InstructorService.GetAsync(InstructorId.ToString());
+        var dto = await InstructorService.GetAsync(InstructorId.ToString());
+
+        Instructor = new InstructorDetailVM
+        {
+            InstructorID = dto.InstructorID,
+            LastName = dto.LastName,
+            FirstName = dto.FirstName,
+            HireDate = dto.HireDate,
+            OfficeLocation = dto.OfficeLocation,
+            ProfilePictureName = dto.ProfilePictureName,
+        };
     }
 
     public void Close()

@@ -5,10 +5,10 @@ using FakeItEasy;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
+using WebUI.Client.Dtos.Instructors;
 using WebUI.Client.Pages.Instructors;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
-using WebUI.Shared.Instructors.Queries.GetInstructorDetails;
 using Xunit;
 
 namespace WebUI.Client.Test.Pages.Instructors;
@@ -25,10 +25,10 @@ public class InstructorDetailsTests : BunitTestBase
     [Fact]
     public async Task InstructorDetails_DisplayDetailsCorrectly()
     {
-        var instructorDetailsVM = _fixture.Create<InstructorDetailsVM>();
+        var instructorDetailsDto = _fixture.Create<InstructorDetailDto>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
-        A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsVM);
+        A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsDto);
         Context.Services.AddScoped(x => fakeInstructorService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -55,18 +55,18 @@ public class InstructorDetailsTests : BunitTestBase
         comp.FindAll("dt")[1].TrimmedText().Should().Be("First name");
         comp.FindAll("dt")[2].TrimmedText().Should().Be("Hire date");
 
-        comp.FindAll("dd")[0].TrimmedText().Should().Be(instructorDetailsVM.LastName);
-        comp.FindAll("dd")[1].TrimmedText().Should().Be(instructorDetailsVM.FirstName);
-        comp.FindAll("dd")[2].TrimmedText().Should().Be(instructorDetailsVM.HireDate.ToShortDateString());
+        comp.FindAll("dd")[0].TrimmedText().Should().Be(instructorDetailsDto.LastName);
+        comp.FindAll("dd")[1].TrimmedText().Should().Be(instructorDetailsDto.FirstName);
+        comp.FindAll("dd")[2].TrimmedText().Should().Be(instructorDetailsDto.HireDate.ToShortDateString());
     }
 
     [Fact]
     public async Task InstructorDetails_WhenOkButtonClicked_PopupCloses()
     {
-        var instructorDetailsVM = _fixture.Create<InstructorDetailsVM>();
+        var instructorDetailsDto = _fixture.Create<InstructorDetailDto>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
-        A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsVM);
+        A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsDto);
         Context.Services.AddScoped(x => fakeInstructorService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();

@@ -10,7 +10,6 @@ using WebUI.Client.Dtos.Instructors;
 using WebUI.Client.Pages.Instructors;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
-using WebUI.Shared.Instructors.Queries.GetInstructorDetails;
 using Xunit;
 
 namespace WebUI.Client.Test.Pages.Instructors;
@@ -27,10 +26,10 @@ public class InstructorEditTests : BunitTestBase
     [Fact]
     public async Task InstructorEdit_DisplayDialogCorrectly()
     {
-        var instructorDetailsVM = _fixture.Create<InstructorDetailsVM>();
+        var instructorDetailsDto = _fixture.Create<InstructorDetailDto>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
-        A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsVM);
+        A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsDto);
         Context.Services.AddScoped(x => fakeInstructorService);
 
         var uploadService = A.Fake<IFileuploadService>();
@@ -56,19 +55,19 @@ public class InstructorEditTests : BunitTestBase
 
         comp.Find("h6").TrimmedText().Should().Be(title);
 
-        ((IHtmlInputElement)comp.FindAll("input")[0]).Value.Should().Be(instructorDetailsVM.LastName);
-        ((IHtmlInputElement)comp.FindAll("input")[1]).Value.Should().Be(instructorDetailsVM.FirstName);
-        ((IHtmlInputElement)comp.FindAll("input")[2]).Value.Should().Be(instructorDetailsVM.HireDate.ToString("yyyy-MM-dd"));
-        ((IHtmlInputElement)comp.FindAll("input")[3]).Value.Should().Be(instructorDetailsVM.OfficeLocation);
+        ((IHtmlInputElement)comp.FindAll("input")[0]).Value.Should().Be(instructorDetailsDto.LastName);
+        ((IHtmlInputElement)comp.FindAll("input")[1]).Value.Should().Be(instructorDetailsDto.FirstName);
+        ((IHtmlInputElement)comp.FindAll("input")[2]).Value.Should().Be(instructorDetailsDto.HireDate.ToString("yyyy-MM-dd"));
+        ((IHtmlInputElement)comp.FindAll("input")[3]).Value.Should().Be(instructorDetailsDto.OfficeLocation);
     }
 
     [Fact]
     public async Task InstructorEdit_WhenCancelButtonClicked_PopupCloses()
     {
-        var instructorDetailsVM = _fixture.Create<InstructorDetailsVM>();
+        var instructorDetailsDto = _fixture.Create<InstructorDetailDto>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
-        A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsVM);
+        A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsDto);
         Context.Services.AddScoped(x => fakeInstructorService);
 
         var uploadService = A.Fake<IFileuploadService>();
@@ -99,10 +98,10 @@ public class InstructorEditTests : BunitTestBase
     [Fact]
     public async Task InstructorEdit_WhenEditButtonClicked_PopupCloses()
     {
-        var instructorDetailsVM = _fixture.Create<InstructorDetailsVM>();
+        var instructorDetailsDto = _fixture.Create<InstructorDetailDto>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
-        A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsVM);
+        A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsDto);
         Context.Services.AddScoped(x => fakeInstructorService);
 
         var uploadService = A.Fake<IFileuploadService>();
@@ -138,10 +137,10 @@ public class InstructorEditTests : BunitTestBase
     [Fact]
     public async Task InstructorEdit_WhenEditButtonClicked_InstructorServiceMustBeCalled()
     {
-        var instructorDetailsVM = _fixture.Create<InstructorDetailsVM>();
+        var instructorDetailsDto = _fixture.Create<InstructorDetailDto>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
-        A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsVM);
+        A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsDto);
         Context.Services.AddScoped(x => fakeInstructorService);
 
         var uploadService = A.Fake<IFileuploadService>();
@@ -179,10 +178,10 @@ public class InstructorEditTests : BunitTestBase
     [Fact]
     public async Task InstructorEdit_WhenExceptionCaughtAfterSave_ShowErrorMessage()
     {
-        var instructorDetailsVM = _fixture.Create<InstructorDetailsVM>();
+        var instructorDetailsDto = _fixture.Create<InstructorDetailDto>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
-        A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsVM);
+        A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsDto);
         A.CallTo(() => fakeInstructorService.UpdateAsync(A<UpdateInstructorDto>.Ignored)).ThrowsAsync(new Exception("error"));
         Context.Services.AddScoped(x => fakeInstructorService);
 
@@ -223,10 +222,10 @@ public class InstructorEditTests : BunitTestBase
     [Fact]
     public async Task InstructorEdit_WhenValidationFails_ShowErrorMessagesForFields()
     {
-        var instructorDetailsVM = _fixture.Create<InstructorDetailsVM>();
+        var instructorDetailsDto = _fixture.Create<InstructorDetailDto>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
-        A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsVM);
+        A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsDto);
         A.CallTo(() => fakeInstructorService.UpdateAsync(A<UpdateInstructorDto>.Ignored)).ThrowsAsync(new Exception("error"));
         Context.Services.AddScoped(x => fakeInstructorService);
 

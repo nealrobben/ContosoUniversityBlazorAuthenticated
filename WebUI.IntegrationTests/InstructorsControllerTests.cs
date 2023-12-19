@@ -5,7 +5,6 @@ using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using WebUI.Client.Dtos.Instructors;
 using WebUI.Shared.Common;
-using WebUI.Shared.Instructors.Queries.GetInstructorDetails;
 using WebUI.Shared.Instructors.Queries.GetInstructorsLookup;
 using WebUI.Shared.Instructors.Queries.GetInstructorsOverview;
 
@@ -293,7 +292,7 @@ public class InstructorsControllerTests : IntegrationTest
         var response = await _client.GetAsync("/api/instructors/1");
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<InstructorDetailsVM>());
+        var result = (await response.Content.ReadAsAsync<InstructorDetailDto>());
 
         result.InstructorID.Should().Be(instructor.ID);
         result.FirstName.Should().Be(instructor.FirstMidName);

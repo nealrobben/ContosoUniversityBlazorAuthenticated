@@ -1,16 +1,15 @@
 ﻿
-using AutoMapper;
 using ContosoUniversityBlazor.Application.Common.Exceptions;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
 using MediatR;
-using WebUI.Shared.Instructors.Queries.GetInstructorDetails;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Threading;
+using Domain.Entities.Projections.Instructors;
 
 namespace ContosoUniversityBlazor.Application.Instructors.Queries.GetInstructorDetails;
-public class GetInstructorDetailsQuery : IRequest<InstructorDetailsVM>
+public class GetInstructorDetailsQuery : IRequest<InstructorDetail>
 {
     public int? ID { get; set; }
 
@@ -20,18 +19,16 @@ public class GetInstructorDetailsQuery : IRequest<InstructorDetailsVM>
     }
 }
 
-public class GetInstructorDetailsQueryHandler : IRequestHandler<GetInstructorDetailsQuery, InstructorDetailsVM>
+public class GetInstructorDetailsQueryHandler : IRequestHandler<GetInstructorDetailsQuery, InstructorDetail>
 {
     private readonly ISchoolContext _context;
-    private readonly IMapper _mapper;
 
-    public GetInstructorDetailsQueryHandler(ISchoolContext context, IMapper mapper)
+    public GetInstructorDetailsQueryHandler(ISchoolContext context)
     {
         _context = context;
-        _mapper = mapper;
     }
 
-    public async Task<InstructorDetailsVM> Handle(GetInstructorDetailsQuery request, CancellationToken cancellationToken)
+    public async Task<InstructorDetail> Handle(GetInstructorDetailsQuery request, CancellationToken cancellationToken)
     {
         if (request.ID == null)
             throw new NotFoundException(nameof(Instructor), request.ID);
@@ -42,6 +39,14 @@ public class GetInstructorDetailsQueryHandler : IRequestHandler<GetInstructorDet
             .FirstOrDefaultAsync(m => m.ID == request.ID, cancellationToken) 
             ?? throw new NotFoundException(nameof(Instructor), request.ID);
 
-        return _mapper.Map<InstructorDetailsVM>(instructor);
+        return new InstructorDetail
+        {
+            InstructorID = instructor.ID,
+            LastName = instructor.LastName,
+            FirstName = instructor.FirstMidName,
+            HireDate = instructor.HireDate,
+            OfficeLocation = instructor.OfficeAssignment?.Location ?? string.Empty,
+            ProfilePictureName = instructor.ProfilePictureName,
+        };
     }
 }
