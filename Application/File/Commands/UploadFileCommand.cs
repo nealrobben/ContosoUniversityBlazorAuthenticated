@@ -60,7 +60,7 @@ public class UploadFilesCommandHandler : IRequestHandler<UploadFileCommand, Uplo
 
                 await using (var ms = new MemoryStream())
                 {
-                    await request.File.CopyToAsync(ms);
+                    await request.File.CopyToAsync(ms, cancellationToken);
                     await _profilePictureService.WriteImageFile(trustedFileNameForFileStorage, ms);
                 }
 
