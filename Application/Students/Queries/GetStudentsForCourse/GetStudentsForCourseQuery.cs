@@ -1,17 +1,16 @@
 ﻿
-using AutoMapper;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using MediatR;
-using WebUI.Shared.Students.Queries.GetStudentsForCourse;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
+using Domain.Entities.Projections.Students;
 
 namespace ContosoUniversityBlazor.Application.Students.Queries.GetStudentsForCourse;
 
-public class GetStudentsForCourseQuery : IRequest<StudentsForCourseVM>
+public class GetStudentsForCourseQuery : IRequest<StudentsForCourse>
 {
     public int? ID { get; set; }
 
@@ -21,21 +20,19 @@ public class GetStudentsForCourseQuery : IRequest<StudentsForCourseVM>
     }
 }
 
-public class GetStudentsForCourseQueryHandler : IRequestHandler<GetStudentsForCourseQuery, StudentsForCourseVM>
+public class GetStudentsForCourseQueryHandler : IRequestHandler<GetStudentsForCourseQuery, StudentsForCourse>
 {
     private readonly ISchoolContext _context;
-    private readonly IMapper _mapper;
 
-    public GetStudentsForCourseQueryHandler(ISchoolContext context, IMapper mapper)
+    public GetStudentsForCourseQueryHandler(ISchoolContext context)
     {
         _context = context;
-        _mapper = mapper;
     }
 
-    public async Task<StudentsForCourseVM> Handle(GetStudentsForCourseQuery request, CancellationToken cancellationToken)
+    public async Task<StudentsForCourse> Handle(GetStudentsForCourseQuery request, CancellationToken cancellationToken)
     {
         if (request.ID == null)
-            return new StudentsForCourseVM(new List<StudentForCourseVM>());
+            return new StudentsForCourse(new List<StudentForCourse>());
 
         var students = await _context.Enrollments
             .Where(x => x.CourseID == request.ID)
@@ -43,6 +40,13 @@ public class GetStudentsForCourseQueryHandler : IRequestHandler<GetStudentsForCo
             .AsNoTracking()
             .ToListAsync(cancellationToken);
 
-        return new StudentsForCourseVM(_mapper.Map<List<StudentForCourseVM>>(students));
+        return new StudentsForCourse
+        {
+            Students = students.Select(x => new StudentForCourse
+            {
+                StudentName = x.Student.FullName,
+                StudentGrade = x.Grade
+            }).ToList()
+        };
     }
 }

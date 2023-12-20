@@ -3,7 +3,6 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using WebUI.Shared.Students.Queries.GetStudentsOverview;
-using WebUI.Shared.Students.Queries.GetStudentsForCourse;
 using WebUI.Shared.Common;
 using WebUI.Client.Dtos.Students;
 
@@ -13,7 +12,7 @@ public interface IStudentService
     : IServiceBase<OverviewVM<StudentOverviewVM>, StudentDetailDto, 
         CreateStudentDto, UpdateStudentDto>
 {
-    Task<StudentsForCourseVM> GetStudentsForCourse(string courseId);
+    Task<StudentsForCourseDto> GetStudentsForCourse(string courseId);
 }
 
 public class StudentService 
@@ -25,8 +24,8 @@ public class StudentService
     {
     }
 
-    public async Task<StudentsForCourseVM> GetStudentsForCourse(string courseId)
+    public async Task<StudentsForCourseDto> GetStudentsForCourse(string courseId)
     {
-        return await _http.GetFromJsonAsync<StudentsForCourseVM>($"{Endpoint}/bycourse/{courseId}");
+        return await _http.GetFromJsonAsync<StudentsForCourseDto>($"{Endpoint}/bycourse/{courseId}");
     }
 }

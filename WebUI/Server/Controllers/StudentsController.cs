@@ -11,7 +11,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebUI.Client.Dtos.Students;
 using WebUI.Shared.Common;
-using WebUI.Shared.Students.Queries.GetStudentsForCourse;
 using WebUI.Shared.Students.Queries.GetStudentsOverview;
 
 namespace ContosoUniversityBlazor.WebUI.Controllers;
@@ -78,11 +77,18 @@ public class StudentsController : ContosoApiController
     }
 
     [HttpGet("bycourse/{id}")]
-    public async Task<ActionResult<StudentsForCourseVM>> ByCourse(string id)
+    public async Task<ActionResult<StudentsForCourseDto>> ByCourse(string id)
     {
-        var vm = await Mediator.Send(new GetStudentsForCourseQuery(int.Parse(id)));
+        var studentsForCourse = await Mediator.Send(new GetStudentsForCourseQuery(int.Parse(id)));
 
-        return Ok(vm);
+        return Ok(new StudentsForCourseDto
+        {
+            Students = studentsForCourse.Students.Select(x => new StudentForCourseDto
+            {
+                StudentName = x.StudentName,
+                StudentGrade = x.StudentGrade
+            }).ToList()
+        });
     }
 
     [HttpPut]

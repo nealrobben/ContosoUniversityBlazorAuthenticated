@@ -1,7 +1,6 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace WebUI.Shared.Students.Queries.GetStudentsForCourse;
+namespace WebUI.Client.ViewModels.Students;
 
 public class StudentsForCourseVM
 {

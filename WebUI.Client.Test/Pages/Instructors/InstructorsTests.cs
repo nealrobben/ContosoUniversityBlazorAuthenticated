@@ -6,11 +6,11 @@ using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
 using WebUI.Client.Dtos.Courses;
+using WebUI.Client.Dtos.Students;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
 using WebUI.Shared.Common;
 using WebUI.Shared.Instructors.Queries.GetInstructorsOverview;
-using WebUI.Shared.Students.Queries.GetStudentsForCourse;
 using Xunit;
 
 namespace WebUI.Client.Test.Pages.Instructors;
@@ -257,11 +257,11 @@ public class InstructorsTests : BunitTestBase
         A.CallTo(() => fakeCourseService.GetCoursesForInstructor(A<string>.Ignored)).Returns(coursesForInstructorOverview);
         Context.Services.AddScoped(x => fakeCourseService);
 
-        var studentsForCourseVM = new StudentsForCourseVM
+        var studentsForCourseDto = new StudentsForCourseDto
         {
             Students =
             {
-                new StudentForCourseVM
+                new StudentForCourseDto
                 {
                     StudentName = "Student X",
                     StudentGrade = ContosoUniversityBlazor.Domain.Enums.Grade.A
@@ -270,7 +270,7 @@ public class InstructorsTests : BunitTestBase
         };
 
         var fakeStudentService = A.Fake<IStudentService>();
-        A.CallTo(() => fakeStudentService.GetStudentsForCourse("2")).Returns(studentsForCourseVM);
+        A.CallTo(() => fakeStudentService.GetStudentsForCourse("2")).Returns(studentsForCourseDto);
         Context.Services.AddScoped(x => fakeStudentService);
 
         var comp = Context.RenderComponent<Client.Pages.Instructors.Instructors>();

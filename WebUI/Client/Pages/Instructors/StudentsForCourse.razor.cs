@@ -1,9 +1,10 @@
 ﻿
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
+using System.Linq;
 using System.Threading.Tasks;
 using WebUI.Client.Services;
-using WebUI.Shared.Students.Queries.GetStudentsForCourse;
+using WebUI.Client.ViewModels.Students;
 
 namespace WebUI.Client.Pages.Instructors;
 
@@ -23,6 +24,17 @@ public partial class StudentsForCourse
     protected override async Task OnParametersSetAsync()
     {
         if(SelectedCourseId != null)
-            StudentsForCourseVM = await StudentService.GetStudentsForCourse(SelectedCourseId.ToString());
+        {
+            var studentsForCourseVM = await StudentService.GetStudentsForCourse(SelectedCourseId.ToString());
+
+            StudentsForCourseVM = new StudentsForCourseVM
+            {
+                Students = studentsForCourseVM.Students.Select(x => new StudentForCourseVM
+                {
+                    StudentName = x.StudentName,
+                    StudentGrade = x.StudentGrade
+                }).ToList()
+            };
+        }
     }
 }
