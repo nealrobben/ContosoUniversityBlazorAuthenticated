@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components.Forms;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using WebUI.Shared;
+using WebUI.Client.Dtos;
 
 namespace WebUI.Client.Services;
 
@@ -33,7 +33,7 @@ public class FileuploadService : IFileuploadService
 
         var response = await _http.PostAsync("api/File", content);
 
-        var newUploadResult = await response.Content.ReadFromJsonAsync<UploadResult>();
+        var newUploadResult = await response.Content.ReadFromJsonAsync<UploadResultDto>();
 
         if (newUploadResult != null)
         {

@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using WebUI.Shared;
+using WebUI.Client.Dtos;
 
 namespace WebUI.Server.Controllers;
 
@@ -25,7 +25,7 @@ public class FileController : ContosoApiController
     }
 
     [HttpPost]
-    public async Task<ActionResult<IList<UploadResult>>> UploadFiles([FromForm] IEnumerable<IFormFile> files)
+    public async Task<ActionResult<IList<UploadResultDto>>> UploadFiles([FromForm] IEnumerable<IFormFile> files)
     {
         var resourcePath = new Uri($"{Request.Scheme}://{Request.Host}/");
         var uploadResult = await Mediator.Send(new UploadFileCommand(files.First()));

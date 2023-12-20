@@ -1,4 +1,5 @@
 ﻿using Application.Common.Interfaces;
+using Domain.Entities.Projections;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -6,7 +7,6 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using WebUI.Shared;
 
 namespace Application.File.Commands;
 

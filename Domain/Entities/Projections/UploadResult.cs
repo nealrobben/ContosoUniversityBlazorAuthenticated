@@ -1,4 +1,5 @@
-﻿namespace WebUI.Shared;
+﻿
+namespace Domain.Entities.Projections;
 
 public class UploadResult
 {
