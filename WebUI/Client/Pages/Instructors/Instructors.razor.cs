@@ -2,11 +2,12 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
+using System.Linq;
 using System.Threading.Tasks;
 using WebUI.Client.Extensions;
 using WebUI.Client.Services;
+using WebUI.Client.ViewModels.Instructors;
 using WebUI.Shared.Common;
-using WebUI.Shared.Instructors.Queries.GetInstructorsOverview;
 
 namespace WebUI.Client.Pages.Instructors;
 
@@ -24,9 +25,9 @@ public partial class Instructors
     [Inject]
     public IDialogService DialogService { get; set; }
 
-    private MudTable<InstructorVM> Table;
+    private MudTable<InstructorOverviewVM> Table;
 
-    public OverviewVM<InstructorVM> InstructorsOverview { get; set; } = new OverviewVM<InstructorVM>();
+    public OverviewVM<InstructorOverviewVM> InstructorsOverview { get; set; } = new OverviewVM<InstructorOverviewVM>();
 
     public int? SelectedInstructorId { get; set; }
     public int? SelectedCourseId { get; set; }
@@ -129,17 +130,30 @@ public partial class Instructors
         await GetInstructors();
     }
 
-    public async Task<TableData<InstructorVM>> ServerReload(TableState state)
+    public async Task<TableData<InstructorOverviewVM>> ServerReload(TableState state)
     {
         var searchString = InstructorsOverview?.MetaData.SearchString ?? "";
         var sortString = state.GetSortString();
 
         var result = await InstructorService.GetAllAsync(sortString, state.Page, searchString, state.PageSize);
 
-        return new TableData<InstructorVM>() { TotalItems = result.MetaData.TotalRecords, Items = result.Records };
+        return new TableData<InstructorOverviewVM>() { TotalItems = result.MetaData.TotalRecords, Items = result.Records.Select(x => new InstructorOverviewVM
+            {
+                InstructorID = x.InstructorID,
+                LastName = x.LastName,
+                FirstName = x.FirstName,
+                HireDate = x.HireDate,
+                OfficeLocation = x.OfficeLocation,
+                CourseAssignments = x.CourseAssignments.Select(x => new CourseAssignmentVM
+                {
+                    CourseID = x.CourseID,
+                    CourseTitle = x.CourseTitle
+                }).ToList()
+            }).ToList()
+        };
     }
 
-    public string InstructorsSelectRowClassFunc(InstructorVM instructor, int rowNumber)
+    public string InstructorsSelectRowClassFunc(InstructorOverviewVM instructor, int rowNumber)
     {
         if (instructor?.InstructorID == SelectedInstructorId)
             return "mud-theme-primary";

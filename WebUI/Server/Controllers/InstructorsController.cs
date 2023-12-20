@@ -9,19 +9,42 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
+using WebUI.Client.Dtos.Common;
 using WebUI.Client.Dtos.Instructors;
-using WebUI.Shared.Common;
-using WebUI.Shared.Instructors.Queries.GetInstructorsOverview;
 
 namespace ContosoUniversityBlazor.WebUI.Controllers;
 public class InstructorsController : ContosoApiController
 {
     [HttpGet]
-    public async Task<ActionResult<OverviewVM<InstructorVM>>> GetAll(string sortOrder, string searchString, int? pageNumber, int? pageSize)
+    public async Task<ActionResult<OverviewDto<InstructorOverviewDto>>> GetAll(string sortOrder, string searchString, int? pageNumber, int? pageSize)
     {
-        var vm = await Mediator.Send(new GetInstructorsOverviewQuery(sortOrder, searchString, pageNumber, pageSize));
+        var overview = await Mediator.Send(new GetInstructorsOverviewQuery(sortOrder, searchString, pageNumber, pageSize));
 
-        return Ok(vm);
+        return Ok(new OverviewDto<InstructorOverviewDto>
+        {
+            MetaData = new MetaDataDto
+            {
+                PageNumber = overview.MetaData.PageNumber,
+                TotalPages = overview.MetaData.TotalPages,
+                PageSize = overview.MetaData.PageSize,
+                TotalRecords = overview.MetaData.TotalRecords,
+                CurrentSort = overview.MetaData.CurrentSort,
+                SearchString = overview.MetaData.SearchString
+            },
+            Records = overview.Records.Select(x => new InstructorOverviewDto
+            {
+                InstructorID = x.InstructorID,
+                LastName = x.LastName,
+                FirstName = x.FirstName,
+                HireDate = x.HireDate,
+                OfficeLocation = x.OfficeLocation,
+                CourseAssignments = x.CourseAssignments.Select(x => new CourseAssignmentDto
+                {
+                    CourseID = x.CourseID,
+                    CourseTitle = x.CourseTitle
+                }).ToList()
+            }).ToList()
+        });
     }
 
     [HttpGet("{id}", Name = "GetInstructor")]

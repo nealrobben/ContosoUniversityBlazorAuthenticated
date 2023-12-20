@@ -2,21 +2,20 @@
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using WebUI.Client.Dtos.Common;
 using WebUI.Client.Dtos.Instructors;
-using WebUI.Shared.Common;
-using WebUI.Shared.Instructors.Queries.GetInstructorsOverview;
 
 namespace WebUI.Client.Services;
 
 public interface IInstructorService 
-    : IServiceBase<OverviewVM<InstructorVM>, InstructorDetailDto,
+    : IServiceBase<OverviewDto<InstructorOverviewDto>, InstructorDetailDto,
         CreateInstructorDto, UpdateInstructorDto>
 {
     Task<InstructorsLookupDto> GetLookupAsync();
 }
 
 public class InstructorService 
-    : ServiceBase<OverviewVM<InstructorVM>, InstructorDetailDto,
+    : ServiceBase<OverviewDto<InstructorOverviewDto>, InstructorDetailDto,
         CreateInstructorDto, UpdateInstructorDto>, IInstructorService
 {
     public InstructorService(HttpClient http) 

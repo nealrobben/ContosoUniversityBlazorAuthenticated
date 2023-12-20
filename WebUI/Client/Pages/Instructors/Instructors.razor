@@ -1,4 +1,4 @@
-﻿@using WebUI.Shared.Instructors.Queries.GetInstructorsOverview
+﻿@using WebUI.Client.ViewModels.Instructors
 @page "/instructors"
 
 <h2>@Localizer["Instructors"]</h2>
@@ -14,7 +14,7 @@
     </MudIconButton>
 </p>
 
-<MudTable ServerData="@(new Func<TableState, Task<TableData<InstructorVM>>>(ServerReload))"
+<MudTable ServerData="@(new Func<TableState, Task<TableData<InstructorOverviewVM>>>(ServerReload))"
           Dense="true" Hover="true" FixedFooter="true" Height="500px" @ref="Table" RowClassFunc="@InstructorsSelectRowClassFunc">
     <ToolBarContent>
         <MudText Typo="Typo.h6">@Localizer["Instructors"]</MudText>
@@ -37,11 +37,11 @@
         </MudIconButton>
     </ToolBarContent>
     <HeaderContent>
-        <MudTh><MudTableSortLabel SortLabel="lastname" T="InstructorVM">@Localizer["LastName"]</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel SortLabel="firstname" T="InstructorVM">@Localizer["FirstName"]</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel SortLabel="hiredate" T="InstructorVM">@Localizer["HireDate"]</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel SortLabel="office" T="InstructorVM">@Localizer["OfficeLocation"]</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel SortLabel="courses" T="InstructorVM">@Localizer["Courses"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="lastname" T="InstructorOverviewVM">@Localizer["LastName"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="firstname" T="InstructorOverviewVM">@Localizer["FirstName"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="hiredate" T="InstructorOverviewVM">@Localizer["HireDate"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="office" T="InstructorOverviewVM">@Localizer["OfficeLocation"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="courses" T="InstructorOverviewVM">@Localizer["Courses"]</MudTableSortLabel></MudTh>
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>

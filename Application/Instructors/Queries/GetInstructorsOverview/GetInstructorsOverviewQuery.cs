@@ -1,19 +1,17 @@
 ﻿
-using AutoMapper;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using MediatR;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
-using WebUI.Shared.Common;
-using WebUI.Shared.Instructors.Queries.GetInstructorsOverview;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Application.Common.Extensions;
+using Domain.Entities.Projections.Common;
+using Domain.Entities.Projections.Instructors;
 
 namespace ContosoUniversityCQRS.Application.Instructors.Queries.GetInstructorsOverview;
 
-public class GetInstructorsOverviewQuery : IRequest<OverviewVM<InstructorVM>>
+public class GetInstructorsOverviewQuery : IRequest<Overview<InstructorOverview>>
 {
     public string SortOrder { get; set; }
     public string SearchString { get; set; }
@@ -30,20 +28,18 @@ public class GetInstructorsOverviewQuery : IRequest<OverviewVM<InstructorVM>>
     }
 }
 
-public class GetInstructorsOverviewQueryHandler : IRequestHandler<GetInstructorsOverviewQuery, OverviewVM<InstructorVM>>
+public class GetInstructorsOverviewQueryHandler : IRequestHandler<GetInstructorsOverviewQuery, Overview<InstructorOverview>>
 {
     private readonly ISchoolContext _context;
-    private readonly IMapper _mapper;
 
     private const int _defaultPageSize = 10;
 
-    public GetInstructorsOverviewQueryHandler(ISchoolContext context, IMapper mapper)
+    public GetInstructorsOverviewQueryHandler(ISchoolContext context)
     {
         _context = context;
-        _mapper = mapper;
     }
 
-    public async Task<OverviewVM<InstructorVM>> Handle(GetInstructorsOverviewQuery request, CancellationToken cancellationToken)
+    public async Task<Overview<InstructorOverview>> Handle(GetInstructorsOverviewQuery request, CancellationToken cancellationToken)
     {
         var instructors = _context.Instructors
             .Search(request.SearchString)
@@ -68,7 +64,23 @@ public class GetInstructorsOverviewQueryHandler : IRequestHandler<GetInstructors
               .Take(metaData.PageSize)
               .ToListAsync(cancellationToken);
 
-        return new OverviewVM<InstructorVM>(_mapper.Map<List<InstructorVM>>(items), metaData);
+        return new Overview<InstructorOverview>
+        {
+            MetaData = metaData,
+            Records = items.Select(x => new InstructorOverview
+            {
+                InstructorID = x.ID,
+                LastName = x.LastName,
+                FirstName = x.FirstMidName,
+                HireDate = x.HireDate,
+                OfficeLocation = x.OfficeAssignment?.Location ?? string.Empty,
+                CourseAssignments = x.CourseAssignments.Select(y => new CourseAssignment
+                {
+                    CourseID = y.CourseID,
+                    CourseTitle = y.Course.Title
+                }).ToList()
+            }).ToList()
+        };
     }
 }
 

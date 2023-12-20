@@ -5,12 +5,12 @@ using FakeItEasy;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
+using WebUI.Client.Dtos.Common;
 using WebUI.Client.Dtos.Courses;
+using WebUI.Client.Dtos.Instructors;
 using WebUI.Client.Dtos.Students;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
-using WebUI.Shared.Common;
-using WebUI.Shared.Instructors.Queries.GetInstructorsOverview;
 using Xunit;
 
 namespace WebUI.Client.Test.Pages.Instructors;
@@ -98,10 +98,10 @@ public class InstructorsTests : BunitTestBase
     [Fact]
     public void Instructor_ClickDetailsButton_OpensDialog()
     {
-        var instructorsOverviewVM = _fixture.Create<OverviewVM<InstructorVM>>();
+        var instructorsOverviewDto = _fixture.Create<OverviewDto<InstructorOverviewDto>>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
-        A.CallTo(() => fakeInstructorService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(instructorsOverviewVM);
+        A.CallTo(() => fakeInstructorService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(instructorsOverviewDto);
         Context.Services.AddScoped(x => fakeInstructorService);
 
         var fakeCourseService = A.Fake<ICourseService>();
@@ -125,10 +125,10 @@ public class InstructorsTests : BunitTestBase
     [Fact]
     public void Instructor_ClickEditButton_OpensDialog()
     {
-        var instructorsOverviewVM = _fixture.Create<OverviewVM<InstructorVM>>();
+        var instructorsOverviewDto = _fixture.Create<OverviewDto<InstructorOverviewDto>>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
-        A.CallTo(() => fakeInstructorService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(instructorsOverviewVM);
+        A.CallTo(() => fakeInstructorService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(instructorsOverviewDto);
         Context.Services.AddScoped(x => fakeInstructorService);
 
         var fakeCourseService = A.Fake<ICourseService>();
@@ -155,10 +155,10 @@ public class InstructorsTests : BunitTestBase
     [Fact]
     public void Instructor_ClickDeleteButton_ShowsConfirmationDialog()
     {
-        var instructorsOverviewVM = _fixture.Create<OverviewVM<InstructorVM>>();
+        var instructorsOverviewDto = _fixture.Create<OverviewDto<InstructorOverviewDto>>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
-        A.CallTo(() => fakeInstructorService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(instructorsOverviewVM);
+        A.CallTo(() => fakeInstructorService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(instructorsOverviewDto);
         Context.Services.AddScoped(x => fakeInstructorService);
 
         var fakeCourseService = A.Fake<ICourseService>();
@@ -178,16 +178,16 @@ public class InstructorsTests : BunitTestBase
 
         Assert.NotEmpty(dialog.Markup.Trim());
 
-        dialog.Find(".mud-dialog-content").TrimmedText().Should().Be($"Are you sure you want to delete Instructor {instructorsOverviewVM.Records[0].FullName}?");
+        dialog.Find(".mud-dialog-content").TrimmedText().Should().Be($"Are you sure you want to delete Instructor {instructorsOverviewDto.Records[0].FullName}?");
     }
 
     [Fact]
     public void Instructor_ClickDeleteButtonAndConfirm_InstructorServiceShouldBeCalled()
     {
-        var instructorsOverviewVM = _fixture.Create<OverviewVM<InstructorVM>>();
+        var instructorsOverviewDto = _fixture.Create<OverviewDto<InstructorOverviewDto>>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
-        A.CallTo(() => fakeInstructorService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(instructorsOverviewVM);
+        A.CallTo(() => fakeInstructorService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(instructorsOverviewDto);
         Context.Services.AddScoped(x => fakeInstructorService);
 
         var fakeCourseService = A.Fake<ICourseService>();
@@ -216,10 +216,10 @@ public class InstructorsTests : BunitTestBase
     [Fact]
     public void Instructor_ClickSelectButton_ShowsCoursesForInstructor()
     {
-        var instructorsOverviewVM = _fixture.Create<OverviewVM<InstructorVM>>();
+        var instructorsOverviewDto = _fixture.Create<OverviewDto<InstructorOverviewDto>>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
-        A.CallTo(() => fakeInstructorService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(instructorsOverviewVM);
+        A.CallTo(() => fakeInstructorService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(instructorsOverviewDto);
         Context.Services.AddScoped(x => fakeInstructorService);
 
         var coursesForInstructorOverview = _fixture.Create<CoursesForInstructorOverviewDto>();
@@ -245,10 +245,10 @@ public class InstructorsTests : BunitTestBase
     [Fact]
     public void Instructor_ClickSelectButtonOnCoursesForInstructor_ShowsStudentsForCourse()
     {
-        var instructorsOverviewVM = _fixture.Create<OverviewVM<InstructorVM>>();
+        var instructorsOverviewDto = _fixture.Create<OverviewDto<InstructorOverviewDto>>();
 
         var fakeInstructorService = A.Fake<IInstructorService>();
-        A.CallTo(() => fakeInstructorService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(instructorsOverviewVM);
+        A.CallTo(() => fakeInstructorService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(instructorsOverviewDto);
         Context.Services.AddScoped(x => fakeInstructorService);
 
         var coursesForInstructorOverview = _fixture.Create<CoursesForInstructorOverviewDto>();

@@ -3,9 +3,8 @@ using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
+using WebUI.Client.Dtos.Common;
 using WebUI.Client.Dtos.Instructors;
-using WebUI.Shared.Common;
-using WebUI.Shared.Instructors.Queries.GetInstructorsOverview;
 
 namespace WebUI.IntegrationTests;
 
@@ -17,7 +16,7 @@ public class InstructorsControllerTests : IntegrationTest
         var response = await _client.GetAsync("/api/instructors");
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        (await response.Content.ReadAsAsync<OverviewVM<InstructorVM>>()).Records.Should().BeEmpty();
+        (await response.Content.ReadAsAsync<OverviewDto<InstructorOverviewDto>>()).Records.Should().BeEmpty();
     }
 
     [Fact]
@@ -42,7 +41,7 @@ public class InstructorsControllerTests : IntegrationTest
         var response = await _client.GetAsync("/api/instructors");
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewVM<InstructorVM>>());
+        var result = (await response.Content.ReadAsAsync<OverviewDto<InstructorOverviewDto>>());
 
         result.Records.Should().ContainSingle();
 
@@ -83,7 +82,7 @@ public class InstructorsControllerTests : IntegrationTest
         var response = await _client.GetAsync("/api/instructors?searchString=de");
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewVM<InstructorVM>>());
+        var result = (await response.Content.ReadAsAsync<OverviewDto<InstructorOverviewDto>>());
 
         result.Records.Should().ContainSingle();
 
@@ -124,7 +123,7 @@ public class InstructorsControllerTests : IntegrationTest
         var response = await _client.GetAsync("/api/instructors?sortOrder=lastname_desc");
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewVM<InstructorVM>>());
+        var result = (await response.Content.ReadAsAsync<OverviewDto<InstructorOverviewDto>>());
 
         result.Records.Count.Should().Be(2);
 
@@ -183,7 +182,7 @@ public class InstructorsControllerTests : IntegrationTest
         var response = await _client.GetAsync("/api/instructors?pageSize=2");
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewVM<InstructorVM>>());
+        var result = (await response.Content.ReadAsAsync<OverviewDto<InstructorOverviewDto>>());
 
         result.Records.Count.Should().Be(2);
 
@@ -247,7 +246,7 @@ public class InstructorsControllerTests : IntegrationTest
         var response = await _client.GetAsync("/api/instructors?pageSize=2&pageNumber=1");
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewVM<InstructorVM>>());
+        var result = (await response.Content.ReadAsAsync<OverviewDto<InstructorOverviewDto>>());
 
         result.Records.Count.Should().Be(2);
 
