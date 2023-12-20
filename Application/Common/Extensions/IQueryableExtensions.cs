@@ -12,8 +12,8 @@ public static class IQueryableExtensions
         if (string.IsNullOrWhiteSpace(searchString))
             return value;
 
-        return value.Where(s => s.LastName.Contains(searchString, StringComparison.CurrentCultureIgnoreCase)
-                   || s.FirstMidName.Contains(searchString, StringComparison.CurrentCultureIgnoreCase));
+        return value.Where(s => s.LastName.Contains(searchString)
+                   || s.FirstMidName.Contains(searchString));
     }
 
     public static IQueryable<Department> Search(this IQueryable<Department> value, string searchString)
@@ -21,7 +21,7 @@ public static class IQueryableExtensions
         if (string.IsNullOrWhiteSpace(searchString))
             return value;
 
-        return value.Where(s => s.Name.Contains(searchString, StringComparison.CurrentCultureIgnoreCase));
+        return value.Where(s => s.Name.Contains(searchString));
     }
 
     public static IQueryable<Instructor> Search(this IQueryable<Instructor> value, string searchString)
@@ -29,8 +29,8 @@ public static class IQueryableExtensions
         if (string.IsNullOrWhiteSpace(searchString))
             return value;
 
-        return value.Where(s => s.LastName.Contains(searchString, StringComparison.CurrentCultureIgnoreCase)
-                   || s.FirstMidName.Contains(searchString, StringComparison.CurrentCultureIgnoreCase));
+        return value.Where(s => s.LastName.Contains(searchString)
+                   || s.FirstMidName.Contains(searchString));
     }
 
     public static IQueryable<Course> Search(this IQueryable<Course> value, string searchString)
@@ -38,7 +38,7 @@ public static class IQueryableExtensions
         if (string.IsNullOrWhiteSpace(searchString))
             return value;
 
-        return value.Where(s => s.Title.Contains(searchString, StringComparison.CurrentCultureIgnoreCase));
+        return value.Where(s => s.Title.Contains(searchString));
     }
 
     public static IQueryable<Student> Sort(this IQueryable<Student> value, string sortString)
