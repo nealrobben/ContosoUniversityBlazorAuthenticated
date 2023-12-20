@@ -5,7 +5,6 @@ using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using WebUI.Client.Dtos.Instructors;
 using WebUI.Shared.Common;
-using WebUI.Shared.Instructors.Queries.GetInstructorsLookup;
 using WebUI.Shared.Instructors.Queries.GetInstructorsOverview;
 
 namespace WebUI.IntegrationTests;
@@ -399,7 +398,7 @@ public class InstructorsControllerTests : IntegrationTest
         var response = await _client.GetAsync("/api/instructors/lookup");
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        (await response.Content.ReadAsAsync<InstructorsLookupVM>()).Instructors.Should().BeEmpty();
+        (await response.Content.ReadAsAsync<InstructorsLookupDto>()).Instructors.Should().BeEmpty();
     }
 
     [Fact]
@@ -423,7 +422,7 @@ public class InstructorsControllerTests : IntegrationTest
         var response = await _client.GetAsync("/api/instructors/lookup");
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<InstructorsLookupVM>());
+        var result = (await response.Content.ReadAsAsync<InstructorsLookupDto>());
 
         result.Instructors[0].ID.Should().Be(instructor.ID);
         result.Instructors[0].FullName.Should().Be(instructor.FullName);

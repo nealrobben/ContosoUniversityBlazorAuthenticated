@@ -6,13 +6,14 @@ using Microsoft.Extensions.Localization;
 using MudBlazor;
 using Newtonsoft.Json;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using WebUI.Client.Dtos.Departments;
 using WebUI.Client.Extensions;
 using WebUI.Client.InputModels.Departments;
 using WebUI.Client.Services;
 using WebUI.Client.Shared;
-using WebUI.Shared.Instructors.Queries.GetInstructorsLookup;
+using WebUI.Client.ViewModels.Instructors;
 
 namespace WebUI.Client.Pages.Departments;
 
@@ -39,7 +40,17 @@ public partial class DepartmentCreate
 
     protected override async Task OnInitializedAsync()
     {
-        InstructorsLookup = await InstructorService.GetLookupAsync();
+        var instructorsLookup = await InstructorService.GetLookupAsync();
+
+        InstructorsLookup = new InstructorsLookupVM
+        {
+            Instructors = instructorsLookup.Instructors.Select(x => new InstructorLookupVM
+            {
+                ID = x.ID,
+                FullName = x.FullName
+            }).ToList()
+        };
+
         CreateDepartmentInputModel.InstructorID = InstructorsLookup.Instructors[0].ID;
         StateHasChanged();
     }

@@ -4,7 +4,6 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using WebUI.Client.Dtos.Instructors;
 using WebUI.Shared.Common;
-using WebUI.Shared.Instructors.Queries.GetInstructorsLookup;
 using WebUI.Shared.Instructors.Queries.GetInstructorsOverview;
 
 namespace WebUI.Client.Services;
@@ -13,7 +12,7 @@ public interface IInstructorService
     : IServiceBase<OverviewVM<InstructorVM>, InstructorDetailDto,
         CreateInstructorDto, UpdateInstructorDto>
 {
-    Task<InstructorsLookupVM> GetLookupAsync();
+    Task<InstructorsLookupDto> GetLookupAsync();
 }
 
 public class InstructorService 
@@ -25,8 +24,8 @@ public class InstructorService
     {
     }
 
-    public async Task<InstructorsLookupVM> GetLookupAsync()
+    public async Task<InstructorsLookupDto> GetLookupAsync()
     {
-        return await _http.GetFromJsonAsync<InstructorsLookupVM>($"{Endpoint}/lookup");
+        return await _http.GetFromJsonAsync<InstructorsLookupDto>($"{Endpoint}/lookup");
     }
 }

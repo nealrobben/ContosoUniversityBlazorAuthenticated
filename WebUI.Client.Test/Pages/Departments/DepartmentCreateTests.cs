@@ -5,10 +5,10 @@ using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
 using WebUI.Client.Dtos.Departments;
+using WebUI.Client.Dtos.Instructors;
 using WebUI.Client.Pages.Departments;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
-using WebUI.Shared.Instructors.Queries.GetInstructorsLookup;
 using Xunit;
 
 namespace WebUI.Client.Test.Pages.Departments;
@@ -22,7 +22,7 @@ public class DepartmentCreateTests : BunitTestBase
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var fakeInstructorService = A.Fake<IInstructorService>();
-        A.CallTo(() => fakeInstructorService.GetLookupAsync()).Returns(GetInstructorsLookupVMWithTestData());
+        A.CallTo(() => fakeInstructorService.GetLookupAsync()).Returns(GetInstructorsLookupDtoWithTestData());
         Context.Services.AddScoped(x => fakeInstructorService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -53,7 +53,7 @@ public class DepartmentCreateTests : BunitTestBase
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var fakeInstructorService = A.Fake<IInstructorService>();
-        A.CallTo(() => fakeInstructorService.GetLookupAsync()).Returns(GetInstructorsLookupVMWithTestData());
+        A.CallTo(() => fakeInstructorService.GetLookupAsync()).Returns(GetInstructorsLookupDtoWithTestData());
         Context.Services.AddScoped(x => fakeInstructorService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -80,7 +80,7 @@ public class DepartmentCreateTests : BunitTestBase
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var fakeInstructorService = A.Fake<IInstructorService>();
-        A.CallTo(() => fakeInstructorService.GetLookupAsync()).Returns(GetInstructorsLookupVMWithTestData());
+        A.CallTo(() => fakeInstructorService.GetLookupAsync()).Returns(GetInstructorsLookupDtoWithTestData());
         Context.Services.AddScoped(x => fakeInstructorService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -112,7 +112,7 @@ public class DepartmentCreateTests : BunitTestBase
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var fakeInstructorService = A.Fake<IInstructorService>();
-        A.CallTo(() => fakeInstructorService.GetLookupAsync()).Returns(GetInstructorsLookupVMWithTestData());
+        A.CallTo(() => fakeInstructorService.GetLookupAsync()).Returns(GetInstructorsLookupDtoWithTestData());
         Context.Services.AddScoped(x => fakeInstructorService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -146,7 +146,7 @@ public class DepartmentCreateTests : BunitTestBase
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var fakeInstructorService = A.Fake<IInstructorService>();
-        A.CallTo(() => fakeInstructorService.GetLookupAsync()).Returns(GetInstructorsLookupVMWithTestData());
+        A.CallTo(() => fakeInstructorService.GetLookupAsync()).Returns(GetInstructorsLookupDtoWithTestData());
         Context.Services.AddScoped(x => fakeInstructorService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -182,7 +182,7 @@ public class DepartmentCreateTests : BunitTestBase
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var fakeInstructorService = A.Fake<IInstructorService>();
-        A.CallTo(() => fakeInstructorService.GetLookupAsync()).Returns(GetInstructorsLookupVMWithTestData());
+        A.CallTo(() => fakeInstructorService.GetLookupAsync()).Returns(GetInstructorsLookupDtoWithTestData());
         Context.Services.AddScoped(x => fakeInstructorService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -208,9 +208,9 @@ public class DepartmentCreateTests : BunitTestBase
         comp.FindAll("div.validation-message")[3].TrimmedText().Should().Be("The StartDate field must be a date.");
     }
 
-    private static InstructorsLookupVM GetInstructorsLookupVMWithTestData()
+    private static InstructorsLookupDto GetInstructorsLookupDtoWithTestData()
     {
-        return new InstructorsLookupVM(new List<InstructorLookupVM>
+        return new InstructorsLookupDto(new List<InstructorLookupDto>
         {
             new() {
                 ID = 1,

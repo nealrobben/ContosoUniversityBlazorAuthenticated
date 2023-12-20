@@ -7,10 +7,10 @@ using ContosoUniversityBlazor.Application.Instructors.Queries.GetInstructorsLook
 using ContosoUniversityCQRS.Application.Instructors.Queries.GetInstructorsOverview;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Threading.Tasks;
 using WebUI.Client.Dtos.Instructors;
 using WebUI.Shared.Common;
-using WebUI.Shared.Instructors.Queries.GetInstructorsLookup;
 using WebUI.Shared.Instructors.Queries.GetInstructorsOverview;
 
 namespace ContosoUniversityBlazor.WebUI.Controllers;
@@ -89,10 +89,17 @@ public class InstructorsController : ContosoApiController
     }
 
     [HttpGet("lookup")]
-    public async Task<ActionResult<InstructorsLookupVM>> GetLookup()
+    public async Task<ActionResult<InstructorsLookupDto>> GetLookup()
     {
-        var vm = await Mediator.Send(new GetInstructorLookupQuery());
+        var lookup = await Mediator.Send(new GetInstructorLookupQuery());
 
-        return Ok(vm);
+        return Ok(new InstructorsLookupDto
+        {
+            Instructors = lookup.Instructors.Select(x => new InstructorLookupDto
+            {
+                ID = x.ID,
+                FullName = x.FullName
+            }).ToList()
+        });
     }
 }
