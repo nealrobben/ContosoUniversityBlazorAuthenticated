@@ -2,11 +2,12 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
+using System.Linq;
 using System.Threading.Tasks;
 using WebUI.Client.Extensions;
 using WebUI.Client.Services;
+using WebUI.Client.ViewModels.Departments;
 using WebUI.Shared.Common;
-using WebUI.Shared.Departments.Queries.GetDepartmentsOverview;
 
 namespace WebUI.Client.Pages.Departments;
 
@@ -24,9 +25,9 @@ public partial class Departments
     [Inject]
     public IStringLocalizer<Departments> Localizer { get; set; }
 
-    private MudTable<DepartmentVM> Table;
+    private MudTable<DepartmentOverviewVM> Table;
 
-    public OverviewVM<DepartmentVM> DepartmentsOverview { get; set; } = new OverviewVM<DepartmentVM>();
+    public OverviewVM<DepartmentOverviewVM> DepartmentsOverview { get; set; } = new OverviewVM<DepartmentOverviewVM>();
 
     protected override void OnInitialized()
     {
@@ -115,13 +116,24 @@ public partial class Departments
         await GetDepartments();
     }
 
-    public async Task<TableData<DepartmentVM>> ServerReload(TableState state)
+    public async Task<TableData<DepartmentOverviewVM>> ServerReload(TableState state)
     {
         var searchString = DepartmentsOverview?.MetaData.SearchString ?? "";
         var sortString = state.GetSortString();
 
         var result = await DepartmentService.GetAllAsync(sortString, state.Page, searchString, state.PageSize);
 
-        return new TableData<DepartmentVM>() { TotalItems = result.MetaData.TotalRecords, Items = result.Records };
+        return new TableData<DepartmentOverviewVM>() 
+        {
+            TotalItems = result.MetaData.TotalRecords,
+            Items = result.Records.Select(x => new DepartmentOverviewVM
+            {
+                DepartmentID = x.DepartmentID,
+                Name = x.Name,
+                Budget = x.Budget,
+                StartDate = x.StartDate,
+                AdministratorName = x.AdministratorName
+            })
+        };
     }
 }

@@ -1,19 +1,17 @@
 ﻿
-using AutoMapper;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using MediatR;
-using WebUI.Shared.Common;
-using WebUI.Shared.Departments.Queries.GetDepartmentsOverview;
 using Microsoft.EntityFrameworkCore;
 using Application.Common.Extensions;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Linq;
-using System.Collections.Generic;
+using Domain.Entities.Projections.Departments;
+using Domain.Entities.Projections.Common;
 
 namespace ContosoUniversityBlazor.Application.Departments.Queries.GetDepartmentsOverview;
 
-public class GetDepartmentsOverviewQuery : IRequest<OverviewVM<DepartmentVM>>
+public class GetDepartmentsOverviewQuery : IRequest<Overview<DepartmentOverview>>
 {
     public string SortOrder { get; set; }
     public string SearchString { get; set; }
@@ -30,20 +28,18 @@ public class GetDepartmentsOverviewQuery : IRequest<OverviewVM<DepartmentVM>>
     }
 }
 
-public class GetDepartmentsOverviewQueryHandler : IRequestHandler<GetDepartmentsOverviewQuery, OverviewVM<DepartmentVM>>
+public class GetDepartmentsOverviewQueryHandler : IRequestHandler<GetDepartmentsOverviewQuery, Overview<DepartmentOverview>>
 {
     private readonly ISchoolContext _context;
-    private readonly IMapper _mapper;
 
     private const int _defaultPageSize = 10;
 
-    public GetDepartmentsOverviewQueryHandler(ISchoolContext context, IMapper mapper)
+    public GetDepartmentsOverviewQueryHandler(ISchoolContext context)
     {
         _context = context;
-        _mapper = mapper;
     }
 
-    public async Task<OverviewVM<DepartmentVM>> Handle(GetDepartmentsOverviewQuery request, CancellationToken cancellationToken)
+    public async Task<Overview<DepartmentOverview>> Handle(GetDepartmentsOverviewQuery request, CancellationToken cancellationToken)
     {
         var departments = _context.Departments
             .Search(request.SearchString)
@@ -61,6 +57,17 @@ public class GetDepartmentsOverviewQueryHandler : IRequestHandler<GetDepartments
             .Take(metaData.PageSize)
             .ToListAsync(cancellationToken);
 
-        return new OverviewVM<DepartmentVM>(_mapper.Map<List<DepartmentVM>>(items), metaData);
+        return new Overview<DepartmentOverview>
+        {
+            MetaData = metaData,
+            Records = items.Select(x => new DepartmentOverview
+            {
+                DepartmentID = x.DepartmentID,
+                Name = x.Name,
+                Budget = x.Budget,
+                StartDate = x.StartDate,
+                AdministratorName = x.Administrator?.FullName ?? string.Empty
+            }).ToList()
+        };
     }
 }

@@ -3,9 +3,9 @@ using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
-using WebUI.Shared.Departments.Queries.GetDepartmentsOverview;
 using WebUI.Shared.Common;
 using WebUI.Client.Dtos.Departments;
+using WebUI.Client.Dtos.Common;
 
 namespace WebUI.IntegrationTests;
 
@@ -17,7 +17,7 @@ public class DepartmentsControllerTests : IntegrationTest
         var response = await _client.GetAsync("/api/departments");
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        (await response.Content.ReadAsAsync<OverviewVM<DepartmentVM>>()).Records.Should().BeEmpty();
+        (await response.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>()).Records.Should().BeEmpty();
     }
 
     [Fact]
@@ -42,7 +42,7 @@ public class DepartmentsControllerTests : IntegrationTest
         var response = await _client.GetAsync("/api/departments");
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewVM<DepartmentVM>>());
+        var result = (await response.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>());
 
         result.Records.Should().ContainSingle();
         result.Records[0].DepartmentID.Should().Be(department.DepartmentID);
@@ -82,7 +82,7 @@ public class DepartmentsControllerTests : IntegrationTest
         var response = await _client.GetAsync("/api/departments?searchString=ef");
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewVM<DepartmentVM>>());
+        var result = (await response.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>());
 
         result.Records.Should().ContainSingle();
         result.Records[0].DepartmentID.Should().Be(department2.DepartmentID);
@@ -122,7 +122,7 @@ public class DepartmentsControllerTests : IntegrationTest
         var response = await _client.GetAsync("/api/departments?sortOrder=name_desc");
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewVM<DepartmentVM>>());
+        var result = (await response.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>());
 
         result.Records.Count.Should().Be(2);
         result.Records[0].DepartmentID.Should().Be(department2.DepartmentID);
@@ -180,7 +180,7 @@ public class DepartmentsControllerTests : IntegrationTest
         var response = await _client.GetAsync("/api/departments?pageSize=2");
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewVM<DepartmentVM>>());
+        var result = (await response.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>());
 
         result.Records.Count.Should().Be(2);
 
@@ -244,7 +244,7 @@ public class DepartmentsControllerTests : IntegrationTest
         var response = await _client.GetAsync("/api/departments?pageNumber=1&pageSize=2");
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewVM<DepartmentVM>>());
+        var result = (await response.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>());
 
         result.Records.Count.Should().Be(2);
 

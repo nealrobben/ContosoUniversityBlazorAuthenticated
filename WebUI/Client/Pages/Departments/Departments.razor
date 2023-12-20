@@ -1,4 +1,4 @@
-﻿@using WebUI.Shared.Departments.Queries.GetDepartmentsOverview
+﻿@using WebUI.Client.ViewModels.Departments
 @page "/departments"
 
 <h2>@Localizer["Departments"]</h2>
@@ -14,7 +14,7 @@
     </MudIconButton>
 </p>
 
-<MudTable ServerData="@(new Func<TableState, Task<TableData<DepartmentVM>>>(ServerReload))"
+<MudTable ServerData="@(new Func<TableState, Task<TableData<DepartmentOverviewVM>>>(ServerReload))"
           Dense="true" Hover="true" FixedFooter="true" Height="500px" @ref="Table">
     <ToolBarContent>
         <MudText Typo="Typo.h6">@Localizer["Departments"]</MudText>
@@ -37,10 +37,10 @@
         </MudIconButton>
     </ToolBarContent>
     <HeaderContent>
-        <MudTh><MudTableSortLabel SortLabel="name" T="DepartmentVM">@Localizer["Name"]</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel SortLabel="budget" T="DepartmentVM">@Localizer["Budget"]</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel SortLabel="startdate" T="DepartmentVM">@Localizer["StartDate"]</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel SortLabel="administratorname" T="DepartmentVM">@Localizer["AdministratorName"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="name" T="DepartmentOverviewVM">@Localizer["Name"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="budget" T="DepartmentOverviewVM">@Localizer["Budget"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="startdate" T="DepartmentOverviewVM">@Localizer["StartDate"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="administratorname" T="DepartmentOverviewVM">@Localizer["AdministratorName"]</MudTableSortLabel></MudTh>
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>

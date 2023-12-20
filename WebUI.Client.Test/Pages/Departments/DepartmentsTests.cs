@@ -5,11 +5,11 @@ using FakeItEasy;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
+using WebUI.Client.Dtos.Common;
+using WebUI.Client.Dtos.Departments;
 using WebUI.Client.Dtos.Instructors;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
-using WebUI.Shared.Common;
-using WebUI.Shared.Departments.Queries.GetDepartmentsOverview;
 using Xunit;
 
 namespace WebUI.Client.Test.Pages.Departments;
@@ -83,10 +83,10 @@ public class DepartmentsTests : BunitTestBase
     [Fact]
     public void Departments_ClickDetailsButton_OpensDialog()
     {
-        var departmentsOverviewVM = _fixture.Create<OverviewVM<DepartmentVM>>();
+        var departmentsOverviewDto = _fixture.Create<OverviewDto<DepartmentOverviewDto>>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(departmentsOverviewVM);
+        A.CallTo(() => fakeDepartmentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(departmentsOverviewDto);
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var dialog = Context.RenderComponent<MudDialogProvider>();
@@ -104,10 +104,10 @@ public class DepartmentsTests : BunitTestBase
     [Fact]
     public void Departments_ClickEditButton_OpensDialog()
     {
-        var departmentsOverviewVM = _fixture.Create<OverviewVM<DepartmentVM>>();
+        var departmentsOverviewDto = _fixture.Create<OverviewDto<DepartmentOverviewDto>>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(departmentsOverviewVM);
+        A.CallTo(() => fakeDepartmentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(departmentsOverviewDto);
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var fakeInstructorService = A.Fake<IInstructorService>();
@@ -128,10 +128,10 @@ public class DepartmentsTests : BunitTestBase
     [Fact]
     public void Departments_ClickDeleteButton_ShowsConfirmationDialog()
     {
-        var departmentsOverviewVM = _fixture.Create<OverviewVM<DepartmentVM>>();
+        var departmentsOverviewDto = _fixture.Create<OverviewDto<DepartmentOverviewDto>>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(departmentsOverviewVM);
+        A.CallTo(() => fakeDepartmentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(departmentsOverviewDto);
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var fakeInstructorService = A.Fake<IInstructorService>();
@@ -148,16 +148,16 @@ public class DepartmentsTests : BunitTestBase
 
         Assert.NotEmpty(dialog.Markup.Trim());
 
-        dialog.Find(".mud-dialog-content").TrimmedText().Should().Be($"Are you sure you want to delete the department {departmentsOverviewVM.Records[0].Name}?");
+        dialog.Find(".mud-dialog-content").TrimmedText().Should().Be($"Are you sure you want to delete the department {departmentsOverviewDto.Records[0].Name}?");
     }
 
     [Fact]
     public void Departments_ClickDeleteButtonAndConfirm_DepartmentServiceShouldBeCalled()
     {
-        var departmentsOverviewVM = _fixture.Create<OverviewVM<DepartmentVM>>();
+        var departmentsOverviewDto = _fixture.Create<OverviewDto<DepartmentOverviewDto>>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(departmentsOverviewVM);
+        A.CallTo(() => fakeDepartmentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(departmentsOverviewDto);
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var fakeInstructorService = A.Fake<IInstructorService>();

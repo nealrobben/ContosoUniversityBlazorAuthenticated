@@ -6,23 +6,41 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using ContosoUniversityBlazor.Application.Departments.Queries.GetDepartmentsLookup;
-using WebUI.Shared.Departments.Queries.GetDepartmentsOverview;
-using WebUI.Shared.Common;
 using WebUI.Client.Dtos.Departments;
 using ContosoUniversityBlazor.Application.Departments.Commands.CreateDepartment;
 using ContosoUniversityBlazor.Application.Departments.Commands.UpdateDepartment;
 using System.Linq;
+using WebUI.Client.Dtos.Common;
 
 namespace ContosoUniversityBlazor.WebUI.Controllers;
 
 public class DepartmentsController : ContosoApiController
 {
     [HttpGet]
-    public async Task<ActionResult<OverviewVM<DepartmentVM>>> GetAll(string sortOrder, string searchString, int? pageNumber, int? pageSize)
+    public async Task<ActionResult<OverviewDto<DepartmentOverviewDto>>> GetAll(string sortOrder, string searchString, int? pageNumber, int? pageSize)
     {
-        var vm = await Mediator.Send(new GetDepartmentsOverviewQuery(sortOrder, searchString, pageNumber, pageSize));
+        var overview = await Mediator.Send(new GetDepartmentsOverviewQuery(sortOrder, searchString, pageNumber, pageSize));
 
-        return Ok(vm);
+        return Ok(new OverviewDto<DepartmentOverviewDto>
+        {
+            MetaData = new MetaDataDto
+            {
+                PageNumber = overview.MetaData.PageNumber,
+                TotalPages = overview.MetaData.TotalPages,
+                PageSize = overview.MetaData.PageSize,
+                TotalRecords = overview.MetaData.TotalRecords,
+                CurrentSort = overview.MetaData.CurrentSort,
+                SearchString = overview.MetaData.SearchString
+            },
+            Records = overview.Records.Select(x => new DepartmentOverviewDto
+            {
+                DepartmentID = x.DepartmentID,
+                Name = x.Name,
+                Budget = x.Budget,
+                StartDate = x.StartDate,
+                AdministratorName = x.AdministratorName
+            }).ToList()
+        });
     }
 
     [HttpGet("{id}", Name = "GetDepartment")]
