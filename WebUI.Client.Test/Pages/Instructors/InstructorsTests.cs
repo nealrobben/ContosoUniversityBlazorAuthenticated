@@ -5,10 +5,10 @@ using FakeItEasy;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
+using WebUI.Client.Dtos.Courses;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
 using WebUI.Shared.Common;
-using WebUI.Shared.Courses.Queries.GetCoursesForInstructor;
 using WebUI.Shared.Instructors.Queries.GetInstructorsOverview;
 using WebUI.Shared.Students.Queries.GetStudentsForCourse;
 using Xunit;
@@ -222,7 +222,7 @@ public class InstructorsTests : BunitTestBase
         A.CallTo(() => fakeInstructorService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(instructorsOverviewVM);
         Context.Services.AddScoped(x => fakeInstructorService);
 
-        var coursesForInstructorOverview = _fixture.Create<CoursesForInstructorOverviewVM>();
+        var coursesForInstructorOverview = _fixture.Create<CoursesForInstructorOverviewDto>();
 
         var fakeCourseService = A.Fake<ICourseService>();
         A.CallTo(() => fakeCourseService.GetCoursesForInstructor(A<string>.Ignored)).Returns(coursesForInstructorOverview);
@@ -251,7 +251,7 @@ public class InstructorsTests : BunitTestBase
         A.CallTo(() => fakeInstructorService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(instructorsOverviewVM);
         Context.Services.AddScoped(x => fakeInstructorService);
 
-        var coursesForInstructorOverview = _fixture.Create<CoursesForInstructorOverviewVM>();
+        var coursesForInstructorOverview = _fixture.Create<CoursesForInstructorOverviewDto>();
 
         var fakeCourseService = A.Fake<ICourseService>();
         A.CallTo(() => fakeCourseService.GetCoursesForInstructor(A<string>.Ignored)).Returns(coursesForInstructorOverview);

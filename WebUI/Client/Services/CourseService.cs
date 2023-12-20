@@ -4,7 +4,6 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using WebUI.Client.Dtos.Courses;
 using WebUI.Shared.Common;
-using WebUI.Shared.Courses.Queries.GetCoursesForInstructor;
 using WebUI.Shared.Courses.Queries.GetCoursesOverview;
 
 namespace WebUI.Client.Services;
@@ -13,7 +12,7 @@ public interface ICourseService
     : IServiceBase<OverviewVM<CourseVM>, CourseDetailDto,
         CreateCourseDto, UpdateCourseDto>
 {
-    Task<CoursesForInstructorOverviewVM> GetCoursesForInstructor(string instructorId);
+    Task<CoursesForInstructorOverviewDto> GetCoursesForInstructor(string instructorId);
 }
 
 public class CourseService 
@@ -25,8 +24,8 @@ public class CourseService
     {
     }
 
-    public async Task<CoursesForInstructorOverviewVM> GetCoursesForInstructor(string instructorId)
+    public async Task<CoursesForInstructorOverviewDto> GetCoursesForInstructor(string instructorId)
     {
-        return await _http.GetFromJsonAsync<CoursesForInstructorOverviewVM>($"{Endpoint}/byinstructor/{instructorId}");
+        return await _http.GetFromJsonAsync<CoursesForInstructorOverviewDto>($"{Endpoint}/byinstructor/{instructorId}");
     }
 }

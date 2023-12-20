@@ -1,17 +1,16 @@
 ﻿
-using AutoMapper;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using MediatR;
-using WebUI.Shared.Courses.Queries.GetCoursesForInstructor;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Linq;
+using Domain.Entities.Projections.Courses;
 
 namespace ContosoUniversityBlazor.Application.Courses.Queries.GetCoursesOverview;
 
-public class GetCoursesForInstructorQuery : IRequest<CoursesForInstructorOverviewVM>
+public class GetCoursesForInstructorQuery : IRequest<CoursesForInstructorOverview>
 {
     public int? ID { get; set; }
 
@@ -21,21 +20,19 @@ public class GetCoursesForInstructorQuery : IRequest<CoursesForInstructorOvervie
     }
 }
 
-public class GetCoursesForInstructorQueryHandler : IRequestHandler<GetCoursesForInstructorQuery, CoursesForInstructorOverviewVM>
+public class GetCoursesForInstructorQueryHandler : IRequestHandler<GetCoursesForInstructorQuery, CoursesForInstructorOverview>
 {
     private readonly ISchoolContext _context;
-    private readonly IMapper _mapper;
 
-    public GetCoursesForInstructorQueryHandler(ISchoolContext context, IMapper mapper)
+    public GetCoursesForInstructorQueryHandler(ISchoolContext context)
     {
         _context = context;
-        _mapper = mapper;
     }
 
-    public async Task<CoursesForInstructorOverviewVM> Handle(GetCoursesForInstructorQuery request, CancellationToken cancellationToken)
+    public async Task<CoursesForInstructorOverview> Handle(GetCoursesForInstructorQuery request, CancellationToken cancellationToken)
     {
         if (request.ID == null)
-            return new CoursesForInstructorOverviewVM(new List<CourseForInstructorVM>());
+            return new CoursesForInstructorOverview(new List<CourseForInstructor>());
 
         var courseIdsForInstructor = await _context.CourseAssignments
             .Where(x => x.InstructorID == request.ID)
@@ -48,6 +45,14 @@ public class GetCoursesForInstructorQueryHandler : IRequestHandler<GetCoursesFor
             .AsNoTracking()
             .ToListAsync(cancellationToken);
 
-        return new CoursesForInstructorOverviewVM(_mapper.Map<List<CourseForInstructorVM>>(courses));
+        return new CoursesForInstructorOverview
+        {
+            Courses = courses.Select(x => new CourseForInstructor
+            {
+                CourseID = x.CourseID,
+                Title = x.Title,
+                DepartmentName = x.Department?.Name ?? string.Empty
+            }).ToList()
+        };
     }
 }

@@ -1,9 +1,10 @@
 ﻿
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
+using System.Linq;
 using System.Threading.Tasks;
 using WebUI.Client.Services;
-using WebUI.Shared.Courses.Queries.GetCoursesForInstructor;
+using WebUI.Client.ViewModels.Courses;
 
 namespace WebUI.Client.Pages.Instructors;
 
@@ -29,7 +30,19 @@ public partial class CoursesForInstructor
     protected override async Task OnParametersSetAsync()
     {
         if(SelectedInstructorId != null)
-            CourseForInstructorOverview = await CourseService.GetCoursesForInstructor(SelectedInstructorId.ToString());
+        {
+            var courseForInstructorOverview = await CourseService.GetCoursesForInstructor(SelectedInstructorId.ToString());
+
+            CourseForInstructorOverview = new CoursesForInstructorOverviewVM
+            {
+                Courses = courseForInstructorOverview.Courses.Select(x => new CourseForInstructorVM
+                {
+                    CourseID = x.CourseID,
+                    Title = x.Title,
+                    DepartmentName = x.DepartmentName
+                }).ToList()
+            };
+        }
     }
 
     public string CoursesSelectRowClassFunc(CourseForInstructorVM course, int rowNumber)

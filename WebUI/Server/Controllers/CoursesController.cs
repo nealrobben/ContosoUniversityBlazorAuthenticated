@@ -5,11 +5,11 @@ using ContosoUniversityBlazor.Application.Courses.Queries.GetCourseDetails;
 using ContosoUniversityBlazor.Application.Courses.Queries.GetCoursesOverview;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Threading.Tasks;
 using WebUI.Client.Dtos.Courses;
 using WebUI.Shared.Common;
 using WebUI.Shared.Courses.Commands.CreateCourse;
-using WebUI.Shared.Courses.Queries.GetCoursesForInstructor;
 using WebUI.Shared.Courses.Queries.GetCoursesOverview;
 
 namespace ContosoUniversityBlazor.WebUI.Controllers;
@@ -85,10 +85,18 @@ public class CoursesController : ContosoApiController
     }
 
     [HttpGet("byinstructor/{id}")]
-    public async Task<ActionResult<CoursesForInstructorOverviewVM>> ByInstructor(string id)
+    public async Task<ActionResult<CoursesForInstructorOverviewDto>> ByInstructor(string id)
     {
-        var vm = await Mediator.Send(new GetCoursesForInstructorQuery(int.Parse(id)));
+        var coursesOverview = await Mediator.Send(new GetCoursesForInstructorQuery(int.Parse(id)));
 
-        return Ok(vm);
+        return Ok(new CoursesForInstructorOverviewDto
+        {
+            Courses = coursesOverview.Courses.Select(x => new CourseForInstructorDto 
+            {
+                CourseID = x.CourseID,
+                Title = x.Title,
+                DepartmentName = x.DepartmentName,
+            }).ToList()
+        });
     }
 }

@@ -5,7 +5,6 @@ using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using WebUI.Client.Dtos.Courses;
 using WebUI.Shared.Common;
-using WebUI.Shared.Courses.Queries.GetCoursesForInstructor;
 using WebUI.Shared.Courses.Queries.GetCoursesOverview;
 
 namespace WebUI.IntegrationTests;
@@ -455,7 +454,7 @@ public class CoursesControllerTests : IntegrationTest
         var response = await _client.GetAsync("/api/courses/byinstructor/1");
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        (await response.Content.ReadAsAsync<CoursesForInstructorOverviewVM>()).Courses.Should().BeEmpty();
+        (await response.Content.ReadAsAsync<CoursesForInstructorOverviewDto>()).Courses.Should().BeEmpty();
     }
 
     [Fact]
@@ -501,7 +500,7 @@ public class CoursesControllerTests : IntegrationTest
         var response = await _client.GetAsync("/api/courses/byinstructor/1");
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<CoursesForInstructorOverviewVM>());
+        var result = (await response.Content.ReadAsAsync<CoursesForInstructorOverviewDto>());
         
         result.Courses.Should().ContainSingle();
         result.Courses[0].CourseID.Should().Be(course.CourseID);
