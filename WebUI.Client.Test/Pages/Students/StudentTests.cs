@@ -5,11 +5,10 @@ using FakeItEasy;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
+using WebUI.Client.Dtos.Common;
 using WebUI.Client.Dtos.Students;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
-using WebUI.Shared.Common;
-using WebUI.Shared.Students.Queries.GetStudentsOverview;
 using Xunit;
 
 namespace WebUI.Client.Test.Pages.Students;
@@ -79,10 +78,10 @@ public class StudentTests : BunitTestBase
     [Fact]
     public void Students_ClickDetailsButton_OpensDialog()
     {
-        var studentsOverviewVM = _fixture.Create<OverviewVM<StudentOverviewVM>>();
+        var studentsOverviewDto = _fixture.Create<OverviewDto<StudentOverviewDto>>();
 
         var fakeStudentService = A.Fake<IStudentService>();
-        A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(studentsOverviewVM);
+        A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(studentsOverviewDto);
 
         var studentDetailDto = _fixture.Create<StudentDetailDto>();
         var enrollment = _fixture.Create<StudentDetailEnrollmentDto>();
@@ -106,10 +105,10 @@ public class StudentTests : BunitTestBase
     [Fact]
     public void Students_ClickEditButton_OpensDialog()
     {
-        var studentsOverviewVM = _fixture.Create<OverviewVM<StudentOverviewVM>>();
+        var studentsOverviewDto = _fixture.Create<OverviewDto<StudentOverviewDto>>();
 
         var fakeStudentService = A.Fake<IStudentService>();
-        A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(studentsOverviewVM);
+        A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(studentsOverviewDto);
         Context.Services.AddScoped(x => fakeStudentService);
 
         var fakeUploadService = A.Fake<IFileuploadService>();
@@ -130,10 +129,10 @@ public class StudentTests : BunitTestBase
     [Fact]
     public void Students_ClickDeleteButton_ShowsConfirmationDialog()
     {
-        var studentsOverviewVM = _fixture.Create<OverviewVM<StudentOverviewVM>>();
+        var studentsOverviewDto = _fixture.Create<OverviewDto<StudentOverviewDto>>();
 
         var fakeStudentService = A.Fake<IStudentService>();
-        A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(studentsOverviewVM);
+        A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(studentsOverviewDto);
         Context.Services.AddScoped(x => fakeStudentService);
 
         var fakeUploadService = A.Fake<IFileuploadService>();
@@ -150,16 +149,16 @@ public class StudentTests : BunitTestBase
 
         Assert.NotEmpty(dialog.Markup.Trim());
 
-        dialog.Find(".mud-dialog-content").TrimmedText().Should().Be($"Are you sure you want to delete Student {studentsOverviewVM.Records[0].FullName}?");
+        dialog.Find(".mud-dialog-content").TrimmedText().Should().Be($"Are you sure you want to delete Student {studentsOverviewDto.Records[0].FullName}?");
     }
 
     [Fact]
     public void Students_ClickDeleteButtonAndConfirm_StudentServiceShouldBeCalled()
     {
-        var studentsOverviewVM = _fixture.Create<OverviewVM<StudentOverviewVM>>();
+        var studentsOverviewDto = _fixture.Create<OverviewDto<StudentOverviewDto>>();
 
         var fakeStudentService = A.Fake<IStudentService>();
-        A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(studentsOverviewVM);
+        A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(studentsOverviewDto);
         Context.Services.AddScoped(x => fakeStudentService);
 
         var fakeUploadService = A.Fake<IFileuploadService>();

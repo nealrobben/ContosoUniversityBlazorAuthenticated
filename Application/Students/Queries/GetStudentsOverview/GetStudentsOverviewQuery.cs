@@ -1,19 +1,17 @@
 ﻿
-using AutoMapper;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using MediatR;
-using WebUI.Shared.Common;
-using WebUI.Shared.Students.Queries.GetStudentsOverview;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using Application.Common.Extensions;
+using Domain.Entities.Projections.Students;
+using Domain.Entities.Projections.Common;
 
 namespace ContosoUniversityBlazor.Application.Students.Queries.GetStudentsOverview;
 
-public class GetStudentsOverviewQuery : IRequest<OverviewVM<StudentOverviewVM>>
+public class GetStudentsOverviewQuery : IRequest<Overview<StudentOverview>>
 {
     public string SortOrder { get; set; }
     public string SearchString { get; set; }
@@ -30,20 +28,18 @@ public class GetStudentsOverviewQuery : IRequest<OverviewVM<StudentOverviewVM>>
     }
 }
 
-public class GetStudentsOverviewQueryHandler : IRequestHandler<GetStudentsOverviewQuery, OverviewVM<StudentOverviewVM>>
+public class GetStudentsOverviewQueryHandler : IRequestHandler<GetStudentsOverviewQuery, Overview<StudentOverview>>
 {
     private const int _defaultPageSize = 3;
 
     private readonly ISchoolContext _context;
-    private readonly IMapper _mapper;
 
-    public GetStudentsOverviewQueryHandler(ISchoolContext context, IMapper mapper)
+    public GetStudentsOverviewQueryHandler(ISchoolContext context)
     {
         _context = context;
-        _mapper = mapper;
     }
 
-    public async Task<OverviewVM<StudentOverviewVM>> Handle(GetStudentsOverviewQuery request, CancellationToken cancellationToken)
+    public async Task<Overview<StudentOverview>> Handle(GetStudentsOverviewQuery request, CancellationToken cancellationToken)
     {
         var students = _context.Students
             .Search(request.SearchString)
@@ -58,6 +54,16 @@ public class GetStudentsOverviewQueryHandler : IRequestHandler<GetStudentsOvervi
             .Take(metaData.PageSize)
             .ToListAsync(cancellationToken);
 
-        return new OverviewVM<StudentOverviewVM>(_mapper.Map<List<StudentOverviewVM>>(items), metaData);
+        return new Overview<StudentOverview>
+        {
+            MetaData = metaData,
+            Records = items.Select(x => new StudentOverview
+            {
+                StudentID = x.ID,
+                LastName = x.LastName,
+                FirstName = x.FirstMidName,
+                EnrollmentDate = x.EnrollmentDate,
+            }).ToList()
+        };
     }
 }

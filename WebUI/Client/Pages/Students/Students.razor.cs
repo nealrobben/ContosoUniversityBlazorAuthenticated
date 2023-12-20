@@ -2,11 +2,12 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
+using System.Linq;
 using System.Threading.Tasks;
 using WebUI.Client.Extensions;
 using WebUI.Client.Services;
+using WebUI.Client.ViewModels.Students;
 using WebUI.Shared.Common;
-using WebUI.Shared.Students.Queries.GetStudentsOverview;
 
 namespace WebUI.Client.Pages.Students;
 
@@ -122,6 +123,12 @@ public partial class Students
 
         var result = await StudentService.GetAllAsync(sortString, state.Page, searchString, state.PageSize);
 
-        return new TableData<StudentOverviewVM>() { TotalItems = result.MetaData.TotalRecords, Items = result.Records };
+        return new TableData<StudentOverviewVM>() { TotalItems = result.MetaData.TotalRecords, Items = result.Records.Select(x => new StudentOverviewVM
+        {
+            StudentID = x.StudentID,
+            LastName = x.LastName,
+            FirstName = x.FirstName,
+            EnrollmentDate = x.EnrollmentDate
+        }) };
     }
 }

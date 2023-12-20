@@ -2,21 +2,20 @@
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using WebUI.Shared.Students.Queries.GetStudentsOverview;
-using WebUI.Shared.Common;
+using WebUI.Client.Dtos.Common;
 using WebUI.Client.Dtos.Students;
 
 namespace WebUI.Client.Services;
 
 public interface IStudentService 
-    : IServiceBase<OverviewVM<StudentOverviewVM>, StudentDetailDto, 
+    : IServiceBase<OverviewDto<StudentOverviewDto>, StudentDetailDto, 
         CreateStudentDto, UpdateStudentDto>
 {
     Task<StudentsForCourseDto> GetStudentsForCourse(string courseId);
 }
 
 public class StudentService 
-    : ServiceBase<OverviewVM<StudentOverviewVM>, StudentDetailDto,
+    : ServiceBase<OverviewDto<StudentOverviewDto>, StudentDetailDto,
         CreateStudentDto, UpdateStudentDto>, IStudentService
 {
     public StudentService(HttpClient http) 

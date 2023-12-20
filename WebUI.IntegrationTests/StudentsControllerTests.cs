@@ -3,9 +3,8 @@ using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
+using WebUI.Client.Dtos.Common;
 using WebUI.Client.Dtos.Students;
-using WebUI.Shared.Common;
-using WebUI.Shared.Students.Queries.GetStudentsOverview;
 
 namespace WebUI.IntegrationTests;
 
@@ -17,7 +16,7 @@ public class StudentsControllerTests : IntegrationTest
         var response = await _client.GetAsync("/api/students");
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        (await response.Content.ReadAsAsync<OverviewVM<StudentOverviewVM>>()).Records.Should().BeEmpty();
+        (await response.Content.ReadAsAsync<OverviewDto<StudentOverviewDto>>()).Records.Should().BeEmpty();
     }
 
     [Fact]
@@ -42,7 +41,7 @@ public class StudentsControllerTests : IntegrationTest
         var response = await _client.GetAsync("/api/students");
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewVM<StudentOverviewVM>>());
+        var result = (await response.Content.ReadAsAsync<OverviewDto<StudentOverviewDto>>());
         
         result.Records.Should().ContainSingle();
         result.Records[0].StudentID.Should().Be(student.ID);
@@ -82,7 +81,7 @@ public class StudentsControllerTests : IntegrationTest
         var response = await _client.GetAsync("/api/students?searchString=de");
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewVM<StudentOverviewVM>>());
+        var result = (await response.Content.ReadAsAsync<OverviewDto<StudentOverviewDto>>());
 
         result.Records.Should().ContainSingle();
 
@@ -123,7 +122,7 @@ public class StudentsControllerTests : IntegrationTest
         var response = await _client.GetAsync("/api/students?sortOrder=lastname_desc");
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewVM<StudentOverviewVM>>());
+        var result = (await response.Content.ReadAsAsync<OverviewDto<StudentOverviewDto>>());
 
         result.Records.Count.Should().Be(2);
 
@@ -187,7 +186,7 @@ public class StudentsControllerTests : IntegrationTest
         var response = await _client.GetAsync("/api/students?pageSize=2");
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewVM<StudentOverviewVM>>());
+        var result = (await response.Content.ReadAsAsync<OverviewDto<StudentOverviewDto>>());
 
         result.Records.Count.Should().Be(2);
 
@@ -251,7 +250,7 @@ public class StudentsControllerTests : IntegrationTest
         var response = await _client.GetAsync("/api/students?pageSize=2&pageNumber=1");
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewVM<StudentOverviewVM>>());
+        var result = (await response.Content.ReadAsAsync<OverviewDto<StudentOverviewDto>>());
 
         result.Records.Count.Should().Be(2);
 

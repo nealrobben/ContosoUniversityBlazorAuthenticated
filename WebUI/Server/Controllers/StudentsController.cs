@@ -9,21 +9,38 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
+using WebUI.Client.Dtos.Common;
 using WebUI.Client.Dtos.Students;
-using WebUI.Shared.Common;
-using WebUI.Shared.Students.Queries.GetStudentsOverview;
 
 namespace ContosoUniversityBlazor.WebUI.Controllers;
 public class StudentsController : ContosoApiController
 {
     [HttpGet]
-    public async Task<ActionResult<OverviewVM<StudentOverviewVM>>> GetAll(string sortOrder, 
+    public async Task<ActionResult<OverviewDto<StudentOverviewDto>>> GetAll(string sortOrder, 
         string searchString, int? pageNumber, int? pageSize)
     {
-        var vm = await Mediator.Send(new GetStudentsOverviewQuery(sortOrder, 
+        var overview = await Mediator.Send(new GetStudentsOverviewQuery(sortOrder, 
             searchString, pageNumber, pageSize));
 
-        return Ok(vm);
+        return Ok(new OverviewDto<StudentOverviewDto>
+        {
+            MetaData = new MetaDataDto
+            {
+                PageNumber = overview.MetaData.PageNumber,
+                TotalPages = overview.MetaData.TotalPages,
+                PageSize = overview.MetaData.PageSize,
+                TotalRecords = overview.MetaData.TotalRecords,
+                CurrentSort = overview.MetaData.CurrentSort,
+                SearchString = overview.MetaData.SearchString
+            },
+            Records = overview.Records.Select(x => new StudentOverviewDto
+            {
+                StudentID = x.StudentID,
+                LastName = x.LastName,
+                FirstName = x.FirstName,
+                EnrollmentDate = x.EnrollmentDate
+            }).ToList()
+        });
     }
 
     [HttpGet("{id}", Name = "GetStudent")]
