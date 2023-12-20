@@ -6,8 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebUI.Client.Extensions;
 using WebUI.Client.Services;
+using WebUI.Client.ViewModels.Common;
 using WebUI.Client.ViewModels.Instructors;
-using WebUI.Shared.Common;
 
 namespace WebUI.Client.Pages.Instructors;
 

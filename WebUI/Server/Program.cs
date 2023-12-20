@@ -36,7 +36,6 @@ public class Program
 
         builder.Services.AddApplication();
         builder.Services.AddInfrastructure(builder.Configuration);
-        builder.Services.AddShared();
 
         builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 

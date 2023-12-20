@@ -3,7 +3,6 @@ using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
-using WebUI.Shared.Common;
 using WebUI.Client.Dtos.Departments;
 using WebUI.Client.Dtos.Common;
 
