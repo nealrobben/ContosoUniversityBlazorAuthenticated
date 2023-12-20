@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using System.Linq;
 using System.Threading.Tasks;
+using WebUI.Client.Enums;
 using WebUI.Client.Services;
 using WebUI.Client.ViewModels.Students;
 
@@ -32,7 +33,7 @@ public partial class StudentsForCourse
                 Students = studentsForCourseVM.Students.Select(x => new StudentForCourseVM
                 {
                     StudentName = x.StudentName,
-                    StudentGrade = x.StudentGrade
+                    StudentGrade = (Grade?)x.StudentGrade
                 }).ToList()
             };
         }

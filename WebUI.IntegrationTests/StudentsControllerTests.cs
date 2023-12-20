@@ -444,6 +444,6 @@ public class StudentsControllerTests : IntegrationTest
         var result = (await response.Content.ReadAsAsync<StudentsForCourseDto>());
         result.Students.Should().ContainSingle();
         result.Students[0].StudentName.Should().Be(student.FullName);
-        result.Students[0].StudentGrade.Should().Be(enrollment.Grade);
+        result.Students[0].StudentGrade.Should().Be((int?)enrollment.Grade);
     }
 }

@@ -9,6 +9,7 @@ using WebUI.Client.Dtos.Common;
 using WebUI.Client.Dtos.Courses;
 using WebUI.Client.Dtos.Instructors;
 using WebUI.Client.Dtos.Students;
+using WebUI.Client.Enums;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
 using Xunit;
@@ -264,7 +265,7 @@ public class InstructorsTests : BunitTestBase
                 new StudentForCourseDto
                 {
                     StudentName = "Student X",
-                    StudentGrade = ContosoUniversityBlazor.Domain.Enums.Grade.A
+                    StudentGrade = (int ?) Grade.A
                 }
             }
         };

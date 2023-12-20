@@ -4,6 +4,7 @@ using Microsoft.Extensions.Localization;
 using MudBlazor;
 using System.Linq;
 using System.Threading.Tasks;
+using WebUI.Client.Enums;
 using WebUI.Client.Services;
 using WebUI.Client.ViewModels.Students;
 
@@ -39,7 +40,7 @@ public partial class StudentDetails
             Enrollments = student.Enrollments.Select(x => new StudentDetailEnrollmentVM
             {
                 CourseTitle = x.CourseTitle,
-                Grade = x.Grade,
+                Grade = (Grade?)x.Grade,
             }).ToList()
         };
     }

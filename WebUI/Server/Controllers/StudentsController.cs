@@ -56,7 +56,7 @@ public class StudentsController : ContosoApiController
             Enrollments = student.Enrollments.Select(x => new StudentDetailEnrollmentDto
             {
                 CourseTitle = x.CourseTitle,
-                Grade = x.Grade,
+                Grade = (int)x.Grade,
             }).ToList()
         });
     }
@@ -99,7 +99,7 @@ public class StudentsController : ContosoApiController
             Students = studentsForCourse.Students.Select(x => new StudentForCourseDto
             {
                 StudentName = x.StudentName,
-                StudentGrade = x.StudentGrade
+                StudentGrade = (int)x.StudentGrade
             }).ToList()
         });
     }
