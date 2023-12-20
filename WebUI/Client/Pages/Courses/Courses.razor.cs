@@ -2,11 +2,12 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
+using System.Linq;
 using System.Threading.Tasks;
 using WebUI.Client.Extensions;
 using WebUI.Client.Services;
-using WebUI.Shared.Common;
-using WebUI.Shared.Courses.Queries.GetCoursesOverview;
+using WebUI.Client.ViewModels.Common;
+using WebUI.Client.ViewModels.Courses;
 
 namespace WebUI.Client.Pages.Courses;
 
@@ -24,9 +25,9 @@ public partial class Courses
     [Inject]
     public IStringLocalizer<Courses> Localizer { get; set; }
 
-    public MudTable<CourseVM> Table { get; set; }
+    public MudTable<CourseOverviewVM> Table { get; set; }
 
-    public OverviewVM<CourseVM> CoursesOverview { get; set; } = new OverviewVM<CourseVM>();
+    public OverviewVM<CourseOverviewVM> CoursesOverview { get; set; } = new OverviewVM<CourseOverviewVM>();
 
     protected override void OnInitialized()
     {
@@ -115,13 +116,20 @@ public partial class Courses
         await GetCourses();
     }
 
-    public async Task<TableData<CourseVM>> ServerReload(TableState state)
+    public async Task<TableData<CourseOverviewVM>> ServerReload(TableState state)
     {
         var searchString = CoursesOverview?.MetaData.SearchString ?? "";
         var sortString = state.GetSortString();
 
         var result = await CourseService.GetAllAsync(sortString, state.Page, searchString, state.PageSize);
 
-        return new TableData<CourseVM>() { TotalItems = result.MetaData.TotalRecords, Items = result.Records };
+        return new TableData<CourseOverviewVM>() { TotalItems = result.MetaData.TotalRecords, Items = result.Records.Select(x => new CourseOverviewVM
+            {
+                CourseID = x.CourseID,
+                Title = x.Title,
+                Credits = x.Credits,
+                DepartmentName = x.DepartmentName
+            }).ToList()
+        };
     }
 }

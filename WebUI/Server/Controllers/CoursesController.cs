@@ -7,21 +7,38 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
+using WebUI.Client.Dtos.Common;
 using WebUI.Client.Dtos.Courses;
-using WebUI.Shared.Common;
 using WebUI.Shared.Courses.Commands.CreateCourse;
-using WebUI.Shared.Courses.Queries.GetCoursesOverview;
 
 namespace ContosoUniversityBlazor.WebUI.Controllers;
 
 public class CoursesController : ContosoApiController
 {
     [HttpGet]
-    public async Task<ActionResult<OverviewVM<CourseVM>>> GetAll(string sortOrder, string searchString, int? pageNumber, int? pageSize)
+    public async Task<ActionResult<OverviewDto<CourseOverviewDto>>> GetAll(string sortOrder, string searchString, int? pageNumber, int? pageSize)
     {
-        var vm = await Mediator.Send(new GetCoursesOverviewQuery(sortOrder, searchString, pageNumber, pageSize));
+        var overview = await Mediator.Send(new GetCoursesOverviewQuery(sortOrder, searchString, pageNumber, pageSize));
 
-        return Ok(vm);
+        return Ok(new OverviewDto<CourseOverviewDto>
+        {
+            MetaData = new MetaDataDto
+            {
+                PageNumber = overview.MetaData.PageNumber,
+                TotalPages = overview.MetaData.TotalPages,
+                PageSize = overview.MetaData.PageSize,
+                TotalRecords = overview.MetaData.TotalRecords,
+                CurrentSort = overview.MetaData.CurrentSort,
+                SearchString = overview.MetaData.SearchString
+            },
+            Records = overview.Records.Select(x => new CourseOverviewDto
+            {
+                CourseID = x.CourseID,
+                Title = x.Title,
+                Credits = x.Credits,
+                DepartmentName = x.DepartmentName
+            }).ToList()
+        });
     }
 
     [HttpGet("{id}", Name = "GetCourse")]

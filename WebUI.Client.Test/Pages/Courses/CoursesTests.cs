@@ -5,11 +5,12 @@ using FakeItEasy;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
+using WebUI.Client.Dtos.Common;
+using WebUI.Client.Dtos.Courses;
 using WebUI.Client.Dtos.Departments;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
 using WebUI.Shared.Common;
-using WebUI.Shared.Courses.Queries.GetCoursesOverview;
 using Xunit;
 
 namespace WebUI.Client.Test.Pages.Courses;
@@ -83,10 +84,10 @@ public class CoursesTests : BunitTestBase
     [Fact]
     public void Courses_ClickDetailsButton_OpensDialog()
     {
-        var coursesOverviewVM = _fixture.Create<OverviewVM<CourseVM>>();
+        var coursesOverviewDto = _fixture.Create<OverviewDto<CourseOverviewDto>>();
 
         var fakeCourseService = A.Fake<ICourseService>();
-        A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(coursesOverviewVM);
+        A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(coursesOverviewDto);
         Context.Services.AddScoped(x => fakeCourseService);
 
         var dialog = Context.RenderComponent<MudDialogProvider>();
@@ -104,10 +105,10 @@ public class CoursesTests : BunitTestBase
     [Fact]
     public void Courses_ClickEditButton_OpensDialog()
     {
-        var coursesOverviewVM = _fixture.Create<OverviewVM<CourseVM>>();
+        var coursesOverviewDto = _fixture.Create<OverviewDto<CourseOverviewDto>>();
 
         var fakeCourseService = A.Fake<ICourseService>();
-        A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(coursesOverviewVM);
+        A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(coursesOverviewDto);
         Context.Services.AddScoped(x => fakeCourseService);
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
@@ -128,10 +129,10 @@ public class CoursesTests : BunitTestBase
     [Fact]
     public void Courses_ClickDeleteButton_ShowsConfirmationDialog()
     {
-        var coursesOverviewVM = _fixture.Create<OverviewVM<CourseVM>>();
+        var coursesOverviewDto = _fixture.Create<OverviewDto<CourseOverviewDto>>();
 
         var fakeCourseService = A.Fake<ICourseService>();
-        A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(coursesOverviewVM);
+        A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(coursesOverviewDto);
         Context.Services.AddScoped(x => fakeCourseService);
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
@@ -148,16 +149,16 @@ public class CoursesTests : BunitTestBase
 
         Assert.NotEmpty(dialog.Markup.Trim());
 
-        dialog.Find(".mud-dialog-content").TrimmedText().Should().Be($"Are you sure you want to delete the course {coursesOverviewVM.Records[0].Title}?");
+        dialog.Find(".mud-dialog-content").TrimmedText().Should().Be($"Are you sure you want to delete the course {coursesOverviewDto.Records[0].Title}?");
     }
 
     [Fact]
     public void Courses_ClickDeleteButtonAndConfirm_CourseServiceShouldBeCalled()
     {
-        var coursesOverviewVM = _fixture.Create<OverviewVM<CourseVM>>();
+        var coursesOverviewDto = _fixture.Create<OverviewDto<CourseOverviewDto>>();
 
         var fakeCourseService = A.Fake<ICourseService>();
-        A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(coursesOverviewVM);
+        A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(coursesOverviewDto);
         Context.Services.AddScoped(x => fakeCourseService);
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();

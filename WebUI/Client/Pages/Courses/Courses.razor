@@ -1,4 +1,4 @@
-﻿@using WebUI.Shared.Courses.Queries.GetCoursesOverview
+﻿@using WebUI.Client.ViewModels.Courses
 @page "/courses"
 
 <h2>@Localizer["Courses"]</h2>
@@ -14,7 +14,7 @@
     </MudIconButton>
 </p>
 
-<MudTable ServerData="@(new Func<TableState, Task<TableData<CourseVM>>>(ServerReload))"
+<MudTable ServerData="@(new Func<TableState, Task<TableData<CourseOverviewVM>>>(ServerReload))"
           Dense="true" Hover="true" FixedFooter="true" Height="500px" @ref="Table">
     <ToolBarContent>
         <MudText Typo="Typo.h6">@Localizer["Courses"]</MudText>
@@ -37,10 +37,10 @@
         </MudIconButton>
     </ToolBarContent>
     <HeaderContent>
-        <MudTh><MudTableSortLabel SortLabel="courseid" T="CourseVM">@Localizer["CourseID"]</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel SortLabel="title" T="CourseVM">@Localizer["Title"]</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel SortLabel="credits" T="CourseVM">@Localizer["Credits"]</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel SortLabel="departmentname" T="CourseVM">@Localizer["Department"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="courseid" T="CourseOverviewVM">@Localizer["CourseID"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="title" T="CourseOverviewVM">@Localizer["Title"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="credits" T="CourseOverviewVM">@Localizer["Credits"]</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="departmentname" T="CourseOverviewVM">@Localizer["Department"]</MudTableSortLabel></MudTh>
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>

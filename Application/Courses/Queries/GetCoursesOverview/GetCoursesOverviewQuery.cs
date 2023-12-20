@@ -1,19 +1,17 @@
 ﻿
-using AutoMapper;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using MediatR;
-using WebUI.Shared.Common;
-using WebUI.Shared.Courses.Queries.GetCoursesOverview;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Extensions;
 using System.Linq;
+using Domain.Entities.Projections.Common;
+using Domain.Entities.Projections.Courses;
 
 namespace ContosoUniversityBlazor.Application.Courses.Queries.GetCoursesOverview;
 
-public class GetCoursesOverviewQuery : IRequest<OverviewVM<CourseVM>>
+public class GetCoursesOverviewQuery : IRequest<Overview<CourseOverview>>
 {
     public string SortOrder { get; set; }
     public string SearchString { get; set; }
@@ -30,20 +28,18 @@ public class GetCoursesOverviewQuery : IRequest<OverviewVM<CourseVM>>
     }
 }
 
-public class GetCoursesOverviewQueryHandler : IRequestHandler<GetCoursesOverviewQuery, OverviewVM<CourseVM>>
+public class GetCoursesOverviewQueryHandler : IRequestHandler<GetCoursesOverviewQuery, Overview<CourseOverview>>
 {
     private readonly ISchoolContext _context;
-    private readonly IMapper _mapper;
 
     private const int _defaultPageSize = 10;
 
-    public GetCoursesOverviewQueryHandler(ISchoolContext context, IMapper mapper)
+    public GetCoursesOverviewQueryHandler(ISchoolContext context)
     {
         _context = context;
-        _mapper = mapper;
     }
 
-    public async Task<OverviewVM<CourseVM>> Handle(GetCoursesOverviewQuery request, CancellationToken cancellationToken)
+    public async Task<Overview<CourseOverview>> Handle(GetCoursesOverviewQuery request, CancellationToken cancellationToken)
     {
         var courses = _context.Courses
             .Search(request.SearchString)
@@ -61,6 +57,16 @@ public class GetCoursesOverviewQueryHandler : IRequestHandler<GetCoursesOverview
             .Take(metaData.PageSize)
             .ToListAsync(cancellationToken);
 
-        return new OverviewVM<CourseVM>(_mapper.Map<List<CourseVM>>(items), metaData);
+        return new Overview<CourseOverview>
+        {
+            MetaData = metaData,
+            Records = items.Select(x => new CourseOverview
+            {
+                CourseID = x.CourseID,
+                Title = x.Title,
+                Credits = x.Credits,
+                DepartmentName = x.Department?.Name ?? string.Empty
+            }).ToList()
+        };
     }
 }
