@@ -1,4 +1,4 @@
-﻿using ContosoUniversityBlazor.Application.Students.Commands.CreateStudent;
+﻿using Application.Students.Commands;
 using FluentValidation;
 
 namespace Application.Students.Validators;

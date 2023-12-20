@@ -12,7 +12,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using ContosoUniversityBlazor.Application;
 using ContosoUniversityBlazor.Infrastructure;
-using WebUI.Shared;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Persistence;
 using ContosoUniversityBlazor.WebUI.Services;

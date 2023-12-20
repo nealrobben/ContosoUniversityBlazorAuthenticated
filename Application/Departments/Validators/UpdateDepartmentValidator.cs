@@ -1,6 +1,6 @@
 ﻿
+using Application.Departments.Commands;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
-using ContosoUniversityBlazor.Application.Departments.Commands.UpdateDepartment;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;

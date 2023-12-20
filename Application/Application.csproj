@@ -15,10 +15,5 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="CourseAssignment\" />
-    <Folder Include="Courses\Queries\GetCourseEdit\" />
-  </ItemGroup>
 
 </Project>

@@ -1,10 +1,6 @@
 ﻿
-using ContosoUniversityBlazor.Application.Students.Commands.CreateStudent;
-using ContosoUniversityBlazor.Application.Students.Commands.DeleteStudent;
-using ContosoUniversityBlazor.Application.Students.Commands.UpdateStudent;
-using ContosoUniversityBlazor.Application.Students.Queries.GetStudentDetails;
-using ContosoUniversityBlazor.Application.Students.Queries.GetStudentsForCourse;
-using ContosoUniversityBlazor.Application.Students.Queries.GetStudentsOverview;
+using Application.Students.Commands;
+using Application.Students.Queries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;

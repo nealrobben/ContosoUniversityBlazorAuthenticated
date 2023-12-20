@@ -1,16 +1,12 @@
 ﻿
-using ContosoUniversityBlazor.Application.Departments.Commands.DeleteDepartment;
-using ContosoUniversityBlazor.Application.Departments.Queries.GetDepartmentDetails;
-using ContosoUniversityBlazor.Application.Departments.Queries.GetDepartmentsOverview;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using ContosoUniversityBlazor.Application.Departments.Queries.GetDepartmentsLookup;
 using WebUI.Client.Dtos.Departments;
-using ContosoUniversityBlazor.Application.Departments.Commands.CreateDepartment;
-using ContosoUniversityBlazor.Application.Departments.Commands.UpdateDepartment;
 using System.Linq;
 using WebUI.Client.Dtos.Common;
+using Application.Departments.Queries;
+using Application.Departments.Commands;
 
 namespace ContosoUniversityBlazor.WebUI.Controllers;
 

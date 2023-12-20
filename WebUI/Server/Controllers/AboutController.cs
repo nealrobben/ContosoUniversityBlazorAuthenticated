@@ -1,5 +1,5 @@
 ﻿
-using ContosoUniversityBlazor.Application.Home.Queries.GetAboutInfo;
+using Application.Home.Queries;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading;

@@ -1,4 +1,4 @@
-﻿using ContosoUniversityBlazor.Application.Instructors.Commands.CreateInstructor;
+﻿using Application.Instructors.Commands;
 using FluentValidation;
 
 namespace Application.Instructors.Validators;

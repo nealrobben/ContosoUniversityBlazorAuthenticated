@@ -1,10 +1,8 @@
 ﻿
-using ContosoUniversityBlazor.Application.Instructors.Commands.CreateInstructor;
-using ContosoUniversityBlazor.Application.Instructors.Commands.DeleteInstructor;
-using ContosoUniversityBlazor.Application.Instructors.Commands.UpdateInstructor;
-using ContosoUniversityBlazor.Application.Instructors.Queries.GetInstructorDetails;
+
+using Application.Instructors.Commands;
+using Application.Instructors.Queries;
 using ContosoUniversityBlazor.Application.Instructors.Queries.GetInstructorsLookup;
-using ContosoUniversityCQRS.Application.Instructors.Queries.GetInstructorsOverview;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
@@ -13,6 +11,7 @@ using WebUI.Client.Dtos.Common;
 using WebUI.Client.Dtos.Instructors;
 
 namespace ContosoUniversityBlazor.WebUI.Controllers;
+
 public class InstructorsController : ContosoApiController
 {
     [HttpGet]

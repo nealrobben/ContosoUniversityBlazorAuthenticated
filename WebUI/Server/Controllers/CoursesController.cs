@@ -1,15 +1,12 @@
 ﻿
-using ContosoUniversityBlazor.Application.Courses.Commands.DeleteCourse;
-using ContosoUniversityBlazor.Application.Courses.Commands.UpdateCourse;
-using ContosoUniversityBlazor.Application.Courses.Queries.GetCourseDetails;
-using ContosoUniversityBlazor.Application.Courses.Queries.GetCoursesOverview;
+using Application.Courses.Commands;
+using Application.Courses.Queries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
 using WebUI.Client.Dtos.Common;
 using WebUI.Client.Dtos.Courses;
-using WebUI.Shared.Courses.Commands.CreateCourse;
 
 namespace ContosoUniversityBlazor.WebUI.Controllers;
 

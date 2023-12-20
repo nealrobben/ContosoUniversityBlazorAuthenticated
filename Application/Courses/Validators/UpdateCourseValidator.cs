@@ -1,6 +1,6 @@
 ﻿
+using Application.Courses.Commands;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
-using ContosoUniversityBlazor.Application.Courses.Commands.UpdateCourse;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
