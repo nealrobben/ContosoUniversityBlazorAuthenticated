@@ -1,38 +1,41 @@
 ﻿
-using AutoMapper;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using MediatR;
-using WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Linq;
-using System.Collections.Generic;
 using System.Threading.Tasks;
+using Domain.Entities.Projections.Departments;
 
 namespace ContosoUniversityBlazor.Application.Departments.Queries.GetDepartmentsLookup;
 
-public class GetDepartmentsLookupQuery : IRequest<DepartmentsLookupVM>
+public class GetDepartmentsLookupQuery : IRequest<DepartmentsLookup>
 {
 }
 
-public class GetDepartmentsLookupQueryHandler : IRequestHandler<GetDepartmentsLookupQuery, DepartmentsLookupVM>
+public class GetDepartmentsLookupQueryHandler : IRequestHandler<GetDepartmentsLookupQuery, DepartmentsLookup>
 {
     private readonly ISchoolContext _context;
-    private readonly IMapper _mapper;
 
-    public GetDepartmentsLookupQueryHandler(ISchoolContext context, IMapper mapper)
+    public GetDepartmentsLookupQueryHandler(ISchoolContext context)
     {
         _context = context;
-        _mapper = mapper;
     }
 
-    public async Task<DepartmentsLookupVM> Handle(GetDepartmentsLookupQuery request, CancellationToken cancellationToken)
+    public async Task<DepartmentsLookup> Handle(GetDepartmentsLookupQuery request, CancellationToken cancellationToken)
     {
         var list = await _context.Departments
             .AsNoTracking()
             .OrderBy(x => x.Name)
             .ToListAsync(cancellationToken);
 
-        return new DepartmentsLookupVM(_mapper.Map<List<DepartmentLookupVM>>(list));
+        return new DepartmentsLookup
+        {
+            Departments = list.Select(x => new DepartmentLookup
+            {
+                DepartmentID = x.DepartmentID,
+                Name = x.Name
+            }).ToList()
+        };
     }
 }

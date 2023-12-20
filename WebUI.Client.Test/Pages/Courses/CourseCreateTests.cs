@@ -5,10 +5,10 @@ using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
 using WebUI.Client.Dtos.Courses;
+using WebUI.Client.Dtos.Departments;
 using WebUI.Client.Pages.Courses;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
-using WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
 using Xunit;
 
 namespace WebUI.Client.Test.Pages.Courses;
@@ -19,7 +19,7 @@ public class CourseCreateTests : BunitTestBase
     public async Task CourseCreate_DisplayDialogCorrectly()
     {
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupVMWithTestData());
+        A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupDtoWithTestData());
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var fakeCourseService = A.Fake<ICourseService>();
@@ -50,7 +50,7 @@ public class CourseCreateTests : BunitTestBase
     public async Task CourseCreate_WhenCancelButtonClicked_PopupCloses()
     {
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupVMWithTestData());
+        A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupDtoWithTestData());
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var fakeCourseService = A.Fake<ICourseService>();
@@ -77,7 +77,7 @@ public class CourseCreateTests : BunitTestBase
     public async Task CourseCreate_WhenCreateButtonClicked_PopupCloses()
     {
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupVMWithTestData());
+        A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupDtoWithTestData());
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var fakeCourseService = A.Fake<ICourseService>();
@@ -109,7 +109,7 @@ public class CourseCreateTests : BunitTestBase
     public async Task CourseCreate_WhenCreateButtonClicked_CourseServiceMustBeCalled()
     {
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupVMWithTestData());
+        A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupDtoWithTestData());
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var fakeCourseService = A.Fake<ICourseService>();
@@ -142,7 +142,7 @@ public class CourseCreateTests : BunitTestBase
     public async Task CourseCreate_WhenExceptionCaughtAfterSave_ShowErrorMessage()
     {
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupVMWithTestData());
+        A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupDtoWithTestData());
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var fakeCourseService = A.Fake<ICourseService>();
@@ -179,7 +179,7 @@ public class CourseCreateTests : BunitTestBase
     public async Task CourseCreate_WhenValidationFails_ShowErrorMessagesForFields()
     {
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupVMWithTestData());
+        A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupDtoWithTestData());
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var fakeCourseService = A.Fake<ICourseService>();
@@ -206,9 +206,9 @@ public class CourseCreateTests : BunitTestBase
         comp.FindAll("div.validation-message")[3].TrimmedText().Should().Be("'Credits' must be greater than '0'.");
     }
 
-    private static DepartmentsLookupVM GetDepartmentsLookupVMWithTestData()
+    private static DepartmentsLookupDto GetDepartmentsLookupDtoWithTestData()
     {
-        return new DepartmentsLookupVM(new List<DepartmentLookupVM>
+        return new DepartmentsLookupDto(new List<DepartmentLookupDto>
         {
             new() {
                 DepartmentID = 1,

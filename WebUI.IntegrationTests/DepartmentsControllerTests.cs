@@ -3,7 +3,6 @@ using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Domain.Entities;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
-using WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
 using WebUI.Shared.Departments.Queries.GetDepartmentsOverview;
 using WebUI.Shared.Common;
 using WebUI.Client.Dtos.Departments;
@@ -398,7 +397,7 @@ public class DepartmentsControllerTests : IntegrationTest
         var response = await _client.GetAsync("/api/departments/lookup");
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        (await response.Content.ReadAsAsync<DepartmentsLookupVM>()).Departments.Should().BeEmpty();
+        (await response.Content.ReadAsAsync<DepartmentsLookupDto>()).Departments.Should().BeEmpty();
     }
 
     [Fact]
@@ -421,7 +420,7 @@ public class DepartmentsControllerTests : IntegrationTest
         var response = await _client.GetAsync("/api/departments/lookup");
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<DepartmentsLookupVM>());
+        var result = (await response.Content.ReadAsAsync<DepartmentsLookupDto>());
         result.Departments.Should().ContainSingle();
         result.Departments[0].DepartmentID.Should().Be(department.DepartmentID);
         result.Departments[0].Name.Should().Be(department.Name);

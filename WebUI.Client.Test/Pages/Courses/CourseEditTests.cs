@@ -7,10 +7,10 @@ using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
 using WebUI.Client.Dtos.Courses;
+using WebUI.Client.Dtos.Departments;
 using WebUI.Client.Pages.Courses;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
-using WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
 using Xunit;
 
 namespace WebUI.Client.Test.Pages.Courses;
@@ -34,7 +34,7 @@ public class CourseEditTests : BunitTestBase
         Context.Services.AddScoped(x => fakeCourseService);
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupVMWithTestData());
+        A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupDtoWithTestData());
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -71,7 +71,7 @@ public class CourseEditTests : BunitTestBase
         Context.Services.AddScoped(x => fakeCourseService);
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupVMWithTestData());
+        A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupDtoWithTestData());
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -106,7 +106,7 @@ public class CourseEditTests : BunitTestBase
         Context.Services.AddScoped(x => fakeCourseService);
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupVMWithTestData());
+        A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupDtoWithTestData());
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -145,7 +145,7 @@ public class CourseEditTests : BunitTestBase
         Context.Services.AddScoped(x => fakeCourseService);
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupVMWithTestData());
+        A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupDtoWithTestData());
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -186,7 +186,7 @@ public class CourseEditTests : BunitTestBase
         Context.Services.AddScoped(x => fakeCourseService);
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupVMWithTestData());
+        A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupDtoWithTestData());
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -229,7 +229,7 @@ public class CourseEditTests : BunitTestBase
         Context.Services.AddScoped(x => fakeCourseService);
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupVMWithTestData());
+        A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupDtoWithTestData());
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -260,9 +260,9 @@ public class CourseEditTests : BunitTestBase
         comp.FindAll("div.validation-message")[1].TrimmedText().Should().Be("The Credits field must be a number.");
     }
 
-    private static DepartmentsLookupVM GetDepartmentsLookupVMWithTestData()
+    private static DepartmentsLookupDto GetDepartmentsLookupDtoWithTestData()
     {
-        return new DepartmentsLookupVM(new List<DepartmentLookupVM>
+        return new DepartmentsLookupDto(new List<DepartmentLookupDto>
         {
             new() {
                 DepartmentID = 1,

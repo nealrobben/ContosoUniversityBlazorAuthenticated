@@ -4,7 +4,6 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using WebUI.Client.Dtos.Departments;
 using WebUI.Shared.Common;
-using WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
 using WebUI.Shared.Departments.Queries.GetDepartmentsOverview;
 
 namespace WebUI.Client.Services;
@@ -13,7 +12,7 @@ public interface IDepartmentService
     : IServiceBase<OverviewVM<DepartmentVM>, DepartmentDetailDto,
         CreateDepartmentDto, UpdateDepartmentDto>
 {
-    Task<DepartmentsLookupVM> GetLookupAsync();
+    Task<DepartmentsLookupDto> GetLookupAsync();
 }
 
 public class DepartmentService
@@ -25,8 +24,8 @@ public class DepartmentService
     {
     }
 
-    public async Task<DepartmentsLookupVM> GetLookupAsync()
+    public async Task<DepartmentsLookupDto> GetLookupAsync()
     {
-        return await _http.GetFromJsonAsync<DepartmentsLookupVM>($"{Endpoint}/lookup");
+        return await _http.GetFromJsonAsync<DepartmentsLookupDto>($"{Endpoint}/lookup");
     }
 }

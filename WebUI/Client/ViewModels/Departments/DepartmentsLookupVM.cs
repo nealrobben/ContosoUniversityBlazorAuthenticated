@@ -1,7 +1,6 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
+namespace WebUI.Client.ViewModels.Departments;
 
 public class DepartmentsLookupVM
 {

@@ -5,11 +5,11 @@ using FakeItEasy;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
+using WebUI.Client.Dtos.Departments;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
 using WebUI.Shared.Common;
 using WebUI.Shared.Courses.Queries.GetCoursesOverview;
-using WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
 using Xunit;
 
 namespace WebUI.Client.Test.Pages.Courses;
@@ -30,10 +30,10 @@ public class CoursesTests : BunitTestBase
         Context.Services.AddScoped(x => fakeCourseService);
 
         var fixture = new Fixture();
-        var departmentsLookupVM = fixture.Create<DepartmentsLookupVM>();
+        var departmentsLookupDto = fixture.Create<DepartmentsLookupDto>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(departmentsLookupVM);
+        A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(departmentsLookupDto);
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var dialog = Context.RenderComponent<MudDialogProvider>();

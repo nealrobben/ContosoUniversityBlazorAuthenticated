@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using ContosoUniversityBlazor.Application.Departments.Queries.GetDepartmentsLookup;
 using WebUI.Shared.Departments.Queries.GetDepartmentsOverview;
-using WebUI.Shared.Departments.Queries.GetDepartmentsLookup;
 using WebUI.Shared.Common;
 using WebUI.Client.Dtos.Departments;
 using ContosoUniversityBlazor.Application.Departments.Commands.CreateDepartment;
 using ContosoUniversityBlazor.Application.Departments.Commands.UpdateDepartment;
+using System.Linq;
 
 namespace ContosoUniversityBlazor.WebUI.Controllers;
 
@@ -90,10 +90,17 @@ public class DepartmentsController : ContosoApiController
     }
 
     [HttpGet("lookup")]
-    public async Task<ActionResult<DepartmentsLookupVM>> GetLookup()
+    public async Task<ActionResult<DepartmentsLookupDto>> GetLookup()
     {
-        var vm = await Mediator.Send(new GetDepartmentsLookupQuery());
+        var lookup = await Mediator.Send(new GetDepartmentsLookupQuery());
 
-        return Ok(vm);
+        return Ok(new DepartmentsLookupDto
+        {
+            Departments = lookup.Departments.Select(x => new DepartmentLookupDto
+            {
+                DepartmentID = x.DepartmentID,
+                Name = x.Name
+            }).ToList()
+        });
     }
 }
