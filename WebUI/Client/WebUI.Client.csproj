@@ -25,12 +25,12 @@
     <PackageReference Include="System.Net.Http.Json" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Domain\Domain.csproj" />
+  </ItemGroup>
+
   <PropertyGroup>
     <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Shared\WebUI.Shared.csproj" />
-  </ItemGroup>
 
 </Project>
