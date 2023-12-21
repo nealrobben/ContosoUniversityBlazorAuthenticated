@@ -91,7 +91,7 @@ public class CoursesControllerTests : IntegrationTest
             await schoolContext.SaveChangesAsync();
         }
 
-        var response = await _client.GetAsync("/api/courses?searchString=math");
+        var response = await _client.GetAsync("/api/courses?searchString=Math");
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         var result = (await response.Content.ReadAsAsync<OverviewDto<CourseOverviewDto>>());
