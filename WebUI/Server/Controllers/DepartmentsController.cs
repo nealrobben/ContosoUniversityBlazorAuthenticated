@@ -7,6 +7,7 @@ using System.Linq;
 using WebUI.Client.Dtos.Common;
 using Application.Departments.Queries;
 using Application.Departments.Commands;
+using WebUI.Server.Mappers;
 
 namespace ContosoUniversityBlazor.WebUI.Controllers;
 
@@ -19,23 +20,8 @@ public class DepartmentsController : ContosoApiController
 
         return Ok(new OverviewDto<DepartmentOverviewDto>
         {
-            MetaData = new MetaDataDto
-            {
-                PageNumber = overview.MetaData.PageNumber,
-                TotalPages = overview.MetaData.TotalPages,
-                PageSize = overview.MetaData.PageSize,
-                TotalRecords = overview.MetaData.TotalRecords,
-                CurrentSort = overview.MetaData.CurrentSort,
-                SearchString = overview.MetaData.SearchString
-            },
-            Records = overview.Records.Select(x => new DepartmentOverviewDto
-            {
-                DepartmentID = x.DepartmentID,
-                Name = x.Name,
-                Budget = x.Budget,
-                StartDate = x.StartDate,
-                AdministratorName = x.AdministratorName
-            }).ToList()
+            MetaData = MetaDataDtoMapper.ToDto(overview.MetaData),
+            Records = overview.Records.Select(DepartmentDtoMapper.ToDto).ToList()
         });
     }
 
@@ -46,16 +32,7 @@ public class DepartmentsController : ContosoApiController
     {
         var department = await Mediator.Send(new GetDepartmentDetailsQuery(int.Parse(id)));
 
-        return Ok(new DepartmentDetailDto
-        {
-            DepartmentID = department.DepartmentID,
-            Name = department.Name,
-            Budget = department.Budget,
-            StartDate = department.StartDate,
-            AdministratorName = department.AdministratorName,
-            InstructorID = department.InstructorID,
-            RowVersion = department.RowVersion
-        });
+        return Ok(DepartmentDtoMapper.ToDto(department));
     }
 
     [HttpPost]
@@ -108,13 +85,6 @@ public class DepartmentsController : ContosoApiController
     {
         var lookup = await Mediator.Send(new GetDepartmentsLookupQuery());
 
-        return Ok(new DepartmentsLookupDto
-        {
-            Departments = lookup.Departments.Select(x => new DepartmentLookupDto
-            {
-                DepartmentID = x.DepartmentID,
-                Name = x.Name
-            }).ToList()
-        });
+        return Ok(DepartmentDtoMapper.ToDto(lookup));
     }
 }
