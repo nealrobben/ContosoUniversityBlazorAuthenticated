@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebUI.Client.Dtos.Common;
 using WebUI.Client.Dtos.Instructors;
+using WebUI.Server.Mappers;
 
 namespace ContosoUniversityBlazor.WebUI.Controllers;
 
@@ -21,28 +22,8 @@ public class InstructorsController : ContosoApiController
 
         return Ok(new OverviewDto<InstructorOverviewDto>
         {
-            MetaData = new MetaDataDto
-            {
-                PageNumber = overview.MetaData.PageNumber,
-                TotalPages = overview.MetaData.TotalPages,
-                PageSize = overview.MetaData.PageSize,
-                TotalRecords = overview.MetaData.TotalRecords,
-                CurrentSort = overview.MetaData.CurrentSort,
-                SearchString = overview.MetaData.SearchString
-            },
-            Records = overview.Records.Select(x => new InstructorOverviewDto
-            {
-                InstructorID = x.InstructorID,
-                LastName = x.LastName,
-                FirstName = x.FirstName,
-                HireDate = x.HireDate,
-                OfficeLocation = x.OfficeLocation,
-                CourseAssignments = x.CourseAssignments.Select(x => new CourseAssignmentDto
-                {
-                    CourseID = x.CourseID,
-                    CourseTitle = x.CourseTitle
-                }).ToList()
-            }).ToList()
+            MetaData = MetaDataDtoMapper.ToDto(overview.MetaData),
+            Records = overview.Records.Select(InstructorDtoMapper.ToDto).ToList()
         });
     }
 
@@ -53,15 +34,7 @@ public class InstructorsController : ContosoApiController
     {
         var instructor = await Mediator.Send(new GetInstructorDetailsQuery(int.Parse(id)));
 
-        return Ok(new InstructorDetailDto
-        {
-            InstructorID = instructor.InstructorID,
-            LastName = instructor.LastName,
-            FirstName = instructor.FirstName,
-            HireDate = instructor.HireDate,
-            OfficeLocation = instructor.OfficeLocation,
-            ProfilePictureName = instructor.ProfilePictureName,
-        });
+        return Ok(InstructorDtoMapper.ToDto(instructor));
     }
 
     [HttpPost]
@@ -115,13 +88,6 @@ public class InstructorsController : ContosoApiController
     {
         var lookup = await Mediator.Send(new GetInstructorLookupQuery());
 
-        return Ok(new InstructorsLookupDto
-        {
-            Instructors = lookup.Instructors.Select(x => new InstructorLookupDto
-            {
-                ID = x.ID,
-                FullName = x.FullName
-            }).ToList()
-        });
+        return Ok(InstructorDtoMapper.ToDto(lookup));
     }
 }

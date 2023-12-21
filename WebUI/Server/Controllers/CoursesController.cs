@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebUI.Client.Dtos.Common;
 using WebUI.Client.Dtos.Courses;
+using WebUI.Server.Mappers;
 
 namespace ContosoUniversityBlazor.WebUI.Controllers;
 
@@ -19,22 +20,8 @@ public class CoursesController : ContosoApiController
 
         return Ok(new OverviewDto<CourseOverviewDto>
         {
-            MetaData = new MetaDataDto
-            {
-                PageNumber = overview.MetaData.PageNumber,
-                TotalPages = overview.MetaData.TotalPages,
-                PageSize = overview.MetaData.PageSize,
-                TotalRecords = overview.MetaData.TotalRecords,
-                CurrentSort = overview.MetaData.CurrentSort,
-                SearchString = overview.MetaData.SearchString
-            },
-            Records = overview.Records.Select(x => new CourseOverviewDto
-            {
-                CourseID = x.CourseID,
-                Title = x.Title,
-                Credits = x.Credits,
-                DepartmentName = x.DepartmentName
-            }).ToList()
+            MetaData = MetaDataDtoMapper.ToDto(overview.MetaData),
+            Records = overview.Records.Select(CourseDtoMapper.ToDto).ToList()
         });
     }
 
@@ -45,13 +32,7 @@ public class CoursesController : ContosoApiController
     {
         var course = await Mediator.Send(new GetCourseDetailsQuery(int.Parse(id)));
 
-        return Ok(new CourseDetailDto
-        {
-            CourseID = course.CourseID,
-            Title = course.Title,
-            Credits = course.Credits,
-            DepartmentID = course.DepartmentID
-        });
+        return Ok(CourseDtoMapper.ToDto(course));
     }
 
     [HttpPost]
@@ -103,14 +84,6 @@ public class CoursesController : ContosoApiController
     {
         var coursesOverview = await Mediator.Send(new GetCoursesForInstructorQuery(int.Parse(id)));
 
-        return Ok(new CoursesForInstructorOverviewDto
-        {
-            Courses = coursesOverview.Courses.Select(x => new CourseForInstructorDto 
-            {
-                CourseID = x.CourseID,
-                Title = x.Title,
-                DepartmentName = x.DepartmentName,
-            }).ToList()
-        });
+        return Ok(CourseDtoMapper.ToDto(coursesOverview));
     }
 }
