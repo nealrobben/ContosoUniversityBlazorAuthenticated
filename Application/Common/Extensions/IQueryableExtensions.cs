@@ -1,6 +1,5 @@
 ﻿
 using ContosoUniversityBlazor.Domain.Entities;
-using System;
 using System.Linq;
 
 namespace Application.Common.Extensions;
@@ -61,8 +60,12 @@ public static class IQueryableExtensions
         {
             "name_asc" => value.OrderBy(s => s.Name),
             "name_desc" => value.OrderByDescending(s => s.Name),
+            "budget_asc" => value.OrderBy(s => s.Budget),
+            "budget_desc" => value.OrderByDescending(s => s.Budget),
+            "startdate_asc" => value.OrderBy(s => s.StartDate),
+            "startdate_desc" => value.OrderByDescending(s => s.StartDate),
             _ => value.OrderBy(s => s.Name),
-        };
+        }; ;
     }
 
     public static IQueryable<Instructor> Sort(this IQueryable<Instructor> value, string sortString)
