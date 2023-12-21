@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Threading;
 using Domain.Entities.Projections.Instructors;
+using Domain.Entities.Projections.Mappers;
 
 namespace Application.Instructors.Queries;
 public class GetInstructorDetailsQuery : IRequest<InstructorDetail>
@@ -39,14 +40,6 @@ public class GetInstructorDetailsQueryHandler : IRequestHandler<GetInstructorDet
             .FirstOrDefaultAsync(m => m.ID == request.ID, cancellationToken)
             ?? throw new NotFoundException(nameof(Instructor), request.ID);
 
-        return new InstructorDetail
-        {
-            InstructorID = instructor.ID,
-            LastName = instructor.LastName,
-            FirstName = instructor.FirstMidName,
-            HireDate = instructor.HireDate,
-            OfficeLocation = instructor.OfficeAssignment?.Location ?? string.Empty,
-            ProfilePictureName = instructor.ProfilePictureName,
-        };
+        return InstructorProjectionMapper.ToInstructorDetailProjection(instructor);
     }
 }

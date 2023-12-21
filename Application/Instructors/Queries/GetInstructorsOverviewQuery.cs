@@ -8,6 +8,7 @@ using System.Linq;
 using Application.Common.Extensions;
 using Domain.Entities.Projections.Common;
 using Domain.Entities.Projections.Instructors;
+using Domain.Entities.Projections.Mappers;
 
 namespace Application.Instructors.Queries;
 
@@ -67,19 +68,7 @@ public class GetInstructorsOverviewQueryHandler : IRequestHandler<GetInstructors
         return new Overview<InstructorOverview>
         {
             MetaData = metaData,
-            Records = items.Select(x => new InstructorOverview
-            {
-                InstructorID = x.ID,
-                LastName = x.LastName,
-                FirstName = x.FirstMidName,
-                HireDate = x.HireDate,
-                OfficeLocation = x.OfficeAssignment?.Location ?? string.Empty,
-                CourseAssignments = x.CourseAssignments.Select(y => new CourseAssignment
-                {
-                    CourseID = y.CourseID,
-                    CourseTitle = y.Course.Title
-                }).ToList()
-            }).ToList()
+            Records = items.Select(InstructorProjectionMapper.ToInstructorOverviewProjection).ToList()
         };
     }
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain.Entities.Projections.Instructors;
+using Domain.Entities.Projections.Mappers;
 
 namespace ContosoUniversityBlazor.Application.Instructors.Queries.GetInstructorsLookup;
 
@@ -29,13 +30,6 @@ public class GetInstructorLookupQueryHandler : IRequestHandler<GetInstructorLook
             .OrderBy(x => x.LastName)
             .ToListAsync(cancellationToken);
 
-        return new InstructorsLookup
-        {
-            Instructors = instructors.Select(x => new InstructorLookup
-            {
-                ID = x.ID,
-                FullName = x.FullName
-            }).ToList()
-        };
+        return InstructorProjectionMapper.ToInstructorsLookupProjection(instructors);
     }
 }
