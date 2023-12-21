@@ -8,6 +8,7 @@ using System.Threading;
 using System.Linq;
 using Domain.Entities.Projections.Departments;
 using Domain.Entities.Projections.Common;
+using Domain.Entities.Projections.Mappers;
 
 namespace Application.Departments.Queries;
 
@@ -60,14 +61,7 @@ public class GetDepartmentsOverviewQueryHandler : IRequestHandler<GetDepartments
         return new Overview<DepartmentOverview>
         {
             MetaData = metaData,
-            Records = items.Select(x => new DepartmentOverview
-            {
-                DepartmentID = x.DepartmentID,
-                Name = x.Name,
-                Budget = x.Budget,
-                StartDate = x.StartDate,
-                AdministratorName = x.Administrator?.FullName ?? string.Empty
-            }).ToList()
+            Records = items.Select(DepartmentProjectionMapper.ToDepartmentOverviewProjection).ToList()
         };
     }
 }

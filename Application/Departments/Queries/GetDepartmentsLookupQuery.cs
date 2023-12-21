@@ -6,6 +6,7 @@ using System.Threading;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain.Entities.Projections.Departments;
+using Domain.Entities.Projections.Mappers;
 
 namespace Application.Departments.Queries;
 
@@ -29,13 +30,6 @@ public class GetDepartmentsLookupQueryHandler : IRequestHandler<GetDepartmentsLo
             .OrderBy(x => x.Name)
             .ToListAsync(cancellationToken);
 
-        return new DepartmentsLookup
-        {
-            Departments = list.Select(x => new DepartmentLookup
-            {
-                DepartmentID = x.DepartmentID,
-                Name = x.Name
-            }).ToList()
-        };
+        return DepartmentProjectionMapper.ToDepartmentsLookupProjection(list);
     }
 }

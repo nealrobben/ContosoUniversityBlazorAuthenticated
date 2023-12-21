@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain.Entities.Projections.Departments;
+using Domain.Entities.Projections.Mappers;
 
 namespace Application.Departments.Queries;
 
@@ -40,15 +41,6 @@ public class GetDepartmentDetailsQueryHandler : IRequestHandler<GetDepartmentDet
             .FirstOrDefaultAsync(m => m.DepartmentID == request.ID, cancellationToken)
             ?? throw new NotFoundException(nameof(Department), request.ID);
 
-        return new DepartmentDetail
-        {
-            DepartmentID = department.DepartmentID,
-            Name = department.Name,
-            Budget = department.Budget,
-            StartDate = department.StartDate,
-            AdministratorName = department.Administrator?.FullName ?? string.Empty,
-            InstructorID = department.InstructorID,
-            RowVersion = department.RowVersion
-        };
+        return DepartmentProjectionMapper.ToDepartmentDetailProjection(department);
     }
 }
