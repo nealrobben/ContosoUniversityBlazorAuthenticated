@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 using System.Threading.Tasks;
+using WebUI.Client.Mappers;
 using WebUI.Client.Services;
 using WebUI.Client.ViewModels.Instructors;
 
@@ -28,15 +29,7 @@ public partial class InstructorDetails
     {
         var dto = await InstructorService.GetAsync(InstructorId.ToString());
 
-        Instructor = new InstructorDetailVM
-        {
-            InstructorID = dto.InstructorID,
-            LastName = dto.LastName,
-            FirstName = dto.FirstName,
-            HireDate = dto.HireDate,
-            OfficeLocation = dto.OfficeLocation,
-            ProfilePictureName = dto.ProfilePictureName,
-        };
+        Instructor = InstructorViewModelMapper.ToViewModel(dto);
     }
 
     public void Close()

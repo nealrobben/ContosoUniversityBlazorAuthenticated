@@ -6,11 +6,11 @@ using Microsoft.Extensions.Localization;
 using MudBlazor;
 using Newtonsoft.Json;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using WebUI.Client.Dtos.Departments;
 using WebUI.Client.Extensions;
 using WebUI.Client.InputModels.Departments;
+using WebUI.Client.Mappers;
 using WebUI.Client.Services;
 using WebUI.Client.Shared;
 using WebUI.Client.ViewModels.Instructors;
@@ -44,15 +44,7 @@ public partial class DepartmentEdit
     protected override async Task OnParametersSetAsync()
     {
         var instructorsLookup = await InstructorService.GetLookupAsync();
-
-        InstructorsLookup = new InstructorsLookupVM
-        {
-            Instructors = instructorsLookup.Instructors.Select(x => new InstructorLookupVM
-            {
-                ID = x.ID,
-                FullName = x.FullName
-            }).ToList()
-        };
+        InstructorsLookup = InstructorViewModelMapper.ToViewModel(instructorsLookup);
 
         var department = await DepartmentService.GetAsync(DepartmentId.ToString());
 

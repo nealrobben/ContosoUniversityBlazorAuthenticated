@@ -5,6 +5,7 @@ using MudBlazor;
 using System.Linq;
 using System.Threading.Tasks;
 using WebUI.Client.Extensions;
+using WebUI.Client.Mappers;
 using WebUI.Client.Services;
 using WebUI.Client.ViewModels.Common;
 using WebUI.Client.ViewModels.Instructors;
@@ -137,19 +138,10 @@ public partial class Instructors
 
         var result = await InstructorService.GetAllAsync(sortString, state.Page, searchString, state.PageSize);
 
-        return new TableData<InstructorOverviewVM>() { TotalItems = result.MetaData.TotalRecords, Items = result.Records.Select(x => new InstructorOverviewVM
-            {
-                InstructorID = x.InstructorID,
-                LastName = x.LastName,
-                FirstName = x.FirstName,
-                HireDate = x.HireDate,
-                OfficeLocation = x.OfficeLocation,
-                CourseAssignments = x.CourseAssignments.Select(x => new CourseAssignmentVM
-                {
-                    CourseID = x.CourseID,
-                    CourseTitle = x.CourseTitle
-                }).ToList()
-            }).ToList()
+        return new TableData<InstructorOverviewVM>() 
+        {
+            TotalItems = result.MetaData.TotalRecords,
+            Items = result.Records.Select(InstructorViewModelMapper.ToViewModel).ToList()
         };
     }
 
