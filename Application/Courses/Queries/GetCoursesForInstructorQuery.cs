@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Linq;
 using Domain.Entities.Projections.Courses;
+using Domain.Entities.Projections.Mappers;
 
 namespace Application.Courses.Queries;
 
@@ -45,14 +46,6 @@ public class GetCoursesForInstructorQueryHandler : IRequestHandler<GetCoursesFor
             .AsNoTracking()
             .ToListAsync(cancellationToken);
 
-        return new CoursesForInstructorOverview
-        {
-            Courses = courses.Select(x => new CourseForInstructor
-            {
-                CourseID = x.CourseID,
-                Title = x.Title,
-                DepartmentName = x.Department?.Name ?? string.Empty
-            }).ToList()
-        };
+        return CourseProjectionMapper.ToCoursesForInstructorProjection(courses);
     }
 }

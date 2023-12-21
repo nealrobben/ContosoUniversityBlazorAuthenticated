@@ -8,6 +8,7 @@ using Application.Common.Extensions;
 using System.Linq;
 using Domain.Entities.Projections.Common;
 using Domain.Entities.Projections.Courses;
+using Domain.Entities.Projections.Mappers;
 
 namespace Application.Courses.Queries;
 
@@ -60,13 +61,7 @@ public class GetCoursesOverviewQueryHandler : IRequestHandler<GetCoursesOverview
         return new Overview<CourseOverview>
         {
             MetaData = metaData,
-            Records = items.Select(x => new CourseOverview
-            {
-                CourseID = x.CourseID,
-                Title = x.Title,
-                Credits = x.Credits,
-                DepartmentName = x.Department?.Name ?? string.Empty
-            }).ToList()
+            Records = items.Select(CourseProjectionMapper.ToCourseOverviewProjection).ToList()
         };
     }
 }

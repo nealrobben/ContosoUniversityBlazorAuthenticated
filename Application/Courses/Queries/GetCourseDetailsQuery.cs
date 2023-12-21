@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain.Entities.Projections.Courses;
+using Domain.Entities.Projections.Mappers;
 
 namespace Application.Courses.Queries;
 
@@ -40,12 +41,6 @@ public class GetCourseDetailsQueryHandler : IRequestHandler<GetCourseDetailsQuer
             .FirstOrDefaultAsync(m => m.CourseID == request.ID, cancellationToken)
             ?? throw new NotFoundException(nameof(Course), request.ID);
 
-        return new CourseDetail
-        {
-            CourseID = course.CourseID,
-            Title = course.Title,
-            Credits = course.Credits,
-            DepartmentID = course.DepartmentID
-        };
+        return CourseProjectionMapper.ToCourseDetailProjection(course);
     }
 }
