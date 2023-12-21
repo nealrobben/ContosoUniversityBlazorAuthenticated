@@ -8,6 +8,7 @@ using System.Linq;
 using Application.Common.Extensions;
 using Domain.Entities.Projections.Students;
 using Domain.Entities.Projections.Common;
+using Domain.Entities.Projections.Mappers;
 
 namespace Application.Students.Queries;
 
@@ -57,13 +58,7 @@ public class GetStudentsOverviewQueryHandler : IRequestHandler<GetStudentsOvervi
         return new Overview<StudentOverview>
         {
             MetaData = metaData,
-            Records = items.Select(x => new StudentOverview
-            {
-                StudentID = x.ID,
-                LastName = x.LastName,
-                FirstName = x.FirstMidName,
-                EnrollmentDate = x.EnrollmentDate,
-            }).ToList()
+            Records = items.Select(StudentProjectionMapper.ToStudentOverviewProjection).ToList()
         };
     }
 }

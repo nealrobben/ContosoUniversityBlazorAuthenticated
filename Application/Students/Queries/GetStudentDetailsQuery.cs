@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Threading;
 using Domain.Entities.Projections.Students;
-using System.Linq;
+using Domain.Entities.Projections.Mappers;
 
 namespace Application.Students.Queries;
 
@@ -42,18 +42,6 @@ public class GetStudentDetailsQueryHandler : IRequestHandler<GetStudentDetailsQu
             .FirstOrDefaultAsync(m => m.ID == request.ID, cancellationToken)
             ?? throw new NotFoundException(nameof(Student), request.ID);
 
-        return new StudentDetail
-        {
-            StudentID = student.ID,
-            LastName = student.LastName,
-            FirstName = student.FirstMidName,
-            EnrollmentDate = student.EnrollmentDate,
-            ProfilePictureName = student.ProfilePictureName,
-            Enrollments = student.Enrollments.Select(x => new StudentDetailEnrollment
-            {
-                CourseTitle = x.Course.Title,
-                Grade = x.Grade,
-            }).ToList()
-        };
+        return StudentProjectionMapper.ToStudentDetailProjection(student);
     }
 }

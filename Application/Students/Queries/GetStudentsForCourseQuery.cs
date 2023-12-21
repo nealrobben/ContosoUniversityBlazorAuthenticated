@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using Domain.Entities.Projections.Students;
+using Domain.Entities.Projections.Mappers;
 
 namespace Application.Students.Queries;
 
@@ -40,13 +41,6 @@ public class GetStudentsForCourseQueryHandler : IRequestHandler<GetStudentsForCo
             .AsNoTracking()
             .ToListAsync(cancellationToken);
 
-        return new StudentsForCourse
-        {
-            Students = students.Select(x => new StudentForCourse
-            {
-                StudentName = x.Student.FullName,
-                StudentGrade = x.Grade
-            }).ToList()
-        };
+        return StudentProjectionMapper.ToStudentsForCourseProjection(students);
     }
 }
