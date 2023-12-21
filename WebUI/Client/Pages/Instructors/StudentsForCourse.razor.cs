@@ -1,9 +1,8 @@
 ﻿
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
-using System.Linq;
 using System.Threading.Tasks;
-using WebUI.Client.Enums;
+using WebUI.Client.Mappers;
 using WebUI.Client.Services;
 using WebUI.Client.ViewModels.Students;
 
@@ -26,16 +25,8 @@ public partial class StudentsForCourse
     {
         if(SelectedCourseId != null)
         {
-            var studentsForCourseVM = await StudentService.GetStudentsForCourse(SelectedCourseId.ToString());
-
-            StudentsForCourseVM = new StudentsForCourseVM
-            {
-                Students = studentsForCourseVM.Students.Select(x => new StudentForCourseVM
-                {
-                    StudentName = x.StudentName,
-                    StudentGrade = (Grade?)x.StudentGrade
-                }).ToList()
-            };
+            var studentsForCourseDto = await StudentService.GetStudentsForCourse(SelectedCourseId.ToString());
+            StudentsForCourseVM = StudentViewModelMapper.ToViewModel(studentsForCourseDto);
         }
     }
 }

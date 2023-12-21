@@ -2,9 +2,8 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
-using System.Linq;
 using System.Threading.Tasks;
-using WebUI.Client.Enums;
+using WebUI.Client.Mappers;
 using WebUI.Client.Services;
 using WebUI.Client.ViewModels.Students;
 
@@ -29,20 +28,7 @@ public partial class StudentDetails
     protected override async Task OnParametersSetAsync()
     {
         var student = await StudentService.GetAsync(StudentId.ToString());
-
-        Student = new StudentDetailVM
-        {
-            StudentID = student.StudentID,
-            LastName = student.LastName,
-            FirstName = student.FirstName,
-            EnrollmentDate = student.EnrollmentDate,
-            ProfilePictureName = student.ProfilePictureName,
-            Enrollments = student.Enrollments.Select(x => new StudentDetailEnrollmentVM
-            {
-                CourseTitle = x.CourseTitle,
-                Grade = (Grade?)x.Grade,
-            }).ToList()
-        };
+        Student = StudentViewModelMapper.ToViewModel(student);
     }
 
     public void Close()
