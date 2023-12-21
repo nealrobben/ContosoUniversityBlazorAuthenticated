@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 using System.Threading.Tasks;
+using WebUI.Client.Mappers;
 using WebUI.Client.Services;
 using WebUI.Client.ViewModels.Departments;
 
@@ -28,16 +29,7 @@ public partial class DepartmentDetails
     {
         var dto = await DepartmentService.GetAsync(DepartmentId.ToString());
 
-        Department = new DepartmentDetailVM
-        {
-            DepartmentID = dto.DepartmentID,
-            Name = dto.Name,
-            Budget = dto.Budget,
-            StartDate = dto.StartDate,
-            AdministratorName = dto.AdministratorName,
-            InstructorID = dto.InstructorID,
-            RowVersion = dto.RowVersion
-        };
+        Department = DepartmentViewModelMapper.ToViewModel(dto);
     }
 
     public void Close()

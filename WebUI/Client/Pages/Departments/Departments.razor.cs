@@ -5,6 +5,7 @@ using MudBlazor;
 using System.Linq;
 using System.Threading.Tasks;
 using WebUI.Client.Extensions;
+using WebUI.Client.Mappers;
 using WebUI.Client.Services;
 using WebUI.Client.ViewModels.Common;
 using WebUI.Client.ViewModels.Departments;
@@ -126,14 +127,7 @@ public partial class Departments
         return new TableData<DepartmentOverviewVM>() 
         {
             TotalItems = result.MetaData.TotalRecords,
-            Items = result.Records.Select(x => new DepartmentOverviewVM
-            {
-                DepartmentID = x.DepartmentID,
-                Name = x.Name,
-                Budget = x.Budget,
-                StartDate = x.StartDate,
-                AdministratorName = x.AdministratorName
-            })
+            Items = result.Records.Select(DepartmentViewModelMapper.ToViewModel)
         };
     }
 }

@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 using Newtonsoft.Json;
-using System.Linq;
 using System.Threading.Tasks;
 using WebUI.Client.Dtos.Courses;
 using WebUI.Client.Extensions;
 using WebUI.Client.InputModels.Courses;
+using WebUI.Client.Mappers;
 using WebUI.Client.Services;
 using WebUI.Client.Shared;
 using WebUI.Client.ViewModels.Departments;
@@ -43,15 +43,7 @@ public partial class CourseEdit
     protected override async Task OnParametersSetAsync()
     {
         var departmentsLookup = await DepartmentService.GetLookupAsync();
-
-        DepartmentsLookup = new DepartmentsLookupVM
-        {
-            Departments = departmentsLookup.Departments.Select(x => new DepartmentLookupVM
-            {
-                DepartmentID = x.DepartmentID,
-                Name = x.Name
-            }).ToList()
-        };
+        DepartmentsLookup = DepartmentViewModelMapper.ToViewModel(departmentsLookup);
 
         var course = await CourseService.GetAsync(CourseId.ToString());
 
