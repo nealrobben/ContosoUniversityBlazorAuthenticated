@@ -91,16 +91,22 @@ public class CoursesControllerTests : IntegrationTest
             await schoolContext.SaveChangesAsync();
         }
 
-        var response = await _client.GetAsync("/api/courses?searchString=Math");
+        var responseLowerCase = await _client.GetAsync("/api/courses?searchString=math");
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewDto<CourseOverviewDto>>());
+        responseLowerCase.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        var result = (await responseLowerCase.Content.ReadAsAsync<OverviewDto<CourseOverviewDto>>());
 
         result.Records.Should().ContainSingle();
         result.Records[0].CourseID.Should().Be(course2.CourseID);
         result.Records[0].Title.Should().Be(course2.Title);
         result.Records[0].Credits.Should().Be(course2.Credits);
         result.Records[0].DepartmentName.Should().Be(department.Name);
+
+        var responseUpperCase = await _client.GetAsync("/api/courses?searchString=MATH");
+        responseUpperCase.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+
+        var resultUpperCase = (await responseUpperCase.Content.ReadAsAsync<OverviewDto<CourseOverviewDto>>());
+        resultUpperCase.Records.Should().ContainSingle();
     }
 
 

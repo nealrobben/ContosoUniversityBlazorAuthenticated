@@ -12,8 +12,8 @@ public static class IQueryableExtensions
         if (string.IsNullOrWhiteSpace(searchString))
             return value;
 
-        return value.Where(s => s.LastName.Contains(searchString)
-                   || s.FirstMidName.Contains(searchString));
+        return value.Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())
+                   || s.FirstMidName.ToUpper().Contains(searchString.ToUpper()));
     }
 
     public static IQueryable<Department> Search(this IQueryable<Department> value, string searchString)
@@ -21,7 +21,7 @@ public static class IQueryableExtensions
         if (string.IsNullOrWhiteSpace(searchString))
             return value;
 
-        return value.Where(s => s.Name.Contains(searchString));
+        return value.Where(s => s.Name.ToUpper().Contains(searchString.ToUpper()));
     }
 
     public static IQueryable<Instructor> Search(this IQueryable<Instructor> value, string searchString)
@@ -29,8 +29,8 @@ public static class IQueryableExtensions
         if (string.IsNullOrWhiteSpace(searchString))
             return value;
 
-        return value.Where(s => s.LastName.Contains(searchString)
-                   || s.FirstMidName.Contains(searchString));
+        return value.Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())
+                   || s.FirstMidName.ToUpper().Contains(searchString.ToUpper()));
     }
 
     public static IQueryable<Course> Search(this IQueryable<Course> value, string searchString)
@@ -38,7 +38,7 @@ public static class IQueryableExtensions
         if (string.IsNullOrWhiteSpace(searchString))
             return value;
 
-        return value.Where(s => s.Title.Contains(searchString));
+        return value.Where(s => s.Title.ToUpper().Contains(searchString.ToUpper()));
     }
 
     public static IQueryable<Student> Sort(this IQueryable<Student> value, string sortString)

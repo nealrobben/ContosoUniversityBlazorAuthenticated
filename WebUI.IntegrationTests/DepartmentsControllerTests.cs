@@ -5,6 +5,7 @@ using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using WebUI.Client.Dtos.Departments;
 using WebUI.Client.Dtos.Common;
+using WebUI.Client.Dtos.Courses;
 
 namespace WebUI.IntegrationTests;
 
@@ -78,16 +79,22 @@ public class DepartmentsControllerTests : IntegrationTest
             await schoolContext.SaveChangesAsync();
         }
 
-        var response = await _client.GetAsync("/api/departments?searchString=ef");
+        var responseLowerCase = await _client.GetAsync("/api/departments?searchString=ef");
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>());
+        responseLowerCase.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        var result = (await responseLowerCase.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>());
 
         result.Records.Should().ContainSingle();
         result.Records[0].DepartmentID.Should().Be(department2.DepartmentID);
         result.Records[0].Name.Should().Be(department2.Name);
         result.Records[0].Budget.Should().Be(department2.Budget);
         result.Records[0].StartDate.Should().Be(department2.StartDate);
+
+        var responseUpperCase = await _client.GetAsync("/api/departments?searchString=EF");
+        responseUpperCase.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+
+        var resultUpperCase = (await responseUpperCase.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>());
+        resultUpperCase.Records.Should().ContainSingle();
     }
 
     [Fact]

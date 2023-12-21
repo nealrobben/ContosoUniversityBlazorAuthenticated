@@ -4,6 +4,7 @@ using ContosoUniversityBlazor.Domain.Entities;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using WebUI.Client.Dtos.Common;
+using WebUI.Client.Dtos.Departments;
 using WebUI.Client.Dtos.Instructors;
 
 namespace WebUI.IntegrationTests;
@@ -79,10 +80,10 @@ public class InstructorsControllerTests : IntegrationTest
             await schoolContext.SaveChangesAsync();
         }
 
-        var response = await _client.GetAsync("/api/instructors?searchString=de");
+        var responseLowerCase = await _client.GetAsync("/api/instructors?searchString=de");
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewDto<InstructorOverviewDto>>());
+        responseLowerCase.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        var result = (await responseLowerCase.Content.ReadAsAsync<OverviewDto<InstructorOverviewDto>>());
 
         result.Records.Should().ContainSingle();
 
@@ -90,6 +91,12 @@ public class InstructorsControllerTests : IntegrationTest
         result.Records[0].FirstName.Should().Be(instructor2.FirstMidName);
         result.Records[0].LastName.Should().Be(instructor2.LastName);
         result.Records[0].HireDate.Should().Be(instructor2.HireDate);
+
+        var responseUpperCase = await _client.GetAsync("/api/instructors?searchString=DE");
+        responseUpperCase.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+
+        var resultUpperCase = (await responseUpperCase.Content.ReadAsAsync<OverviewDto<InstructorOverviewDto>>());
+        resultUpperCase.Records.Should().ContainSingle();
     }
 
     [Fact]
