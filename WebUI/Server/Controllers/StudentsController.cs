@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebUI.Client.Dtos.Common;
 using WebUI.Client.Dtos.Students;
+using WebUI.Server.Mappers;
 
 namespace ContosoUniversityBlazor.WebUI.Controllers;
 public class StudentsController : ContosoApiController
@@ -20,22 +21,8 @@ public class StudentsController : ContosoApiController
 
         return Ok(new OverviewDto<StudentOverviewDto>
         {
-            MetaData = new MetaDataDto
-            {
-                PageNumber = overview.MetaData.PageNumber,
-                TotalPages = overview.MetaData.TotalPages,
-                PageSize = overview.MetaData.PageSize,
-                TotalRecords = overview.MetaData.TotalRecords,
-                CurrentSort = overview.MetaData.CurrentSort,
-                SearchString = overview.MetaData.SearchString
-            },
-            Records = overview.Records.Select(x => new StudentOverviewDto
-            {
-                StudentID = x.StudentID,
-                LastName = x.LastName,
-                FirstName = x.FirstName,
-                EnrollmentDate = x.EnrollmentDate
-            }).ToList()
+            MetaData = MetaDataDtoMapper.ToDto(overview.MetaData),
+            Records = overview.Records.Select(StudentDtoMapper.ToDto).ToList()
         });
     }
 
@@ -46,19 +33,7 @@ public class StudentsController : ContosoApiController
     {
         var student = await Mediator.Send(new GetStudentDetailsQuery(int.Parse(id)));
 
-        return Ok(new StudentDetailDto
-        {
-            StudentID = student.StudentID,
-            LastName = student.LastName,
-            FirstName = student.FirstName,
-            EnrollmentDate = student.EnrollmentDate,
-            ProfilePictureName = student.ProfilePictureName,
-            Enrollments = student.Enrollments.Select(x => new StudentDetailEnrollmentDto
-            {
-                CourseTitle = x.CourseTitle,
-                Grade = (int)x.Grade,
-            }).ToList()
-        });
+        return Ok(StudentDtoMapper.ToDto(student));
     }
 
     [HttpPost]
@@ -94,14 +69,7 @@ public class StudentsController : ContosoApiController
     {
         var studentsForCourse = await Mediator.Send(new GetStudentsForCourseQuery(int.Parse(id)));
 
-        return Ok(new StudentsForCourseDto
-        {
-            Students = studentsForCourse.Students.Select(x => new StudentForCourseDto
-            {
-                StudentName = x.StudentName,
-                StudentGrade = (int)x.StudentGrade
-            }).ToList()
-        });
+        return Ok(StudentDtoMapper.ToDto(studentsForCourse));
     }
 
     [HttpPut]
