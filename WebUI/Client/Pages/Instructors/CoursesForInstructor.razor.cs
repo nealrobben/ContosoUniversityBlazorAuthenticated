@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using System.Linq;
 using System.Threading.Tasks;
+using WebUI.Client.Mappers;
 using WebUI.Client.Services;
 using WebUI.Client.ViewModels.Courses;
 
@@ -32,16 +33,7 @@ public partial class CoursesForInstructor
         if(SelectedInstructorId != null)
         {
             var courseForInstructorOverview = await CourseService.GetCoursesForInstructor(SelectedInstructorId.ToString());
-
-            CourseForInstructorOverview = new CoursesForInstructorOverviewVM
-            {
-                Courses = courseForInstructorOverview.Courses.Select(x => new CourseForInstructorVM
-                {
-                    CourseID = x.CourseID,
-                    Title = x.Title,
-                    DepartmentName = x.DepartmentName
-                }).ToList()
-            };
+            CourseForInstructorOverview = CourseViewModelMapper.ToViewModel(courseForInstructorOverview);
         }
     }
 
