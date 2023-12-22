@@ -41,11 +41,14 @@ public partial class DepartmentEdit
     public UpdateDepartmentInputModel UpdateDepartmentInputModel { get; set; } = new UpdateDepartmentInputModel();
     public InstructorsLookupVM InstructorsLookup { get; set; }
 
-    protected override async Task OnParametersSetAsync()
+    protected override async Task OnInitializedAsync()
     {
         var instructorsLookup = await InstructorService.GetLookupAsync();
         InstructorsLookup = InstructorViewModelMapper.ToViewModel(instructorsLookup);
+    }
 
+    protected override async Task OnParametersSetAsync()
+    {
         var department = await DepartmentService.GetAsync(DepartmentId.ToString());
 
         UpdateDepartmentInputModel.DepartmentID = department.DepartmentID;

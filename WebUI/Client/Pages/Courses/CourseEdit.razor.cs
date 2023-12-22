@@ -40,11 +40,14 @@ public partial class CourseEdit
     public UpdateCourseInputModel UpdateCourseInputModel { get; set; } = new UpdateCourseInputModel();
     public DepartmentsLookupVM DepartmentsLookup { get; set; }
 
-    protected override async Task OnParametersSetAsync()
+    protected override async Task OnInitializedAsync()
     {
         var departmentsLookup = await DepartmentService.GetLookupAsync();
         DepartmentsLookup = DepartmentViewModelMapper.ToViewModel(departmentsLookup);
+    }
 
+    protected override async Task OnParametersSetAsync()
+    {
         var course = await CourseService.GetAsync(CourseId.ToString());
 
         UpdateCourseInputModel.CourseID = course.CourseID;
