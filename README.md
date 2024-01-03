@@ -19,6 +19,15 @@ The solution contains the following projects:
 | WebUI.Client.Test 		| Unit tests for the WebUI.Client project      | 
 | WebUI.Integration.Tests 	| Integration tests      | 
 
+To create the database, open the project in Visual Studio and go to the Package Manager Console window.
+In there, make sure WebUI.Server is selected as the default project and run the following command to apply EF migrations to create/update the database:
+
+```Powershell
+Update-Database
+```
+
+
+
 [![Master build](https://github.com/nealrobben/ContosoUniversityBlazorAuthenticated/actions/workflows/Master%20build.yml/badge.svg)](https://github.com/nealrobben/ContosoUniversityBlazorAuthenticated/actions/workflows/Master%20build.yml)
 
 
