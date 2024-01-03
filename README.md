@@ -2,15 +2,22 @@
 A fork of my ContosoUniversityBlazorExtended project meant for further experimentation with Authentication/Authorization.
 
 This project is based off the [Contoso University](https://learn.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro?view=aspnetcore-8.0) example from Microsoft.
+
+
 It has been adapted to Clean Architecture based off the [Clean Architecture solution template](https://github.com/jasontaylordev/CleanArchitecture) from Jason Taylor as an API using CQRS with a Blazor WASM front-end.
+
 
 The solution contains the following projects:
 
-| Project        | Are           |
-| ------------- |:-------------:| 
-| col 3 is      | right-aligned | 
-| col 2 is      | centered      | 
-| zebra stripes | are neat      | 
+| Project					| Are           |
+| --------------------------|---------------| 
+| Application				| Application layer containing the use-cases for the business logic | 
+| Domain      				| Domain layer containing the entities      | 
+| Infrastructure 			| Infrastructure layer containing implementations for the interfaces from the application layer & persistence with EF Core      | 
+| WebUI.Client 				| Blazor WASM client      | 
+| WebUI.Server 				| API in ASP.Net Core       | 
+| WebUI.Client.Test 		| Unit tests for the WebUI.Client project      | 
+| WebUI.Integration.Tests 	| Integration tests      | 
 
 [![Master build](https://github.com/nealrobben/ContosoUniversityBlazorAuthenticated/actions/workflows/Master%20build.yml/badge.svg)](https://github.com/nealrobben/ContosoUniversityBlazorAuthenticated/actions/workflows/Master%20build.yml)
 
