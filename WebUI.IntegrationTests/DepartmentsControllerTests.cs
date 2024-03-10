@@ -5,7 +5,6 @@ using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using WebUI.Client.Dtos.Departments;
 using WebUI.Client.Dtos.Common;
-using WebUI.Client.Dtos.Courses;
 
 namespace WebUI.IntegrationTests;
 

@@ -4,7 +4,6 @@ using ContosoUniversityBlazor.Domain.Entities;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using WebUI.Client.Dtos.Common;
-using WebUI.Client.Dtos.Departments;
 using WebUI.Client.Dtos.Instructors;
 
 namespace WebUI.IntegrationTests;
