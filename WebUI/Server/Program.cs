@@ -102,7 +102,7 @@ public class Program
         }
         finally
         {
-            Log.CloseAndFlush();
+            await Log.CloseAndFlushAsync();
         }
     }
 
@@ -115,7 +115,7 @@ public class Program
         {
             var context = serviceProvider.GetRequiredService<ContosoUniversityBlazor.Persistence.SchoolContext>();
 
-            context.Database.EnsureCreated();
+            await context.Database.EnsureCreatedAsync();
 
             var mediator = serviceProvider.GetRequiredService<IMediator>();
             await mediator.Send(new SeedDataCommand(), CancellationToken.None);

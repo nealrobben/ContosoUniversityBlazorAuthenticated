@@ -71,7 +71,7 @@ public class UploadFilesCommandHandler : IRequestHandler<UploadFileCommand, Uplo
             }
             catch (IOException ex)
             {
-                _logger.LogError("{FileName} error on upload (Err: 3): {Message}",
+                _logger.LogError(ex, "{FileName} error on upload (Err: 3): {Message}",
                     request.File.FileName, ex.Message);
                 uploadResult.ErrorCode = 3;
             }
