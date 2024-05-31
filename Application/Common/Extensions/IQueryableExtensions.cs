@@ -65,7 +65,7 @@ public static class IQueryableExtensions
             "startdate_asc" => value.OrderBy(s => s.StartDate),
             "startdate_desc" => value.OrderByDescending(s => s.StartDate),
             _ => value.OrderBy(s => s.Name),
-        }; ;
+        };
     }
 
     public static IQueryable<Instructor> Sort(this IQueryable<Instructor> value, string sortString)
