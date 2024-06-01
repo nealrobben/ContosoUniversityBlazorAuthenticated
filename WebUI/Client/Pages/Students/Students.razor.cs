@@ -94,7 +94,7 @@ public partial class Students
 
         var options = new DialogOptions() { MaxWidth = MaxWidth.Large };
 
-        var dialog = DialogService.Show<StudentEdit>(Localizer["StudentEdit"], parameters, options);
+        var dialog = await DialogService.ShowAsync<StudentEdit>(Localizer["StudentEdit"], parameters, options);
 
         var result = await dialog.Result;
 
@@ -108,7 +108,7 @@ public partial class Students
     {
         var options = new DialogOptions() { MaxWidth = MaxWidth.Large };
 
-        var dialog = DialogService.Show<StudentCreate>(Localizer["CreateStudent"], options);
+        var dialog = await DialogService.ShowAsync<StudentCreate>(Localizer["CreateStudent"], options);
         var result = await dialog.Result;
 
         if (result.Data != null && (bool)result.Data)

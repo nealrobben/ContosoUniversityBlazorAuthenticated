@@ -83,7 +83,7 @@ public partial class Courses
 
         var options = new DialogOptions() { MaxWidth = MaxWidth.ExtraSmall };
 
-        var dialog = DialogService.Show<CourseEdit>(Localizer["CourseEdit"], parameters, options);
+        var dialog = await DialogService.ShowAsync<CourseEdit>(Localizer["CourseEdit"], parameters, options);
 
         var result = await dialog.Result;
 
@@ -97,7 +97,7 @@ public partial class Courses
     {
         var options = new DialogOptions() { MaxWidth = MaxWidth.Large };
 
-        var dialog = DialogService.Show<CourseCreate>(Localizer["CreateCourse"], options);
+        var dialog = await DialogService.ShowAsync<CourseCreate>(Localizer["CreateCourse"], options);
         var result = await dialog.Result;
 
         if (result.Data != null && (bool)result.Data)

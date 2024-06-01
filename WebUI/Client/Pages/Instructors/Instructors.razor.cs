@@ -97,7 +97,7 @@ public partial class Instructors
 
         var options = new DialogOptions() { MaxWidth = MaxWidth.Medium };
 
-        var dialog = DialogService.Show<InstructorEdit>(Localizer["InstructorEdit"], parameters, options);
+        var dialog = await DialogService.ShowAsync<InstructorEdit>(Localizer["InstructorEdit"], parameters, options);
 
         var result = await dialog.Result;
 
@@ -111,7 +111,7 @@ public partial class Instructors
     {
         var options = new DialogOptions() { MaxWidth = MaxWidth.Medium };
 
-        var dialog = DialogService.Show<InstructorCreate>(Localizer["CreateInstructor"], options);
+        var dialog = await DialogService.ShowAsync<InstructorCreate>(Localizer["CreateInstructor"], options);
         var result = await dialog.Result;
 
         if (result.Data != null && (bool)result.Data)

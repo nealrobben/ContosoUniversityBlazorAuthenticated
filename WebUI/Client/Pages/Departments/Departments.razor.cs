@@ -83,7 +83,7 @@ public partial class Departments
 
         var options = new DialogOptions() { MaxWidth = MaxWidth.ExtraSmall };
 
-        var dialog = DialogService.Show<DepartmentEdit>(Localizer["DepartmentEdit"], parameters, options);
+        var dialog = await DialogService.ShowAsync<DepartmentEdit>(Localizer["DepartmentEdit"], parameters, options);
 
         var result = await dialog.Result;
 
@@ -97,7 +97,7 @@ public partial class Departments
     {
         var options = new DialogOptions() { MaxWidth = MaxWidth.Large };
 
-        var dialog = DialogService.Show<DepartmentCreate>(Localizer["CreateDepartment"], options);
+        var dialog = await DialogService.ShowAsync<DepartmentCreate>(Localizer["CreateDepartment"], options);
         var result = await dialog.Result;
 
         if (result.Data != null && (bool)result.Data)
