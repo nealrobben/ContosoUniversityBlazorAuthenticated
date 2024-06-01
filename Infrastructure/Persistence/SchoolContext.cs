@@ -4,8 +4,6 @@ using ContosoUniversityBlazor.Domain.Common;
 using ContosoUniversityBlazor.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.EntityFrameworkCore.Storage;
-using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,7 +13,6 @@ public class SchoolContext : DbContext, ISchoolContext
 {
     private readonly ICurrentUserService _currentUserService;
     private readonly IDateTime _dateTime;
-    private IDbContextTransaction _currentTransaction;
 
     public DbSet<Course> Courses { get; set; }
     public DbSet<Enrollment> Enrollments { get; set; }
@@ -58,55 +55,6 @@ public class SchoolContext : DbContext, ISchoolContext
         }
 
         return base.SaveChangesAsync(cancellationToken);
-    }
-
-    public async Task BeginTransactionAsync()
-    {
-        if (_currentTransaction != null)
-        {
-            return;
-        }
-
-        _currentTransaction = await base.Database.BeginTransactionAsync(IsolationLevel.ReadCommitted).ConfigureAwait(false);
-    }
-
-    public async Task CommitTransactionAsync()
-    {
-        try
-        {
-            await SaveChangesAsync().ConfigureAwait(false);
-
-            _currentTransaction?.Commit();
-        }
-        catch
-        {
-            RollbackTransaction();
-            throw;
-        }
-        finally
-        {
-            if (_currentTransaction != null)
-            {
-                _currentTransaction.Dispose();
-                _currentTransaction = null;
-            }
-        }
-    }
-
-    public void RollbackTransaction()
-    {
-        try
-        {
-            _currentTransaction?.Rollback();
-        }
-        finally
-        {
-            if (_currentTransaction != null)
-            {
-                _currentTransaction.Dispose();
-                _currentTransaction = null;
-            }
-        }
     }
 
     public override EntityEntry<TEntity> Entry<TEntity>(TEntity entity)
