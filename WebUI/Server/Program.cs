@@ -79,7 +79,7 @@ public class Program
         app.UseStaticFiles();
 
         app.UseOpenApi();
-        app.UseSwaggerUi3(settings =>
+        app.UseSwaggerUi(settings =>
         {
         });
 
