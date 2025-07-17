@@ -62,7 +62,7 @@ public class DepartmentsTests : BunitTestBase
         comp.Find("#SearchButton").Should().NotBeNull();
         comp.Find("#SearchButton").Click();
 
-        A.CallTo(() => fakeDepartmentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).MustHaveHappened();
+        A.CallTo(() => fakeDepartmentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored, A<CancellationToken>.Ignored)).MustHaveHappened();
     }
 
     [Fact]
@@ -77,7 +77,7 @@ public class DepartmentsTests : BunitTestBase
         comp.Find("#BackToFullListButton").Should().NotBeNull();
         comp.Find("#BackToFullListButton").Click();
 
-        A.CallTo(() => fakeDepartmentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).MustHaveHappened();
+        A.CallTo(() => fakeDepartmentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored, A<CancellationToken>.Ignored)).MustHaveHappened();
     }
 
     [Fact]
@@ -86,7 +86,7 @@ public class DepartmentsTests : BunitTestBase
         var departmentsOverviewDto = _fixture.Create<OverviewDto<DepartmentOverviewDto>>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(departmentsOverviewDto);
+        A.CallTo(() => fakeDepartmentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored, A<CancellationToken>.Ignored)).Returns(departmentsOverviewDto);
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var dialog = Context.RenderComponent<MudDialogProvider>();
@@ -107,7 +107,7 @@ public class DepartmentsTests : BunitTestBase
         var departmentsOverviewDto = _fixture.Create<OverviewDto<DepartmentOverviewDto>>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(departmentsOverviewDto);
+        A.CallTo(() => fakeDepartmentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored, A<CancellationToken>.Ignored)).Returns(departmentsOverviewDto);
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var fakeInstructorService = A.Fake<IInstructorService>();
@@ -131,7 +131,7 @@ public class DepartmentsTests : BunitTestBase
         var departmentsOverviewDto = _fixture.Create<OverviewDto<DepartmentOverviewDto>>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(departmentsOverviewDto);
+        A.CallTo(() => fakeDepartmentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored, A<CancellationToken>.Ignored)).Returns(departmentsOverviewDto);
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var fakeInstructorService = A.Fake<IInstructorService>();
@@ -157,7 +157,7 @@ public class DepartmentsTests : BunitTestBase
         var departmentsOverviewDto = _fixture.Create<OverviewDto<DepartmentOverviewDto>>();
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
-        A.CallTo(() => fakeDepartmentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored)).Returns(departmentsOverviewDto);
+        A.CallTo(() => fakeDepartmentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored, A<CancellationToken>.Ignored)).Returns(departmentsOverviewDto);
         Context.Services.AddScoped(x => fakeDepartmentService);
 
         var fakeInstructorService = A.Fake<IInstructorService>();

@@ -1,6 +1,7 @@
 ﻿
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using WebUI.Client.Extensions;
 
@@ -10,7 +11,7 @@ public interface IServiceBase<TOverviewVM, TDetailsVM, TCreateCommand, TUpdateCo
 {
     Task CreateAsync(TCreateCommand createCommand);
     Task DeleteAsync(string id);
-    Task<TOverviewVM> GetAllAsync(string sortOrder, int? pageNumber, string searchString, int? pageSize);
+    Task<TOverviewVM> GetAllAsync(string sortOrder, int? pageNumber, string searchString, int? pageSize, CancellationToken ct);
     Task<TDetailsVM> GetAsync(string id);
     Task UpdateAsync(TUpdateCommand createCommand);
 }
@@ -34,14 +35,14 @@ public abstract class ServiceBase<TOverviewVM, TDetailsVM, TCreateCommand, TUpda
         _controllerName = controllerName;
     }
 
-    public async Task<TOverviewVM> GetAllAsync(string sortOrder, int? pageNumber, string searchString, int? pageSize)
+    public async Task<TOverviewVM> GetAllAsync(string sortOrder, int? pageNumber, string searchString, int? pageSize, CancellationToken ct)
     {
         var url = Endpoint.AppendParameter(PageNumberParameterName, pageNumber)
             .AppendParameter(SearchStringParameterName, searchString)
             .AppendParameter(SortOrderParameterName, sortOrder)
             .AppendParameter(PageSizeParameterName, pageSize);
 
-        return await _http.GetFromJsonAsync<TOverviewVM>(url);
+        return await _http.GetFromJsonAsync<TOverviewVM>(url, ct);
     }
 
     public async Task<TDetailsVM> GetAsync(string id)

@@ -70,7 +70,7 @@ public partial class Departments
             { "DepartmentId", departmentId }
         };
 
-        var options = new DialogOptions() { MaxWidth = MaxWidth.ExtraSmall };
+        var options = new DialogOptions { MaxWidth = MaxWidth.ExtraSmall };
 
         await DialogService.ShowAsync<DepartmentDetails>(Localizer["DepartmentDetails"], parameters, options);
     }
@@ -82,7 +82,7 @@ public partial class Departments
             { "DepartmentId", departmentId }
         };
 
-        var options = new DialogOptions() { MaxWidth = MaxWidth.ExtraSmall };
+        var options = new DialogOptions { MaxWidth = MaxWidth.ExtraSmall };
 
         var dialog = await DialogService.ShowAsync<DepartmentEdit>(Localizer["DepartmentEdit"], parameters, options);
 
@@ -96,7 +96,7 @@ public partial class Departments
 
     public async Task OpenDepartmentCreate()
     {
-        var options = new DialogOptions() { MaxWidth = MaxWidth.Large };
+        var options = new DialogOptions { MaxWidth = MaxWidth.Large };
 
         var dialog = await DialogService.ShowAsync<DepartmentCreate>(Localizer["CreateDepartment"], options);
         var result = await dialog.Result;
@@ -123,7 +123,7 @@ public partial class Departments
         var searchString = DepartmentsOverview?.MetaData.SearchString ?? "";
         var sortString = state.GetSortString();
 
-        var result = await DepartmentService.GetAllAsync(sortString, state.Page, searchString, state.PageSize);
+        var result = await DepartmentService.GetAllAsync(sortString, state.Page, searchString, state.PageSize, ct);
 
         return new TableData<DepartmentOverviewVM>
         {

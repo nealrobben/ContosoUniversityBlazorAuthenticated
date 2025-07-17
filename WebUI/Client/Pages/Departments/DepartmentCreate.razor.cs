@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
-using Newtonsoft.Json;
 using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using WebUI.Client.Dtos.Departments;
 using WebUI.Client.Extensions;
@@ -70,7 +70,7 @@ public partial class DepartmentCreate
             }
             catch (ApiException ex)
             {
-                var problemDetails = JsonConvert.DeserializeObject<ValidationProblemDetails>(ex.Response);
+                var problemDetails = JsonSerializer.Deserialize<ValidationProblemDetails>(ex.Response);
 
                 if (problemDetails != null)
                 {

@@ -84,7 +84,7 @@ public partial class Instructors
             { "InstructorId", instructorId }
         };
 
-        var options = new DialogOptions() { MaxWidth = MaxWidth.Medium };
+        var options = new DialogOptions { MaxWidth = MaxWidth.Medium };
 
         await DialogService.ShowAsync<InstructorDetails>(Localizer["InstructorDetails"], parameters, options);
     }
@@ -96,7 +96,7 @@ public partial class Instructors
             { "InstructorId", instructorId }
         };
 
-        var options = new DialogOptions() { MaxWidth = MaxWidth.Medium };
+        var options = new DialogOptions { MaxWidth = MaxWidth.Medium };
 
         var dialog = await DialogService.ShowAsync<InstructorEdit>(Localizer["InstructorEdit"], parameters, options);
 
@@ -110,7 +110,7 @@ public partial class Instructors
 
     public async Task OpenCreateInstructor()
     {
-        var options = new DialogOptions() { MaxWidth = MaxWidth.Medium };
+        var options = new DialogOptions { MaxWidth = MaxWidth.Medium };
 
         var dialog = await DialogService.ShowAsync<InstructorCreate>(Localizer["CreateInstructor"], options);
         var result = await dialog.Result;
@@ -137,7 +137,7 @@ public partial class Instructors
         var searchString = InstructorsOverview?.MetaData.SearchString ?? "";
         var sortString = state.GetSortString();
 
-        var result = await InstructorService.GetAllAsync(sortString, state.Page, searchString, state.PageSize);
+        var result = await InstructorService.GetAllAsync(sortString, state.Page, searchString, state.PageSize, ct);
 
         return new TableData<InstructorOverviewVM>
         {

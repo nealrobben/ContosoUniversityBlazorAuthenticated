@@ -70,7 +70,7 @@ public partial class Courses
             { "CourseId", courseId }
         };
 
-        var options = new DialogOptions() { MaxWidth = MaxWidth.ExtraSmall };
+        var options = new DialogOptions { MaxWidth = MaxWidth.ExtraSmall };
 
         await DialogService.ShowAsync<CourseDetails>(Localizer["CourseDetails"], parameters, options);
     }
@@ -82,7 +82,7 @@ public partial class Courses
             { "CourseId", courseId }
         };
 
-        var options = new DialogOptions() { MaxWidth = MaxWidth.ExtraSmall };
+        var options = new DialogOptions { MaxWidth = MaxWidth.ExtraSmall };
 
         var dialog = await DialogService.ShowAsync<CourseEdit>(Localizer["CourseEdit"], parameters, options);
 
@@ -96,7 +96,7 @@ public partial class Courses
 
     public async Task OpenCourseCreate()
     {
-        var options = new DialogOptions() { MaxWidth = MaxWidth.Large };
+        var options = new DialogOptions { MaxWidth = MaxWidth.Large };
 
         var dialog = await DialogService.ShowAsync<CourseCreate>(Localizer["CreateCourse"], options);
         var result = await dialog.Result;
@@ -123,7 +123,7 @@ public partial class Courses
         var searchString = CoursesOverview?.MetaData.SearchString ?? "";
         var sortString = state.GetSortString();
 
-        var result = await CourseService.GetAllAsync(sortString, state.Page, searchString, state.PageSize);
+        var result = await CourseService.GetAllAsync(sortString, state.Page, searchString, state.PageSize, ct);
 
         return new TableData<CourseOverviewVM>
         {

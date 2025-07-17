@@ -81,7 +81,7 @@ public partial class Students
             { "StudentId", studentId }
         };
 
-        var options = new DialogOptions() { MaxWidth = MaxWidth.Large };
+        var options = new DialogOptions { MaxWidth = MaxWidth.Large };
 
         await DialogService.ShowAsync<StudentDetails>(Localizer["StudentDetails"], parameters, options);
     }
@@ -93,7 +93,7 @@ public partial class Students
             { "StudentId", studentId }
         };
 
-        var options = new DialogOptions() { MaxWidth = MaxWidth.Large };
+        var options = new DialogOptions { MaxWidth = MaxWidth.Large };
 
         var dialog = await DialogService.ShowAsync<StudentEdit>(Localizer["StudentEdit"], parameters, options);
 
@@ -107,7 +107,7 @@ public partial class Students
 
     public async Task OpenStudentCreate()
     {
-        var options = new DialogOptions() { MaxWidth = MaxWidth.Large };
+        var options = new DialogOptions { MaxWidth = MaxWidth.Large };
 
         var dialog = await DialogService.ShowAsync<StudentCreate>(Localizer["CreateStudent"], options);
         var result = await dialog.Result;
@@ -123,7 +123,7 @@ public partial class Students
         var searchString = StudentsOverview?.MetaData.SearchString ?? "";
         var sortString = state.GetSortString();
 
-        var result = await StudentService.GetAllAsync(sortString, state.Page, searchString, state.PageSize);
+        var result = await StudentService.GetAllAsync(sortString, state.Page, searchString, state.PageSize, ct);
 
         return new TableData<StudentOverviewVM>
         {
