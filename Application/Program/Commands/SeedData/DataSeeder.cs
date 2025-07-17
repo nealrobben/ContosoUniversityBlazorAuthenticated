@@ -78,7 +78,8 @@ public class DataSeeder
                 },
             new() {
                 StudentID = students.Single(s => s.LastName == "Anand").ID,
-                CourseID = courses.Single(c => c.Title == "Chemistry" ).CourseID
+                CourseID = courses.Single(c => c.Title == "Chemistry" ).CourseID,
+                Grade = Grade.B
                 },
             new() {
                 StudentID = students.Single(s => s.LastName == "Anand").ID,
