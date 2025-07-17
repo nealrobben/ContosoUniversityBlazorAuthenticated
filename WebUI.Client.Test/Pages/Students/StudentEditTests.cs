@@ -34,7 +34,7 @@ public class StudentEditTests : BunitTestBase
         A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsDto);
         Context.Services.AddScoped(x => fakeStudentService);
 
-        var uploadService = A.Fake<IFileuploadService>();
+        var uploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => uploadService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -73,7 +73,7 @@ public class StudentEditTests : BunitTestBase
         A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsDto);
         Context.Services.AddScoped(x => fakeStudentService);
 
-        var uploadService = A.Fake<IFileuploadService>();
+        var uploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => uploadService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -109,7 +109,7 @@ public class StudentEditTests : BunitTestBase
         A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsDto);
         Context.Services.AddScoped(x => fakeStudentService);
 
-        var uploadService = A.Fake<IFileuploadService>();
+        var uploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => uploadService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -149,7 +149,7 @@ public class StudentEditTests : BunitTestBase
         A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsDto);
         Context.Services.AddScoped(x => fakeStudentService);
 
-        var uploadService = A.Fake<IFileuploadService>();
+        var uploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => uploadService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -192,7 +192,7 @@ public class StudentEditTests : BunitTestBase
         A.CallTo(() => fakeStudentService.UpdateAsync(A<UpdateStudentDto>.Ignored)).ThrowsAsync(new Exception("error"));
         Context.Services.AddScoped(x => fakeStudentService);
 
-        var uploadService = A.Fake<IFileuploadService>();
+        var uploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => uploadService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -237,7 +237,7 @@ public class StudentEditTests : BunitTestBase
         A.CallTo(() => fakeStudentService.UpdateAsync(A<UpdateStudentDto>.Ignored)).ThrowsAsync(new Exception("error"));
         Context.Services.AddScoped(x => fakeStudentService);
 
-        var uploadService = A.Fake<IFileuploadService>();
+        var uploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => uploadService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();

@@ -13,7 +13,7 @@ namespace WebUI.Client.Pages.Instructors;
 public partial class InstructorEdit
 {
     [Inject]
-    public IFileuploadService FileuploadService { get; set; }
+    public IFileUploadService FileUploadService { get; set; }
 
     [Inject]
     public IStringLocalizer<InstructorEdit> Localizer { get; set; }
@@ -54,7 +54,7 @@ public partial class InstructorEdit
             {
                 if (File != null)
                 {
-                    UpdateInstructorInputModel.ProfilePictureName = await FileuploadService.UploadFile(File);
+                    UpdateInstructorInputModel.ProfilePictureName = await FileUploadService.UploadFile(File);
                 }
 
                 await InstructorService.UpdateAsync(new UpdateInstructorDto

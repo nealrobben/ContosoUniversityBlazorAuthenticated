@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using WebUI.Client.Extensions;
 using WebUI.Client.Mappers;
@@ -117,14 +118,14 @@ public partial class Departments
         await GetDepartments();
     }
 
-    public async Task<TableData<DepartmentOverviewVM>> ServerReload(TableState state)
+    public async Task<TableData<DepartmentOverviewVM>> ServerReload(TableState state, CancellationToken ct)
     {
         var searchString = DepartmentsOverview?.MetaData.SearchString ?? "";
         var sortString = state.GetSortString();
 
         var result = await DepartmentService.GetAllAsync(sortString, state.Page, searchString, state.PageSize);
 
-        return new TableData<DepartmentOverviewVM>() 
+        return new TableData<DepartmentOverviewVM>
         {
             TotalItems = result.MetaData.TotalRecords,
             Items = result.Records.Select(DepartmentViewModelMapper.ToViewModel)

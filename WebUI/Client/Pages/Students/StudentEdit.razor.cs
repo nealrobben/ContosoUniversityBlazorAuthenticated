@@ -13,7 +13,7 @@ namespace WebUI.Client.Pages.Students;
 public partial class StudentEdit
 {
     [Inject]
-    public IFileuploadService FileuploadService { get; set; }
+    public IFileUploadService FileUploadService { get; set; }
 
     [Inject]
     public IStringLocalizer<StudentEdit> Localizer { get; set; }
@@ -54,7 +54,7 @@ public partial class StudentEdit
             {
                 if (File != null)
                 {
-                    UpdateStudentInputModel.ProfilePictureName = await FileuploadService.UploadFile(File);
+                    UpdateStudentInputModel.ProfilePictureName = await FileUploadService.UploadFile(File);
                 }
 
                 await StudentService.UpdateAsync(new UpdateStudentDto

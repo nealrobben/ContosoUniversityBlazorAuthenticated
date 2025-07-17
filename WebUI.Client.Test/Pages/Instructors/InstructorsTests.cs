@@ -37,7 +37,7 @@ public class InstructorsTests : BunitTestBase
         var fakeStudentService = A.Fake<IStudentService>();
         Context.Services.AddScoped(x => fakeStudentService);
 
-        var fakeUploadService = A.Fake<IFileuploadService>();
+        var fakeUploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => fakeUploadService);
 
         var dialog = Context.RenderComponent<MudDialogProvider>();
@@ -138,7 +138,7 @@ public class InstructorsTests : BunitTestBase
         var fakeStudentService = A.Fake<IStudentService>();
         Context.Services.AddScoped(x => fakeStudentService);
 
-        var fakeUploadService = A.Fake<IFileuploadService>();
+        var fakeUploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => fakeUploadService);
 
         var dialog = Context.RenderComponent<MudDialogProvider>();

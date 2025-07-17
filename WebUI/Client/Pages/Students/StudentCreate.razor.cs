@@ -17,7 +17,7 @@ public partial class StudentCreate
     public IStringLocalizer<StudentCreate> Localizer { get; set; }
 
     [Inject]
-    public IFileuploadService FileUploadService { get; set; }
+    public IFileUploadService FileUploadService { get; set; }
 
     [Inject]
     public IStudentService StudentService { get; set; }

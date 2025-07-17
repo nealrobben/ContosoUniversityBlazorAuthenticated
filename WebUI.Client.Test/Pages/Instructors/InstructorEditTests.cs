@@ -32,7 +32,7 @@ public class InstructorEditTests : BunitTestBase
         A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsDto);
         Context.Services.AddScoped(x => fakeInstructorService);
 
-        var uploadService = A.Fake<IFileuploadService>();
+        var uploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => uploadService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -70,7 +70,7 @@ public class InstructorEditTests : BunitTestBase
         A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsDto);
         Context.Services.AddScoped(x => fakeInstructorService);
 
-        var uploadService = A.Fake<IFileuploadService>();
+        var uploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => uploadService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -104,7 +104,7 @@ public class InstructorEditTests : BunitTestBase
         A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsDto);
         Context.Services.AddScoped(x => fakeInstructorService);
 
-        var uploadService = A.Fake<IFileuploadService>();
+        var uploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => uploadService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -143,7 +143,7 @@ public class InstructorEditTests : BunitTestBase
         A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsDto);
         Context.Services.AddScoped(x => fakeInstructorService);
 
-        var uploadService = A.Fake<IFileuploadService>();
+        var uploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => uploadService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -185,7 +185,7 @@ public class InstructorEditTests : BunitTestBase
         A.CallTo(() => fakeInstructorService.UpdateAsync(A<UpdateInstructorDto>.Ignored)).ThrowsAsync(new Exception("error"));
         Context.Services.AddScoped(x => fakeInstructorService);
 
-        var uploadService = A.Fake<IFileuploadService>();
+        var uploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => uploadService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -229,7 +229,7 @@ public class InstructorEditTests : BunitTestBase
         A.CallTo(() => fakeInstructorService.UpdateAsync(A<UpdateInstructorDto>.Ignored)).ThrowsAsync(new Exception("error"));
         Context.Services.AddScoped(x => fakeInstructorService);
 
-        var uploadService = A.Fake<IFileuploadService>();
+        var uploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => uploadService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();

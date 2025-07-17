@@ -33,7 +33,7 @@
                         </MudButton>
                         @if (File != null)
                         {
-                            <MudList>
+                            <MudList T="IBrowserFile">
                                 <MudListItem Icon="@Icons.Material.Filled.AttachFile" @key="@File">
                                         @File.Name <code>@File.Size bytes</code>
                                 </MudListItem>

@@ -43,7 +43,7 @@ public static class Program
         builder.Services.AddScoped<ICourseService, CourseService>();
         builder.Services.AddScoped<IInstructorService, InstructorService>();
         builder.Services.AddScoped<IStudentService, StudentService>();
-        builder.Services.AddScoped<IFileuploadService, FileuploadService>();
+        builder.Services.AddScoped<IFileUploadService, FileUploadService>();
         builder.Services.AddScoped<ClientSettingService>();
     }
 

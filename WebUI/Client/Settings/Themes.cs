@@ -112,11 +112,11 @@ public static class Themes
 
     private static readonly MudTheme defaultTheme = new()
     {
-        Palette = new PaletteLight()
+        PaletteLight = new PaletteLight
         {
             Primary = "#1E88E5",
             AppbarBackground = "#1E88E5",
-            Background = Colors.Grey.Lighten5,
+            Background = Colors.Gray.Lighten5,
             DrawerBackground = "#FFF",
             DrawerText = "rgba(0,0,0, 0.7)",
             Success = "#007E33"
@@ -127,13 +127,13 @@ public static class Themes
 
     private static readonly MudTheme darkTheme = new()
     {
-        Palette = new PaletteDark()
+        PaletteDark = new PaletteDark
         {
             Primary = "#1E88E5",
             Success = "#007E33",
             Black = "#27272f",
             Background = "#32333d",
-            BackgroundGrey = "#27272f",
+            BackgroundGray = "#27272f",
             Surface = "#373740",
             DrawerBackground = "#27272f",
             DrawerText = "rgba(255,255,255, 0.50)",

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using WebUI.Client.Extensions;
 using WebUI.Client.Mappers;
@@ -131,14 +132,14 @@ public partial class Instructors
         await GetInstructors();
     }
 
-    public async Task<TableData<InstructorOverviewVM>> ServerReload(TableState state)
+    public async Task<TableData<InstructorOverviewVM>> ServerReload(TableState state, CancellationToken ct)
     {
         var searchString = InstructorsOverview?.MetaData.SearchString ?? "";
         var sortString = state.GetSortString();
 
         var result = await InstructorService.GetAllAsync(sortString, state.Page, searchString, state.PageSize);
 
-        return new TableData<InstructorOverviewVM>() 
+        return new TableData<InstructorOverviewVM>
         {
             TotalItems = result.MetaData.TotalRecords,
             Items = result.Records.Select(InstructorViewModelMapper.ToViewModel).ToList()

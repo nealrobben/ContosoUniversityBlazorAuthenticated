@@ -1,4 +1,5 @@
-﻿@using WebUI.Client.ViewModels.Departments
+﻿@using System.Threading
+@using WebUI.Client.ViewModels.Departments
 @page "/departments"
 
 <h2>@Localizer["Departments"]</h2>
@@ -6,7 +7,7 @@
 
 <p>
     <MudIconButton OnClick="(e => OpenDepartmentCreate())"
-                   Title="@Localizer["Create"]"
+                   title="@Localizer["Create"]"
                    Variant="Variant.Filled"
                    Icon="fas fa-plus-circle"
                    Color="Color.Primary" 
@@ -14,7 +15,8 @@
     </MudIconButton>
 </p>
 
-<MudTable ServerData="@(new Func<TableState, Task<TableData<DepartmentOverviewVM>>>(ServerReload))"
+<MudTable T="DepartmentOverviewVM"
+          ServerData="@(new Func<TableState, CancellationToken, Task<TableData<DepartmentOverviewVM>>>(ServerReload))"
           Dense="true" Hover="true" FixedFooter="true" Height="500px" @ref="Table">
     <ToolBarContent>
         <MudText Typo="Typo.h6">@Localizer["Departments"]</MudText>
@@ -22,14 +24,14 @@
         <MudTextField T="string" Placeholder="@Localizer["Search"]" Adornment="Adornment.Start" @bind-Value="@DepartmentsOverview.MetaData.SearchString"
                       AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0" id="SearchValue"></MudTextField>
         <MudIconButton OnClick="Filter"
-                       Title="@Localizer["Search"]"
+                       title="@Localizer["Search"]"
                        Variant="Variant.Filled"
                        Icon="fas fa-search"
                        Color="Color.Primary"
                        id="SearchButton">
         </MudIconButton>
         <MudIconButton OnClick="BackToFullList"
-                       Title="@Localizer["BackToFullList"]"
+                       title="@Localizer["BackToFullList"]"
                        Variant="Variant.Filled"
                        Icon="fas fa-list"
                        Color="Color.Primary"
@@ -50,21 +52,21 @@
         <MudTd DataLabel="AdministratorName">@context.AdministratorName</MudTd>
         <MudTd DataLabel="">
             <MudIconButton OnClick="(e => OpenDepartmentEdit(context.DepartmentID))"
-                           Title="@Localizer["Edit"]"
+                           title="@Localizer["Edit"]"
                            Variant="Variant.Filled"
                            Icon="fas fa-edit"
                            Color="Color.Primary" Size="Size.Small"
                            Class="OpenDepartmentEditButton">
             </MudIconButton>
             <MudIconButton OnClick="(e => OpenDepartmentDetails(context.DepartmentID))"
-                           Title="@Localizer["Details"]"
+                           title="@Localizer["Details"]"
                            Variant="Variant.Filled"
                            Icon="fas fa-eye"
                            Color="Color.Primary" Size="Size.Small"
                            Class="OpenDepartmentDetailsButton">
             </MudIconButton>
             <MudIconButton OnClick=@(e => DeleteDepartment(context.DepartmentID, $"{context.Name}"))
-                           Title="@Localizer["Delete"]"
+                           title="@Localizer["Delete"]"
                            Variant="Variant.Filled"
                            Icon="fas fa-trash-alt"
                            Color="Color.Primary" Size="Size.Small"

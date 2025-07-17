@@ -1,4 +1,5 @@
-﻿@using WebUI.Client.ViewModels.Instructors
+﻿@using System.Threading
+@using WebUI.Client.ViewModels.Instructors
 @page "/instructors"
 
 <h2>@Localizer["Instructors"]</h2>
@@ -6,7 +7,7 @@
 
 <p>
     <MudIconButton OnClick="(e => OpenCreateInstructor())"
-                   Title="@Localizer["Create"]"
+                   title="@Localizer["Create"]"
                    Variant="Variant.Filled"
                    Icon="fas fa-plus-circle"
                    Color="Color.Primary"
@@ -14,7 +15,8 @@
     </MudIconButton>
 </p>
 
-<MudTable ServerData="@(new Func<TableState, Task<TableData<InstructorOverviewVM>>>(ServerReload))"
+<MudTable T="InstructorOverviewVM"
+          ServerData="@(new Func<TableState, CancellationToken, Task<TableData<InstructorOverviewVM>>>(ServerReload))"
           Dense="true" Hover="true" FixedFooter="true" Height="500px" @ref="Table" RowClassFunc="@InstructorsSelectRowClassFunc">
     <ToolBarContent>
         <MudText Typo="Typo.h6">@Localizer["Instructors"]</MudText>
@@ -22,14 +24,14 @@
         <MudTextField T="string" Placeholder="@Localizer["Search"]" Adornment="Adornment.Start" @bind-Value="@InstructorsOverview.MetaData.SearchString"
                       AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0" id="SearchValue"></MudTextField>
         <MudIconButton OnClick="Filter"
-                       Title="@Localizer["Search"]"
+                       title="@Localizer["Search"]"
                        Variant="Variant.Filled"
                        Icon="fas fa-search"
                        Color="Color.Primary"
                        id="SearchButton">
         </MudIconButton>
         <MudIconButton OnClick="BackToFullList"
-                       Title="@Localizer["BackToFullList"]"
+                       title="@Localizer["BackToFullList"]"
                        Variant="Variant.Filled"
                        Icon="fas fa-list"
                        Color="Color.Primary"
@@ -52,21 +54,21 @@
         <MudTd DataLabel="Courses"></MudTd>
         <MudTd DataLabel="">
             <MudIconButton OnClick=@(e => SelectInstructor(context.InstructorID))
-                           Title="@Localizer["Select"]"
+                           title="@Localizer["Select"]"
                            Variant="Variant.Filled"
                            Icon="fas fa-hand-pointer"
                            Color="Color.Primary" Size="Size.Small"
                            Class="InstructorSelectButton">
             </MudIconButton>
             <MudIconButton OnClick="(e => OpenInstructorEdit(context.InstructorID))"
-                           Title="@Localizer["Edit"]"
+                           title="@Localizer["Edit"]"
                            Variant="Variant.Filled"
                            Icon="fas fa-edit"
                            Color="Color.Primary" Size="Size.Small"
                            Class="OpenInstructorEditButton">
             </MudIconButton>
             <MudIconButton OnClick="(e => OpenInstructorDetails(context.InstructorID))"
-                           Title="@Localizer["Details"]"
+                           title="@Localizer["Details"]"
                            Variant="Variant.Filled"
                            Icon="fas fa-eye"
                            Color="Color.Primary" Size="Size.Small"
@@ -74,7 +76,7 @@
             </MudIconButton>
             <MudIconButton OnClick=@(e =>
                            DeleteInstructor(context.InstructorID, $"{context.FullName}"))
-                           Title="@Localizer["Delete"]"
+                           title="@Localizer["Delete"]"
                            Variant="Variant.Filled"
                            Icon="fas fa-trash-alt"
                            Color="Color.Primary" Size="Size.Small"

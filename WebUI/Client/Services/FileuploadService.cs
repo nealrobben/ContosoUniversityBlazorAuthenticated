@@ -7,18 +7,18 @@ using WebUI.Client.Dtos;
 
 namespace WebUI.Client.Services;
 
-public interface IFileuploadService
+public interface IFileUploadService
 {
     Task<string> UploadFile(IBrowserFile file);
 }
 
-public class FileuploadService : IFileuploadService
+public class FileUploadService : IFileUploadService
 {
     private readonly HttpClient _http;
 
-    const long maxFileSize = 1024 * 1024 * 15;
+    const long MaxFileSize = 1024 * 1024 * 15;
 
-    public FileuploadService(HttpClient http)
+    public FileUploadService(HttpClient http)
     {
         _http = http;
     }
@@ -28,7 +28,7 @@ public class FileuploadService : IFileuploadService
         var storedFileName = "";
         using var content = new MultipartFormDataContent();
 
-        var fileContent = new StreamContent(file.OpenReadStream(maxFileSize));
+        var fileContent = new StreamContent(file.OpenReadStream(MaxFileSize));
         content.Add(content: fileContent, name: "\"files\"", fileName: file.Name);
 
         var response = await _http.PostAsync("api/File", content);

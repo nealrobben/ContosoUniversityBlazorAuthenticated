@@ -20,7 +20,7 @@ public class InstructorCreateTests : BunitTestBase
         var fakeInstructorService = A.Fake<IInstructorService>();
         Context.Services.AddScoped(x => fakeInstructorService);
 
-        var uploadService = A.Fake<IFileuploadService>();
+        var uploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => uploadService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -49,7 +49,7 @@ public class InstructorCreateTests : BunitTestBase
         var fakeInstructorService = A.Fake<IInstructorService>();
         Context.Services.AddScoped(x => fakeInstructorService);
 
-        var uploadService = A.Fake<IFileuploadService>();
+        var uploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => uploadService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -75,7 +75,7 @@ public class InstructorCreateTests : BunitTestBase
         var fakeInstructorService = A.Fake<IInstructorService>();
         Context.Services.AddScoped(x => fakeInstructorService);
 
-        var fakeUploadService = A.Fake<IFileuploadService>();
+        var fakeUploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => fakeUploadService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -105,7 +105,7 @@ public class InstructorCreateTests : BunitTestBase
         var fakeInstructorService = A.Fake<IInstructorService>();
         Context.Services.AddScoped(x => fakeInstructorService);
 
-        var fakeUploadService = A.Fake<IFileuploadService>();
+        var fakeUploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => fakeUploadService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -137,7 +137,7 @@ public class InstructorCreateTests : BunitTestBase
         A.CallTo(() => fakeInstructorService.CreateAsync(A<CreateInstructorDto>.Ignored)).ThrowsAsync(new Exception("error"));
         Context.Services.AddScoped(x => fakeInstructorService);
 
-        var fakeUploadService = A.Fake<IFileuploadService>();
+        var fakeUploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => fakeUploadService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
@@ -171,7 +171,7 @@ public class InstructorCreateTests : BunitTestBase
         var fakeInstructorService = A.Fake<IInstructorService>();
         Context.Services.AddScoped(x => fakeInstructorService);
 
-        var fakeUploadService = A.Fake<IFileuploadService>();
+        var fakeUploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => fakeUploadService);
 
         var comp = Context.RenderComponent<MudDialogProvider>();
