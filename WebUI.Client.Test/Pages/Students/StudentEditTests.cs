@@ -50,7 +50,7 @@ public class StudentEditTests : BunitTestBase
         };
 
         const string title = "Edit Student";
-        await comp.InvokeAsync(() => dialogReference = service?.Show<StudentEdit>(title, parameters));
+        await comp.InvokeAsync(async () => dialogReference = await service!.ShowAsync<StudentEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 
         Assert.NotEmpty(comp.Markup.Trim());
@@ -89,7 +89,7 @@ public class StudentEditTests : BunitTestBase
         };
 
         const string title = "Edit Student";
-        await comp.InvokeAsync(() => dialogReference = service?.Show<StudentEdit>(title, parameters));
+        await comp.InvokeAsync(async () => dialogReference = await service!.ShowAsync<StudentEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 
         Assert.NotEmpty(comp.Markup.Trim());
@@ -125,7 +125,7 @@ public class StudentEditTests : BunitTestBase
         };
 
         const string title = "Edit Student";
-        await comp.InvokeAsync(() => dialogReference = service?.Show<StudentEdit>(title, parameters));
+        await comp.InvokeAsync(async () => dialogReference = await service!.ShowAsync<StudentEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 
         Assert.NotEmpty(comp.Markup.Trim());
@@ -165,7 +165,7 @@ public class StudentEditTests : BunitTestBase
         };
 
         const string title = "Edit Student";
-        await comp.InvokeAsync(() => dialogReference = service?.Show<StudentEdit>(title, parameters));
+        await comp.InvokeAsync(async () => dialogReference = await service!.ShowAsync<StudentEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 
         Assert.NotEmpty(comp.Markup.Trim());
@@ -208,7 +208,7 @@ public class StudentEditTests : BunitTestBase
         };
 
         const string title = "Edit Student";
-        await comp.InvokeAsync(() => dialogReference = service?.Show<StudentEdit>(title, parameters));
+        await comp.InvokeAsync(async () => dialogReference = await service!.ShowAsync<StudentEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 
         Assert.NotEmpty(comp.Markup.Trim());
@@ -253,7 +253,7 @@ public class StudentEditTests : BunitTestBase
         };
 
         const string title = "Edit Student";
-        await comp.InvokeAsync(() => dialogReference = service?.Show<StudentEdit>(title, parameters));
+        await comp.InvokeAsync(async () => dialogReference = await service!.ShowAsync<StudentEdit>(title, parameters));
         Assert.NotNull(dialogReference);
 
         Assert.NotEmpty(comp.Markup.Trim());

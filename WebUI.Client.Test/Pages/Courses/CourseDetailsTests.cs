@@ -44,7 +44,7 @@ public class CourseDetailsTests : BunitTestBase
         };
 
         const string title = "Course Details";
-        await comp.InvokeAsync(() => dialogReference = service?.Show<CourseDetails>(title, parameters));
+        await comp.InvokeAsync(async () => dialogReference = await service!.ShowAsync<CourseDetails>(title, parameters));
         Assert.NotNull(dialogReference);
 
         Assert.NotEmpty(comp.Markup.Trim());
@@ -82,7 +82,7 @@ public class CourseDetailsTests : BunitTestBase
         };
 
         const string title = "Course Details";
-        await comp.InvokeAsync(() => dialogReference = service?.Show<CourseDetails>(title, parameters));
+        await comp.InvokeAsync(async () => dialogReference = await service!.ShowAsync<CourseDetails>(title, parameters));
         Assert.NotNull(dialogReference);
 
         Assert.NotEmpty(comp.Markup.Trim());
