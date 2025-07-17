@@ -25,7 +25,7 @@ public partial class StudentEdit
     public int StudentId { get; set; }
 
     [CascadingParameter]
-    MudDialogInstance MudDialog { get; set; }
+    IMudDialogInstance MudDialog { get; set; }
 
     public UpdateStudentInputModel UpdateStudentInputModel { get; set; } = new UpdateStudentInputModel();
 

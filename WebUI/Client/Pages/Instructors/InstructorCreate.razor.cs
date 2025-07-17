@@ -23,7 +23,7 @@ public partial class InstructorCreate
     public IInstructorService InstructorService { get; set; }
 
     [CascadingParameter]
-    MudDialogInstance MudDialog { get; set; }
+    IMudDialogInstance MudDialog { get; set; }
 
     public bool ErrorVisible { get; set; }
 

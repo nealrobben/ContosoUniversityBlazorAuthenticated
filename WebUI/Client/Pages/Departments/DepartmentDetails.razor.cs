@@ -12,7 +12,7 @@ namespace WebUI.Client.Pages.Departments;
 public partial class DepartmentDetails
 {
     [CascadingParameter] 
-    MudDialogInstance MudDialog { get; set; }
+    IMudDialogInstance MudDialog { get; set; }
 
     [Inject]
     private IDepartmentService DepartmentService { get; set; }

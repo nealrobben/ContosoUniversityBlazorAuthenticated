@@ -74,7 +74,7 @@ public partial class Students
         await GetStudents();
     }
 
-    public void OpenStudentDetails(int studentId)
+    public async Task OpenStudentDetails(int studentId)
     {
         var parameters = new DialogParameters
         {
@@ -83,7 +83,7 @@ public partial class Students
 
         var options = new DialogOptions() { MaxWidth = MaxWidth.Large };
 
-        DialogService.Show<StudentDetails>(Localizer["StudentDetails"], parameters, options);
+        await DialogService.ShowAsync<StudentDetails>(Localizer["StudentDetails"], parameters, options);
     }
 
     public async Task OpenStudentEdit(int studentId)

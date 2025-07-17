@@ -24,14 +24,14 @@
         <MudTextField T="string" Placeholder="@Localizer["Search"]" Adornment="Adornment.Start" @bind-Value="@CoursesOverview.MetaData.SearchString"
                       AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0" id="SearchValue"></MudTextField>
         <MudIconButton OnClick="Filter"
-                       Title="@Localizer["Search"]"
+                       title="@Localizer["Search"]"
                        Variant="Variant.Filled"
                        Icon="fas fa-search"
                        Color="Color.Primary"
                        id="SearchButton">
         </MudIconButton>
         <MudIconButton OnClick="BackToFullList"
-                       Title="@Localizer["BackToFullList"]"
+                       title="@Localizer["BackToFullList"]"
                        Variant="Variant.Filled"
                        Icon="fas fa-list"
                        Color="Color.Primary"
@@ -52,21 +52,21 @@
         <MudTd DataLabel="DepartmentName">@context.DepartmentName</MudTd>
         <MudTd DataLabel="">
             <MudIconButton OnClick="(e => OpenCourseEdit(context.CourseID))"
-                           Title="@Localizer["Edit"]"
+                           title="@Localizer["Edit"]"
                            Variant="Variant.Filled"
                            Icon="fas fa-edit"
                            Color="Color.Primary" Size="Size.Small"
                            Class="OpenCourseEditButton">
             </MudIconButton>
             <MudIconButton OnClick="(e => OpenCourseDetails(context.CourseID))"
-                           Title="@Localizer["Details"]"
+                           title="@Localizer["Details"]"
                            Variant="Variant.Filled"
                            Icon="fas fa-eye"
                            Color="Color.Primary" Size="Size.Small"
                            Class="OpenCourseDetailsButton">
             </MudIconButton>
             <MudIconButton OnClick=@(e => DeleteCourse(context.CourseID, $"{context.Title}"))
-                           Title="@Localizer["Delete"]"
+                           title="@Localizer["Delete"]"
                            Variant="Variant.Filled"
                            Icon="fas fa-trash-alt"
                            Color="Color.Primary" Size="Size.Small"

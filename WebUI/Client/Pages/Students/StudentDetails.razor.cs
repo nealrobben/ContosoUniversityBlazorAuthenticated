@@ -18,7 +18,7 @@ public partial class StudentDetails
     IStringLocalizer<StudentDetails> Localizer { get; set; }
 
     [CascadingParameter]
-    MudDialogInstance MudDialog { get; set; }
+    IMudDialogInstance MudDialog { get; set; }
 
     [Parameter]
     public int StudentId { get; set; }

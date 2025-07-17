@@ -25,7 +25,7 @@ public partial class InstructorEdit
     public int InstructorId { get; set; }
 
     [CascadingParameter]
-    MudDialogInstance MudDialog { get; set; }
+    IMudDialogInstance MudDialog { get; set; }
 
     public bool ErrorVisible { get; set; }
 

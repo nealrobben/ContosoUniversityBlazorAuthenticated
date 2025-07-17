@@ -31,7 +31,7 @@ public partial class CourseEdit
     IStringLocalizer<CourseEdit> Localizer { get; set; }
 
     [CascadingParameter]
-    MudDialogInstance MudDialog { get; set; }
+    IMudDialogInstance MudDialog { get; set; }
 
     private CustomValidation _customValidation;
 

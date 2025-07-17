@@ -32,7 +32,7 @@ public partial class DepartmentEdit
     public IInstructorService InstructorService { get; set; }
 
     [CascadingParameter]
-    MudDialogInstance MudDialog { get; set; }
+    IMudDialogInstance MudDialog { get; set; }
 
     private CustomValidation _customValidation;
 

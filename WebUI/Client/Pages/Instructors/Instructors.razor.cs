@@ -77,7 +77,7 @@ public partial class Instructors
         SelectedCourseId = courseId;
     }
 
-    public void OpenInstructorDetails(int instructorId)
+    public async Task OpenInstructorDetails(int instructorId)
     {
         var parameters = new DialogParameters
         {
@@ -86,7 +86,7 @@ public partial class Instructors
 
         var options = new DialogOptions() { MaxWidth = MaxWidth.Medium };
 
-        DialogService.Show<InstructorDetails>(Localizer["InstructorDetails"], parameters, options);
+        await DialogService.ShowAsync<InstructorDetails>(Localizer["InstructorDetails"], parameters, options);
     }
 
     public async Task OpenInstructorEdit(int instructorId)

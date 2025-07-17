@@ -26,12 +26,14 @@ public partial class CourseCreate
 
     [Inject]
     public ICourseService CourseService { get; set; }
+
     public DepartmentsLookupVM DepartmentsLookup { get; set; }
 
     public bool ErrorVisible { get; set; }
 
     [CascadingParameter]
-    MudDialogInstance MudDialog { get; set; }
+    IMudDialogInstance MudDialog { get; set; }
+
     public CreateCourseInputModel CreateCourseInputModel { get; set; } = new CreateCourseInputModel();
 
     private CustomValidation _customValidation;

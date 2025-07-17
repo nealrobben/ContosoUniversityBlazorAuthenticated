@@ -63,7 +63,7 @@ public partial class Departments
         }
     }
 
-    public void OpenDepartmentDetails(int departmentId)
+    public async Task OpenDepartmentDetails(int departmentId)
     {
         var parameters = new DialogParameters
         {
@@ -72,7 +72,7 @@ public partial class Departments
 
         var options = new DialogOptions() { MaxWidth = MaxWidth.ExtraSmall };
 
-        DialogService.Show<DepartmentDetails>(Localizer["DepartmentDetails"], parameters, options);
+        await DialogService.ShowAsync<DepartmentDetails>(Localizer["DepartmentDetails"], parameters, options);
     }
 
     public async Task OpenDepartmentEdit(int departmentId)

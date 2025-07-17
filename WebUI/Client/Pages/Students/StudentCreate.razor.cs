@@ -23,7 +23,7 @@ public partial class StudentCreate
     public IStudentService StudentService { get; set; }
 
     [CascadingParameter]
-    MudDialogInstance MudDialog { get; set; }
+    IMudDialogInstance MudDialog { get; set; }
 
     public CreateStudentInputModel CreateStudentInputModel { get; set; } = new CreateStudentInputModel { EnrollmentDate = DateTime.Now.Date };
 

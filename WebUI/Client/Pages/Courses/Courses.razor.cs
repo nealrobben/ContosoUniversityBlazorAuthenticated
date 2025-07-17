@@ -63,7 +63,7 @@ public partial class Courses
         }
     }
 
-    public void OpenCourseDetails(int courseId)
+    public async Task OpenCourseDetails(int courseId)
     {
         var parameters = new DialogParameters
         {
@@ -72,7 +72,7 @@ public partial class Courses
 
         var options = new DialogOptions() { MaxWidth = MaxWidth.ExtraSmall };
 
-        DialogService.Show<CourseDetails>(Localizer["CourseDetails"], parameters, options);
+        await DialogService.ShowAsync<CourseDetails>(Localizer["CourseDetails"], parameters, options);
     }
 
     public async Task OpenCourseEdit(int courseId)

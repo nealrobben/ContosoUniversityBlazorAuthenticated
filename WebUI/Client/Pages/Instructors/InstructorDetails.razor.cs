@@ -18,7 +18,7 @@ public partial class InstructorDetails
     public IInstructorService InstructorService { get; set; }
 
     [CascadingParameter]
-    MudDialogInstance MudDialog { get; set; }
+    IMudDialogInstance MudDialog { get; set; }
 
     [Parameter]
     public int InstructorId { get; set; }
