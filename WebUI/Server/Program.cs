@@ -23,7 +23,7 @@ namespace WebUI.Server;
 public class Program
 #pragma warning restore S1118 // Utility classes should not have public constructors
 {
-    public async static Task Main(string[] args)
+    public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
