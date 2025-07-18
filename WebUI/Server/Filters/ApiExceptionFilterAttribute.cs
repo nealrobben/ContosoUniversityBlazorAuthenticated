@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 namespace WebUI.Server.Filters;
 
+[AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
 public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
 {
 
