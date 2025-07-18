@@ -1,11 +1,10 @@
-﻿
-using ContosoUniversityBlazor.Application.Common.Interfaces;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using ContosoUniversityBlazor.Application.Common.Interfaces;
 using MediatR.Pipeline;
 using Microsoft.Extensions.Logging;
 
-namespace ContosoUniversityBlazor.Application.Common.Behaviours;
+namespace Application.Common.Behaviours;
 
 public class LoggingBehaviour<TRequest> : IRequestPreProcessor<TRequest>
 {

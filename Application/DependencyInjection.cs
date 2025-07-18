@@ -1,7 +1,6 @@
-﻿
-using ContosoUniversityBlazor.Application.Common.Behaviours;
-using FluentValidation;
+﻿using FluentValidation;
 using System.Reflection;
+using Application.Common.Behaviours;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
