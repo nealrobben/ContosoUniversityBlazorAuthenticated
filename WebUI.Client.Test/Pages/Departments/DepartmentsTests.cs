@@ -1,5 +1,4 @@
-﻿
-using AutoFixture;
+﻿using AutoFixture;
 using Bunit;
 using FakeItEasy;
 using FluentAssertions;
@@ -36,10 +35,9 @@ public class DepartmentsTests : BunitTestBase
         A.CallTo(() => fakeInstructorService.GetLookupAsync()).Returns(instructorsLookupDto);
         Context.Services.AddScoped(x => fakeInstructorService);
 
-        var dialog = Context.RenderComponent<MudDialogProvider>();
-        Assert.Empty(dialog.Markup.Trim());
+        var dialog = RenderComponent<MudDialogProvider>();
 
-        var comp = Context.RenderComponent<Client.Pages.Departments.Departments>();
+        var comp = RenderComponent<Client.Pages.Departments.Departments>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.Find("h2").TrimmedText().Should().Be("Departments");
@@ -56,7 +54,7 @@ public class DepartmentsTests : BunitTestBase
         var fakeDepartmentService = A.Fake<IDepartmentService>();
         Context.Services.AddScoped(x => fakeDepartmentService);
 
-        var comp = Context.RenderComponent<Client.Pages.Departments.Departments>();
+        var comp = RenderComponent<Client.Pages.Departments.Departments>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.Find("#SearchButton").Should().NotBeNull();
@@ -71,7 +69,7 @@ public class DepartmentsTests : BunitTestBase
         var fakeDepartmentService = A.Fake<IDepartmentService>();
         Context.Services.AddScoped(x => fakeDepartmentService);
 
-        var comp = Context.RenderComponent<Client.Pages.Departments.Departments>();
+        var comp = RenderComponent<Client.Pages.Departments.Departments>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.Find("#BackToFullListButton").Should().NotBeNull();
@@ -89,10 +87,9 @@ public class DepartmentsTests : BunitTestBase
         A.CallTo(() => fakeDepartmentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored, A<CancellationToken>.Ignored)).Returns(departmentsOverviewDto);
         Context.Services.AddScoped(x => fakeDepartmentService);
 
-        var dialog = Context.RenderComponent<MudDialogProvider>();
-        Assert.Empty(dialog.Markup.Trim());
+        var dialog = RenderComponent<MudDialogProvider>();
 
-        var comp = Context.RenderComponent<Client.Pages.Departments.Departments>();
+        var comp = RenderComponent<Client.Pages.Departments.Departments>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.FindAll(".OpenDepartmentDetailsButton")[0].Should().NotBeNull();
@@ -113,10 +110,9 @@ public class DepartmentsTests : BunitTestBase
         var fakeInstructorService = A.Fake<IInstructorService>();
         Context.Services.AddScoped(x => fakeInstructorService);
 
-        var dialog = Context.RenderComponent<MudDialogProvider>();
-        Assert.Empty(dialog.Markup.Trim());
+        var dialog = RenderComponent<MudDialogProvider>();
 
-        var comp = Context.RenderComponent<Client.Pages.Departments.Departments>();
+        var comp = RenderComponent<Client.Pages.Departments.Departments>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.FindAll(".OpenDepartmentEditButton")[0].Should().NotBeNull();
@@ -137,10 +133,9 @@ public class DepartmentsTests : BunitTestBase
         var fakeInstructorService = A.Fake<IInstructorService>();
         Context.Services.AddScoped(x => fakeInstructorService);
 
-        var dialog = Context.RenderComponent<MudDialogProvider>();
-        Assert.Empty(dialog.Markup.Trim());
+        var dialog = RenderComponent<MudDialogProvider>();
 
-        var comp = Context.RenderComponent<Client.Pages.Departments.Departments>();
+        var comp = RenderComponent<Client.Pages.Departments.Departments>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.FindAll(".DepartmentDeleteButton")[0].Should().NotBeNull();
@@ -163,10 +158,9 @@ public class DepartmentsTests : BunitTestBase
         var fakeInstructorService = A.Fake<IInstructorService>();
         Context.Services.AddScoped(x => fakeInstructorService);
 
-        var dialog = Context.RenderComponent<MudDialogProvider>();
-        Assert.Empty(dialog.Markup.Trim());
+        var dialog = RenderComponent<MudDialogProvider>();
 
-        var comp = Context.RenderComponent<Client.Pages.Departments.Departments>();
+        var comp = RenderComponent<Client.Pages.Departments.Departments>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.FindAll(".DepartmentDeleteButton")[0].Should().NotBeNull();

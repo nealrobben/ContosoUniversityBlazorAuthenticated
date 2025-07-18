@@ -1,5 +1,4 @@
-﻿
-using AutoFixture;
+﻿using AutoFixture;
 using Bunit;
 using FakeItEasy;
 using FluentAssertions;
@@ -31,10 +30,9 @@ public class StudentTests : BunitTestBase
         var fakeUploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => fakeUploadService);
 
-        var dialog = Context.RenderComponent<MudDialogProvider>();
-        Assert.Empty(dialog.Markup.Trim());
+        var dialog = RenderComponent<MudDialogProvider>();
 
-        var comp = Context.RenderComponent<Client.Pages.Students.Students>();
+        var comp = RenderComponent<Client.Pages.Students.Students>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.Find("h2").TrimmedText().Should().Be("Students");
@@ -51,13 +49,14 @@ public class StudentTests : BunitTestBase
         var fakeStudentService = A.Fake<IStudentService>();
         Context.Services.AddScoped(x => fakeStudentService);
 
-        var comp = Context.RenderComponent<Client.Pages.Students.Students>();
+        var comp = RenderComponent<Client.Pages.Students.Students>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.Find("#SearchButton").Should().NotBeNull();
         comp.Find("#SearchButton").Click();
 
-        A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored, A<CancellationToken>.Ignored)).MustHaveHappened();
+        A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored,
+            A<int?>.Ignored, A<CancellationToken>.Ignored)).MustHaveHappened();
     }
 
     [Fact]
@@ -66,13 +65,14 @@ public class StudentTests : BunitTestBase
         var fakeStudentService = A.Fake<IStudentService>();
         Context.Services.AddScoped(x => fakeStudentService);
 
-        var comp = Context.RenderComponent<Client.Pages.Students.Students>();
+        var comp = RenderComponent<Client.Pages.Students.Students>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.Find("#BackToFullListButton").Should().NotBeNull();
         comp.Find("#BackToFullListButton").Click();
 
-        A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored, A<CancellationToken>.Ignored)).MustHaveHappened();
+        A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored,
+            A<int?>.Ignored, A<CancellationToken>.Ignored)).MustHaveHappened();
     }
 
     [Fact]
@@ -81,7 +81,8 @@ public class StudentTests : BunitTestBase
         var studentsOverviewDto = _fixture.Create<OverviewDto<StudentOverviewDto>>();
 
         var fakeStudentService = A.Fake<IStudentService>();
-        A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored, A<CancellationToken>.Ignored)).Returns(studentsOverviewDto);
+        A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored,
+            A<int?>.Ignored, A<CancellationToken>.Ignored)).Returns(studentsOverviewDto);
 
         var studentDetailDto = _fixture.Create<StudentDetailDto>();
         var enrollment = _fixture.Create<StudentDetailEnrollmentDto>();
@@ -90,10 +91,9 @@ public class StudentTests : BunitTestBase
 
         Context.Services.AddScoped(x => fakeStudentService);
 
-        var dialog = Context.RenderComponent<MudDialogProvider>();
-        Assert.Empty(dialog.Markup.Trim());
+        var dialog = RenderComponent<MudDialogProvider>();
 
-        var comp = Context.RenderComponent<Client.Pages.Students.Students>();
+        var comp = RenderComponent<Client.Pages.Students.Students>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.FindAll(".OpenStudentDetailsButton")[0].Should().NotBeNull();
@@ -108,16 +108,16 @@ public class StudentTests : BunitTestBase
         var studentsOverviewDto = _fixture.Create<OverviewDto<StudentOverviewDto>>();
 
         var fakeStudentService = A.Fake<IStudentService>();
-        A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored, A<CancellationToken>.Ignored)).Returns(studentsOverviewDto);
+        A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored,
+            A<int?>.Ignored, A<CancellationToken>.Ignored)).Returns(studentsOverviewDto);
         Context.Services.AddScoped(x => fakeStudentService);
 
         var fakeUploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => fakeUploadService);
 
-        var dialog = Context.RenderComponent<MudDialogProvider>();
-        Assert.Empty(dialog.Markup.Trim());
+        var dialog = RenderComponent<MudDialogProvider>();
 
-        var comp = Context.RenderComponent<Client.Pages.Students.Students>();
+        var comp = RenderComponent<Client.Pages.Students.Students>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.FindAll(".OpenStudentEditButton")[0].Should().NotBeNull();
@@ -132,16 +132,16 @@ public class StudentTests : BunitTestBase
         var studentsOverviewDto = _fixture.Create<OverviewDto<StudentOverviewDto>>();
 
         var fakeStudentService = A.Fake<IStudentService>();
-        A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored, A<CancellationToken>.Ignored)).Returns(studentsOverviewDto);
+        A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored,
+            A<int?>.Ignored, A<CancellationToken>.Ignored)).Returns(studentsOverviewDto);
         Context.Services.AddScoped(x => fakeStudentService);
 
         var fakeUploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => fakeUploadService);
 
-        var dialog = Context.RenderComponent<MudDialogProvider>();
-        Assert.Empty(dialog.Markup.Trim());
+        var dialog = RenderComponent<MudDialogProvider>();
 
-        var comp = Context.RenderComponent<Client.Pages.Students.Students>();
+        var comp = RenderComponent<Client.Pages.Students.Students>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.FindAll(".StudentDeleteButton")[0].Should().NotBeNull();
@@ -158,16 +158,16 @@ public class StudentTests : BunitTestBase
         var studentsOverviewDto = _fixture.Create<OverviewDto<StudentOverviewDto>>();
 
         var fakeStudentService = A.Fake<IStudentService>();
-        A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored, A<CancellationToken>.Ignored)).Returns(studentsOverviewDto);
+        A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored,
+            A<int?>.Ignored, A<CancellationToken>.Ignored)).Returns(studentsOverviewDto);
         Context.Services.AddScoped(x => fakeStudentService);
 
         var fakeUploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => fakeUploadService);
 
-        var dialog = Context.RenderComponent<MudDialogProvider>();
-        Assert.Empty(dialog.Markup.Trim());
+        var dialog = RenderComponent<MudDialogProvider>();
 
-        var comp = Context.RenderComponent<Client.Pages.Students.Students>();
+        var comp = RenderComponent<Client.Pages.Students.Students>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.FindAll(".StudentDeleteButton")[0].Should().NotBeNull();

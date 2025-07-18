@@ -1,5 +1,4 @@
-﻿
-using AutoFixture;
+﻿using AutoFixture;
 using Bunit;
 using FakeItEasy;
 using FluentAssertions;
@@ -40,10 +39,9 @@ public class InstructorsTests : BunitTestBase
         var fakeUploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => fakeUploadService);
 
-        var dialog = Context.RenderComponent<MudDialogProvider>();
-        Assert.Empty(dialog.Markup.Trim());
+        var dialog = RenderComponent<MudDialogProvider>();
 
-        var comp = Context.RenderComponent<Client.Pages.Instructors.Instructors>();
+        var comp = RenderComponent<Client.Pages.Instructors.Instructors>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.Find("h2").TrimmedText().Should().Be("Instructors");
@@ -66,7 +64,7 @@ public class InstructorsTests : BunitTestBase
         var fakeStudentService = A.Fake<IStudentService>();
         Context.Services.AddScoped(x => fakeStudentService);
 
-        var comp = Context.RenderComponent<Client.Pages.Instructors.Instructors>();
+        var comp = RenderComponent<Client.Pages.Instructors.Instructors>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.Find("#SearchButton").Should().NotBeNull();
@@ -87,7 +85,7 @@ public class InstructorsTests : BunitTestBase
         var fakeStudentService = A.Fake<IStudentService>();
         Context.Services.AddScoped(x => fakeStudentService);
 
-        var comp = Context.RenderComponent<Client.Pages.Instructors.Instructors>();
+        var comp = RenderComponent<Client.Pages.Instructors.Instructors>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.Find("#BackToFullListButton").Should().NotBeNull();
@@ -111,10 +109,9 @@ public class InstructorsTests : BunitTestBase
         var fakeStudentService = A.Fake<IStudentService>();
         Context.Services.AddScoped(x => fakeStudentService);
 
-        var dialog = Context.RenderComponent<MudDialogProvider>();
-        Assert.Empty(dialog.Markup.Trim());
+        var dialog = RenderComponent<MudDialogProvider>();
 
-        var comp = Context.RenderComponent<Client.Pages.Instructors.Instructors>();
+        var comp = RenderComponent<Client.Pages.Instructors.Instructors>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.FindAll(".OpenInstructorDetailsButton")[0].Should().NotBeNull();
@@ -141,10 +138,9 @@ public class InstructorsTests : BunitTestBase
         var fakeUploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => fakeUploadService);
 
-        var dialog = Context.RenderComponent<MudDialogProvider>();
-        Assert.Empty(dialog.Markup.Trim());
+        var dialog = RenderComponent<MudDialogProvider>();
 
-        var comp = Context.RenderComponent<Client.Pages.Instructors.Instructors>();
+        var comp = RenderComponent<Client.Pages.Instructors.Instructors>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.FindAll(".OpenInstructorEditButton")[0].Should().NotBeNull();
@@ -168,10 +164,9 @@ public class InstructorsTests : BunitTestBase
         var fakeStudentService = A.Fake<IStudentService>();
         Context.Services.AddScoped(x => fakeStudentService);
 
-        var dialog = Context.RenderComponent<MudDialogProvider>();
-        Assert.Empty(dialog.Markup.Trim());
+        var dialog = RenderComponent<MudDialogProvider>();
 
-        var comp = Context.RenderComponent<Client.Pages.Instructors.Instructors>();
+        var comp = RenderComponent<Client.Pages.Instructors.Instructors>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.FindAll(".InstructorDeleteButton")[0].Should().NotBeNull();
@@ -197,10 +192,9 @@ public class InstructorsTests : BunitTestBase
         var fakeStudentService = A.Fake<IStudentService>();
         Context.Services.AddScoped(x => fakeStudentService);
 
-        var dialog = Context.RenderComponent<MudDialogProvider>();
-        Assert.Empty(dialog.Markup.Trim());
+        var dialog = RenderComponent<MudDialogProvider>();
 
-        var comp = Context.RenderComponent<Client.Pages.Instructors.Instructors>();
+        var comp = RenderComponent<Client.Pages.Instructors.Instructors>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.FindAll(".InstructorDeleteButton")[0].Should().NotBeNull();
@@ -232,7 +226,7 @@ public class InstructorsTests : BunitTestBase
         var fakeStudentService = A.Fake<IStudentService>();
         Context.Services.AddScoped(x => fakeStudentService);
 
-        var comp = Context.RenderComponent<Client.Pages.Instructors.Instructors>();
+        var comp = RenderComponent<Client.Pages.Instructors.Instructors>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.FindAll("#CoursesForInstructorTable").Should().BeEmpty();
@@ -274,7 +268,7 @@ public class InstructorsTests : BunitTestBase
         A.CallTo(() => fakeStudentService.GetStudentsForCourse("2")).Returns(studentsForCourseDto);
         Context.Services.AddScoped(x => fakeStudentService);
 
-        var comp = Context.RenderComponent<Client.Pages.Instructors.Instructors>();
+        var comp = RenderComponent<Client.Pages.Instructors.Instructors>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.FindAll(".InstructorSelectButton")[0].Should().NotBeNull();

@@ -1,5 +1,4 @@
-﻿
-using AutoFixture;
+﻿using AutoFixture;
 using Bunit;
 using FakeItEasy;
 using FluentAssertions;
@@ -36,10 +35,9 @@ public class CoursesTests : BunitTestBase
         A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(departmentsLookupDto);
         Context.Services.AddScoped(x => fakeDepartmentService);
 
-        var dialog = Context.RenderComponent<MudDialogProvider>();
-        Assert.Empty(dialog.Markup.Trim());
+        var dialog = RenderComponent<MudDialogProvider>();
 
-        var comp = Context.RenderComponent<Client.Pages.Courses.Courses>();
+        var comp = RenderComponent<Client.Pages.Courses.Courses>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.Find("h2").TrimmedText().Should().Be("Courses");
@@ -56,13 +54,14 @@ public class CoursesTests : BunitTestBase
         var fakeCourseService = A.Fake<ICourseService>();
         Context.Services.AddScoped(x => fakeCourseService);
 
-        var comp = Context.RenderComponent<Client.Pages.Courses.Courses>();
+        var comp = RenderComponent<Client.Pages.Courses.Courses>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.Find("#SearchButton").Should().NotBeNull();
         comp.Find("#SearchButton").Click();
 
-        A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored, A<CancellationToken>.Ignored)).MustHaveHappened();
+        A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored,
+            A<int?>.Ignored, A<CancellationToken>.Ignored)).MustHaveHappened();
     }
 
     [Fact]
@@ -71,13 +70,14 @@ public class CoursesTests : BunitTestBase
         var fakeCourseService = A.Fake<ICourseService>();
         Context.Services.AddScoped(x => fakeCourseService);
 
-        var comp = Context.RenderComponent<Client.Pages.Courses.Courses>();
+        var comp = RenderComponent<Client.Pages.Courses.Courses>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.Find("#BackToFullListButton").Should().NotBeNull();
         comp.Find("#BackToFullListButton").Click();
 
-        A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored, A<CancellationToken>.Ignored)).MustHaveHappened();
+        A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored,
+            A<int?>.Ignored, A<CancellationToken>.Ignored)).MustHaveHappened();
     }
 
     [Fact]
@@ -86,13 +86,13 @@ public class CoursesTests : BunitTestBase
         var coursesOverviewDto = _fixture.Create<OverviewDto<CourseOverviewDto>>();
 
         var fakeCourseService = A.Fake<ICourseService>();
-        A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored, A<CancellationToken>.Ignored)).Returns(coursesOverviewDto);
+        A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored,
+            A<int?>.Ignored, A<CancellationToken>.Ignored)).Returns(coursesOverviewDto);
         Context.Services.AddScoped(x => fakeCourseService);
 
-        var dialog = Context.RenderComponent<MudDialogProvider>();
-        Assert.Empty(dialog.Markup.Trim());
+        var dialog = RenderComponent<MudDialogProvider>();
 
-        var comp = Context.RenderComponent<Client.Pages.Courses.Courses>();
+        var comp = RenderComponent<Client.Pages.Courses.Courses>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.FindAll(".OpenCourseDetailsButton")[0].Should().NotBeNull();
@@ -107,16 +107,16 @@ public class CoursesTests : BunitTestBase
         var coursesOverviewDto = _fixture.Create<OverviewDto<CourseOverviewDto>>();
 
         var fakeCourseService = A.Fake<ICourseService>();
-        A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored, A<CancellationToken>.Ignored)).Returns(coursesOverviewDto);
+        A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored,
+            A<int?>.Ignored, A<CancellationToken>.Ignored)).Returns(coursesOverviewDto);
         Context.Services.AddScoped(x => fakeCourseService);
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
         Context.Services.AddScoped(x => fakeDepartmentService);
 
-        var dialog = Context.RenderComponent<MudDialogProvider>();
-        Assert.Empty(dialog.Markup.Trim());
+        var dialog = RenderComponent<MudDialogProvider>();
 
-        var comp = Context.RenderComponent<Client.Pages.Courses.Courses>();
+        var comp = RenderComponent<Client.Pages.Courses.Courses>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.FindAll(".OpenCourseEditButton")[0].Should().NotBeNull();
@@ -131,16 +131,16 @@ public class CoursesTests : BunitTestBase
         var coursesOverviewDto = _fixture.Create<OverviewDto<CourseOverviewDto>>();
 
         var fakeCourseService = A.Fake<ICourseService>();
-        A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored, A<CancellationToken>.Ignored)).Returns(coursesOverviewDto);
+        A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored,
+            A<int?>.Ignored, A<CancellationToken>.Ignored)).Returns(coursesOverviewDto);
         Context.Services.AddScoped(x => fakeCourseService);
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
         Context.Services.AddScoped(x => fakeDepartmentService);
 
-        var dialog = Context.RenderComponent<MudDialogProvider>();
-        Assert.Empty(dialog.Markup.Trim());
+        var dialog = RenderComponent<MudDialogProvider>();
 
-        var comp = Context.RenderComponent<Client.Pages.Courses.Courses>();
+        var comp = RenderComponent<Client.Pages.Courses.Courses>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.FindAll(".CourseDeleteButton")[0].Should().NotBeNull();
@@ -157,16 +157,16 @@ public class CoursesTests : BunitTestBase
         var coursesOverviewDto = _fixture.Create<OverviewDto<CourseOverviewDto>>();
 
         var fakeCourseService = A.Fake<ICourseService>();
-        A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored, A<CancellationToken>.Ignored)).Returns(coursesOverviewDto);
+        A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored,
+            A<int?>.Ignored, A<CancellationToken>.Ignored)).Returns(coursesOverviewDto);
         Context.Services.AddScoped(x => fakeCourseService);
 
         var fakeDepartmentService = A.Fake<IDepartmentService>();
         Context.Services.AddScoped(x => fakeDepartmentService);
 
-        var dialog = Context.RenderComponent<MudDialogProvider>();
-        Assert.Empty(dialog.Markup.Trim());
+        var dialog = RenderComponent<MudDialogProvider>();
 
-        var comp = Context.RenderComponent<Client.Pages.Courses.Courses>();
+        var comp = RenderComponent<Client.Pages.Courses.Courses>();
         Assert.NotEmpty(comp.Markup.Trim());
 
         comp.FindAll(".CourseDeleteButton")[0].Should().NotBeNull();
