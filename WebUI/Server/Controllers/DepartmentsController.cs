@@ -1,15 +1,14 @@
-﻿
+﻿using System.Linq;
+using System.Threading.Tasks;
+using Application.Departments.Commands;
+using Application.Departments.Queries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using WebUI.Client.Dtos.Departments;
-using System.Linq;
 using WebUI.Client.Dtos.Common;
-using Application.Departments.Queries;
-using Application.Departments.Commands;
+using WebUI.Client.Dtos.Departments;
 using WebUI.Server.Mappers;
 
-namespace ContosoUniversityBlazor.WebUI.Controllers;
+namespace WebUI.Server.Controllers;
 
 public class DepartmentsController : ContosoApiController
 {

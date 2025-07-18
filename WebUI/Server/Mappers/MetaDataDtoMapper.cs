@@ -1,6 +1,5 @@
 ﻿using Domain.Entities.Projections.Common;
 using WebUI.Client.Dtos.Common;
-using WebUI.Client.ViewModels.Common;
 
 namespace WebUI.Server.Mappers;
 

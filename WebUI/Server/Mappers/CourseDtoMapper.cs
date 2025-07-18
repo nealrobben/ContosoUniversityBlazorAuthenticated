@@ -1,5 +1,4 @@
-﻿using ContosoUniversityBlazor.Domain.Entities;
-using Domain.Entities.Projections.Courses;
+﻿using Domain.Entities.Projections.Courses;
 using System.Linq;
 using WebUI.Client.Dtos.Courses;
 

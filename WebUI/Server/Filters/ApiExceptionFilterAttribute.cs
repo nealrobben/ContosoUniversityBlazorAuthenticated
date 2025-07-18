@@ -1,12 +1,11 @@
-﻿
-using ContosoUniversityBlazor.Application.Common.Exceptions;
+﻿using ContosoUniversityBlazor.Application.Common.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
 
-namespace ContosoUniversityBlazor.WebUI.Filters;
+namespace WebUI.Server.Filters;
 
 public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
 {

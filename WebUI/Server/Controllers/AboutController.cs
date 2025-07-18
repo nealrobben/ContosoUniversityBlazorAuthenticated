@@ -1,12 +1,11 @@
-﻿
-using Application.Home.Queries;
-using Microsoft.AspNetCore.Mvc;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Home.Queries;
+using Microsoft.AspNetCore.Mvc;
 using WebUI.Client.Dtos.Home;
 
-namespace ContosoUniversityBlazor.WebUI.Controllers;
+namespace WebUI.Server.Controllers;
 
 public class AboutController : ContosoApiController
 {

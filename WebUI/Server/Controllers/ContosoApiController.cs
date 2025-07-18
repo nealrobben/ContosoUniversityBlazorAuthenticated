@@ -1,9 +1,8 @@
-﻿
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ContosoUniversityBlazor.WebUI.Controllers;
+namespace WebUI.Server.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

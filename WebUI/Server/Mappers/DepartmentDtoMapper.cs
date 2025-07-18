@@ -1,5 +1,4 @@
-﻿using ContosoUniversityBlazor.Domain.Entities;
-using Domain.Entities.Projections.Departments;
+﻿using Domain.Entities.Projections.Departments;
 using System.Linq;
 using WebUI.Client.Dtos.Departments;
 

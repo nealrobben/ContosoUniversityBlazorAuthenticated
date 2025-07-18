@@ -1,8 +1,6 @@
-﻿
-using ContosoUniversityBlazor.Application.Program.Commands.SeedData;
+﻿using ContosoUniversityBlazor.Application.Program.Commands.SeedData;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -15,9 +13,9 @@ using ContosoUniversityBlazor.Infrastructure;
 using ContosoUniversityBlazor.Application.Common.Interfaces;
 using ContosoUniversityBlazor.Persistence;
 using ContosoUniversityBlazor.WebUI.Services;
-using ContosoUniversityBlazor.WebUI.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using WebUI.Server.Filters;
 
 namespace WebUI.Server;
 

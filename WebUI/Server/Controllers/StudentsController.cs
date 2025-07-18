@@ -1,15 +1,14 @@
-﻿
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Application.Students.Commands;
 using Application.Students.Queries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using System.Threading.Tasks;
 using WebUI.Client.Dtos.Common;
 using WebUI.Client.Dtos.Students;
 using WebUI.Server.Mappers;
 
-namespace ContosoUniversityBlazor.WebUI.Controllers;
+namespace WebUI.Server.Controllers;
 public class StudentsController : ContosoApiController
 {
     [HttpGet]

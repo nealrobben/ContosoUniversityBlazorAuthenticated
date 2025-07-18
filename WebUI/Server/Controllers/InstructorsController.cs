@@ -1,17 +1,15 @@
-﻿
-
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Application.Instructors.Commands;
 using Application.Instructors.Queries;
 using ContosoUniversityBlazor.Application.Instructors.Queries.GetInstructorsLookup;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using System.Threading.Tasks;
 using WebUI.Client.Dtos.Common;
 using WebUI.Client.Dtos.Instructors;
 using WebUI.Server.Mappers;
 
-namespace ContosoUniversityBlazor.WebUI.Controllers;
+namespace WebUI.Server.Controllers;
 
 public class InstructorsController : ContosoApiController
 {
