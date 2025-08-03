@@ -47,8 +47,8 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       shell: pwsh
       run: |
-        dotnet-sonarscanner begin /k:"nealrobben_ContosoUniversityBlazorAuthenticated" /o:"nealrobben" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+        .\.sonar\scanner\dotnet-sonarscanner begin /k:"nealrobben_ContosoUniversityBlazorAuthenticated" /o:"nealrobben" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
         dotnet build
-        dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+        .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
     - name: Test
       run: dotnet test --no-build --verbosity normal
