@@ -1,8 +1,7 @@
-﻿
-using ContosoUniversityBlazor.Application.Common.Models;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Application.Common.Models;
 
-namespace ContosoUniversityBlazor.Application.Common.Interfaces;
+namespace Application.Common.Interfaces;
 
 public interface IIdentityService
 {

@@ -1,5 +1,4 @@
-﻿
-using Application.Common.Interfaces;
+﻿using Application.Common.Interfaces;
 using System.IO;
 using System.Threading.Tasks;
 using Azure.Storage.Blobs;

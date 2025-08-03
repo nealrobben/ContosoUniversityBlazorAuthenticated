@@ -1,6 +1,5 @@
-﻿
-using ContosoUniversityBlazor.Domain.Entities;
-using System.Linq;
+﻿using System.Linq;
+using Domain.Entities;
 
 namespace Application.Common.Extensions;
 

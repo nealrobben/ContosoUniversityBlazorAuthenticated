@@ -1,5 +1,4 @@
-﻿
-using AngleSharp.Dom;
+﻿using AngleSharp.Dom;
 
 namespace WebUI.Client.Test.Extensions;
 

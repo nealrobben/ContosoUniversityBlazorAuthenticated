@@ -1,5 +1,4 @@
-﻿
-namespace Domain.Entities.Projections.Instructors;
+﻿namespace Domain.Entities.Projections.Instructors;
 
 public class InstructorLookup
 {

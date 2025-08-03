@@ -1,10 +1,9 @@
-﻿
-using ContosoUniversityBlazor.Application.Common.Interfaces;
-using ContosoUniversityBlazor.Domain.Entities;
-using MediatR;
+﻿using MediatR;
 using System;
 using System.Threading.Tasks;
 using System.Threading;
+using Application.Common.Interfaces;
+using Domain.Entities;
 
 namespace Application.Instructors.Commands;
 

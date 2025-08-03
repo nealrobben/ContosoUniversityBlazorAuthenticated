@@ -1,25 +1,27 @@
-﻿using ContosoUniversityBlazor.Application.Program.Commands.SeedData;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
-using ContosoUniversityBlazor.Application;
-using ContosoUniversityBlazor.Infrastructure;
-using ContosoUniversityBlazor.Application.Common.Interfaces;
-using ContosoUniversityBlazor.Persistence;
-using ContosoUniversityBlazor.WebUI.Services;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+using Application;
+using Application.Common.Interfaces;
+using Application.Program.Commands.SeedData;
+using Infrastructure;
+using Infrastructure.Persistence;
 using WebUI.Server.Filters;
+using WebUI.Server.Services;
 
 namespace WebUI.Server;
 
 #pragma warning disable S1118 // Utility classes should not have public constructors
+[ExcludeFromCodeCoverage]
 public class Program
 #pragma warning restore S1118 // Utility classes should not have public constructors
 {
@@ -111,7 +113,7 @@ public class Program
 
         try
         {
-            var context = serviceProvider.GetRequiredService<ContosoUniversityBlazor.Persistence.SchoolContext>();
+            var context = serviceProvider.GetRequiredService<SchoolContext>();
 
             await context.Database.EnsureCreatedAsync();
 

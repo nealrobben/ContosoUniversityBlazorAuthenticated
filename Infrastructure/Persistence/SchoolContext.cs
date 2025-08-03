@@ -1,13 +1,12 @@
-﻿
-using ContosoUniversityBlazor.Application.Common.Interfaces;
-using ContosoUniversityBlazor.Domain.Common;
-using ContosoUniversityBlazor.Domain.Entities;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Application.Common.Interfaces;
+using Domain.Common;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace ContosoUniversityBlazor.Persistence;
+namespace Infrastructure.Persistence;
 
 public class SchoolContext : DbContext, ISchoolContext
 {

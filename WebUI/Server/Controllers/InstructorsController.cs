@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Application.Instructors.Commands;
 using Application.Instructors.Queries;
-using ContosoUniversityBlazor.Application.Instructors.Queries.GetInstructorsLookup;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebUI.Client.Dtos.Common;

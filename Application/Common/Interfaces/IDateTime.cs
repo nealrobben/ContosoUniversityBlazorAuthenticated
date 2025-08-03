@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ContosoUniversityBlazor.Application.Common.Interfaces;
+namespace Application.Common.Interfaces;
 
 public interface IDateTime
 {

@@ -1,11 +1,13 @@
-﻿using FluentValidation;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Application.Common.Behaviours;
+using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ContosoUniversityBlazor.Application;
+namespace Application;
 
+[ExcludeFromCodeCoverage]
 public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)

@@ -1,9 +1,9 @@
-﻿using ContosoUniversityBlazor.Application.Common.Exceptions;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using System.Collections.Generic;
+using Application.Common.Exceptions;
 
 namespace WebUI.Server.Filters;
 

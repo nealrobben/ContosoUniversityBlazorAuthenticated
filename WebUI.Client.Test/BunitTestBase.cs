@@ -1,9 +1,7 @@
-﻿
-using Bunit;
+﻿using Bunit;
 using FluentValidation;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.DependencyInjection;
-using MudBlazor;
 using MudBlazor.Services;
 using WebUI.Client.InputModels.Courses;
 using WebUI.Client.Shared;

@@ -1,5 +1,4 @@
-﻿
-namespace WebUI.Client.Dtos.Students;
+﻿namespace WebUI.Client.Dtos.Students;
 
 public class StudentForCourseDto
 {

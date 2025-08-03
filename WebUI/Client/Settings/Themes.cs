@@ -1,5 +1,4 @@
-﻿
-using MudBlazor;
+﻿using MudBlazor;
 
 namespace WebUI.Client.Settings;
 

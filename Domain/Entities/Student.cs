@@ -1,8 +1,7 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace ContosoUniversityBlazor.Domain.Entities;
+namespace Domain.Entities;
 
 public class Student : Person
 {

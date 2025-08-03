@@ -1,5 +1,4 @@
-﻿
-using AutoFixture;
+﻿using AutoFixture;
 using Bunit;
 using FakeItEasy;
 using FluentAssertions;

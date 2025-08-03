@@ -1,5 +1,4 @@
-﻿
-using System.IO;
+﻿using System.IO;
 using System.Threading.Tasks;
 
 namespace Application.Common.Interfaces;

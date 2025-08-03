@@ -1,14 +1,15 @@
-﻿
-using ContosoUniversityBlazor.Application.Common.Interfaces;
-using ContosoUniversityBlazor.Domain.Entities;
-using ContosoUniversityBlazor.Domain.Enums;
-using System;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.Common.Interfaces;
+using Domain.Entities;
+using Domain.Enums;
 
-namespace ContosoUniversityBlazor.Application.Program.Commands.SeedData;
+namespace Application.Program.Commands.SeedData;
 
+[ExcludeFromCodeCoverage]
 public class DataSeeder
 {
     private readonly ISchoolContext _context;
@@ -120,7 +121,7 @@ public class DataSeeder
 
     private async Task AddCourseAssignments(Instructor[] instructors, Course[] courses)
     {
-        var courseInstructors = new Domain.Entities.CourseAssignment[]
+        var courseInstructors = new CourseAssignment[]
         {
             new() {
                 CourseID = courses.Single(c => c.Title == "Chemistry" ).CourseID,
@@ -156,7 +157,7 @@ public class DataSeeder
                 },
         };
 
-        foreach (Domain.Entities.CourseAssignment ci in courseInstructors)
+        foreach (CourseAssignment ci in courseInstructors)
         {
             _context.CourseAssignments.Add(ci);
         }

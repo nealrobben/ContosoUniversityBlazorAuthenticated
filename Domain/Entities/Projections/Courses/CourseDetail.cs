@@ -1,5 +1,4 @@
-﻿
-namespace Domain.Entities.Projections.Courses;
+﻿namespace Domain.Entities.Projections.Courses;
 
 public class CourseDetail
 {

@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Mvc.Testing;
+﻿using Microsoft.AspNetCore.Mvc.Testing;
 using WebUI.Server;
 
 namespace WebUI.IntegrationTests;

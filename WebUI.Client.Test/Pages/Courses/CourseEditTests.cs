@@ -1,5 +1,4 @@
-﻿
-using AngleSharp.Html.Dom;
+﻿using AngleSharp.Html.Dom;
 using AutoFixture;
 using Bunit;
 using FakeItEasy;

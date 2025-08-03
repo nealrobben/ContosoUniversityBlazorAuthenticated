@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Components.Forms;
+﻿using Microsoft.AspNetCore.Components.Forms;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;

@@ -1,6 +1,4 @@
-﻿
-using ContosoUniversityBlazor.Domain.Entities;
-using Domain.Entities.Projections.Instructors;
+﻿using Domain.Entities.Projections.Instructors;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,7 +19,7 @@ public static class InstructorProjectionMapper
         };
     }
 
-    public static Instructors.CourseAssignment ToCourseAssignmentProjection(ContosoUniversityBlazor.Domain.Entities.CourseAssignment courseAssignment)
+    public static Instructors.CourseAssignment ToCourseAssignmentProjection(CourseAssignment courseAssignment)
     {
         return new Instructors.CourseAssignment
         {

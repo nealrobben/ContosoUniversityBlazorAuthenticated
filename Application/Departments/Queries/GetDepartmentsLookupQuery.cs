@@ -1,10 +1,9 @@
-﻿
-using ContosoUniversityBlazor.Application.Common.Interfaces;
-using MediatR;
+﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.Common.Interfaces;
 using Domain.Entities.Projections.Departments;
 using Domain.Entities.Projections.Mappers;
 

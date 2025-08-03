@@ -1,4 +1,4 @@
-﻿namespace ContosoUniversityBlazor.Domain.Enums;
+﻿namespace Domain.Enums;
 
 public enum Grade
 {

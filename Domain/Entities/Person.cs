@@ -1,4 +1,4 @@
-﻿namespace ContosoUniversityBlazor.Domain.Entities;
+﻿namespace Domain.Entities;
 
 public abstract class Person
 {

@@ -1,17 +1,15 @@
-﻿
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Application.Common.Interfaces;
-using ContosoUniversityBlazor.Application.Common.Interfaces;
-using ContosoUniversityBlazor.Infrastructure.Services;
-using ContosoUniversityBlazor.Persistence;
+using Infrastructure.Persistence;
 using Infrastructure.Services;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
-namespace ContosoUniversityBlazor.Infrastructure;
+namespace Infrastructure;
 
+[ExcludeFromCodeCoverage]
 public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)

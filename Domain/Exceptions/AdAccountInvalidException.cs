@@ -1,7 +1,6 @@
-﻿
-using System;
+﻿using System;
 
-namespace ContosoUniversityBlazor.Domain.Exceptions;
+namespace Domain.Exceptions;
 
 public class AdAccountInvalidException : Exception
 {

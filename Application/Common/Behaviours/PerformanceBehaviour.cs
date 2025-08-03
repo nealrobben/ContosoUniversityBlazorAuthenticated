@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using ContosoUniversityBlazor.Application.Common.Interfaces;
+using Application.Common.Interfaces;
 using MediatR;
 using Microsoft.Extensions.Logging;
 

@@ -1,5 +1,4 @@
-﻿
-using WebUI.Client.Enums;
+﻿using WebUI.Client.Enums;
 
 namespace WebUI.Client.ViewModels.Students;
 

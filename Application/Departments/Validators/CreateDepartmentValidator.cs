@@ -1,10 +1,9 @@
-﻿
-using Application.Departments.Commands;
-using ContosoUniversityBlazor.Application.Common.Interfaces;
+﻿using Application.Departments.Commands;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Common.Interfaces;
 
 namespace Application.Departments.Validators;
 

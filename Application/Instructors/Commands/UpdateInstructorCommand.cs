@@ -1,12 +1,10 @@
-﻿
-using Application.Common.Interfaces;
-using ContosoUniversityBlazor.Application.Common.Exceptions;
-using ContosoUniversityBlazor.Application.Common.Interfaces;
-using ContosoUniversityBlazor.Domain.Entities;
+﻿using Application.Common.Interfaces;
 using MediatR;
 using System;
 using System.Threading.Tasks;
 using System.Threading;
+using Application.Common.Exceptions;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Instructors.Commands;

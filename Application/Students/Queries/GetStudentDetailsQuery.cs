@@ -1,11 +1,10 @@
-﻿
-using ContosoUniversityBlazor.Application.Common.Exceptions;
-using ContosoUniversityBlazor.Application.Common.Interfaces;
-using ContosoUniversityBlazor.Domain.Entities;
-using MediatR;
+﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Threading;
+using Application.Common.Exceptions;
+using Application.Common.Interfaces;
+using Domain.Entities;
 using Domain.Entities.Projections.Students;
 using Domain.Entities.Projections.Mappers;
 

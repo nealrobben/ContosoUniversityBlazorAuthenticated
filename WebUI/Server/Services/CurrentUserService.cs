@@ -1,9 +1,8 @@
-﻿
-using ContosoUniversityBlazor.Application.Common.Interfaces;
+﻿using System.Security.Claims;
+using Application.Common.Interfaces;
 using Microsoft.AspNetCore.Http;
-using System.Security.Claims;
 
-namespace ContosoUniversityBlazor.WebUI.Services;
+namespace WebUI.Server.Services;
 
 public class CurrentUserService : ICurrentUserService
 {

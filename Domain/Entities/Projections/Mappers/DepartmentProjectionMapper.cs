@@ -1,6 +1,4 @@
-﻿
-using ContosoUniversityBlazor.Domain.Entities;
-using Domain.Entities.Projections.Departments;
+﻿using Domain.Entities.Projections.Departments;
 using System.Collections.Generic;
 using System.Linq;
 

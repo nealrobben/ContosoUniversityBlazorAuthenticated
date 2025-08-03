@@ -1,11 +1,10 @@
-﻿
-using ContosoUniversityBlazor.Domain.Entities;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace ContosoUniversityBlazor.Application.Common.Interfaces;
+namespace Application.Common.Interfaces;
 
 public interface ISchoolContext
 {
@@ -15,7 +14,7 @@ public interface ISchoolContext
     public DbSet<Department> Departments { get; set; }
     public DbSet<Instructor> Instructors { get; set; }
     public DbSet<OfficeAssignment> OfficeAssignments { get; set; }
-    public DbSet<Domain.Entities.CourseAssignment> CourseAssignments { get; set; }
+    public DbSet<CourseAssignment> CourseAssignments { get; set; }
 
     int SaveChanges();
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);

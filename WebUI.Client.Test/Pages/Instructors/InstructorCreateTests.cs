@@ -1,5 +1,4 @@
-﻿
-using Bunit;
+﻿using Bunit;
 using FakeItEasy;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;

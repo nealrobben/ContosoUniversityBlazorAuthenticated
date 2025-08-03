@@ -1,5 +1,4 @@
-﻿
-namespace Domain.Entities.Projections;
+﻿namespace Domain.Entities.Projections;
 
 public class UploadResult
 {

@@ -1,9 +1,8 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace WebUI.Client.Extensions;
 
-public partial class ApiException : System.Exception
+public class ApiException : System.Exception
 {
     public int StatusCode { get; private set; }
 

@@ -1,6 +1,6 @@
-﻿
-using ContosoUniversityBlazor.Application.Common.Interfaces;
-using ContosoUniversityBlazor.Domain.Entities;
+﻿using Application.Common.Interfaces;
+using Domain.Entities;
+using Domain.Enums;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using WebUI.Client.Dtos.Common;
@@ -431,7 +431,7 @@ public class StudentsControllerTests : IntegrationTest
         {
             CourseID = course.CourseID,
             StudentID = student.ID,
-            Grade = ContosoUniversityBlazor.Domain.Enums.Grade.B
+            Grade = Grade.B
         };
 
         using (var scope = _appFactory.Services.CreateScope())

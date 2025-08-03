@@ -1,9 +1,8 @@
-﻿
-using ContosoUniversityBlazor.Domain.Entities;
+﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ContosoUniversityBlazor.Persistence.Configurations;
+namespace Infrastructure.Persistence.Configurations;
 
 public class DepartmentConfiguration : IEntityTypeConfiguration<Department>
 {

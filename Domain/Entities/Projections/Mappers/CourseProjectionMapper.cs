@@ -1,6 +1,4 @@
-﻿
-using ContosoUniversityBlazor.Domain.Entities;
-using Domain.Entities.Projections.Courses;
+﻿using Domain.Entities.Projections.Courses;
 using System.Collections.Generic;
 using System.Linq;
 

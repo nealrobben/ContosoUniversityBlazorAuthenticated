@@ -1,5 +1,4 @@
-﻿
-using Bunit;
+﻿using Bunit;
 using WebUI.Client.Pages.Departments;
 using Xunit;
 using Microsoft.Extensions.DependencyInjection;

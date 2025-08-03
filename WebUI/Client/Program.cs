@@ -1,18 +1,20 @@
 
+using Blazored.LocalStorage;
+using FluentValidation;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor.Services;
 using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Net.Http;
 using System.Threading.Tasks;
-using WebUI.Client.Services;
-using System.Globalization;
-using Blazored.LocalStorage;
-using FluentValidation;
 using WebUI.Client.InputModels.Courses;
+using WebUI.Client.Services;
 
 namespace WebUI.Client;
 
+[ExcludeFromCodeCoverage]
 public static class Program
 {
     public static async Task Main(string[] args)

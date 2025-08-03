@@ -1,5 +1,4 @@
-﻿
-namespace Domain.Entities.Projections.Departments;
+﻿namespace Domain.Entities.Projections.Departments;
 
 public class DepartmentLookup
 {

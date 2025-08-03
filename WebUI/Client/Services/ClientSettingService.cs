@@ -1,5 +1,4 @@
-﻿
-using Blazored.LocalStorage;
+﻿using Blazored.LocalStorage;
 using MudBlazor;
 using System.Threading.Tasks;
 using WebUI.Client.Settings;

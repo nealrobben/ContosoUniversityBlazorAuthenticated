@@ -1,14 +1,13 @@
-﻿
-using ContosoUniversityBlazor.Application.Common.Interfaces;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Common.Interfaces;
 using Domain.Entities.Projections.Instructors;
 using Domain.Entities.Projections.Mappers;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
-namespace ContosoUniversityBlazor.Application.Instructors.Queries.GetInstructorsLookup;
+namespace Application.Instructors.Queries;
 
 public class GetInstructorLookupQuery : IRequest<InstructorsLookup>
 {
