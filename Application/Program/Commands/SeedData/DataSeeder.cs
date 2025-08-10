@@ -106,10 +106,8 @@ public class DataSeeder
 
         foreach (Enrollment e in enrollments)
         {
-            var enrollmentInDataBase = _context.Enrollments.Where(
-                s =>
-                        s.Student.ID == e.StudentID &&
-                        s.Course.CourseID == e.CourseID).SingleOrDefault();
+            var enrollmentInDataBase = _context.Enrollments.SingleOrDefault(s => s.Student.ID == e.StudentID &&
+                s.Course.CourseID == e.CourseID);
             if (enrollmentInDataBase == null)
             {
                 _context.Enrollments.Add(e);

@@ -1,6 +1,6 @@
 ﻿
 <MudMenu Icon="@Icons.Material.Outlined.Language" Color="Color.Inherit" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter" Dense="true">
-    @foreach (var language in supportedCultures)
+    @foreach (var language in _supportedCultures)
 {
     <MudMenuItem OnClick="(()=> ChangeLanguageAsync(language))">@language.DisplayName</MudMenuItem>
 }

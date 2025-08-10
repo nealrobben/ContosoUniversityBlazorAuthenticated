@@ -15,12 +15,7 @@ namespace WebUI.Client.Test.Pages.Departments;
 
 public class DepartmentsTests : BunitTestBase
 {
-    private readonly Fixture _fixture;
-
-    public DepartmentsTests()
-    {
-        _fixture = new Fixture();
-    }
+    private readonly Fixture _fixture = new();
 
     [Fact]
     public void Departments_ClickCreateButton_OpensDialog()

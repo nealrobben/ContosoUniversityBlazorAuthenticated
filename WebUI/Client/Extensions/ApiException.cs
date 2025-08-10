@@ -6,7 +6,7 @@ public class ApiException : System.Exception
 {
     public int StatusCode { get; private set; }
 
-    public string Response { get; private set; }
+    public string Response { get; }
 
     public IReadOnlyDictionary<string, IEnumerable<string>> Headers { get; private set; }
 
@@ -22,6 +22,6 @@ public class ApiException : System.Exception
 
     public override string ToString()
     {
-        return string.Format("HTTP Response: \n\n{0}\n\n{1}", Response, base.ToString());
+        return $"HTTP Response: \n\n{Response}\n\n{base.ToString()}";
     }
 }

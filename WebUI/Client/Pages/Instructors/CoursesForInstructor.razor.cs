@@ -1,7 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
-using System.Linq;
 using System.Threading.Tasks;
 using WebUI.Client.Mappers;
 using WebUI.Client.Services;
@@ -26,7 +25,7 @@ public partial class CoursesForInstructor
     [Parameter] 
     public EventCallback<int> OnCourseSelected { get; set; }
 
-    public CoursesForInstructorOverviewVM CourseForInstructorOverview { get; set; } = new CoursesForInstructorOverviewVM();
+    public CoursesForInstructorOverviewVM CourseForInstructorOverview { get; set; } = new();
 
     protected override async Task OnParametersSetAsync()
     {

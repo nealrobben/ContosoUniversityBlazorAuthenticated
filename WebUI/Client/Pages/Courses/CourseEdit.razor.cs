@@ -37,7 +37,7 @@ public partial class CourseEdit
 
     public bool ErrorVisible { get; set; }
 
-    public UpdateCourseInputModel UpdateCourseInputModel { get; set; } = new UpdateCourseInputModel();
+    public UpdateCourseInputModel UpdateCourseInputModel { get; set; } = new();
     public DepartmentsLookupVM DepartmentsLookup { get; set; }
 
     protected override async Task OnInitializedAsync()

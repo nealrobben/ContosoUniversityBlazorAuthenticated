@@ -29,8 +29,8 @@ public partial class InstructorEdit
 
     public bool ErrorVisible { get; set; }
 
-    public IBrowserFile File { get; set; } = null;
-    public UpdateInstructorInputModel UpdateInstructorInputModel { get; set; } = new UpdateInstructorInputModel();
+    public IBrowserFile File { get; set; }
+    public UpdateInstructorInputModel UpdateInstructorInputModel { get; set; } = new();
 
     protected override async Task OnParametersSetAsync()
     {

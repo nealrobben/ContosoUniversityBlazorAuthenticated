@@ -29,7 +29,7 @@ public partial class Departments
 
     private MudTable<DepartmentOverviewVM> Table;
 
-    public OverviewVM<DepartmentOverviewVM> DepartmentsOverview { get; set; } = new OverviewVM<DepartmentOverviewVM>();
+    public OverviewVM<DepartmentOverviewVM> DepartmentsOverview { get; set; } = new();
 
     protected override void OnInitialized()
     {
@@ -88,7 +88,7 @@ public partial class Departments
 
         var result = await dialog.Result;
 
-        if (result.Data != null && (bool)result.Data)
+        if (result?.Data != null && (bool)result.Data)
         {
             await GetDepartments();
         }
@@ -101,7 +101,7 @@ public partial class Departments
         var dialog = await DialogService.ShowAsync<DepartmentCreate>(Localizer["CreateDepartment"], options);
         var result = await dialog.Result;
 
-        if (result.Data != null && (bool)result.Data)
+        if (result?.Data != null && (bool)result.Data)
         {
             await GetDepartments();
         }

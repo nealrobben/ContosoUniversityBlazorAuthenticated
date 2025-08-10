@@ -9,9 +9,7 @@ using Domain.Entities.Projections.Mappers;
 
 namespace Application.Departments.Queries;
 
-public class GetDepartmentsLookupQuery : IRequest<DepartmentsLookup>
-{
-}
+public class GetDepartmentsLookupQuery : IRequest<DepartmentsLookup>;
 
 public class GetDepartmentsLookupQueryHandler : IRequestHandler<GetDepartmentsLookupQuery, DepartmentsLookup>
 {

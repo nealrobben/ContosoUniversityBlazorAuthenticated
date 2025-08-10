@@ -56,10 +56,7 @@ public static class Program
         {
             CultureInfo culture;
             var preference = await clientSettingService.GetSettings();
-            if (preference != null)
-                culture = new CultureInfo(preference.LanguageCode);
-            else
-                culture = new CultureInfo("en-US");
+            culture = preference != null ? new CultureInfo(preference.LanguageCode) : new CultureInfo("en-US");
             CultureInfo.DefaultThreadCurrentCulture = culture;
             CultureInfo.DefaultThreadCurrentUICulture = culture;
         }

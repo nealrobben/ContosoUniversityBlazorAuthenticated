@@ -5,11 +5,6 @@ namespace Domain.Entities;
 
 public class Department
 {
-    public Department()
-    {
-        Courses = new HashSet<Course>();
-    }
-
     public int DepartmentID { get; set; }
     public string Name { get; set; }
     public decimal Budget { get; set; }
@@ -18,7 +13,7 @@ public class Department
     public byte[] RowVersion { get; set; }
 
     public Instructor Administrator { get; set; }
-    public ICollection<Course> Courses { get; set; }
+    public ICollection<Course> Courses { get; set; } = new HashSet<Course>();
 
     public override string ToString()
     {

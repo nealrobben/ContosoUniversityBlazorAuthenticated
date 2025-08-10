@@ -33,7 +33,7 @@ public partial class DepartmentCreate
 
     private CustomValidation _customValidation;
 
-    public CreateDepartmentInputModel CreateDepartmentInputModel { get; set; } = new CreateDepartmentInputModel() { StartDate = DateTime.UtcNow.Date };
+    public CreateDepartmentInputModel CreateDepartmentInputModel { get; set; } = new() { StartDate = DateTime.UtcNow.Date };
     public InstructorsLookupVM InstructorsLookup { get; set; }
 
     public bool ErrorVisible { get; set; }

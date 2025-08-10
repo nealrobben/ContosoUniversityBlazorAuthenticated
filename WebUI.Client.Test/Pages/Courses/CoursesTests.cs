@@ -15,12 +15,7 @@ namespace WebUI.Client.Test.Pages.Courses;
 
 public class CoursesTests : BunitTestBase
 {
-    private readonly Fixture _fixture;
-
-    public CoursesTests()
-    {
-        _fixture = new Fixture();
-    }
+    private readonly Fixture _fixture = new();
 
     [Fact]
     public void Courses_ClickCreateButton_OpensDialog()

@@ -16,10 +16,7 @@ public class OverviewDto<T>
 
     public OverviewDto(IList<T> records, MetaDataDto metaData)
     {
-        if (records != null)
-            Records = records;
-        else
-            Records = new List<T>();
+        Records = records ?? new List<T>();
 
         MetaData = metaData;
     }

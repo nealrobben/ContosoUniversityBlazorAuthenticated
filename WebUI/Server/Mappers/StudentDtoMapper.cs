@@ -15,7 +15,7 @@ public static class StudentDtoMapper
         };
     }
 
-    public static StudentsForCourseDto ToDto(Domain.Entities.Projections.Students.StudentsForCourse model)
+    public static StudentsForCourseDto ToDto(StudentsForCourse model)
     {
         return new StudentsForCourseDto
         {

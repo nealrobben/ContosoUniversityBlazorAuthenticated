@@ -18,10 +18,5 @@ public class StudentDetailVM
 
     public string ProfilePictureName { get; set; }
 
-    public List<StudentDetailEnrollmentVM> Enrollments { get; set; }
-
-    public StudentDetailVM()
-    {
-        Enrollments = [];
-    }
+    public List<StudentDetailEnrollmentVM> Enrollments { get; set; } = [];
 }

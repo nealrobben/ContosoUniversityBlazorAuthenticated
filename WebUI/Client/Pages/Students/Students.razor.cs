@@ -29,7 +29,7 @@ public partial class Students
 
     private MudTable<StudentOverviewVM> Table;
 
-    public OverviewVM<StudentOverviewVM> StudentsOverview { get; set; } = new OverviewVM<StudentOverviewVM>();
+    public OverviewVM<StudentOverviewVM> StudentsOverview { get; set; } = new();
 
     protected override void OnInitialized()
     {
@@ -99,7 +99,7 @@ public partial class Students
 
         var result = await dialog.Result;
 
-        if (result.Data != null && (bool)result.Data)
+        if (result?.Data != null && (bool)result.Data)
         {
             await GetStudents();
         }
@@ -112,7 +112,7 @@ public partial class Students
         var dialog = await DialogService.ShowAsync<StudentCreate>(Localizer["CreateStudent"], options);
         var result = await dialog.Result;
 
-        if (result.Data != null && (bool)result.Data)
+        if (result?.Data != null && (bool)result.Data)
         {
             await GetStudents();
         }

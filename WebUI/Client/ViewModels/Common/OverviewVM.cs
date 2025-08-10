@@ -16,10 +16,7 @@ public class OverviewVM<T>
 
     public OverviewVM(IList<T> records, MetaDataVM metaData)
     {
-        if (records != null)
-            Records = records;
-        else
-            Records = new List<T>();
+        Records = records ?? new List<T>();
 
         MetaData = metaData;
     }

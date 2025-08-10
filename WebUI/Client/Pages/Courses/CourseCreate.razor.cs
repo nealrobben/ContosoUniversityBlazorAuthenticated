@@ -34,7 +34,7 @@ public partial class CourseCreate
     [CascadingParameter]
     IMudDialogInstance MudDialog { get; set; }
 
-    public CreateCourseInputModel CreateCourseInputModel { get; set; } = new CreateCourseInputModel();
+    public CreateCourseInputModel CreateCourseInputModel { get; set; } = new();
 
     private CustomValidation _customValidation;
 

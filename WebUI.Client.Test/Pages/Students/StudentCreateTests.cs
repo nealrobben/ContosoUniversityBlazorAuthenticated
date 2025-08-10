@@ -30,7 +30,7 @@ public class StudentCreateTests : BunitTestBase
         IDialogReference? dialogReference = null;
 
         const string title = "Create Student";
-        await comp.InvokeAsync(async () => dialogReference = await service!.ShowAsync<StudentCreate>(title));
+        await comp.InvokeAsync(async () => dialogReference = await service.ShowAsync<StudentCreate>(title));
         Assert.NotNull(dialogReference);
 
         Assert.NotEmpty(comp.Markup.Trim());
@@ -59,7 +59,7 @@ public class StudentCreateTests : BunitTestBase
         IDialogReference? dialogReference = null;
 
         const string title = "Create Student";
-        await comp.InvokeAsync(async () => dialogReference = await service!.ShowAsync<StudentCreate>(title));
+        await comp.InvokeAsync(async () => dialogReference = await service.ShowAsync<StudentCreate>(title));
         Assert.NotNull(dialogReference);
 
         Assert.NotEmpty(comp.Markup.Trim());
@@ -85,7 +85,7 @@ public class StudentCreateTests : BunitTestBase
         IDialogReference? dialogReference = null;
 
         const string title = "Create Student";
-        await comp.InvokeAsync(async () => dialogReference = await service!.ShowAsync<StudentCreate>(title));
+        await comp.InvokeAsync(async () => dialogReference = await service.ShowAsync<StudentCreate>(title));
         Assert.NotNull(dialogReference);
 
         Assert.NotEmpty(comp.Markup.Trim());
@@ -115,7 +115,7 @@ public class StudentCreateTests : BunitTestBase
         IDialogReference? dialogReference = null;
 
         const string title = "Create Student";
-        await comp.InvokeAsync(async () => dialogReference = await service!.ShowAsync<StudentCreate>(title));
+        await comp.InvokeAsync(async () => dialogReference = await service.ShowAsync<StudentCreate>(title));
         Assert.NotNull(dialogReference);
 
         Assert.NotEmpty(comp.Markup.Trim());
@@ -147,7 +147,7 @@ public class StudentCreateTests : BunitTestBase
         IDialogReference? dialogReference = null;
 
         const string title = "Create Student";
-        await comp.InvokeAsync(async () => dialogReference = await service!.ShowAsync<StudentCreate>(title));
+        await comp.InvokeAsync(async () => dialogReference = await service.ShowAsync<StudentCreate>(title));
         Assert.NotNull(dialogReference);
 
         Assert.NotEmpty(comp.Markup.Trim());
@@ -181,7 +181,7 @@ public class StudentCreateTests : BunitTestBase
         IDialogReference? dialogReference = null;
 
         const string title = "Create Student";
-        await comp.InvokeAsync(async () => dialogReference = await service!.ShowAsync<StudentCreate>(title));
+        await comp.InvokeAsync(async () => dialogReference = await service.ShowAsync<StudentCreate>(title));
         Assert.NotNull(dialogReference);
 
         Assert.NotEmpty(comp.Markup.Trim());

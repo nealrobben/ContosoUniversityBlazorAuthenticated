@@ -16,10 +16,7 @@ public interface ISchoolContext
     public DbSet<OfficeAssignment> OfficeAssignments { get; set; }
     public DbSet<CourseAssignment> CourseAssignments { get; set; }
 
-    int SaveChanges();
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
-
-    EntityEntry Entry(object entity);
 
     EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
 }

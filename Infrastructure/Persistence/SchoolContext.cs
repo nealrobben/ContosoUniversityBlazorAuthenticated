@@ -4,7 +4,6 @@ using Application.Common.Interfaces;
 using Domain.Common;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Infrastructure.Persistence;
 
@@ -36,7 +35,7 @@ public class SchoolContext : DbContext, ISchoolContext
         base.OnModelCreating(modelBuilder);
     }
 
-    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new())
     {
         foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
         {
@@ -54,10 +53,5 @@ public class SchoolContext : DbContext, ISchoolContext
         }
 
         return base.SaveChangesAsync(cancellationToken);
-    }
-
-    public override EntityEntry<TEntity> Entry<TEntity>(TEntity entity)
-    {
-        return base.Entry(entity);
     }
 }

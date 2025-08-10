@@ -25,7 +25,7 @@ public partial class DepartmentDetails
     [Parameter] 
     public int DepartmentId { get; set; }
 
-    protected async override Task OnParametersSetAsync()
+    protected override async Task OnParametersSetAsync()
     {
         var dto = await DepartmentService.GetAsync(DepartmentId.ToString());
 

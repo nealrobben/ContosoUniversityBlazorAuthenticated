@@ -12,7 +12,7 @@ public class UpdateDepartmentValidator
 {
     private readonly ISchoolContext _context;
 
-    public UpdateDepartmentValidator(ISchoolContext context) : base()
+    public UpdateDepartmentValidator(ISchoolContext context)
     {
         _context = context;
 

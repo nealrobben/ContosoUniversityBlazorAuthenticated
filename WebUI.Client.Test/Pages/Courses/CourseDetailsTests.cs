@@ -14,12 +14,7 @@ namespace WebUI.Client.Test.Pages.Courses;
 
 public class CourseDetailsTests : BunitTestBase
 {
-    private readonly Fixture _fixture;
-
-    public CourseDetailsTests()
-    {
-        _fixture = new Fixture();
-    }
+    private readonly Fixture _fixture = new();
 
     [Fact]
     public async Task CourseDetails_DisplayDetailsCorrectly()
@@ -43,7 +38,7 @@ public class CourseDetailsTests : BunitTestBase
         };
 
         const string title = "Course Details";
-        await comp.InvokeAsync(async () => dialogReference = await service!.ShowAsync<CourseDetails>(title, parameters));
+        await comp.InvokeAsync(async () => dialogReference = await service.ShowAsync<CourseDetails>(title, parameters));
         Assert.NotNull(dialogReference);
 
         Assert.NotEmpty(comp.Markup.Trim());
@@ -81,7 +76,7 @@ public class CourseDetailsTests : BunitTestBase
         };
 
         const string title = "Course Details";
-        await comp.InvokeAsync(async () => dialogReference = await service!.ShowAsync<CourseDetails>(title, parameters));
+        await comp.InvokeAsync(async () => dialogReference = await service.ShowAsync<CourseDetails>(title, parameters));
         Assert.NotNull(dialogReference);
 
         Assert.NotEmpty(comp.Markup.Trim());

@@ -11,7 +11,7 @@ namespace WebUI.Client.Test;
 public abstract class BunitTestBase
 {
     private bool _mudPopoverAdded;
-    protected TestContext Context { get; private set; }
+    protected TestContext Context { get; }
 
     protected BunitTestBase()
     {

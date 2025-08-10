@@ -13,7 +13,7 @@ public class UpdateCourseValidator
 {
     private readonly ISchoolContext _context;
 
-    public UpdateCourseValidator(ISchoolContext context) : base()
+    public UpdateCourseValidator(ISchoolContext context)
     {
         _context = context;
 

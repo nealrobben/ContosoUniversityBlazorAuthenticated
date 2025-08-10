@@ -25,11 +25,11 @@ public partial class StudentCreate
     [CascadingParameter]
     IMudDialogInstance MudDialog { get; set; }
 
-    public CreateStudentInputModel CreateStudentInputModel { get; set; } = new CreateStudentInputModel { EnrollmentDate = DateTime.Now.Date };
+    public CreateStudentInputModel CreateStudentInputModel { get; set; } = new() { EnrollmentDate = DateTime.Now.Date };
 
     public bool ErrorVisible { get; set; }
 
-    public IBrowserFile File { get; set; } = null;
+    public IBrowserFile File { get; set; }
 
     public async Task FormSubmitted(EditContext editContext)
     {

@@ -27,8 +27,8 @@ public partial class InstructorCreate
 
     public bool ErrorVisible { get; set; }
 
-    public IBrowserFile File { get; set; } = null;
-    public CreateInstructorInputModel CreateInstructorInputModel { get; set; } = new CreateInstructorInputModel() { HireDate = DateTime.Now.Date };
+    public IBrowserFile File { get; set; }
+    public CreateInstructorInputModel CreateInstructorInputModel { get; set; } = new() { HireDate = DateTime.Now.Date };
 
     public async Task FormSubmitted(EditContext editContext)
     {

@@ -38,7 +38,7 @@ public partial class DepartmentEdit
 
     public bool ErrorVisible { get; set; }
 
-    public UpdateDepartmentInputModel UpdateDepartmentInputModel { get; set; } = new UpdateDepartmentInputModel();
+    public UpdateDepartmentInputModel UpdateDepartmentInputModel { get; set; } = new();
     public InstructorsLookupVM InstructorsLookup { get; set; }
 
     protected override async Task OnInitializedAsync()

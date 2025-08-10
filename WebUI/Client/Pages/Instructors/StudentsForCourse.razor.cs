@@ -19,7 +19,7 @@ public partial class StudentsForCourse
     [Parameter]
     public int? SelectedCourseId { get; set; }
 
-    public StudentsForCourseVM StudentsForCourseVM { get; set; } = new StudentsForCourseVM();
+    public StudentsForCourseVM StudentsForCourseVM { get; set; } = new();
 
     protected override async Task OnParametersSetAsync()
     {

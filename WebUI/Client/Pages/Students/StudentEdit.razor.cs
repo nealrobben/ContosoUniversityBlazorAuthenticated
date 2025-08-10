@@ -27,11 +27,11 @@ public partial class StudentEdit
     [CascadingParameter]
     IMudDialogInstance MudDialog { get; set; }
 
-    public UpdateStudentInputModel UpdateStudentInputModel { get; set; } = new UpdateStudentInputModel();
+    public UpdateStudentInputModel UpdateStudentInputModel { get; set; } = new();
 
     public bool ErrorVisible { get; set; }
 
-    public IBrowserFile File { get; set; } = null;
+    public IBrowserFile File { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {

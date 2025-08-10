@@ -9,9 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Instructors.Queries;
 
-public class GetInstructorLookupQuery : IRequest<InstructorsLookup>
-{
-}
+public class GetInstructorLookupQuery : IRequest<InstructorsLookup>;
 
 public class GetInstructorLookupQueryHandler : IRequestHandler<GetInstructorLookupQuery, InstructorsLookup>
 {

@@ -5,9 +5,7 @@ using MediatR;
 
 namespace Application.Program.Commands.SeedData;
 
-public class SeedDataCommand : IRequest
-{
-}
+public class SeedDataCommand : IRequest;
 
 public class SeedDataCommandHandler : IRequestHandler<SeedDataCommand>
 {

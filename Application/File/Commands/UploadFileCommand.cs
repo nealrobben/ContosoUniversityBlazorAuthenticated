@@ -12,7 +12,7 @@ namespace Application.File.Commands;
 
 public class UploadFileCommand : IRequest<UploadResult>
 {
-    public IFormFile File { get; private set; }
+    public IFormFile File { get; }
 
     public UploadFileCommand(IFormFile file)
     {

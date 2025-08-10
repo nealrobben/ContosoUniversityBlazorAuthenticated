@@ -12,7 +12,7 @@ public class CreateDepartmentValidator
 {
     private readonly ISchoolContext _context;
 
-    public CreateDepartmentValidator(ISchoolContext context) : base()
+    public CreateDepartmentValidator(ISchoolContext context)
     {
         _context = context;
 

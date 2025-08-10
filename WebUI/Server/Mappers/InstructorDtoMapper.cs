@@ -36,7 +36,7 @@ public static class InstructorDtoMapper
         };
     }
 
-    public static CourseAssignmentDto ToDto(Domain.Entities.Projections.Instructors.CourseAssignment model)
+    public static CourseAssignmentDto ToDto(CourseAssignment model)
     {
         return new CourseAssignmentDto
         {

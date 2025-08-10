@@ -29,7 +29,7 @@ public partial class Courses
 
     public MudTable<CourseOverviewVM> Table { get; set; }
 
-    public OverviewVM<CourseOverviewVM> CoursesOverview { get; set; } = new OverviewVM<CourseOverviewVM>();
+    public OverviewVM<CourseOverviewVM> CoursesOverview { get; set; } = new();
 
     protected override void OnInitialized()
     {
@@ -88,7 +88,7 @@ public partial class Courses
 
         var result = await dialog.Result;
 
-        if (result.Data != null && (bool)result.Data)
+        if (result?.Data != null && (bool)result.Data)
         {
             await GetCourses();
         }
@@ -101,7 +101,7 @@ public partial class Courses
         var dialog = await DialogService.ShowAsync<CourseCreate>(Localizer["CreateCourse"], options);
         var result = await dialog.Result;
 
-        if (result.Data != null && (bool)result.Data)
+        if (result?.Data != null && (bool)result.Data)
         {
             await GetCourses();
         }

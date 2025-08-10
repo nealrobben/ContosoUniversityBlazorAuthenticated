@@ -29,7 +29,7 @@ public partial class Instructors
 
     private MudTable<InstructorOverviewVM> Table;
 
-    public OverviewVM<InstructorOverviewVM> InstructorsOverview { get; set; } = new OverviewVM<InstructorOverviewVM>();
+    public OverviewVM<InstructorOverviewVM> InstructorsOverview { get; set; } = new();
 
     public int? SelectedInstructorId { get; set; }
     public int? SelectedCourseId { get; set; }
@@ -102,7 +102,7 @@ public partial class Instructors
 
         var result = await dialog.Result;
 
-        if (result.Data != null && (bool)result.Data)
+        if (result?.Data != null && (bool)result.Data)
         {
             await GetInstructors();
         }
@@ -115,7 +115,7 @@ public partial class Instructors
         var dialog = await DialogService.ShowAsync<InstructorCreate>(Localizer["CreateInstructor"], options);
         var result = await dialog.Result;
 
-        if (result.Data != null && (bool)result.Data)
+        if (result?.Data != null && (bool)result.Data)
         {
             await GetInstructors();
         }

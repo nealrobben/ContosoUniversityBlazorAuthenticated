@@ -8,9 +8,7 @@ using Domain.Entities.Projections.Home;
 
 namespace Application.Home.Queries;
 
-public class GetAboutInfoQuery : IRequest<AboutInfo>
-{
-}
+public class GetAboutInfoQuery : IRequest<AboutInfo>;
 
 public class GetAboutInfoQueryHandler : IRequestHandler<GetAboutInfoQuery, AboutInfo>
 {
