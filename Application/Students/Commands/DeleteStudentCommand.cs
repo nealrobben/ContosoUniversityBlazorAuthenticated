@@ -35,7 +35,7 @@ public class DeleteStudentCommandHandler : IRequestHandler<DeleteStudentCommand>
             ?? throw new NotFoundException(nameof(Student), request.ID);
 
         if (!string.IsNullOrWhiteSpace(student.ProfilePictureName))
-            _profilePictureService.DeleteImageFile(student.ProfilePictureName);
+            await _profilePictureService.DeleteImageFile(student.ProfilePictureName);
 
         _context.Students.Remove(student);
         await _context.SaveChangesAsync(cancellationToken);

@@ -38,7 +38,7 @@ public class DeleteInstructorCommandHandler : IRequestHandler<DeleteInstructorCo
             ?? throw new NotFoundException(nameof(Instructor), request.ID);
 
         if (!string.IsNullOrWhiteSpace(instructor.ProfilePictureName))
-            _profilePictureService.DeleteImageFile(instructor.ProfilePictureName);
+            await _profilePictureService.DeleteImageFile(instructor.ProfilePictureName);
 
         var departments = await _context.Departments
             .Where(d => d.InstructorID == request.ID)

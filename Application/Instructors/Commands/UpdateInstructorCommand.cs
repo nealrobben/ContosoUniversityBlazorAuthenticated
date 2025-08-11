@@ -48,7 +48,7 @@ public class UpdateInstructorCommandHandler : IRequestHandler<UpdateInstructorCo
             ?? throw new NotFoundException(nameof(Instructor), request.InstructorID);
 
         if (!Equals(instructorToUpdate.ProfilePictureName, request.ProfilePictureName))
-            _profilePictureService.DeleteImageFile(instructorToUpdate.ProfilePictureName);
+            await _profilePictureService.DeleteImageFile(instructorToUpdate.ProfilePictureName);
 
         instructorToUpdate.LastName = request.LastName;
         instructorToUpdate.FirstMidName = request.FirstName;

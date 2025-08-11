@@ -28,14 +28,16 @@ public class LocalProfilePictureService : IProfilePictureService
         return await File.ReadAllBytesAsync(fullName);
     }
 
-    public void DeleteImageFile(string name)
+    public Task DeleteImageFile(string name)
     {
         if (string.IsNullOrWhiteSpace(name))
-            return;
+            return Task.CompletedTask;
 
         var fullName = Path.Combine(_path, name);
 
         if (File.Exists(fullName))
             File.Delete(fullName);
+
+        return Task.CompletedTask;
     }
 }

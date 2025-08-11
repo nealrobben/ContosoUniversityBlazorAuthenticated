@@ -42,7 +42,7 @@ public class UpdateStudentCommandHandler : IRequestHandler<UpdateStudentCommand>
             .FirstOrDefaultAsync(s => s.ID == request.StudentID, cancellationToken);
 
         if (!Equals(studentToUpdate.ProfilePictureName, request.ProfilePictureName))
-            _profilePictureService.DeleteImageFile(studentToUpdate.ProfilePictureName);
+            await _profilePictureService.DeleteImageFile(studentToUpdate.ProfilePictureName);
 
         studentToUpdate.FirstMidName = request.FirstName;
         studentToUpdate.LastName = request.LastName;

@@ -7,5 +7,5 @@ public interface IProfilePictureService
 {
     Task WriteImageFile(string name, MemoryStream ms);
     Task<byte[]> GetImageFile(string fullName);
-    void DeleteImageFile(string name);
+    Task DeleteImageFile(string name);
 }

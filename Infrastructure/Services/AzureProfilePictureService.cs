@@ -31,14 +31,15 @@ public class AzureProfilePictureService : IProfilePictureService
         _config = config;
     }
 
-    public async void DeleteImageFile(string name)
+    public async Task WriteImageFile(string name, MemoryStream ms)
     {
         var blobServiceClient = new BlobServiceClient(ConnectionString);
         var containerClient = blobServiceClient.GetBlobContainerClient(ContainerName);
 
         var blobClient = containerClient.GetBlobClient(name);
 
-        await blobClient.DeleteIfExistsAsync();
+        ms.Position = 0;
+        await blobClient.UploadAsync(ms, true);
     }
 
     public async Task<byte[]> GetImageFile(string fullName)
@@ -55,14 +56,13 @@ public class AzureProfilePictureService : IProfilePictureService
         return ms.ToArray();
     }
 
-    public async Task WriteImageFile(string name, MemoryStream ms)
+    public async Task DeleteImageFile(string name)
     {
         var blobServiceClient = new BlobServiceClient(ConnectionString);
         var containerClient = blobServiceClient.GetBlobContainerClient(ContainerName);
 
         var blobClient = containerClient.GetBlobClient(name);
 
-        ms.Position = 0;
-        await blobClient.UploadAsync(ms, true);
+        await blobClient.DeleteIfExistsAsync();
     }
 }

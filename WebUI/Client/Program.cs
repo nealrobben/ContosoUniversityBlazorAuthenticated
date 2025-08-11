@@ -54,9 +54,8 @@ public static class Program
         var clientSettingService = host.Services.GetRequiredService<ClientSettingService>();
         if (clientSettingService != null)
         {
-            CultureInfo culture;
             var preference = await clientSettingService.GetSettings();
-            culture = preference != null ? new CultureInfo(preference.LanguageCode) : new CultureInfo("en-US");
+            var culture = preference != null ? new CultureInfo(preference.LanguageCode) : new CultureInfo("en-US");
             CultureInfo.DefaultThreadCurrentCulture = culture;
             CultureInfo.DefaultThreadCurrentUICulture = culture;
         }
