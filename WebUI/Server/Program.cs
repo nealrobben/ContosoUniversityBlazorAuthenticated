@@ -77,6 +77,7 @@ public class Program
         app.UseHealthChecks("/health");
 
         app.UseStaticFiles();
+        app.MapStaticAssets();
 
         app.UseOpenApi();
         app.UseSwaggerUi(settings =>
