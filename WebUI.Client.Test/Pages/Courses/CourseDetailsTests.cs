@@ -81,7 +81,7 @@ public class CourseDetailsTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("button").Click();
+        await comp.Find("button").ClickAsync();
         comp.Markup.Trim().Should().BeEmpty();
     }
 }

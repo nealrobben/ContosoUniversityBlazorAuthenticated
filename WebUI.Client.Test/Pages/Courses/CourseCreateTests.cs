@@ -68,7 +68,7 @@ public class CourseCreateTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("button[type='button']").Click();
+        await comp.Find("button[type='button']").ClickAsync();
         comp.Markup.Trim().Should().BeEmpty();
     }
 
@@ -100,7 +100,7 @@ public class CourseCreateTests : BunitTestBase
         comp.Find("#Credits").Change("2");
         comp.Find("#Department").Change("3");
 
-        comp.Find("button[type='submit']").Click();
+        await comp.Find("button[type='submit']").ClickAsync();
         comp.Markup.Trim().Should().BeEmpty();
     }
 
@@ -132,7 +132,7 @@ public class CourseCreateTests : BunitTestBase
         comp.Find("#Credits").Change("2");
         comp.Find("#Department").Change("3");
 
-        comp.Find("button[type='submit']").Click();
+        await comp.Find("button[type='submit']").ClickAsync();
 
         A.CallTo(() => fakeCourseService.CreateAsync(A<CreateCourseDto>.That.IsInstanceOf(typeof(CreateCourseDto)))).MustHaveHappened();
     }
@@ -168,7 +168,7 @@ public class CourseCreateTests : BunitTestBase
         comp.Find("#Credits").Change("2");
         comp.Find("#Department").Change("3");
 
-        comp.Find("button[type='submit']").Click();
+        await comp.Find("button[type='submit']").ClickAsync();
 
         dialog?.ErrorVisible.Should().Be(true);
         comp.Find("div.mud-alert-message").TrimmedText().Should().Be("An error occured during saving");
@@ -197,7 +197,7 @@ public class CourseCreateTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("button[type='submit']").Click();
+        await comp.Find("button[type='submit']").ClickAsync();
 
         comp.FindAll("div.validation-message")[0].TrimmedText().Should().Be("'Course ID' must not be empty.");
         comp.FindAll("div.validation-message")[1].TrimmedText().Should().Be("'Title' must not be empty.");
