@@ -24,7 +24,7 @@ public class CourseCreateTests : BunitTestBase
         var fakeCourseService = A.Fake<ICourseService>();
         Context.Services.AddScoped(x => fakeCourseService);
 
-        var comp = Context.RenderComponent<MudDialogProvider>();
+        var comp = Context.Render<MudDialogProvider>();
         Assert.Empty(comp.Markup.Trim());
 
         var service = Context.Services.GetService<IDialogService>() as DialogService;
@@ -55,7 +55,7 @@ public class CourseCreateTests : BunitTestBase
         var fakeCourseService = A.Fake<ICourseService>();
         Context.Services.AddScoped(x => fakeCourseService);
 
-        var comp = Context.RenderComponent<MudDialogProvider>();
+        var comp = Context.Render<MudDialogProvider>();
         Assert.Empty(comp.Markup.Trim());
 
         var service = Context.Services.GetService<IDialogService>() as DialogService;
@@ -82,7 +82,7 @@ public class CourseCreateTests : BunitTestBase
         var fakeCourseService = A.Fake<ICourseService>();
         Context.Services.AddScoped(x => fakeCourseService);
 
-        var comp = Context.RenderComponent<MudDialogProvider>();
+        var comp = Context.Render<MudDialogProvider>();
         Assert.Empty(comp.Markup.Trim());
 
         var service = Context.Services.GetService<IDialogService>() as DialogService;
@@ -114,7 +114,7 @@ public class CourseCreateTests : BunitTestBase
         var fakeCourseService = A.Fake<ICourseService>();
         Context.Services.AddScoped(x => fakeCourseService);
 
-        var comp = Context.RenderComponent<MudDialogProvider>();
+        var comp = Context.Render<MudDialogProvider>();
         Assert.Empty(comp.Markup.Trim());
 
         var service = Context.Services.GetService<IDialogService>() as DialogService;
@@ -148,7 +148,7 @@ public class CourseCreateTests : BunitTestBase
         A.CallTo(() => fakeCourseService.CreateAsync(A<CreateCourseDto>.Ignored)).ThrowsAsync(new Exception("error"));
         Context.Services.AddScoped(x => fakeCourseService);
 
-        var comp = Context.RenderComponent<MudDialogProvider>();
+        var comp = Context.Render<MudDialogProvider>();
         Assert.Empty(comp.Markup.Trim());
 
         var service = Context.Services.GetService<IDialogService>() as DialogService;
@@ -184,7 +184,7 @@ public class CourseCreateTests : BunitTestBase
         var fakeCourseService = A.Fake<ICourseService>();
         Context.Services.AddScoped(x => fakeCourseService);
 
-        var comp = Context.RenderComponent<MudDialogProvider>();
+        var comp = Context.Render<MudDialogProvider>();
         Assert.Empty(comp.Markup.Trim());
 
         var service = Context.Services.GetService<IDialogService>() as DialogService;

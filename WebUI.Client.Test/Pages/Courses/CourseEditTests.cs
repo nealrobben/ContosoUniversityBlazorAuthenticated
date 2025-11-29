@@ -31,7 +31,7 @@ public class CourseEditTests : BunitTestBase
         A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupDtoWithTestData());
         Context.Services.AddScoped(x => fakeDepartmentService);
 
-        var comp = Context.RenderComponent<MudDialogProvider>();
+        var comp = Context.Render<MudDialogProvider>();
         Assert.Empty(comp.Markup.Trim());
 
         var service = Context.Services.GetService<IDialogService>() as DialogService;
@@ -68,7 +68,7 @@ public class CourseEditTests : BunitTestBase
         A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupDtoWithTestData());
         Context.Services.AddScoped(x => fakeDepartmentService);
 
-        var comp = Context.RenderComponent<MudDialogProvider>();
+        var comp = Context.Render<MudDialogProvider>();
         Assert.Empty(comp.Markup.Trim());
 
         var service = Context.Services.GetService<IDialogService>() as DialogService;
@@ -103,7 +103,7 @@ public class CourseEditTests : BunitTestBase
         A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupDtoWithTestData());
         Context.Services.AddScoped(x => fakeDepartmentService);
 
-        var comp = Context.RenderComponent<MudDialogProvider>();
+        var comp = Context.Render<MudDialogProvider>();
         Assert.Empty(comp.Markup.Trim());
 
         var service = Context.Services.GetService<IDialogService>() as DialogService;
@@ -142,7 +142,7 @@ public class CourseEditTests : BunitTestBase
         A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupDtoWithTestData());
         Context.Services.AddScoped(x => fakeDepartmentService);
 
-        var comp = Context.RenderComponent<MudDialogProvider>();
+        var comp = Context.Render<MudDialogProvider>();
         Assert.Empty(comp.Markup.Trim());
 
         var service = Context.Services.GetService<IDialogService>() as DialogService;
@@ -183,7 +183,7 @@ public class CourseEditTests : BunitTestBase
         A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupDtoWithTestData());
         Context.Services.AddScoped(x => fakeDepartmentService);
 
-        var comp = Context.RenderComponent<MudDialogProvider>();
+        var comp = Context.Render<MudDialogProvider>();
         Assert.Empty(comp.Markup.Trim());
 
         var service = Context.Services.GetService<IDialogService>() as DialogService;
@@ -226,7 +226,7 @@ public class CourseEditTests : BunitTestBase
         A.CallTo(() => fakeDepartmentService.GetLookupAsync()).Returns(GetDepartmentsLookupDtoWithTestData());
         Context.Services.AddScoped(x => fakeDepartmentService);
 
-        var comp = Context.RenderComponent<MudDialogProvider>();
+        var comp = Context.Render<MudDialogProvider>();
         Assert.Empty(comp.Markup.Trim());
 
         var service = Context.Services.GetService<IDialogService>() as DialogService;

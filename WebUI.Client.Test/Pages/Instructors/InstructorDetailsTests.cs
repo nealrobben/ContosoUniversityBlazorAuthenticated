@@ -25,7 +25,7 @@ public class InstructorDetailsTests : BunitTestBase
         A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsDto);
         Context.Services.AddScoped(x => fakeInstructorService);
 
-        var comp = Context.RenderComponent<MudDialogProvider>();
+        var comp = Context.Render<MudDialogProvider>();
         Assert.Empty(comp.Markup.Trim());
 
         var service = Context.Services.GetService<IDialogService>() as DialogService;
@@ -63,7 +63,7 @@ public class InstructorDetailsTests : BunitTestBase
         A.CallTo(() => fakeInstructorService.GetAsync(A<string>.Ignored)).Returns(instructorDetailsDto);
         Context.Services.AddScoped(x => fakeInstructorService);
 
-        var comp = Context.RenderComponent<MudDialogProvider>();
+        var comp = Context.Render<MudDialogProvider>();
         Assert.Empty(comp.Markup.Trim());
 
         var service = Context.Services.GetService<IDialogService>() as DialogService;
@@ -81,7 +81,7 @@ public class InstructorDetailsTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("button").Click();
+        await comp.Find("button").ClickAsync();
         comp.Markup.Trim().Should().BeEmpty();
     }
 }

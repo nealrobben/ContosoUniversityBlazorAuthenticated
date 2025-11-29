@@ -31,7 +31,7 @@ public class StudentEditTests : BunitTestBase
         var uploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => uploadService);
 
-        var comp = Context.RenderComponent<MudDialogProvider>();
+        var comp = Context.Render<MudDialogProvider>();
         Assert.Empty(comp.Markup.Trim());
 
         var service = Context.Services.GetService<IDialogService>() as DialogService;
@@ -70,7 +70,7 @@ public class StudentEditTests : BunitTestBase
         var uploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => uploadService);
 
-        var comp = Context.RenderComponent<MudDialogProvider>();
+        var comp = Context.Render<MudDialogProvider>();
         Assert.Empty(comp.Markup.Trim());
 
         var service = Context.Services.GetService<IDialogService>() as DialogService;
@@ -88,7 +88,7 @@ public class StudentEditTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("button[type='button']").Click();
+        await comp.Find("button[type='button']").ClickAsync();
         comp.Markup.Trim().Should().BeEmpty();
     }
 
@@ -106,7 +106,7 @@ public class StudentEditTests : BunitTestBase
         var uploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => uploadService);
 
-        var comp = Context.RenderComponent<MudDialogProvider>();
+        var comp = Context.Render<MudDialogProvider>();
         Assert.Empty(comp.Markup.Trim());
 
         var service = Context.Services.GetService<IDialogService>() as DialogService;
@@ -128,7 +128,7 @@ public class StudentEditTests : BunitTestBase
         comp.Find("#FirstName").Change("new firstname");
         comp.Find("#EnrollmentDate").Change("1/3/2021");
 
-        comp.Find("button[type='submit']").Click();
+        await comp.Find("button[type='submit']").ClickAsync();
         comp.Markup.Trim().Should().BeEmpty();
     }
 
@@ -146,7 +146,7 @@ public class StudentEditTests : BunitTestBase
         var uploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => uploadService);
 
-        var comp = Context.RenderComponent<MudDialogProvider>();
+        var comp = Context.Render<MudDialogProvider>();
         Assert.Empty(comp.Markup.Trim());
 
         var service = Context.Services.GetService<IDialogService>() as DialogService;
@@ -168,7 +168,7 @@ public class StudentEditTests : BunitTestBase
         comp.Find("#FirstName").Change("new firstname");
         comp.Find("#EnrollmentDate").Change("1/3/2021");
 
-        comp.Find("button[type='submit']").Click();
+        await comp.Find("button[type='submit']").ClickAsync();
         comp.Markup.Trim().Should().BeEmpty();
 
         A.CallTo(() => fakeStudentService.UpdateAsync(A<UpdateStudentDto>.That.IsInstanceOf(typeof(UpdateStudentDto)))).MustHaveHappened();
@@ -189,7 +189,7 @@ public class StudentEditTests : BunitTestBase
         var uploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => uploadService);
 
-        var comp = Context.RenderComponent<MudDialogProvider>();
+        var comp = Context.Render<MudDialogProvider>();
         Assert.Empty(comp.Markup.Trim());
 
         var service = Context.Services.GetService<IDialogService>() as DialogService;
@@ -213,7 +213,7 @@ public class StudentEditTests : BunitTestBase
         comp.Find("#FirstName").Change("new firstname");
         comp.Find("#EnrollmentDate").Change("1/3/2021");
 
-        comp.Find("button[type='submit']").Click();
+        await comp.Find("button[type='submit']").ClickAsync();
 
         dialog?.ErrorVisible.Should().Be(true);
         comp.Find("div.mud-alert-message").TrimmedText().Should().Be("An error occured during saving");
@@ -234,7 +234,7 @@ public class StudentEditTests : BunitTestBase
         var uploadService = A.Fake<IFileUploadService>();
         Context.Services.AddScoped(x => uploadService);
 
-        var comp = Context.RenderComponent<MudDialogProvider>();
+        var comp = Context.Render<MudDialogProvider>();
         Assert.Empty(comp.Markup.Trim());
 
         var service = Context.Services.GetService<IDialogService>() as DialogService;
@@ -256,7 +256,7 @@ public class StudentEditTests : BunitTestBase
         comp.Find("#FirstName").Change("");
         comp.Find("#EnrollmentDate").Change("");
 
-        comp.Find("button[type='submit']").Click();
+        await comp.Find("button[type='submit']").ClickAsync();
 
         comp.FindAll("div.validation-message")[0].TrimmedText().Should().Be("'Last Name' must not be empty.");
         comp.FindAll("div.validation-message")[1].TrimmedText().Should().Be("'First Name' must not be empty.");

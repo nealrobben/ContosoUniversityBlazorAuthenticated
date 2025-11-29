@@ -11,11 +11,11 @@ namespace WebUI.Client.Test;
 public abstract class BunitTestBase
 {
     private bool _mudPopoverAdded;
-    protected TestContext Context { get; }
+    protected BunitContext Context { get; }
 
     protected BunitTestBase()
     {
-        Context = new TestContext();
+        Context = new BunitContext();
 
         Context.JSInterop.Mode = JSRuntimeMode.Loose;
 
@@ -33,14 +33,14 @@ public abstract class BunitTestBase
     private IRenderedComponent<IComponent> RenderWithMudPopover<TComponent>()
         where TComponent : IComponent
     {
-        return Context.RenderComponent<UnitTestLayout>(hostParams => hostParams
+        return Context.Render<UnitTestLayout>(hostParams => hostParams
         .AddChildContent<TComponent>());
     }
 
     private IRenderedComponent<IComponent> RenderWithoutMudPopover<TComponent>()
         where TComponent : IComponent
     {
-        return (IRenderedComponent<IComponent>)Context.RenderComponent<TComponent>();
+        return (IRenderedComponent<IComponent>)Context.Render<TComponent>();
     }
 
     protected IRenderedComponent<IComponent> RenderComponent<TComponent>()

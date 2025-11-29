@@ -25,7 +25,7 @@ public class CourseDetailsTests : BunitTestBase
         A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsDto);
         Context.Services.AddScoped(x => fakeCourseService);
 
-        var comp = Context.RenderComponent<MudDialogProvider>();
+        var comp = Context.Render<MudDialogProvider>();
         Assert.Empty(comp.Markup.Trim());
 
         var service = Context.Services.GetService<IDialogService>() as DialogService;
@@ -63,7 +63,7 @@ public class CourseDetailsTests : BunitTestBase
         A.CallTo(() => fakeCourseService.GetAsync(A<string>.Ignored)).Returns(courseDetailsDto);
         Context.Services.AddScoped(x => fakeCourseService);
 
-        var comp = Context.RenderComponent<MudDialogProvider>();
+        var comp = Context.Render<MudDialogProvider>();
         Assert.Empty(comp.Markup.Trim());
 
         var service = Context.Services.GetService<IDialogService>() as DialogService;
