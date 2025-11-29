@@ -6,7 +6,7 @@
   <ItemGroup>
     <PackageVersion Include="AutoFixture" Version="4.18.1" />
     <PackageVersion Include="bunit" Version="1.40.0" />
-    <PackageVersion Include="Azure.Storage.Blobs" Version="12.25.0" />
+    <PackageVersion Include="Azure.Storage.Blobs" Version="12.26.0" />
     <PackageVersion Include="Blazored.FluentValidation" Version="2.2.0" />
     <PackageVersion Include="Blazored.LocalStorage" Version="4.5.0" />
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
