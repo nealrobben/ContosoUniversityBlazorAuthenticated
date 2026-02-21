@@ -124,10 +124,10 @@ public class DepartmentEditTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("#Name").Change("My name");
-        comp.Find("#Budget").Change("123");
-        comp.Find("#StartDate").Change("1/3/2021");
-        comp.Find("#InstructorID").Change("1");
+        await comp.Find("#Name").ChangeAsync("My name");
+        await comp.Find("#Budget").ChangeAsync("123");
+        await comp.Find("#StartDate").ChangeAsync("1/3/2021");
+        await comp.Find("#InstructorID").ChangeAsync("1");
 
         await comp.Find("button[type='submit']").ClickAsync();
         comp.Markup.Trim().Should().BeEmpty();
@@ -164,10 +164,10 @@ public class DepartmentEditTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("#Name").Change("My name");
-        comp.Find("#Budget").Change("123");
-        comp.Find("#StartDate").Change("1/3/2021");
-        comp.Find("#InstructorID").Change("1");
+        await comp.Find("#Name").ChangeAsync("My name");
+        await comp.Find("#Budget").ChangeAsync("123");
+        await comp.Find("#StartDate").ChangeAsync("1/3/2021");
+        await comp.Find("#InstructorID").ChangeAsync("1");
 
         await comp.Find("button[type='submit']").ClickAsync();
 
@@ -208,10 +208,10 @@ public class DepartmentEditTests : BunitTestBase
 
         var dialog = dialogReference?.Dialog as DepartmentEdit;
 
-        comp.Find("#Name").Change("My name");
-        comp.Find("#Budget").Change("123");
-        comp.Find("#StartDate").Change("1/3/2021");
-        comp.Find("#InstructorID").Change("1");
+        await comp.Find("#Name").ChangeAsync("My name");
+        await comp.Find("#Budget").ChangeAsync("123");
+        await comp.Find("#StartDate").ChangeAsync("1/3/2021");
+        await comp.Find("#InstructorID").ChangeAsync("1");
 
         await comp.Find("button[type='submit']").ClickAsync();
 
@@ -250,10 +250,10 @@ public class DepartmentEditTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("#Name").Change("");
-        comp.Find("#Budget").Change("");
-        comp.Find("#StartDate").Change("");
-        comp.Find("#InstructorID").Change("");
+        await comp.Find("#Name").ChangeAsync("");
+        await comp.Find("#Budget").ChangeAsync("");
+        await comp.Find("#StartDate").ChangeAsync("");
+        await comp.Find("#InstructorID").ChangeAsync("");
 
         await comp.Find("button[type='submit']").ClickAsync();
 

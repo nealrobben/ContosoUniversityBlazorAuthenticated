@@ -121,9 +121,9 @@ public class CourseEditTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("#Title").Change("My title");
-        comp.Find("#Credits").Change("123");
-        comp.Find("#Department").Change("1");
+        await comp.Find("#Title").ChangeAsync("My title");
+        await comp.Find("#Credits").ChangeAsync("123");
+        await comp.Find("#Department").ChangeAsync("1");
 
         await comp.Find("button[type='submit']").ClickAsync();
         comp.Markup.Trim().Should().BeEmpty();
@@ -160,9 +160,9 @@ public class CourseEditTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("#Title").Change("My title");
-        comp.Find("#Credits").Change("123");
-        comp.Find("#Department").Change("1");
+        await comp.Find("#Title").ChangeAsync("My title");
+        await comp.Find("#Credits").ChangeAsync("123");
+        await comp.Find("#Department").ChangeAsync("1");
 
         await comp.Find("button[type='submit']").ClickAsync();
 
@@ -203,9 +203,9 @@ public class CourseEditTests : BunitTestBase
 
         var dialog = dialogReference?.Dialog as CourseEdit;
 
-        comp.Find("#Title").Change("My title");
-        comp.Find("#Credits").Change("123");
-        comp.Find("#Department").Change("1");
+        await comp.Find("#Title").ChangeAsync("My title");
+        await comp.Find("#Credits").ChangeAsync("123");
+        await comp.Find("#Department").ChangeAsync("1");
 
         await comp.Find("button[type='submit']").ClickAsync();
 
@@ -244,9 +244,9 @@ public class CourseEditTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("#Title").Change("");
-        comp.Find("#Credits").Change("");
-        comp.Find("#Department").Change("");
+        await comp.Find("#Title").ChangeAsync("");
+        await comp.Find("#Credits").ChangeAsync("");
+        await comp.Find("#Department").ChangeAsync("");
 
         await comp.Find("button[type='submit']").ClickAsync();
 
