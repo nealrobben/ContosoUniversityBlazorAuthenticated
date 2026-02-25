@@ -124,9 +124,9 @@ public class StudentEditTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("#LastName").Change("new lastname");
-        comp.Find("#FirstName").Change("new firstname");
-        comp.Find("#EnrollmentDate").Change("1/3/2021");
+        await comp.Find("#LastName").ChangeAsync("new lastname");
+        await comp.Find("#FirstName").ChangeAsync("new firstname");
+        await comp.Find("#EnrollmentDate").ChangeAsync("1/3/2021");
 
         await comp.Find("button[type='submit']").ClickAsync();
         comp.Markup.Trim().Should().BeEmpty();
@@ -164,9 +164,9 @@ public class StudentEditTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("#LastName").Change("new lastname");
-        comp.Find("#FirstName").Change("new firstname");
-        comp.Find("#EnrollmentDate").Change("1/3/2021");
+        await comp.Find("#LastName").ChangeAsync("new lastname");
+        await comp.Find("#FirstName").ChangeAsync("new firstname");
+        await comp.Find("#EnrollmentDate").ChangeAsync("1/3/2021");
 
         await comp.Find("button[type='submit']").ClickAsync();
         comp.Markup.Trim().Should().BeEmpty();
@@ -209,9 +209,9 @@ public class StudentEditTests : BunitTestBase
 
         var dialog = dialogReference?.Dialog as StudentEdit;
 
-        comp.Find("#LastName").Change("new lastname");
-        comp.Find("#FirstName").Change("new firstname");
-        comp.Find("#EnrollmentDate").Change("1/3/2021");
+        await comp.Find("#LastName").ChangeAsync("new lastname");
+        await comp.Find("#FirstName").ChangeAsync("new firstname");
+        await comp.Find("#EnrollmentDate").ChangeAsync("1/3/2021");
 
         await comp.Find("button[type='submit']").ClickAsync();
 
@@ -252,9 +252,9 @@ public class StudentEditTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("#LastName").Change("");
-        comp.Find("#FirstName").Change("");
-        comp.Find("#EnrollmentDate").Change("");
+        await comp.Find("#LastName").ChangeAsync("");
+        await comp.Find("#FirstName").ChangeAsync("");
+        await comp.Find("#EnrollmentDate").ChangeAsync("");
 
         await comp.Find("button[type='submit']").ClickAsync();
 

@@ -119,10 +119,10 @@ public class InstructorEditTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("#LastName").Change("new lastname");
-        comp.Find("#FirstName").Change("new firstname");
-        comp.Find("#HireDate").Change("1/3/2021");
-        comp.Find("#OfficeLocation").Change("1");
+        await comp.Find("#LastName").ChangeAsync("new lastname");
+        await comp.Find("#FirstName").ChangeAsync("new firstname");
+        await comp.Find("#HireDate").ChangeAsync("1/3/2021");
+        await comp.Find("#OfficeLocation").ChangeAsync("1");
 
         await comp.Find("button[type='submit']").ClickAsync();
         comp.Markup.Trim().Should().BeEmpty();
@@ -158,10 +158,10 @@ public class InstructorEditTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("#LastName").Change("new lastname");
-        comp.Find("#FirstName").Change("new firstname");
-        comp.Find("#HireDate").Change("1/3/2021");
-        comp.Find("#OfficeLocation").Change("1");
+        await comp.Find("#LastName").ChangeAsync("new lastname");
+        await comp.Find("#FirstName").ChangeAsync("new firstname");
+        await comp.Find("#HireDate").ChangeAsync("1/3/2021");
+        await comp.Find("#OfficeLocation").ChangeAsync("1");
 
         await comp.Find("button[type='submit']").ClickAsync();
         comp.Markup.Trim().Should().BeEmpty();
@@ -202,10 +202,10 @@ public class InstructorEditTests : BunitTestBase
 
         var dialog = dialogReference?.Dialog as InstructorEdit;
 
-        comp.Find("#LastName").Change("new lastname");
-        comp.Find("#FirstName").Change("new firstname");
-        comp.Find("#HireDate").Change("1/3/2021");
-        comp.Find("#OfficeLocation").Change("1");
+        await comp.Find("#LastName").ChangeAsync("new lastname");
+        await comp.Find("#FirstName").ChangeAsync("new firstname");
+        await comp.Find("#HireDate").ChangeAsync("1/3/2021");
+        await comp.Find("#OfficeLocation").ChangeAsync("1");
 
         await comp.Find("button[type='submit']").ClickAsync();
 
@@ -244,9 +244,9 @@ public class InstructorEditTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("#LastName").Change("");
-        comp.Find("#FirstName").Change("");
-        comp.Find("#HireDate").Change("");
+        await comp.Find("#LastName").ChangeAsync("");
+        await comp.Find("#FirstName").ChangeAsync("");
+        await comp.Find("#HireDate").ChangeAsync("");
 
         await comp.Find("button[type='submit']").ClickAsync();
 

@@ -90,9 +90,9 @@ public class StudentCreateTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("#LastName").Change("lastname");
-        comp.Find("#FirstName").Change("Firstname");
-        comp.Find("#EnrollmentDate").Change("01/03/2021");
+        await comp.Find("#LastName").ChangeAsync("lastname");
+        await comp.Find("#FirstName").ChangeAsync("Firstname");
+        await comp.Find("#EnrollmentDate").ChangeAsync("01/03/2021");
 
         await comp.Find("button[type='submit']").ClickAsync();
         comp.Markup.Trim().Should().BeEmpty();
@@ -120,9 +120,9 @@ public class StudentCreateTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("#LastName").Change("lastname");
-        comp.Find("#FirstName").Change("Firstname");
-        comp.Find("#EnrollmentDate").Change("01/03/2021");
+        await comp.Find("#LastName").ChangeAsync("lastname");
+        await comp.Find("#FirstName").ChangeAsync("Firstname");
+        await comp.Find("#EnrollmentDate").ChangeAsync("01/03/2021");
 
         await comp.Find("button[type='submit']").ClickAsync();
 
@@ -154,9 +154,9 @@ public class StudentCreateTests : BunitTestBase
 
         var dialog = dialogReference?.Dialog as StudentCreate;
 
-        comp.Find("#LastName").Change("lastname");
-        comp.Find("#FirstName").Change("Firstname");
-        comp.Find("#EnrollmentDate").Change("01/03/2021");
+        await comp.Find("#LastName").ChangeAsync("lastname");
+        await comp.Find("#FirstName").ChangeAsync("Firstname");
+        await comp.Find("#EnrollmentDate").ChangeAsync("01/03/2021");
 
         await comp.Find("button[type='submit']").ClickAsync();
 
@@ -186,7 +186,7 @@ public class StudentCreateTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("#EnrollmentDate").Change("");
+        await comp.Find("#EnrollmentDate").ChangeAsync("");
 
         await comp.Find("button[type='submit']").ClickAsync();
 
