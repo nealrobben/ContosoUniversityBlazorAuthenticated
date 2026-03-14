@@ -37,6 +37,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{1BE5311F-1
 		Student.http = Student.http
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUI.Client.Test_New", "WebUI.Client.Test_New\WebUI.Client.Test_New.csproj", "{D11EF903-21A5-481E-9B1A-9842730541DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{010B919A-954E-446B-80BB-A170DD84437A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{010B919A-954E-446B-80BB-A170DD84437A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{010B919A-954E-446B-80BB-A170DD84437A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D11EF903-21A5-481E-9B1A-9842730541DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D11EF903-21A5-481E-9B1A-9842730541DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D11EF903-21A5-481E-9B1A-9842730541DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D11EF903-21A5-481E-9B1A-9842730541DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,6 +90,7 @@ Global
 		{5A1C60EF-4EF2-4196-8B1E-BDF2928C8897} = {AFCDF6E7-6175-41A7-A86D-A05614F21A7D}
 		{010B919A-954E-446B-80BB-A170DD84437A} = {AFCDF6E7-6175-41A7-A86D-A05614F21A7D}
 		{1BE5311F-1CCD-4B77-AD84-5420CE33261F} = {20BD6576-FB02-45BA-8804-19A899A50E40}
+		{D11EF903-21A5-481E-9B1A-9842730541DA} = {AFCDF6E7-6175-41A7-A86D-A05614F21A7D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BE52E884-3F5A-4736-9990-E8DFB461106E}
