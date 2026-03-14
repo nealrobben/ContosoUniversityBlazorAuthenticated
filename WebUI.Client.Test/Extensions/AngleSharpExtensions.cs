@@ -1,6 +1,6 @@
 ﻿using AngleSharp.Dom;
 
-namespace WebUI.Client.Test_New.Extensions;
+namespace WebUI.Client.Test.Extensions;
 
 public static class AngleSharpExtensions
 {

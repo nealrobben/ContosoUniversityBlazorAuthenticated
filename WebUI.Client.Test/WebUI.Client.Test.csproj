@@ -4,7 +4,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <OutputType>Exe</OutputType>
-    <RootNamespace>WebUI.Client.Test_New</RootNamespace>
+    <RootNamespace>WebUI.Client.Test</RootNamespace>
     <TargetFramework>net9.0</TargetFramework>
   </PropertyGroup>
 

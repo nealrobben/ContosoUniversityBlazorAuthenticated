@@ -8,9 +8,9 @@ using MudBlazor;
 using WebUI.Client.Dtos.Students;
 using WebUI.Client.Pages.Students;
 using WebUI.Client.Services;
-using WebUI.Client.Test_New.Extensions;
+using WebUI.Client.Test.Extensions;
 
-namespace WebUI.Client.Test_New.Pages.Students;
+namespace WebUI.Client.Test.Pages.Students;
 
 public class StudentEditTests : BunitTestBase
 {
