@@ -11,7 +11,6 @@ using WebUI.Client.Dtos.Students;
 using WebUI.Client.Enums;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
-using Xunit;
 
 namespace WebUI.Client.Test.Pages.Instructors;
 

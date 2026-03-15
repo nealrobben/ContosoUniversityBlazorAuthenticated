@@ -1,14 +1,13 @@
-﻿using Bunit;
-using WebUI.Client.Pages.Departments;
-using Xunit;
-using Microsoft.Extensions.DependencyInjection;
-using WebUI.Client.Services;
+﻿using AutoFixture;
+using Bunit;
 using FakeItEasy;
-using MudBlazor;
 using FluentAssertions;
-using WebUI.Client.Test.Extensions;
-using AutoFixture;
+using Microsoft.Extensions.DependencyInjection;
+using MudBlazor;
 using WebUI.Client.Dtos.Departments;
+using WebUI.Client.Pages.Departments;
+using WebUI.Client.Services;
+using WebUI.Client.Test.Extensions;
 
 namespace WebUI.Client.Test.Pages.Departments;
 

@@ -9,7 +9,6 @@ using WebUI.Client.Dtos.Instructors;
 using WebUI.Client.Pages.Instructors;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
-using Xunit;
 
 namespace WebUI.Client.Test.Pages.Instructors;
 

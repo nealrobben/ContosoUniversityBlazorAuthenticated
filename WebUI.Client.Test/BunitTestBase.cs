@@ -8,7 +8,7 @@ using WebUI.Client.Shared;
 
 namespace WebUI.Client.Test;
 
-public abstract class BunitTestBase
+public class BunitTestBase
 {
     private bool _mudPopoverAdded;
     protected BunitContext Context { get; }
@@ -34,7 +34,7 @@ public abstract class BunitTestBase
         where TComponent : IComponent
     {
         return Context.Render<UnitTestLayout>(hostParams => hostParams
-        .AddChildContent<TComponent>());
+            .AddChildContent<TComponent>());
     }
 
     private IRenderedComponent<IComponent> RenderWithoutMudPopover<TComponent>()

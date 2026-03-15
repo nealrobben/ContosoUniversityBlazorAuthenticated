@@ -7,7 +7,6 @@ using WebUI.Client.Dtos.Students;
 using WebUI.Client.Pages.Students;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
-using Xunit;
 
 namespace WebUI.Client.Test.Pages.Students;
 

@@ -8,7 +8,6 @@ using WebUI.Client.Dtos.Departments;
 using WebUI.Client.Pages.Courses;
 using WebUI.Client.Services;
 using WebUI.Client.Test.Extensions;
-using Xunit;
 
 namespace WebUI.Client.Test.Pages.Courses;
 
