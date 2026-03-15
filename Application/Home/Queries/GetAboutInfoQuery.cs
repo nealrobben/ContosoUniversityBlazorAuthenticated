@@ -10,7 +10,7 @@ namespace Application.Home.Queries;
 
 public class GetAboutInfoQuery : IRequest<AboutInfo>;
 
-public class GetAboutInfoQueryHandler : IRequestHandler<GetAboutInfoQuery, AboutInfo>
+internal class GetAboutInfoQueryHandler : IRequestHandler<GetAboutInfoQuery, AboutInfo>
 {
     private readonly ISchoolContext _context;
 

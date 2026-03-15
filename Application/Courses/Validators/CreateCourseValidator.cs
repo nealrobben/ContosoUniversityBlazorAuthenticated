@@ -1,5 +1,4 @@
-﻿
-using Application.Courses.Commands;
+﻿using Application.Courses.Commands;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;

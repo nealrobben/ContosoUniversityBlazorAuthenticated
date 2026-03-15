@@ -19,7 +19,7 @@ public class DeleteInstructorCommand : IRequest
     }
 }
 
-public class DeleteInstructorCommandHandler : IRequestHandler<DeleteInstructorCommand>
+internal class DeleteInstructorCommandHandler : IRequestHandler<DeleteInstructorCommand>
 {
     private readonly ISchoolContext _context;
     private readonly IProfilePictureService _profilePictureService;

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations;
 
-public class EnrollmentConfiguration : IEntityTypeConfiguration<Enrollment>
+internal class EnrollmentConfiguration : IEntityTypeConfiguration<Enrollment>
 {
     public void Configure(EntityTypeBuilder<Enrollment> builder)
     {

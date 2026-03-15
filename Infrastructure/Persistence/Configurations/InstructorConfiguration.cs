@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations;
 
-public class InstructorConfiguration : IEntityTypeConfiguration<Instructor>
+internal class InstructorConfiguration : IEntityTypeConfiguration<Instructor>
 {
     public void Configure(EntityTypeBuilder<Instructor> builder)
     {

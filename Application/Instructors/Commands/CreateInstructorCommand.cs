@@ -18,7 +18,7 @@ public class CreateInstructorCommand : IRequest<int>
     public string ProfilePictureName { get; set; }
 }
 
-public class CreateInstructorCommandHandler : IRequestHandler<CreateInstructorCommand, int>
+internal class CreateInstructorCommandHandler : IRequestHandler<CreateInstructorCommand, int>
 {
     private readonly ISchoolContext _context;
 

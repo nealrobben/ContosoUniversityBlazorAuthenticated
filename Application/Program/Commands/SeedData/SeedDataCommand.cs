@@ -7,7 +7,7 @@ namespace Application.Program.Commands.SeedData;
 
 public class SeedDataCommand : IRequest;
 
-public class SeedDataCommandHandler : IRequestHandler<SeedDataCommand>
+internal class SeedDataCommandHandler : IRequestHandler<SeedDataCommand>
 {
     private readonly ISchoolContext _schoolContext;
 

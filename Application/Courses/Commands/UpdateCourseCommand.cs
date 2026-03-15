@@ -19,7 +19,7 @@ public class UpdateCourseCommand : IRequest
     public int DepartmentID { get; set; }
 }
 
-public class UpdateCourseCommandHandler : IRequestHandler<UpdateCourseCommand>
+internal class UpdateCourseCommandHandler : IRequestHandler<UpdateCourseCommand>
 {
     private readonly ISchoolContext _context;
 

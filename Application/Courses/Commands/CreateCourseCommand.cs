@@ -17,7 +17,7 @@ public class CreateCourseCommand : IRequest<int>
     public int DepartmentID { get; set; }
 }
 
-public class CreateCourseCommandHandler : IRequestHandler<CreateCourseCommand, int>
+internal class CreateCourseCommandHandler : IRequestHandler<CreateCourseCommand, int>
 {
     private readonly ISchoolContext _context;
 

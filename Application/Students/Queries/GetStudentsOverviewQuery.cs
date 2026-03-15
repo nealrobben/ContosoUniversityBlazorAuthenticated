@@ -28,7 +28,7 @@ public class GetStudentsOverviewQuery : IRequest<Overview<StudentOverview>>
     }
 }
 
-public class GetStudentsOverviewQueryHandler : IRequestHandler<GetStudentsOverviewQuery, Overview<StudentOverview>>
+internal class GetStudentsOverviewQueryHandler : IRequestHandler<GetStudentsOverviewQuery, Overview<StudentOverview>>
 {
     private const int _defaultPageSize = 3;
 

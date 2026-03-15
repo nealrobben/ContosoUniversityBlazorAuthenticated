@@ -24,7 +24,7 @@ public class UpdateDepartmentCommand : IRequest
     public int InstructorID { get; set; }
 }
 
-public class UpdateDepartmentCommandHandler : IRequestHandler<UpdateDepartmentCommand>
+internal class UpdateDepartmentCommandHandler : IRequestHandler<UpdateDepartmentCommand>
 {
     private readonly ISchoolContext _context;
 

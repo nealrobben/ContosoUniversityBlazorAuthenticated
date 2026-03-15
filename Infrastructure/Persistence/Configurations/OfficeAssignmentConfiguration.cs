@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations;
 
-public class OfficeAssignmentConfiguration : IEntityTypeConfiguration<OfficeAssignment>
+internal class OfficeAssignmentConfiguration : IEntityTypeConfiguration<OfficeAssignment>
 {
     public void Configure(EntityTypeBuilder<OfficeAssignment> builder)
     {

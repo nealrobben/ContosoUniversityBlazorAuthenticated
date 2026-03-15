@@ -20,7 +20,7 @@ public class GetCourseDetailsQuery : IRequest<CourseDetail>
     }
 }
 
-public class GetCourseDetailsQueryHandler : IRequestHandler<GetCourseDetailsQuery, CourseDetail>
+internal class GetCourseDetailsQueryHandler : IRequestHandler<GetCourseDetailsQuery, CourseDetail>
 {
     private readonly ISchoolContext _context;
 

@@ -28,7 +28,7 @@ public class GetCoursesOverviewQuery : IRequest<Overview<CourseOverview>>
     }
 }
 
-public class GetCoursesOverviewQueryHandler : IRequestHandler<GetCoursesOverviewQuery, Overview<CourseOverview>>
+internal class GetCoursesOverviewQueryHandler : IRequestHandler<GetCoursesOverviewQuery, Overview<CourseOverview>>
 {
     private readonly ISchoolContext _context;
 

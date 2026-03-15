@@ -18,7 +18,7 @@ public class DeleteDepartmentCommand : IRequest
     }
 }
 
-public class DeleteDepartmentCommandHandler : IRequestHandler<DeleteDepartmentCommand>
+internal class DeleteDepartmentCommandHandler : IRequestHandler<DeleteDepartmentCommand>
 {
     private readonly ISchoolContext _context;
 
