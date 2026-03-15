@@ -35,7 +35,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{1BE5311F-1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUI.Client.Test", "WebUI.Client.Test\WebUI.Client.Test.csproj", "{D11EF903-21A5-481E-9B1A-9842730541DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUI.IntegrationTests_New", "WebUI.IntegrationTests_New\WebUI.IntegrationTests_New.csproj", "{C6A19C25-EAFF-47A6-8BC2-A18A4258F201}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUI.IntegrationTests", "WebUI.IntegrationTests\WebUI.IntegrationTests.csproj", "{C6A19C25-EAFF-47A6-8BC2-A18A4258F201}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
