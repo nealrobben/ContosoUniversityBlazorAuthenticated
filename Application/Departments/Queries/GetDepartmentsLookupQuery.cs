@@ -11,7 +11,7 @@ namespace Application.Departments.Queries;
 
 public class GetDepartmentsLookupQuery : IRequest<DepartmentsLookup>;
 
-public class GetDepartmentsLookupQueryHandler : IRequestHandler<GetDepartmentsLookupQuery, DepartmentsLookup>
+internal class GetDepartmentsLookupQueryHandler : IRequestHandler<GetDepartmentsLookupQuery, DepartmentsLookup>
 {
     private readonly ISchoolContext _context;
 

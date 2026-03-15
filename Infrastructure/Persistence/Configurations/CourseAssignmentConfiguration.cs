@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations;
 
-public class CourseAssignmentConfiguration : IEntityTypeConfiguration<CourseAssignment>
+internal class CourseAssignmentConfiguration : IEntityTypeConfiguration<CourseAssignment>
 {
     public void Configure(EntityTypeBuilder<CourseAssignment> builder)
     {

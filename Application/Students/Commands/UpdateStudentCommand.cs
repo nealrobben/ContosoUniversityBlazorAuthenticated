@@ -22,7 +22,7 @@ public class UpdateStudentCommand : IRequest
     public string ProfilePictureName { get; set; }
 }
 
-public class UpdateStudentCommandHandler : IRequestHandler<UpdateStudentCommand>
+internal class UpdateStudentCommandHandler : IRequestHandler<UpdateStudentCommand>
 {
     private readonly ISchoolContext _context;
     private readonly IProfilePictureService _profilePictureService;

@@ -24,7 +24,7 @@ public class UpdateInstructorCommand : IRequest
     public string ProfilePictureName { get; set; }
 }
 
-public class UpdateInstructorCommandHandler : IRequestHandler<UpdateInstructorCommand>
+internal class UpdateInstructorCommandHandler : IRequestHandler<UpdateInstructorCommand>
 {
     private readonly ISchoolContext _context;
     private readonly IProfilePictureService _profilePictureService;

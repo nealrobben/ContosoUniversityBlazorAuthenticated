@@ -28,7 +28,7 @@ public class GetDepartmentsOverviewQuery : IRequest<Overview<DepartmentOverview>
     }
 }
 
-public class GetDepartmentsOverviewQueryHandler : IRequestHandler<GetDepartmentsOverviewQuery, Overview<DepartmentOverview>>
+internal class GetDepartmentsOverviewQueryHandler : IRequestHandler<GetDepartmentsOverviewQuery, Overview<DepartmentOverview>>
 {
     private readonly ISchoolContext _context;
 

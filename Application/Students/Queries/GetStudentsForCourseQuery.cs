@@ -20,7 +20,7 @@ public class GetStudentsForCourseQuery : IRequest<StudentsForCourse>
     }
 }
 
-public class GetStudentsForCourseQueryHandler : IRequestHandler<GetStudentsForCourseQuery, StudentsForCourse>
+internal class GetStudentsForCourseQueryHandler : IRequestHandler<GetStudentsForCourseQuery, StudentsForCourse>
 {
     private readonly ISchoolContext _context;
 
