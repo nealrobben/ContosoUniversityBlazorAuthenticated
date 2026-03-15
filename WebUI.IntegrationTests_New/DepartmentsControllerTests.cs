@@ -2,20 +2,20 @@
 using Domain.Entities;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
-using WebUI.Client.Dtos.Departments;
 using WebUI.Client.Dtos.Common;
+using WebUI.Client.Dtos.Departments;
 
-namespace WebUI.IntegrationTests_New;
+namespace WebUI.IntegrationTests;
 
 public class DepartmentsControllerTests : IntegrationTest
 {
     [Fact]
     public async Task GetAll_WithoutDepartments_ReturnsEmptyResponse()
     {
-        var response = await _client.GetAsync("/api/departments");
+        var response = await _client.GetAsync("/api/departments", TestContext.Current.CancellationToken);
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        (await response.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>()).Records.Should().BeEmpty();
+        (await response.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>(TestContext.Current.CancellationToken)).Records.Should().BeEmpty();
     }
 
     [Fact]
@@ -34,13 +34,13 @@ public class DepartmentsControllerTests : IntegrationTest
             var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
 
             schoolContext.Departments.Add(department);
-            await schoolContext.SaveChangesAsync();
+            await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
-        var response = await _client.GetAsync("/api/departments");
+        var response = await _client.GetAsync("/api/departments", TestContext.Current.CancellationToken);
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>());
+        var result = await response.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>(TestContext.Current.CancellationToken);
 
         result.Records.Should().ContainSingle();
         result.Records[0].DepartmentID.Should().Be(department.DepartmentID);
@@ -77,10 +77,10 @@ public class DepartmentsControllerTests : IntegrationTest
             await schoolContext.SaveChangesAsync();
         }
 
-        var responseLowerCase = await _client.GetAsync("/api/departments?searchString=ef");
+        var responseLowerCase = await _client.GetAsync("/api/departments?searchString=ef", TestContext.Current.CancellationToken);
 
         responseLowerCase.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await responseLowerCase.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>());
+        var result = await responseLowerCase.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>(TestContext.Current.CancellationToken);
 
         result.Records.Should().ContainSingle();
         result.Records[0].DepartmentID.Should().Be(department2.DepartmentID);
@@ -88,10 +88,10 @@ public class DepartmentsControllerTests : IntegrationTest
         result.Records[0].Budget.Should().Be(department2.Budget);
         result.Records[0].StartDate.Should().Be(department2.StartDate);
 
-        var responseUpperCase = await _client.GetAsync("/api/departments?searchString=EF");
+        var responseUpperCase = await _client.GetAsync("/api/departments?searchString=EF", TestContext.Current.CancellationToken);
         responseUpperCase.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
 
-        var resultUpperCase = (await responseUpperCase.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>());
+        var resultUpperCase = await responseUpperCase.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>(TestContext.Current.CancellationToken);
         resultUpperCase.Records.Should().ContainSingle();
     }
 
@@ -120,13 +120,13 @@ public class DepartmentsControllerTests : IntegrationTest
 
             schoolContext.Departments.Add(department1);
             schoolContext.Departments.Add(department2);
-            await schoolContext.SaveChangesAsync();
+            await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
-        var response = await _client.GetAsync("/api/departments?sortOrder=name_desc");
+        var response = await _client.GetAsync("/api/departments?sortOrder=name_desc", TestContext.Current.CancellationToken);
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>());
+        var result = await response.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>(TestContext.Current.CancellationToken);
 
         result.Records.Count.Should().Be(2);
         result.Records[0].DepartmentID.Should().Be(department2.DepartmentID);
@@ -178,13 +178,13 @@ public class DepartmentsControllerTests : IntegrationTest
             schoolContext.Departments.Add(department2);
             schoolContext.Departments.Add(department3);
             schoolContext.Departments.Add(department4);
-            await schoolContext.SaveChangesAsync();
+            await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
-        var response = await _client.GetAsync("/api/departments?pageSize=2");
+        var response = await _client.GetAsync("/api/departments?pageSize=2", TestContext.Current.CancellationToken);
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>());
+        var result = await response.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>(TestContext.Current.CancellationToken);
 
         result.Records.Count.Should().Be(2);
 
@@ -245,10 +245,10 @@ public class DepartmentsControllerTests : IntegrationTest
             await schoolContext.SaveChangesAsync();
         }
 
-        var response = await _client.GetAsync("/api/departments?pageNumber=1&pageSize=2");
+        var response = await _client.GetAsync("/api/departments?pageNumber=1&pageSize=2", TestContext.Current.CancellationToken);
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>());
+        var result = await response.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>(TestContext.Current.CancellationToken);
 
         result.Records.Count.Should().Be(2);
 
@@ -266,7 +266,7 @@ public class DepartmentsControllerTests : IntegrationTest
     [Fact]
     public async Task GetSingle_WithNonExistingId_ReturnsNotFound()
     {
-        var response = await _client.GetAsync("/api/departments/1");
+        var response = await _client.GetAsync("/api/departments/1", TestContext.Current.CancellationToken);
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
     }
 
@@ -286,13 +286,13 @@ public class DepartmentsControllerTests : IntegrationTest
             var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
 
             schoolContext.Departments.Add(department);
-            await schoolContext.SaveChangesAsync();
+            await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
-        var response = await _client.GetAsync("/api/departments/1");
+        var response = await _client.GetAsync("/api/departments/1", TestContext.Current.CancellationToken);
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<DepartmentDetailDto>());
+        var result = await response.Content.ReadAsAsync<DepartmentDetailDto>(TestContext.Current.CancellationToken);
         result.DepartmentID.Should().Be(department.DepartmentID);
         result.Name.Should().Be(department.Name);
         result.Budget.Should().Be(department.Budget);
@@ -327,7 +327,7 @@ public class DepartmentsControllerTests : IntegrationTest
     [Fact]
     public async Task Delete_WithNonExistingId_ReturnsNotFound()
     {
-        var response = await _client.DeleteAsync("/api/departments/1");
+        var response = await _client.DeleteAsync("/api/departments/1", TestContext.Current.CancellationToken);
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
     }
 
@@ -344,9 +344,9 @@ public class DepartmentsControllerTests : IntegrationTest
 
         var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
         schoolContext.Departments.Add(department);
-        await schoolContext.SaveChangesAsync();
+        await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
 
-        var response = await _client.DeleteAsync("/api/departments/1");
+        var response = await _client.DeleteAsync("/api/departments/1", TestContext.Current.CancellationToken);
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
 
         schoolContext.Departments.Should().BeEmpty();
@@ -368,7 +368,7 @@ public class DepartmentsControllerTests : IntegrationTest
 
             var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
             schoolContext.Departments.Add(department);
-            await schoolContext.SaveChangesAsync();
+            await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
         var updateDepartmentCommand = new UpdateDepartmentDto
@@ -398,10 +398,10 @@ public class DepartmentsControllerTests : IntegrationTest
     [Fact]
     public async Task GetLookup_WithoutDepartments_ReturnsEmptyResponse()
     {
-        var response = await _client.GetAsync("/api/departments/lookup");
+        var response = await _client.GetAsync("/api/departments/lookup", TestContext.Current.CancellationToken);
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        (await response.Content.ReadAsAsync<DepartmentsLookupDto>()).Departments.Should().BeEmpty();
+        (await response.Content.ReadAsAsync<DepartmentsLookupDto>(TestContext.Current.CancellationToken)).Departments.Should().BeEmpty();
     }
 
     [Fact]
@@ -418,13 +418,13 @@ public class DepartmentsControllerTests : IntegrationTest
             var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
 
             schoolContext.Departments.Add(department);
-            await schoolContext.SaveChangesAsync();
+            await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
-        var response = await _client.GetAsync("/api/departments/lookup");
+        var response = await _client.GetAsync("/api/departments/lookup", TestContext.Current.CancellationToken);
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<DepartmentsLookupDto>());
+        var result = await response.Content.ReadAsAsync<DepartmentsLookupDto>(TestContext.Current.CancellationToken);
         result.Departments.Should().ContainSingle();
         result.Departments[0].DepartmentID.Should().Be(department.DepartmentID);
         result.Departments[0].Name.Should().Be(department.Name);

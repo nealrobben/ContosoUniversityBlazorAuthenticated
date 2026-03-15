@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
 using WebUI.Server;
 
-namespace WebUI.IntegrationTests_New;
+namespace WebUI.IntegrationTests;
 
 public class IntegrationTest
 {

@@ -6,17 +6,17 @@ using Microsoft.Extensions.DependencyInjection;
 using WebUI.Client.Dtos.Common;
 using WebUI.Client.Dtos.Students;
 
-namespace WebUI.IntegrationTests_New;
+namespace WebUI.IntegrationTests;
 
 public class StudentsControllerTests : IntegrationTest
 {
     [Fact]
     public async Task GetAll_WithoutStudents_ReturnsEmptyResponse()
     {
-        var response = await _client.GetAsync("/api/students");
+        var response = await _client.GetAsync("/api/students", TestContext.Current.CancellationToken);
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        (await response.Content.ReadAsAsync<OverviewDto<StudentOverviewDto>>()).Records.Should().BeEmpty();
+        (await response.Content.ReadAsAsync<OverviewDto<StudentOverviewDto>>(TestContext.Current.CancellationToken)).Records.Should().BeEmpty();
     }
 
     [Fact]
@@ -35,13 +35,13 @@ public class StudentsControllerTests : IntegrationTest
             var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
 
             schoolContext.Students.Add(student);
-            await schoolContext.SaveChangesAsync();
+            await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
-        var response = await _client.GetAsync("/api/students");
+        var response = await _client.GetAsync("/api/students", TestContext.Current.CancellationToken);
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewDto<StudentOverviewDto>>());
+        var result = (await response.Content.ReadAsAsync<OverviewDto<StudentOverviewDto>>(TestContext.Current.CancellationToken));
 
         result.Records.Should().ContainSingle();
         result.Records[0].StudentID.Should().Be(student.ID);
@@ -75,13 +75,13 @@ public class StudentsControllerTests : IntegrationTest
 
             schoolContext.Students.Add(student1);
             schoolContext.Students.Add(student2);
-            await schoolContext.SaveChangesAsync();
+            await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
-        var responseLowerCase = await _client.GetAsync("/api/students?searchString=de");
+        var responseLowerCase = await _client.GetAsync("/api/students?searchString=de", TestContext.Current.CancellationToken);
 
         responseLowerCase.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await responseLowerCase.Content.ReadAsAsync<OverviewDto<StudentOverviewDto>>());
+        var result = (await responseLowerCase.Content.ReadAsAsync<OverviewDto<StudentOverviewDto>>(TestContext.Current.CancellationToken));
 
         result.Records.Should().ContainSingle();
 
@@ -90,10 +90,10 @@ public class StudentsControllerTests : IntegrationTest
         result.Records[0].LastName.Should().Be(student2.LastName);
         result.Records[0].EnrollmentDate.Should().Be(student2.EnrollmentDate);
 
-        var responseUpperCase = await _client.GetAsync("/api/students?searchString=DE");
-        responseLowerCase.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        var responseUpperCase = await _client.GetAsync("/api/students?searchString=DE", TestContext.Current.CancellationToken);
+        responseUpperCase.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
 
-        var resultUpperCase = (await responseUpperCase.Content.ReadAsAsync<OverviewDto<StudentOverviewDto>>());
+        var resultUpperCase = (await responseUpperCase.Content.ReadAsAsync<OverviewDto<StudentOverviewDto>>(TestContext.Current.CancellationToken));
         resultUpperCase.Records.Should().ContainSingle();
     }
 
@@ -122,13 +122,13 @@ public class StudentsControllerTests : IntegrationTest
 
             schoolContext.Students.Add(student1);
             schoolContext.Students.Add(student2);
-            await schoolContext.SaveChangesAsync();
+            await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
-        var response = await _client.GetAsync("/api/students?sortOrder=lastname_desc");
+        var response = await _client.GetAsync("/api/students?sortOrder=lastname_desc", TestContext.Current.CancellationToken);
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewDto<StudentOverviewDto>>());
+        var result = (await response.Content.ReadAsAsync<OverviewDto<StudentOverviewDto>>(TestContext.Current.CancellationToken));
 
         result.Records.Count.Should().Be(2);
 
@@ -186,13 +186,13 @@ public class StudentsControllerTests : IntegrationTest
             schoolContext.Students.Add(student2);
             schoolContext.Students.Add(student3);
             schoolContext.Students.Add(student4);
-            await schoolContext.SaveChangesAsync();
+            await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
-        var response = await _client.GetAsync("/api/students?pageSize=2");
+        var response = await _client.GetAsync("/api/students?pageSize=2", TestContext.Current.CancellationToken);
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewDto<StudentOverviewDto>>());
+        var result = (await response.Content.ReadAsAsync<OverviewDto<StudentOverviewDto>>(TestContext.Current.CancellationToken));
 
         result.Records.Count.Should().Be(2);
 
@@ -250,13 +250,13 @@ public class StudentsControllerTests : IntegrationTest
             schoolContext.Students.Add(student2);
             schoolContext.Students.Add(student3);
             schoolContext.Students.Add(student4);
-            await schoolContext.SaveChangesAsync();
+            await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
-        var response = await _client.GetAsync("/api/students?pageSize=2&pageNumber=1");
+        var response = await _client.GetAsync("/api/students?pageSize=2&pageNumber=1", TestContext.Current.CancellationToken);
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewDto<StudentOverviewDto>>());
+        var result = (await response.Content.ReadAsAsync<OverviewDto<StudentOverviewDto>>(TestContext.Current.CancellationToken));
 
         result.Records.Count.Should().Be(2);
 
@@ -274,7 +274,7 @@ public class StudentsControllerTests : IntegrationTest
     [Fact]
     public async Task GetSingle_WithNonExistingId_ReturnsNotFound()
     {
-        var response = await _client.GetAsync("/api/students/1");
+        var response = await _client.GetAsync("/api/students/1", TestContext.Current.CancellationToken);
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
     }
 
@@ -297,9 +297,9 @@ public class StudentsControllerTests : IntegrationTest
             await schoolContext.SaveChangesAsync();
         }
 
-        var response = await _client.GetAsync("/api/students/1");
+        var response = await _client.GetAsync("/api/students/1", TestContext.Current.CancellationToken);
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<StudentDetailDto>());
+        var result = (await response.Content.ReadAsAsync<StudentDetailDto>(TestContext.Current.CancellationToken));
 
         result.StudentID.Should().Be(student.ID);
         result.FirstName.Should().Be(student.FirstMidName);
@@ -333,7 +333,7 @@ public class StudentsControllerTests : IntegrationTest
     [Fact]
     public async Task Delete_WithNonExistingId_ReturnsNotFound()
     {
-        var response = await _client.DeleteAsync("/api/students/1");
+        var response = await _client.DeleteAsync("/api/students/1", TestContext.Current.CancellationToken);
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
     }
 
@@ -351,9 +351,9 @@ public class StudentsControllerTests : IntegrationTest
 
         var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
         schoolContext.Students.Add(student);
-        await schoolContext.SaveChangesAsync();
+        await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
 
-        var response = await _client.DeleteAsync("/api/students/1");
+        var response = await _client.DeleteAsync("/api/students/1", TestContext.Current.CancellationToken);
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
 
         schoolContext.Students.Should().BeEmpty();
@@ -374,7 +374,7 @@ public class StudentsControllerTests : IntegrationTest
 
             var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
             schoolContext.Students.Add(student);
-            await schoolContext.SaveChangesAsync();
+            await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
         var updateStudentCommand = new UpdateStudentDto
@@ -403,10 +403,10 @@ public class StudentsControllerTests : IntegrationTest
     [Fact]
     public async Task ByCourse_WithoutStudents_ReturnsEmptyResponse()
     {
-        var response = await _client.GetAsync("/api/students/bycourse/1");
+        var response = await _client.GetAsync("/api/students/bycourse/1", TestContext.Current.CancellationToken);
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        (await response.Content.ReadAsAsync<StudentsForCourseDto>()).Students.Should().BeEmpty();
+        (await response.Content.ReadAsAsync<StudentsForCourseDto>(TestContext.Current.CancellationToken)).Students.Should().BeEmpty();
     }
 
     [Fact]
@@ -441,13 +441,13 @@ public class StudentsControllerTests : IntegrationTest
             schoolContext.Students.Add(student);
             schoolContext.Courses.Add(course);
             schoolContext.Enrollments.Add(enrollment);
-            await schoolContext.SaveChangesAsync();
+            await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
-        var response = await _client.GetAsync("/api/students/bycourse/1");
+        var response = await _client.GetAsync("/api/students/bycourse/1", TestContext.Current.CancellationToken);
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<StudentsForCourseDto>());
+        var result = await response.Content.ReadAsAsync<StudentsForCourseDto>(TestContext.Current.CancellationToken);
         result.Students.Should().ContainSingle();
         result.Students[0].StudentName.Should().Be(student.FullName);
         result.Students[0].StudentGrade.Should().Be((int?)enrollment.Grade);
