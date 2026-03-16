@@ -74,7 +74,7 @@ public class DepartmentsControllerTests : IntegrationTest
 
             schoolContext.Departments.Add(department1);
             schoolContext.Departments.Add(department2);
-            await schoolContext.SaveChangesAsync();
+            await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
         var responseLowerCase = await _client.GetAsync("/api/departments?searchString=ef", TestContext.Current.CancellationToken);
@@ -242,7 +242,7 @@ public class DepartmentsControllerTests : IntegrationTest
             schoolContext.Departments.Add(department2);
             schoolContext.Departments.Add(department3);
             schoolContext.Departments.Add(department4);
-            await schoolContext.SaveChangesAsync();
+            await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
         var response = await _client.GetAsync("/api/departments?pageNumber=1&pageSize=2", TestContext.Current.CancellationToken);

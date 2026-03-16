@@ -294,7 +294,7 @@ public class StudentsControllerTests : IntegrationTest
             var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
 
             schoolContext.Students.Add(student);
-            await schoolContext.SaveChangesAsync();
+            await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
         var response = await _client.GetAsync("/api/students/1", TestContext.Current.CancellationToken);
