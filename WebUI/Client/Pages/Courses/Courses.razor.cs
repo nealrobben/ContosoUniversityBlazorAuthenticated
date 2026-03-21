@@ -44,7 +44,7 @@ public partial class Courses
 
     public async Task DeleteCourse(int courseId, string title)
     {
-        bool? dialogResult = await DialogService.ShowMessageBox(Localizer["Confirm"], Localizer["DeleteConfirmation", title],
+        bool? dialogResult = await DialogService.ShowMessageBoxAsync(Localizer["Confirm"], Localizer["DeleteConfirmation", title],
             yesText: Localizer["Delete"], cancelText: Localizer["Cancel"]);
 
         if (dialogResult == true)
