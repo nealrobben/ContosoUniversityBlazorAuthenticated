@@ -59,7 +59,7 @@ public partial class StudentEdit
 
                 await StudentService.UpdateAsync(new UpdateStudentDto
                 {
-                    StudentID = UpdateStudentInputModel.StudentID,
+                    StudentId = UpdateStudentInputModel.StudentID,
                     LastName = UpdateStudentInputModel.LastName,
                     FirstName = UpdateStudentInputModel.FirstName,
                     EnrollmentDate = UpdateStudentInputModel.EnrollmentDate,

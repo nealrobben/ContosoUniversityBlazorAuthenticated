@@ -50,7 +50,7 @@ public class CourseDetailsTests : BunitTestBase
 
         comp.FindAll("dd")[0].TrimmedText().Should().Be(courseDetailsDto.Title);
         comp.FindAll("dd")[1].TrimmedText().Should().Be(courseDetailsDto.Credits.ToString());
-        comp.FindAll("dd")[2].TrimmedText().Should().Be(courseDetailsDto.DepartmentID.ToString());
+        comp.FindAll("dd")[2].TrimmedText().Should().Be(courseDetailsDto.DepartmentId.ToString());
     }
 
     [Fact]

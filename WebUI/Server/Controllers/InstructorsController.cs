@@ -69,7 +69,7 @@ public class InstructorsController : ContosoApiController
     {
         await Mediator.Send(new UpdateInstructorCommand
         {
-            InstructorID = dto.InstructorID,
+            InstructorId = dto.InstructorId,
             LastName = dto.LastName,
             FirstName = dto.FirstName,
             HireDate = dto.HireDate,

@@ -13,7 +13,7 @@
         </HeaderContent>
         <RowTemplate>
             <MudTd>
-                <MudIconButton @onclick="@(() => OnCourseSelected.InvokeAsync(context.CourseID))"
+                <MudIconButton @onclick="@(() => OnCourseSelected.InvokeAsync(context.CourseId))"
                                title="@Localizer["Select"]"
                                Variant="Variant.Filled"
                                Icon="fas fa-hand-pointer"
@@ -21,7 +21,7 @@
                                Class="CourseSelectButton">
                 </MudIconButton>
             </MudTd>
-            <MudTd>@context.CourseID</MudTd>
+            <MudTd>@context.CourseId</MudTd>
             <MudTd>@context.Title</MudTd>
             <MudTd>@context.DepartmentName</MudTd>
         </RowTemplate>

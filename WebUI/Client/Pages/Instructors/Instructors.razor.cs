@@ -148,7 +148,7 @@ public partial class Instructors
 
     public string InstructorsSelectRowClassFunc(InstructorOverviewVM instructor, int rowNumber)
     {
-        if (instructor?.InstructorID == SelectedInstructorId)
+        if (instructor?.InstructorId == SelectedInstructorId)
             return "mud-theme-primary";
 
         return "";

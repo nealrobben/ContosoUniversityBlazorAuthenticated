@@ -8,7 +8,7 @@ public class StudentsForCourseDto
 
     public StudentsForCourseDto()
     {
-        Students = new List<StudentForCourseDto>();
+        Students = [];
     }
 
     public StudentsForCourseDto(IList<StudentForCourseDto> students)

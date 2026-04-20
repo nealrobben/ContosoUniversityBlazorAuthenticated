@@ -8,7 +8,7 @@ public class InstructorsLookupDto
 
     public InstructorsLookupDto()
     {
-        Instructors = new List<InstructorLookupDto>();
+        Instructors = [];
     }
 
     public InstructorsLookupDto(IList<InstructorLookupDto> instructors)

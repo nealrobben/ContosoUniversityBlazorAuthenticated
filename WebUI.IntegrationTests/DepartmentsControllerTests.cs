@@ -293,7 +293,7 @@ public class DepartmentsControllerTests : IntegrationTest
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         var result = await response.Content.ReadAsAsync<DepartmentDetailDto>(TestContext.Current.CancellationToken);
-        result.DepartmentID.Should().Be(department.DepartmentID);
+        result.DepartmentId.Should().Be(department.DepartmentID);
         result.Name.Should().Be(department.Name);
         result.Budget.Should().Be(department.Budget);
         result.StartDate.Should().Be(department.StartDate);
@@ -307,7 +307,7 @@ public class DepartmentsControllerTests : IntegrationTest
             Name = "Test 1",
             Budget = 123,
             StartDate = DateTime.UtcNow,
-            InstructorID = 1
+            InstructorId = 1
         };
 
         var response = await _client.PostAsJsonAsync("/api/departments", department);
@@ -321,7 +321,7 @@ public class DepartmentsControllerTests : IntegrationTest
         schoolContext.Departments.First().Name.Should().Be(department.Name);
         schoolContext.Departments.First().Budget.Should().Be(department.Budget);
         schoolContext.Departments.First().StartDate.Should().Be(department.StartDate);
-        schoolContext.Departments.First().InstructorID.Should().Be(department.InstructorID);
+        schoolContext.Departments.First().InstructorID.Should().Be(department.InstructorId);
     }
 
     [Fact]
@@ -373,11 +373,11 @@ public class DepartmentsControllerTests : IntegrationTest
 
         var updateDepartmentCommand = new UpdateDepartmentDto
         {
-            DepartmentID = 1,
+            DepartmentId = 1,
             Name = "Test 2",
             Budget = 456,
             StartDate = DateTime.UtcNow.AddDays(1),
-            InstructorID = 2
+            InstructorId = 2
         };
 
         var response = await _client.PutAsJsonAsync("/api/departments", updateDepartmentCommand);
@@ -391,7 +391,7 @@ public class DepartmentsControllerTests : IntegrationTest
             schoolContext.Departments.First().Name.Should().Be(updateDepartmentCommand.Name);
             schoolContext.Departments.First().Budget.Should().Be(updateDepartmentCommand.Budget);
             schoolContext.Departments.First().StartDate.Should().Be(updateDepartmentCommand.StartDate);
-            schoolContext.Departments.First().InstructorID.Should().Be(updateDepartmentCommand.InstructorID);
+            schoolContext.Departments.First().InstructorID.Should().Be(updateDepartmentCommand.InstructorId);
         }
     }
 

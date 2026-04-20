@@ -46,26 +46,26 @@
         <MudTh></MudTh>
     </HeaderContent>
     <RowTemplate>
-        <MudTd DataLabel="Name">@context.CourseID</MudTd>
+        <MudTd DataLabel="Name">@context.CourseId</MudTd>
         <MudTd DataLabel="Title">@context.Title</MudTd>
         <MudTd DataLabel="Credits">@context.Credits</MudTd>
         <MudTd DataLabel="DepartmentName">@context.DepartmentName</MudTd>
         <MudTd DataLabel="">
-            <MudIconButton OnClick="(e => OpenCourseEdit(context.CourseID))"
+            <MudIconButton OnClick="(e => OpenCourseEdit(context.CourseId))"
                            title="@Localizer["Edit"]"
                            Variant="Variant.Filled"
                            Icon="fas fa-edit"
                            Color="Color.Primary" Size="Size.Small"
                            Class="OpenCourseEditButton">
             </MudIconButton>
-            <MudIconButton OnClick="(e => OpenCourseDetails(context.CourseID))"
+            <MudIconButton OnClick="(e => OpenCourseDetails(context.CourseId))"
                            title="@Localizer["Details"]"
                            Variant="Variant.Filled"
                            Icon="fas fa-eye"
                            Color="Color.Primary" Size="Size.Small"
                            Class="OpenCourseDetailsButton">
             </MudIconButton>
-            <MudIconButton OnClick=@(e => DeleteCourse(context.CourseID, $"{context.Title}"))
+            <MudIconButton OnClick=@(e => DeleteCourse(context.CourseId, $"{context.Title}"))
                            title="@Localizer["Delete"]"
                            Variant="Variant.Filled"
                            Icon="fas fa-trash-alt"

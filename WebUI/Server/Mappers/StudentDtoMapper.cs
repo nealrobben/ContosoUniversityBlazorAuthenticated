@@ -49,7 +49,7 @@ public static class StudentDtoMapper
     {
         return new StudentOverviewDto
         {
-            StudentID = model.StudentID,
+            StudentId = model.StudentID,
             LastName = model.LastName,
             FirstName = model.FirstName,
             EnrollmentDate = model.EnrollmentDate

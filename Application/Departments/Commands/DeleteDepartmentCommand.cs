@@ -10,11 +10,11 @@ namespace Application.Departments.Commands;
 
 public class DeleteDepartmentCommand : IRequest
 {
-    public int ID { get; set; }
+    public int Id { get; set; }
 
     public DeleteDepartmentCommand(int id)
     {
-        ID = id;
+        Id = id;
     }
 }
 
@@ -29,8 +29,8 @@ internal class DeleteDepartmentCommandHandler : IRequestHandler<DeleteDepartment
 
     public async Task<Unit> Handle(DeleteDepartmentCommand request, CancellationToken cancellationToken)
     {
-        var department = await _context.Departments.SingleOrDefaultAsync(x => x.DepartmentID == request.ID, cancellationToken)
-            ?? throw new NotFoundException(nameof(Department), request.ID);
+        var department = await _context.Departments.SingleOrDefaultAsync(x => x.DepartmentID == request.Id, cancellationToken)
+            ?? throw new NotFoundException(nameof(Department), request.Id);
 
         _context.Departments.Remove(department);
         await _context.SaveChangesAsync(cancellationToken);

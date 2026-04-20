@@ -11,7 +11,7 @@ namespace Application.Students.Commands;
 
 public class UpdateStudentCommand : IRequest
 {
-    public int? StudentID { get; set; }
+    public int? StudentId { get; set; }
 
     public string LastName { get; set; }
 
@@ -35,11 +35,11 @@ internal class UpdateStudentCommandHandler : IRequestHandler<UpdateStudentComman
 
     public async Task<Unit> Handle(UpdateStudentCommand request, CancellationToken cancellationToken)
     {
-        if (request.StudentID == null)
-            throw new NotFoundException(nameof(Student), request.StudentID);
+        if (request.StudentId == null)
+            throw new NotFoundException(nameof(Student), request.StudentId);
 
         var studentToUpdate = await _context.Students
-            .FirstOrDefaultAsync(s => s.ID == request.StudentID, cancellationToken);
+            .FirstOrDefaultAsync(s => s.ID == request.StudentId, cancellationToken);
 
         if (!Equals(studentToUpdate.ProfilePictureName, request.ProfilePictureName))
             await _profilePictureService.DeleteImageFile(studentToUpdate.ProfilePictureName);

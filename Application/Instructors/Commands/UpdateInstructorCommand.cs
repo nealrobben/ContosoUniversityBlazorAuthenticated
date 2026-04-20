@@ -11,7 +11,7 @@ namespace Application.Instructors.Commands;
 
 public class UpdateInstructorCommand : IRequest
 {
-    public int? InstructorID { get; set; }
+    public int? InstructorId { get; set; }
 
     public string LastName { get; set; }
 
@@ -37,15 +37,15 @@ internal class UpdateInstructorCommandHandler : IRequestHandler<UpdateInstructor
 
     public async Task<Unit> Handle(UpdateInstructorCommand request, CancellationToken cancellationToken)
     {
-        if (request.InstructorID == null)
-            throw new NotFoundException(nameof(Instructor), request.InstructorID);
+        if (request.InstructorId == null)
+            throw new NotFoundException(nameof(Instructor), request.InstructorId);
 
         var instructorToUpdate = await _context.Instructors
             .Include(i => i.OfficeAssignment)
             .Include(i => i.CourseAssignments)
             .ThenInclude(i => i.Course)
-            .FirstOrDefaultAsync(m => m.ID == request.InstructorID, cancellationToken)
-            ?? throw new NotFoundException(nameof(Instructor), request.InstructorID);
+            .FirstOrDefaultAsync(m => m.ID == request.InstructorId, cancellationToken)
+            ?? throw new NotFoundException(nameof(Instructor), request.InstructorId);
 
         if (!Equals(instructorToUpdate.ProfilePictureName, request.ProfilePictureName))
             await _profilePictureService.DeleteImageFile(instructorToUpdate.ProfilePictureName);

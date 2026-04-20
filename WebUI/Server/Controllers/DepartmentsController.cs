@@ -44,7 +44,7 @@ public class DepartmentsController : ContosoApiController
             Name = dto.Name,
             Budget = dto.Budget,
             StartDate = dto.StartDate,
-            InstructorID = dto.InstructorID
+            InstructorId = dto.InstructorId
         });
         var result = await Mediator.Send(new GetDepartmentDetailsQuery(departmentID));
 
@@ -68,12 +68,12 @@ public class DepartmentsController : ContosoApiController
     {
         await Mediator.Send(new UpdateDepartmentCommand
         {
-            DepartmentID = dto.DepartmentID,
+            DepartmentId = dto.DepartmentId,
             Name = dto.Name,
             Budget = dto.Budget,
             StartDate = dto.StartDate,
             RowVersion = dto.RowVersion,
-            InstructorID = dto.InstructorID
+            InstructorId = dto.InstructorId
         });
 
         return NoContent();

@@ -19,7 +19,7 @@ public class UpdateDepartmentValidator
         RuleFor(p => p.Name).NotEmpty().MaximumLength(50);
         RuleFor(p => p.Budget).NotEmpty().GreaterThan(0);
         RuleFor(p => p.StartDate).NotEmpty();
-        RuleFor(p => p.InstructorID).NotEmpty();
+        RuleFor(p => p.InstructorId).NotEmpty();
 
         RuleFor(v => v.Name)
             .MustAsync(BeUniqueName)
@@ -30,6 +30,6 @@ public class UpdateDepartmentValidator
         string name, CancellationToken cancellationToken)
     {
         return await _context.Departments
-            .AllAsync(x => !x.Name.Equals(name) || x.DepartmentID == updateDepartment.DepartmentID, cancellationToken);
+            .AllAsync(x => !x.Name.Equals(name) || x.DepartmentID == updateDepartment.DepartmentId, cancellationToken);
     }
 }

@@ -27,12 +27,12 @@ public static class DepartmentDtoMapper
     {
         return new DepartmentDetailDto
         {
-            DepartmentID = model.DepartmentID,
+            DepartmentId = model.DepartmentID,
             Name = model.Name,
             Budget = model.Budget,
             StartDate = model.StartDate,
             AdministratorName = model.AdministratorName,
-            InstructorID = model.InstructorID,
+            InstructorId = model.InstructorID,
             RowVersion = model.RowVersion
         };
     }

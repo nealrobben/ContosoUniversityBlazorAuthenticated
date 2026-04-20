@@ -266,11 +266,11 @@ public class DepartmentEditTests : BunitTestBase
         return new InstructorsLookupDto(new List<InstructorLookupDto>
         {
             new() {
-                ID = 1,
+                Id = 1,
                 FullName = "Test One"
             },
             new() {
-                ID = 2,
+                Id = 2,
                 FullName = "Test Two"
             }
         });

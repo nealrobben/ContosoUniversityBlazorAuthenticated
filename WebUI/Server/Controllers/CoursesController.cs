@@ -41,10 +41,10 @@ public class CoursesController : ContosoApiController
     {
         var courseID = await Mediator.Send(new CreateCourseCommand
         {
-            CourseID = dto.CourseID,
+            CourseId = dto.CourseId,
             Title = dto.Title,
             Credits = dto.Credits,
-            DepartmentID = dto.DepartmentID,
+            DepartmentId = dto.DepartmentId,
         });
 
         var result = await Mediator.Send(new GetCourseDetailsQuery(courseID));
@@ -69,10 +69,10 @@ public class CoursesController : ContosoApiController
     {
         await Mediator.Send(new UpdateCourseCommand
         {
-            CourseID = dto.CourseID,
+            CourseId = dto.CourseId,
             Title = dto.Title,
             Credits = dto.Credits,
-            DepartmentID = dto.DepartmentID
+            DepartmentId = dto.DepartmentId
         });
 
         return NoContent();

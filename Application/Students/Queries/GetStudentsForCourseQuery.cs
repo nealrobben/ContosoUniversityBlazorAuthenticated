@@ -12,11 +12,11 @@ namespace Application.Students.Queries;
 
 public class GetStudentsForCourseQuery : IRequest<StudentsForCourse>
 {
-    public int? ID { get; set; }
+    public int? Id { get; set; }
 
     public GetStudentsForCourseQuery(int? id)
     {
-        ID = id;
+        Id = id;
     }
 }
 
@@ -31,11 +31,11 @@ internal class GetStudentsForCourseQueryHandler : IRequestHandler<GetStudentsFor
 
     public async Task<StudentsForCourse> Handle(GetStudentsForCourseQuery request, CancellationToken cancellationToken)
     {
-        if (request.ID == null)
+        if (request.Id == null)
             return new StudentsForCourse(new List<StudentForCourse>());
 
         var students = await _context.Enrollments
-            .Where(x => x.CourseID == request.ID)
+            .Where(x => x.CourseID == request.Id)
             .Include(c => c.Student)
             .AsNoTracking()
             .ToListAsync(cancellationToken);

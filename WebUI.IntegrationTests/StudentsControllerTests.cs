@@ -44,7 +44,7 @@ public class StudentsControllerTests : IntegrationTest
         var result = (await response.Content.ReadAsAsync<OverviewDto<StudentOverviewDto>>(TestContext.Current.CancellationToken));
 
         result.Records.Should().ContainSingle();
-        result.Records[0].StudentID.Should().Be(student.ID);
+        result.Records[0].StudentId.Should().Be(student.ID);
         result.Records[0].FirstName.Should().Be(student.FirstMidName);
         result.Records[0].LastName.Should().Be(student.LastName);
         result.Records[0].EnrollmentDate.Should().Be(student.EnrollmentDate);
@@ -85,7 +85,7 @@ public class StudentsControllerTests : IntegrationTest
 
         result.Records.Should().ContainSingle();
 
-        result.Records[0].StudentID.Should().Be(student2.ID);
+        result.Records[0].StudentId.Should().Be(student2.ID);
         result.Records[0].FirstName.Should().Be(student2.FirstMidName);
         result.Records[0].LastName.Should().Be(student2.LastName);
         result.Records[0].EnrollmentDate.Should().Be(student2.EnrollmentDate);
@@ -132,12 +132,12 @@ public class StudentsControllerTests : IntegrationTest
 
         result.Records.Count.Should().Be(2);
 
-        result.Records[0].StudentID.Should().Be(student2.ID);
+        result.Records[0].StudentId.Should().Be(student2.ID);
         result.Records[0].FirstName.Should().Be(student2.FirstMidName);
         result.Records[0].LastName.Should().Be(student2.LastName);
         result.Records[0].EnrollmentDate.Should().Be(student2.EnrollmentDate);
 
-        result.Records[1].StudentID.Should().Be(student1.ID);
+        result.Records[1].StudentId.Should().Be(student1.ID);
         result.Records[1].FirstName.Should().Be(student1.FirstMidName);
         result.Records[1].LastName.Should().Be(student1.LastName);
         result.Records[1].EnrollmentDate.Should().Be(student1.EnrollmentDate);
@@ -196,12 +196,12 @@ public class StudentsControllerTests : IntegrationTest
 
         result.Records.Count.Should().Be(2);
 
-        result.Records[0].StudentID.Should().Be(student1.ID);
+        result.Records[0].StudentId.Should().Be(student1.ID);
         result.Records[0].FirstName.Should().Be(student1.FirstMidName);
         result.Records[0].LastName.Should().Be(student1.LastName);
         result.Records[0].EnrollmentDate.Should().Be(student1.EnrollmentDate);
 
-        result.Records[1].StudentID.Should().Be(student2.ID);
+        result.Records[1].StudentId.Should().Be(student2.ID);
         result.Records[1].FirstName.Should().Be(student2.FirstMidName);
         result.Records[1].LastName.Should().Be(student2.LastName);
         result.Records[1].EnrollmentDate.Should().Be(student2.EnrollmentDate);
@@ -260,12 +260,12 @@ public class StudentsControllerTests : IntegrationTest
 
         result.Records.Count.Should().Be(2);
 
-        result.Records[0].StudentID.Should().Be(student3.ID);
+        result.Records[0].StudentId.Should().Be(student3.ID);
         result.Records[0].FirstName.Should().Be(student3.FirstMidName);
         result.Records[0].LastName.Should().Be(student3.LastName);
         result.Records[0].EnrollmentDate.Should().Be(student3.EnrollmentDate);
 
-        result.Records[1].StudentID.Should().Be(student4.ID);
+        result.Records[1].StudentId.Should().Be(student4.ID);
         result.Records[1].FirstName.Should().Be(student4.FirstMidName);
         result.Records[1].LastName.Should().Be(student4.LastName);
         result.Records[1].EnrollmentDate.Should().Be(student4.EnrollmentDate);
@@ -379,7 +379,7 @@ public class StudentsControllerTests : IntegrationTest
 
         var updateStudentCommand = new UpdateStudentDto
         {
-            StudentID = 1,
+            StudentId = 1,
             FirstName = "First name 2",
             LastName = "Last name 2",
             EnrollmentDate = DateTime.UtcNow.AddDays(1)
@@ -393,7 +393,7 @@ public class StudentsControllerTests : IntegrationTest
             var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
 
             schoolContext.Students.Should().ContainSingle();
-            schoolContext.Students.First().ID.Should().Be(updateStudentCommand.StudentID);
+            schoolContext.Students.First().ID.Should().Be(updateStudentCommand.StudentId);
             schoolContext.Students.First().FirstMidName.Should().Be(updateStudentCommand.FirstName);
             schoolContext.Students.First().LastName.Should().Be(updateStudentCommand.LastName);
             schoolContext.Students.First().EnrollmentDate.Should().Be(updateStudentCommand.EnrollmentDate);

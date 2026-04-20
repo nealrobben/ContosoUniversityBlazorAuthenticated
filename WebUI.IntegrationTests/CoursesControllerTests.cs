@@ -49,7 +49,7 @@ public class CoursesControllerTests : IntegrationTest
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         var result = await response.Content.ReadAsAsync<OverviewDto<CourseOverviewDto>>(TestContext.Current.CancellationToken);
         result.Records.Should().ContainSingle();
-        result.Records[0].CourseID.Should().Be(course.CourseID);
+        result.Records[0].CourseId.Should().Be(course.CourseID);
         result.Records[0].Title.Should().Be(course.Title);
         result.Records[0].Credits.Should().Be(course.Credits);
         result.Records[0].DepartmentName.Should().Be(department.Name);
@@ -96,7 +96,7 @@ public class CoursesControllerTests : IntegrationTest
         var result = await responseLowerCase.Content.ReadAsAsync<OverviewDto<CourseOverviewDto>>(TestContext.Current.CancellationToken);
 
         result.Records.Should().ContainSingle();
-        result.Records[0].CourseID.Should().Be(course2.CourseID);
+        result.Records[0].CourseId.Should().Be(course2.CourseID);
         result.Records[0].Title.Should().Be(course2.Title);
         result.Records[0].Credits.Should().Be(course2.Credits);
         result.Records[0].DepartmentName.Should().Be(department.Name);
@@ -150,7 +150,7 @@ public class CoursesControllerTests : IntegrationTest
         var result = await response.Content.ReadAsAsync<OverviewDto<CourseOverviewDto>>(TestContext.Current.CancellationToken);
 
         result.Records.Count.Should().Be(2);
-        result.Records[0].CourseID.Should().Be(course2.CourseID);
+        result.Records[0].CourseId.Should().Be(course2.CourseID);
         result.Records[0].Title.Should().Be(course2.Title);
         result.Records[0].Credits.Should().Be(course2.Credits);
         result.Records[0].DepartmentName.Should().Be(department.Name);
@@ -216,12 +216,12 @@ public class CoursesControllerTests : IntegrationTest
 
         result.Records.Count.Should().Be(2);
 
-        result.Records[0].CourseID.Should().Be(course1.CourseID);
+        result.Records[0].CourseId.Should().Be(course1.CourseID);
         result.Records[0].Title.Should().Be(course1.Title);
         result.Records[0].Credits.Should().Be(course1.Credits);
         result.Records[0].DepartmentName.Should().Be(department.Name);
 
-        result.Records[1].CourseID.Should().Be(course2.CourseID);
+        result.Records[1].CourseId.Should().Be(course2.CourseID);
         result.Records[1].Title.Should().Be(course2.Title);
         result.Records[1].Credits.Should().Be(course2.Credits);
         result.Records[1].DepartmentName.Should().Be(department.Name);
@@ -287,12 +287,12 @@ public class CoursesControllerTests : IntegrationTest
 
         result.Records.Count.Should().Be(2);
 
-        result.Records[0].CourseID.Should().Be(course3.CourseID);
+        result.Records[0].CourseId.Should().Be(course3.CourseID);
         result.Records[0].Title.Should().Be(course3.Title);
         result.Records[0].Credits.Should().Be(course3.Credits);
         result.Records[0].DepartmentName.Should().Be(department.Name);
 
-        result.Records[1].CourseID.Should().Be(course4.CourseID);
+        result.Records[1].CourseId.Should().Be(course4.CourseID);
         result.Records[1].Title.Should().Be(course4.Title);
         result.Records[1].Credits.Should().Be(course4.Credits);
         result.Records[1].DepartmentName.Should().Be(department.Name);
@@ -335,10 +335,10 @@ public class CoursesControllerTests : IntegrationTest
 
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         var result = await response.Content.ReadAsAsync<CourseDetailDto>(TestContext.Current.CancellationToken);
-        result.CourseID.Should().Be(course.CourseID);
+        result.CourseId.Should().Be(course.CourseID);
         result.Title.Should().Be(course.Title);
         result.Credits.Should().Be(course.Credits);
-        result.DepartmentID.Should().Be(department.DepartmentID);
+        result.DepartmentId.Should().Be(department.DepartmentID);
     }
 
     [Fact]
@@ -352,10 +352,10 @@ public class CoursesControllerTests : IntegrationTest
 
         var course = new CreateCourseDto
         {
-            CourseID = 1,
+            CourseId = 1,
             Title = "Title 1",
             Credits = 2,
-            DepartmentID = 1
+            DepartmentId = 1
         };
 
         using (var scope = _appFactory.Services.CreateScope())
@@ -375,10 +375,10 @@ public class CoursesControllerTests : IntegrationTest
             var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
 
             schoolContext.Courses.Should().ContainSingle();
-            schoolContext.Courses.First().CourseID.Should().Be(course.CourseID);
+            schoolContext.Courses.First().CourseID.Should().Be(course.CourseId);
             schoolContext.Courses.First().Title.Should().Be(course.Title);
             schoolContext.Courses.First().Credits.Should().Be(course.Credits);
-            schoolContext.Courses.First().DepartmentID.Should().Be(course.DepartmentID);
+            schoolContext.Courses.First().DepartmentID.Should().Be(course.DepartmentId);
         }
     }
 
@@ -432,10 +432,10 @@ public class CoursesControllerTests : IntegrationTest
 
         var updateCourseCommand = new UpdateCourseDto
         {
-            CourseID = 1,
+            CourseId = 1,
             Title = "Title 2",
             Credits = 22,
-            DepartmentID = 4
+            DepartmentId = 4
         };
 
         var response = await _client.PutAsJsonAsync("/api/courses", updateCourseCommand);
@@ -448,7 +448,7 @@ public class CoursesControllerTests : IntegrationTest
             schoolContext.Courses.Should().ContainSingle();
             schoolContext.Courses.First().Title.Should().Be(updateCourseCommand.Title);
             schoolContext.Courses.First().Credits.Should().Be(updateCourseCommand.Credits);
-            schoolContext.Courses.First().DepartmentID.Should().Be(updateCourseCommand.DepartmentID);
+            schoolContext.Courses.First().DepartmentID.Should().Be(updateCourseCommand.DepartmentId);
         }
     }
 
@@ -507,7 +507,7 @@ public class CoursesControllerTests : IntegrationTest
         var result = await response.Content.ReadAsAsync<CoursesForInstructorOverviewDto>(TestContext.Current.CancellationToken);
 
         result.Courses.Should().ContainSingle();
-        result.Courses[0].CourseID.Should().Be(course.CourseID);
+        result.Courses[0].CourseId.Should().Be(course.CourseID);
         result.Courses[0].Title.Should().Be(course.Title);
         result.Courses[0].DepartmentName.Should().Be(department.Name);
     }

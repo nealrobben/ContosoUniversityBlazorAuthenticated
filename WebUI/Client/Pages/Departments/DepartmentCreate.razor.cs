@@ -43,7 +43,7 @@ public partial class DepartmentCreate
         var instructorsLookup = await InstructorService.GetLookupAsync();
         InstructorsLookup = InstructorViewModelMapper.ToViewModel(instructorsLookup);
 
-        CreateDepartmentInputModel.InstructorID = InstructorsLookup.Instructors[0].ID;
+        CreateDepartmentInputModel.InstructorID = InstructorsLookup.Instructors[0].Id;
         StateHasChanged();
     }
 
@@ -62,7 +62,7 @@ public partial class DepartmentCreate
                     Name = CreateDepartmentInputModel.Name,
                     Budget = CreateDepartmentInputModel.Budget,
                     StartDate = CreateDepartmentInputModel.StartDate,
-                    InstructorID = CreateDepartmentInputModel.InstructorID
+                    InstructorId = CreateDepartmentInputModel.InstructorID
                 });
 
                 CreateDepartmentInputModel = new CreateDepartmentInputModel();

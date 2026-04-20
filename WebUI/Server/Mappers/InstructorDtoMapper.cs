@@ -10,7 +10,7 @@ public static class InstructorDtoMapper
     {
         return new InstructorLookupDto
         {
-            ID = model.ID,
+            Id = model.ID,
             FullName = model.FullName
         };
     }
@@ -27,7 +27,7 @@ public static class InstructorDtoMapper
     {
         return new InstructorDetailDto
         {
-            InstructorID = model.InstructorID,
+            InstructorId = model.InstructorID,
             LastName = model.LastName,
             FirstName = model.FirstName,
             HireDate = model.HireDate,
@@ -40,7 +40,7 @@ public static class InstructorDtoMapper
     {
         return new CourseAssignmentDto
         {
-            CourseID = model.CourseID,
+            CourseId = model.CourseID,
             CourseTitle = model.CourseTitle
         };
     }
@@ -49,7 +49,7 @@ public static class InstructorDtoMapper
     {
         return new InstructorOverviewDto
         {
-            InstructorID = model.InstructorID,
+            InstructorId = model.InstructorID,
             LastName = model.LastName,
             FirstName = model.FirstName,
             HireDate = model.HireDate,

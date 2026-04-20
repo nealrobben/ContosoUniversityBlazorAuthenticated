@@ -51,9 +51,9 @@ public partial class DepartmentEdit
     {
         var department = await DepartmentService.GetAsync(DepartmentId.ToString());
 
-        UpdateDepartmentInputModel.DepartmentID = department.DepartmentID;
+        UpdateDepartmentInputModel.DepartmentID = department.DepartmentId;
         UpdateDepartmentInputModel.Budget = department.Budget;
-        UpdateDepartmentInputModel.InstructorID = department.InstructorID ?? 0;
+        UpdateDepartmentInputModel.InstructorID = department.InstructorId ?? 0;
         UpdateDepartmentInputModel.Name = department.Name;
         UpdateDepartmentInputModel.StartDate = department.StartDate;
         UpdateDepartmentInputModel.RowVersion = department.RowVersion;
@@ -71,12 +71,12 @@ public partial class DepartmentEdit
             {
                 await DepartmentService.UpdateAsync(new UpdateDepartmentDto
                 {
-                    DepartmentID = UpdateDepartmentInputModel.DepartmentID,
+                    DepartmentId = UpdateDepartmentInputModel.DepartmentID,
                     Name = UpdateDepartmentInputModel.Name,
                     Budget = UpdateDepartmentInputModel.Budget,
                     StartDate = UpdateDepartmentInputModel.StartDate,
                     RowVersion = UpdateDepartmentInputModel.RowVersion,
-                    InstructorID = UpdateDepartmentInputModel.InstructorID
+                    InstructorId = UpdateDepartmentInputModel.InstructorID
                 });
                 MudDialog.Close(DialogResult.Ok(true));
             }

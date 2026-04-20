@@ -15,7 +15,7 @@ public class CreateDepartmentCommand : IRequest<int>
 
     public DateTime StartDate { get; set; }
 
-    public int InstructorID { get; set; }
+    public int InstructorId { get; set; }
 }
 
 internal class CreateDepartmentCommandHandler : IRequestHandler<CreateDepartmentCommand, int>
@@ -34,7 +34,7 @@ internal class CreateDepartmentCommandHandler : IRequestHandler<CreateDepartment
             Name = request.Name,
             Budget = request.Budget,
             StartDate = request.StartDate,
-            InstructorID = request.InstructorID
+            InstructorID = request.InstructorId
         };
 
         _context.Departments.Add(newDepartment);

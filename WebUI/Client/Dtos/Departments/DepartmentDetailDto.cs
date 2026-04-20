@@ -4,7 +4,7 @@ namespace WebUI.Client.Dtos.Departments;
 
 public class DepartmentDetailDto
 {
-    public int DepartmentID { get; set; }
+    public int DepartmentId { get; set; }
 
     public string Name { get; set; }
 
@@ -14,7 +14,7 @@ public class DepartmentDetailDto
 
     public string AdministratorName { get; set; }
 
-    public int? InstructorID { get; set; }
+    public int? InstructorId { get; set; }
 
     public byte[] RowVersion { get; set; }
 }

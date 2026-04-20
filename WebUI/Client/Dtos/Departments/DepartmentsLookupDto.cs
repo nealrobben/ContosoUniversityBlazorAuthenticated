@@ -8,7 +8,7 @@ public class DepartmentsLookupDto
 
     public DepartmentsLookupDto()
     {
-        Departments = new List<DepartmentLookupDto>();
+        Departments = [];
     }
 
     public DepartmentsLookupDto(IList<DepartmentLookupDto> departments)

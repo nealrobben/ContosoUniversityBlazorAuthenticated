@@ -36,7 +36,7 @@ public partial class InstructorEdit
     {
         var instructor = await InstructorService.GetAsync(InstructorId.ToString());
 
-        UpdateInstructorInputModel.InstructorID = instructor.InstructorID;
+        UpdateInstructorInputModel.InstructorID = instructor.InstructorId;
         UpdateInstructorInputModel.FirstName = instructor.FirstName;
         UpdateInstructorInputModel.LastName = instructor.LastName;
         UpdateInstructorInputModel.HireDate = instructor.HireDate;
@@ -59,7 +59,7 @@ public partial class InstructorEdit
 
                 await InstructorService.UpdateAsync(new UpdateInstructorDto
                 {
-                    InstructorID = UpdateInstructorInputModel.InstructorID,
+                    InstructorId = UpdateInstructorInputModel.InstructorID,
                     LastName = UpdateInstructorInputModel.LastName,
                     FirstName = UpdateInstructorInputModel.FirstName,
                     HireDate = UpdateInstructorInputModel.HireDate,

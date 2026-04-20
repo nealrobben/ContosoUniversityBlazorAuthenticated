@@ -10,13 +10,13 @@ namespace Application.Courses.Commands;
 
 public class UpdateCourseCommand : IRequest
 {
-    public int? CourseID { get; set; }
+    public int? CourseId { get; set; }
 
     public string Title { get; set; }
 
     public int Credits { get; set; }
 
-    public int DepartmentID { get; set; }
+    public int DepartmentId { get; set; }
 }
 
 internal class UpdateCourseCommandHandler : IRequestHandler<UpdateCourseCommand>
@@ -30,15 +30,15 @@ internal class UpdateCourseCommandHandler : IRequestHandler<UpdateCourseCommand>
 
     public async Task<Unit> Handle(UpdateCourseCommand request, CancellationToken cancellationToken)
     {
-        if (request.CourseID == null)
-            throw new NotFoundException(nameof(Course), request.CourseID);
+        if (request.CourseId == null)
+            throw new NotFoundException(nameof(Course), request.CourseId);
 
         var courseToUpdate = await _context.Courses
-            .FirstOrDefaultAsync(c => c.CourseID == request.CourseID, cancellationToken);
+            .FirstOrDefaultAsync(c => c.CourseID == request.CourseId, cancellationToken);
 
         courseToUpdate.Title = request.Title;
         courseToUpdate.Credits = request.Credits;
-        courseToUpdate.DepartmentID = request.DepartmentID;
+        courseToUpdate.DepartmentID = request.DepartmentId;
 
         await _context.SaveChangesAsync(cancellationToken);
 

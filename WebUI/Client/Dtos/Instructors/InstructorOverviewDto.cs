@@ -5,7 +5,7 @@ namespace WebUI.Client.Dtos.Instructors;
 
 public class InstructorOverviewDto
 {
-    public int InstructorID { get; set; }
+    public int InstructorId { get; set; }
 
     public string LastName { get; set; }
 

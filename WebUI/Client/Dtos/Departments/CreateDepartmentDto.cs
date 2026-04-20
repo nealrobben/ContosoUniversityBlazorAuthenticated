@@ -10,5 +10,5 @@ public class CreateDepartmentDto
 
     public DateTime StartDate { get; set; }
 
-    public int InstructorID { get; set; }
+    public int InstructorId { get; set; }
 }

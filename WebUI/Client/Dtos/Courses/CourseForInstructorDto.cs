@@ -2,7 +2,7 @@
 
 public class CourseForInstructorDto
 {
-    public int CourseID { get; set; }
+    public int CourseId { get; set; }
 
     public string Title { get; set; }
 

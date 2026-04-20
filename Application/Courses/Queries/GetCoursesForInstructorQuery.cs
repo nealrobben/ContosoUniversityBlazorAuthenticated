@@ -12,11 +12,11 @@ namespace Application.Courses.Queries;
 
 public class GetCoursesForInstructorQuery : IRequest<CoursesForInstructorOverview>
 {
-    public int? ID { get; set; }
+    public int? Id { get; set; }
 
     public GetCoursesForInstructorQuery(int? id)
     {
-        ID = id;
+        Id = id;
     }
 }
 
@@ -31,11 +31,11 @@ internal class GetCoursesForInstructorQueryHandler : IRequestHandler<GetCoursesF
 
     public async Task<CoursesForInstructorOverview> Handle(GetCoursesForInstructorQuery request, CancellationToken cancellationToken)
     {
-        if (request.ID == null)
+        if (request.Id == null)
             return new CoursesForInstructorOverview(new List<CourseForInstructor>());
 
         var courseIdsForInstructor = await _context.CourseAssignments
-            .Where(x => x.InstructorID == request.ID)
+            .Where(x => x.InstructorID == request.Id)
             .Select(x => x.CourseID)
             .ToListAsync(cancellationToken);
 

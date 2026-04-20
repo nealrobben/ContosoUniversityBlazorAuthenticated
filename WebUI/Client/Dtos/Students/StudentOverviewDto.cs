@@ -4,7 +4,7 @@ namespace WebUI.Client.Dtos.Students;
 
 public class StudentOverviewDto
 {
-    public int StudentID { get; set; }
+    public int StudentId { get; set; }
 
     public string FirstName { get; set; }
 

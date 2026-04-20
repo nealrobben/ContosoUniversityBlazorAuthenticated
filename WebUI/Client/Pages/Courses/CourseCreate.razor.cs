@@ -43,7 +43,7 @@ public partial class CourseCreate
         var departmentsLookup = await DepartmentService.GetLookupAsync();
         DepartmentsLookup = DepartmentViewModelMapper.ToViewModel(departmentsLookup);
 
-        CreateCourseInputModel.DepartmentID = DepartmentsLookup.Departments[0].DepartmentID;
+        CreateCourseInputModel.DepartmentID = DepartmentsLookup.Departments[0].DepartmentId;
         StateHasChanged();
     }
 
@@ -59,10 +59,10 @@ public partial class CourseCreate
             {
                 await CourseService.CreateAsync(new CreateCourseDto
                 {
-                    CourseID = CreateCourseInputModel.CourseID,
+                    CourseId = CreateCourseInputModel.CourseID,
                     Title = CreateCourseInputModel.Title,
                     Credits = CreateCourseInputModel.Credits,
-                    DepartmentID = CreateCourseInputModel.DepartmentID
+                    DepartmentId = CreateCourseInputModel.DepartmentID
                 });
 
                 CreateCourseInputModel = new CreateCourseInputModel();

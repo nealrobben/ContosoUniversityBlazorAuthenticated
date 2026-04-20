@@ -44,7 +44,7 @@ public class InstructorsControllerTests : IntegrationTest
 
         result.Records.Should().ContainSingle();
 
-        result.Records[0].InstructorID.Should().Be(instructor.ID);
+        result.Records[0].InstructorId.Should().Be(instructor.ID);
         result.Records[0].FirstName.Should().Be(instructor.FirstMidName);
         result.Records[0].LastName.Should().Be(instructor.LastName);
         result.Records[0].HireDate.Should().Be(instructor.HireDate);
@@ -85,7 +85,7 @@ public class InstructorsControllerTests : IntegrationTest
 
         result.Records.Should().ContainSingle();
 
-        result.Records[0].InstructorID.Should().Be(instructor2.ID);
+        result.Records[0].InstructorId.Should().Be(instructor2.ID);
         result.Records[0].FirstName.Should().Be(instructor2.FirstMidName);
         result.Records[0].LastName.Should().Be(instructor2.LastName);
         result.Records[0].HireDate.Should().Be(instructor2.HireDate);
@@ -132,7 +132,7 @@ public class InstructorsControllerTests : IntegrationTest
 
         result.Records.Count.Should().Be(2);
 
-        result.Records[0].InstructorID.Should().Be(instructor2.ID);
+        result.Records[0].InstructorId.Should().Be(instructor2.ID);
         result.Records[0].FirstName.Should().Be(instructor2.FirstMidName);
         result.Records[0].LastName.Should().Be(instructor2.LastName);
         result.Records[0].HireDate.Should().Be(instructor2.HireDate);
@@ -191,12 +191,12 @@ public class InstructorsControllerTests : IntegrationTest
 
         result.Records.Count.Should().Be(2);
 
-        result.Records[0].InstructorID.Should().Be(instructor1.ID);
+        result.Records[0].InstructorId.Should().Be(instructor1.ID);
         result.Records[0].FirstName.Should().Be(instructor1.FirstMidName);
         result.Records[0].LastName.Should().Be(instructor1.LastName);
         result.Records[0].HireDate.Should().Be(instructor1.HireDate);
 
-        result.Records[1].InstructorID.Should().Be(instructor2.ID);
+        result.Records[1].InstructorId.Should().Be(instructor2.ID);
         result.Records[1].FirstName.Should().Be(instructor2.FirstMidName);
         result.Records[1].LastName.Should().Be(instructor2.LastName);
         result.Records[1].HireDate.Should().Be(instructor2.HireDate);
@@ -255,12 +255,12 @@ public class InstructorsControllerTests : IntegrationTest
 
         result.Records.Count.Should().Be(2);
 
-        result.Records[0].InstructorID.Should().Be(instructor3.ID);
+        result.Records[0].InstructorId.Should().Be(instructor3.ID);
         result.Records[0].FirstName.Should().Be(instructor3.FirstMidName);
         result.Records[0].LastName.Should().Be(instructor3.LastName);
         result.Records[0].HireDate.Should().Be(instructor3.HireDate);
 
-        result.Records[1].InstructorID.Should().Be(instructor4.ID);
+        result.Records[1].InstructorId.Should().Be(instructor4.ID);
         result.Records[1].FirstName.Should().Be(instructor4.FirstMidName);
         result.Records[1].LastName.Should().Be(instructor4.LastName);
         result.Records[1].HireDate.Should().Be(instructor4.HireDate);
@@ -297,7 +297,7 @@ public class InstructorsControllerTests : IntegrationTest
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         var result = await response.Content.ReadAsAsync<InstructorDetailDto>(TestContext.Current.CancellationToken);
 
-        result.InstructorID.Should().Be(instructor.ID);
+        result.InstructorId.Should().Be(instructor.ID);
         result.FirstName.Should().Be(instructor.FirstMidName);
         result.LastName.Should().Be(instructor.LastName);
         result.HireDate.Should().Be(instructor.HireDate);
@@ -375,7 +375,7 @@ public class InstructorsControllerTests : IntegrationTest
 
         var updateInstructorCommand = new UpdateInstructorDto
         {
-            InstructorID = 1,
+            InstructorId = 1,
             FirstName = "First name 2",
             LastName = "Last name 2",
             HireDate = DateTime.UtcNow.AddDays(1)
@@ -389,7 +389,7 @@ public class InstructorsControllerTests : IntegrationTest
             var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
 
             schoolContext.Instructors.Should().ContainSingle();
-            schoolContext.Instructors.First().ID.Should().Be(updateInstructorCommand.InstructorID);
+            schoolContext.Instructors.First().ID.Should().Be(updateInstructorCommand.InstructorId);
             schoolContext.Instructors.First().FirstMidName.Should().Be(updateInstructorCommand.FirstName);
             schoolContext.Instructors.First().LastName.Should().Be(updateInstructorCommand.LastName);
             schoolContext.Instructors.First().HireDate.Should().Be(updateInstructorCommand.HireDate);
@@ -428,7 +428,7 @@ public class InstructorsControllerTests : IntegrationTest
         response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
         var result = await response.Content.ReadAsAsync<InstructorsLookupDto>(TestContext.Current.CancellationToken);
 
-        result.Instructors[0].ID.Should().Be(instructor.ID);
+        result.Instructors[0].Id.Should().Be(instructor.ID);
         result.Instructors[0].FullName.Should().Be(instructor.FullName);
     }
 }

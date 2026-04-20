@@ -12,11 +12,11 @@ namespace Application.Students.Queries;
 
 public class GetStudentDetailsQuery : IRequest<StudentDetail>
 {
-    public int? ID { get; set; }
+    public int? Id { get; set; }
 
     public GetStudentDetailsQuery(int? id)
     {
-        ID = id;
+        Id = id;
     }
 }
 
@@ -31,15 +31,15 @@ internal class GetStudentDetailsQueryHandler : IRequestHandler<GetStudentDetails
 
     public async Task<StudentDetail> Handle(GetStudentDetailsQuery request, CancellationToken cancellationToken)
     {
-        if (request.ID == null)
-            throw new NotFoundException(nameof(Student), request.ID);
+        if (request.Id == null)
+            throw new NotFoundException(nameof(Student), request.Id);
 
         var student = await _context.Students
             .Include(s => s.Enrollments)
             .ThenInclude(e => e.Course)
             .AsNoTracking()
-            .FirstOrDefaultAsync(m => m.ID == request.ID, cancellationToken)
-            ?? throw new NotFoundException(nameof(Student), request.ID);
+            .FirstOrDefaultAsync(m => m.ID == request.Id, cancellationToken)
+            ?? throw new NotFoundException(nameof(Student), request.Id);
 
         return StudentProjectionMapper.ToStudentDetailProjection(student);
     }

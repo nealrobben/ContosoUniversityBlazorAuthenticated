@@ -38,7 +38,7 @@ public partial class CoursesForInstructor
 
     public string CoursesSelectRowClassFunc(CourseForInstructorVM course, int rowNumber)
     {
-        if (course?.CourseID == SelectedCourseId)
+        if (course?.CourseId == SelectedCourseId)
             return "mud-theme-primary";
 
         return "";

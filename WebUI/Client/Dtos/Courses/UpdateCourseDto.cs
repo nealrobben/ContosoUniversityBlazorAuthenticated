@@ -2,11 +2,11 @@
 
 public class UpdateCourseDto
 {
-    public int? CourseID { get; set; }
+    public int? CourseId { get; set; }
 
     public string Title { get; set; }
 
     public int Credits { get; set; }
 
-    public int DepartmentID { get; set; }
+    public int DepartmentId { get; set; }
 }

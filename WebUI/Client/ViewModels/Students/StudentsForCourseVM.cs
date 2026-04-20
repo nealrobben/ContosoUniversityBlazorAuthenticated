@@ -8,7 +8,7 @@ public class StudentsForCourseVM
 
     public StudentsForCourseVM()
     {
-        Students = new List<StudentForCourseVM>();
+        Students = [];
     }
 
     public StudentsForCourseVM(IList<StudentForCourseVM> students)

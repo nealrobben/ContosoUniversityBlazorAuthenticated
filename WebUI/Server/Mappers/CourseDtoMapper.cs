@@ -10,7 +10,7 @@ public static class CourseDtoMapper
     {
         return new CourseForInstructorDto
         {
-            CourseID = model.CourseID,
+            CourseId = model.CourseID,
             Title = model.Title,
             DepartmentName = model.DepartmentName,
         };
@@ -28,10 +28,10 @@ public static class CourseDtoMapper
     {
         return new CourseDetailDto
         {
-            CourseID = model.CourseID,
+            CourseId = model.CourseID,
             Title = model.Title,
             Credits = model.Credits,
-            DepartmentID = model.DepartmentID
+            DepartmentId = model.DepartmentID
         };
     }
 
@@ -39,7 +39,7 @@ public static class CourseDtoMapper
     {
         return new CourseOverviewDto
         {
-            CourseID = model.CourseID,
+            CourseId = model.CourseID,
             Title = model.Title,
             Credits = model.Credits,
             DepartmentName = model.DepartmentName

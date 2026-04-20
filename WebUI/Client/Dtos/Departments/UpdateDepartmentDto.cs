@@ -4,7 +4,7 @@ namespace WebUI.Client.Dtos.Departments;
 
 public class UpdateDepartmentDto
 {
-    public int DepartmentID { get; set; }
+    public int DepartmentId { get; set; }
 
     public string Name { get; set; }
 
@@ -14,5 +14,5 @@ public class UpdateDepartmentDto
 
     public byte[] RowVersion { get; set; }
 
-    public int InstructorID { get; set; }
+    public int InstructorId { get; set; }
 }
