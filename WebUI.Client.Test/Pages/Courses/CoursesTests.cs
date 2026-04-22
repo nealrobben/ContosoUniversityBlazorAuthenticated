@@ -8,9 +8,9 @@ using WebUI.Client.Dtos.Common;
 using WebUI.Client.Dtos.Courses;
 using WebUI.Client.Dtos.Departments;
 using WebUI.Client.Services;
-using WebUI.Client.Test.Extensions;
+using WebUI.Client.Tests.Extensions;
 
-namespace WebUI.Client.Test.Pages.Courses;
+namespace WebUI.Client.Tests.Pages.Courses;
 
 public class CoursesTests : BunitTestBase
 {

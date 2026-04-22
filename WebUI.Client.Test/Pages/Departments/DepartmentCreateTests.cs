@@ -7,9 +7,9 @@ using WebUI.Client.Dtos.Departments;
 using WebUI.Client.Dtos.Instructors;
 using WebUI.Client.Pages.Departments;
 using WebUI.Client.Services;
-using WebUI.Client.Test.Extensions;
+using WebUI.Client.Tests.Extensions;
 
-namespace WebUI.Client.Test.Pages.Departments;
+namespace WebUI.Client.Tests.Pages.Departments;
 
 public class DepartmentCreateTests : BunitTestBase
 {

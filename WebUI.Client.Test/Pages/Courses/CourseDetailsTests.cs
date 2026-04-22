@@ -7,9 +7,9 @@ using MudBlazor;
 using WebUI.Client.Dtos.Courses;
 using WebUI.Client.Pages.Courses;
 using WebUI.Client.Services;
-using WebUI.Client.Test.Extensions;
+using WebUI.Client.Tests.Extensions;
 
-namespace WebUI.Client.Test.Pages.Courses;
+namespace WebUI.Client.Tests.Pages.Courses;
 
 public class CourseDetailsTests : BunitTestBase
 {

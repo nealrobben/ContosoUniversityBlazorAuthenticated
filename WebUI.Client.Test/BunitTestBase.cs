@@ -6,7 +6,7 @@ using MudBlazor.Services;
 using WebUI.Client.InputModels.Courses;
 using WebUI.Client.Shared;
 
-namespace WebUI.Client.Test;
+namespace WebUI.Client.Tests;
 
 public class BunitTestBase
 {

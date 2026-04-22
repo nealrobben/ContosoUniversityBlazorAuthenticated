@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31903.59
+# Visual Studio Version 18
+VisualStudioVersion = 18.5.11716.220 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2E1F9B44-8DCD-4B65-A078-E9CD94DF9323}"
 EndProject
@@ -33,7 +33,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{1BE5311F-1
 		Student.http = Student.http
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUI.Client.Test", "WebUI.Client.Test\WebUI.Client.Test.csproj", "{D11EF903-21A5-481E-9B1A-9842730541DA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUI.Client.Tests", "WebUI.Client.Test\WebUI.Client.Tests.csproj", "{D11EF903-21A5-481E-9B1A-9842730541DA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUI.IntegrationTests", "WebUI.IntegrationTests\WebUI.IntegrationTests.csproj", "{C6A19C25-EAFF-47A6-8BC2-A18A4258F201}"
 EndProject
