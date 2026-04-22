@@ -1,5 +1,5 @@
-﻿using Domain.Entities.Projections.Instructors;
-using System.Linq;
+﻿using System.Linq;
+using Domain.Entities.Projections.Instructors;
 using WebUI.Client.Dtos.Instructors;
 
 namespace WebUI.Server.Mappers;

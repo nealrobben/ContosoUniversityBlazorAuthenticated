@@ -1,5 +1,5 @@
-﻿using Domain.Entities.Projections.Departments;
-using System.Linq;
+﻿using System.Linq;
+using Domain.Entities.Projections.Departments;
 using WebUI.Client.Dtos.Departments;
 
 namespace WebUI.Server.Mappers;

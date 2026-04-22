@@ -1,8 +1,8 @@
 ﻿using Application.Common.Interfaces;
+using ArchUnitNET.Domain;
 using ArchUnitNET.Loader;
 using Domain.Common;
 using Infrastructure.Services;
-using ArchUnitNET.Domain;
 using WebUI.Client;
 using WebUI.Server.Controllers;
 using Assembly = System.Reflection.Assembly;

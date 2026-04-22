@@ -1,6 +1,6 @@
-﻿using Domain.Entities.Projections.Students;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Domain.Entities.Projections.Students;
 
 namespace Domain.Entities.Projections.Mappers;
 

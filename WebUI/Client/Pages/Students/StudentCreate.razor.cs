@@ -1,10 +1,10 @@
 ﻿
+using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
-using System;
-using System.Threading.Tasks;
 using WebUI.Client.Dtos.Students;
 using WebUI.Client.InputModels.Students;
 using WebUI.Client.Services;

@@ -1,8 +1,8 @@
-﻿using MediatR;
+﻿using System.Threading;
 using System.Threading.Tasks;
-using System.Threading;
 using Application.Common.Interfaces;
 using Domain.Entities;
+using MediatR;
 
 namespace Application.Courses.Commands;
 

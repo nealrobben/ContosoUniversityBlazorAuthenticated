@@ -1,12 +1,12 @@
-﻿using Application.Common.Interfaces;
+﻿using System;
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
+using Application.Common.Interfaces;
 using Domain.Entities.Projections;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using System;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Application.File.Commands;
 

@@ -1,11 +1,11 @@
 ﻿
 using System.Text.Json;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
-using System.Threading.Tasks;
 using WebUI.Client.Dtos.Courses;
 using WebUI.Client.Extensions;
 using WebUI.Client.InputModels.Courses;

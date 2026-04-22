@@ -1,12 +1,12 @@
-﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
 using Application.Common.Interfaces;
 using Domain.Entities;
 using Domain.Entities.Projections.Courses;
 using Domain.Entities.Projections.Mappers;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Courses.Queries;
 

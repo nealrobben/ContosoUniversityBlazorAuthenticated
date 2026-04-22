@@ -1,5 +1,5 @@
-﻿using Domain.Entities.Projections.Students;
-using System.Linq;
+﻿using System.Linq;
+using Domain.Entities.Projections.Students;
 using WebUI.Client.Dtos.Students;
 
 namespace WebUI.Server.Mappers;

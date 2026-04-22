@@ -1,7 +1,7 @@
 ﻿
-using Microsoft.AspNetCore.Components;
 using System.Globalization;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
 using WebUI.Client.Services;
 
 namespace WebUI.Client.Shared;

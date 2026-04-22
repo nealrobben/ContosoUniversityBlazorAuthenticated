@@ -1,12 +1,12 @@
 ﻿
-using Microsoft.AspNetCore.Components;
-using Microsoft.Extensions.Localization;
-using MudBlazor;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Localization;
+using MudBlazor;
 using WebUI.CLient.ViewModels.Home;
 
 namespace WebUI.Client.Pages.Home;

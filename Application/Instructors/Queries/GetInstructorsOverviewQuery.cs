@@ -1,13 +1,13 @@
-﻿using MediatR;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Threading;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
+using System.Threading.Tasks;
 using Application.Common.Extensions;
 using Application.Common.Interfaces;
 using Domain.Entities.Projections.Common;
 using Domain.Entities.Projections.Instructors;
 using Domain.Entities.Projections.Mappers;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Instructors.Queries;
 

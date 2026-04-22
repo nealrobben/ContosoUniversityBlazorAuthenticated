@@ -1,5 +1,5 @@
-﻿using Domain.Entities.Projections.Courses;
-using System.Linq;
+﻿using System.Linq;
+using Domain.Entities.Projections.Courses;
 using WebUI.Client.Dtos.Courses;
 
 namespace WebUI.Server.Mappers;
