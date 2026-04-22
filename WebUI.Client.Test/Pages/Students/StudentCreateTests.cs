@@ -1,8 +1,8 @@
 ﻿using Bunit;
 using FakeItEasy;
-using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
+using Shouldly;
 using WebUI.Client.Dtos.Students;
 using WebUI.Client.Pages.Students;
 using WebUI.Client.Services;
@@ -34,11 +34,11 @@ public class StudentCreateTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("h6").TrimmedText().Should().Be(title);
+        comp.Find("h6").TrimmedText().ShouldBe(title);
 
-        comp.FindAll("input")[0].Id.Should().Be("LastName");
-        comp.FindAll("input")[1].Id.Should().Be("FirstName");
-        comp.FindAll("input")[2].Id.Should().Be("EnrollmentDate");
+        comp.FindAll("input")[0].Id.ShouldBe("LastName");
+        comp.FindAll("input")[1].Id.ShouldBe("FirstName");
+        comp.FindAll("input")[2].Id.ShouldBe("EnrollmentDate");
     }
 
     [Fact]
@@ -64,7 +64,7 @@ public class StudentCreateTests : BunitTestBase
         Assert.NotEmpty(comp.Markup.Trim());
 
         await comp.Find("button[type='button']").ClickAsync();
-        comp.Markup.Trim().Should().BeEmpty();
+        comp.Markup.Trim().ShouldBeEmpty();
     }
 
     [Fact]
@@ -94,7 +94,7 @@ public class StudentCreateTests : BunitTestBase
         await comp.Find("#EnrollmentDate").ChangeAsync("01/03/2021");
 
         await comp.Find("button[type='submit']").ClickAsync();
-        comp.Markup.Trim().Should().BeEmpty();
+        comp.Markup.Trim().ShouldBeEmpty();
     }
 
     [Fact]
@@ -159,8 +159,8 @@ public class StudentCreateTests : BunitTestBase
 
         await comp.Find("button[type='submit']").ClickAsync();
 
-        dialog?.ErrorVisible.Should().Be(true);
-        comp.Find("div.mud-alert-message").TrimmedText().Should().Be("An error occured during saving");
+        dialog?.ErrorVisible.ShouldBe(true);
+        comp.Find("div.mud-alert-message").TrimmedText().ShouldBe("An error occured during saving");
     }
 
     [Fact]
@@ -189,8 +189,8 @@ public class StudentCreateTests : BunitTestBase
 
         await comp.Find("button[type='submit']").ClickAsync();
 
-        comp.FindAll("div.validation-message")[0].TrimmedText().Should().Be("'Last Name' must not be empty.");
-        comp.FindAll("div.validation-message")[1].TrimmedText().Should().Be("'First Name' must not be empty.");
-        comp.FindAll("div.validation-message")[2].TrimmedText().Should().Be("The EnrollmentDate field must be a date.");
+        comp.FindAll("div.validation-message")[0].TrimmedText().ShouldBe("'Last Name' must not be empty.");
+        comp.FindAll("div.validation-message")[1].TrimmedText().ShouldBe("'First Name' must not be empty.");
+        comp.FindAll("div.validation-message")[2].TrimmedText().ShouldBe("The EnrollmentDate field must be a date.");
     }
 }

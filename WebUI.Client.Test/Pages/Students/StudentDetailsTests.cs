@@ -1,9 +1,9 @@
 ﻿using AutoFixture;
 using Bunit;
 using FakeItEasy;
-using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
+using Shouldly;
 using WebUI.Client.Dtos.Students;
 using WebUI.Client.Pages.Students;
 using WebUI.Client.Services;
@@ -44,20 +44,20 @@ public class StudentDetailsTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("h6").TrimmedText().Should().Be(title);
+        comp.Find("h6").TrimmedText().ShouldBe(title);
 
-        comp.FindAll("dt")[0].TrimmedText().Should().Be("Last name");
-        comp.FindAll("dt")[1].TrimmedText().Should().Be("First name");
-        comp.FindAll("dt")[2].TrimmedText().Should().Be("Enrollment date");
+        comp.FindAll("dt")[0].TrimmedText().ShouldBe("Last name");
+        comp.FindAll("dt")[1].TrimmedText().ShouldBe("First name");
+        comp.FindAll("dt")[2].TrimmedText().ShouldBe("Enrollment date");
 
-        comp.FindAll("dd")[0].TrimmedText().Should().Be(studentDetailDto.LastName);
-        comp.FindAll("dd")[1].TrimmedText().Should().Be(studentDetailDto.FirstName);
-        comp.FindAll("dd")[2].TrimmedText().Should().Be(studentDetailDto.EnrollmentDate.ToShortDateString());
+        comp.FindAll("dd")[0].TrimmedText().ShouldBe(studentDetailDto.LastName);
+        comp.FindAll("dd")[1].TrimmedText().ShouldBe(studentDetailDto.FirstName);
+        comp.FindAll("dd")[2].TrimmedText().ShouldBe(studentDetailDto.EnrollmentDate.ToShortDateString());
 
         var enrollmentsTable = comp.Find("table");
         var row = ((AngleSharp.Html.Dom.IHtmlTableSectionElement)enrollmentsTable.Children[0]).Rows[1];
-        row.Cells[0].TrimmedText().Should().Be(enrollment.CourseTitle);
-        row.Cells[1].TrimmedText().Should().Be(enrollment.Grade.ToString());
+        row.Cells[0].TrimmedText().ShouldBe(enrollment.CourseTitle);
+        row.Cells[1].TrimmedText().ShouldBe(enrollment.Grade.ToString());
     }
 
     [Fact]
@@ -90,6 +90,6 @@ public class StudentDetailsTests : BunitTestBase
         Assert.NotEmpty(comp.Markup.Trim());
 
         await comp.Find("button").ClickAsync();
-        comp.Markup.Trim().Should().BeEmpty();
+        comp.Markup.Trim().ShouldBeEmpty();
     }
 }

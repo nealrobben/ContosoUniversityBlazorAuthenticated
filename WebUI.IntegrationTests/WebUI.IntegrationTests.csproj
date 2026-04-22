@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-      <PackageReference Include="FluentAssertions" />
       <PackageReference Include="Microsoft.AspNet.WebApi.Client" />
       <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
       <PackageReference Include="Microsoft.NET.Test.Sdk" />

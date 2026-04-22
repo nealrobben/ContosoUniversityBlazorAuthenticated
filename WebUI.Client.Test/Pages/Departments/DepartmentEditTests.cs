@@ -2,9 +2,9 @@
 using AutoFixture;
 using Bunit;
 using FakeItEasy;
-using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
+using Shouldly;
 using WebUI.Client.Dtos.Departments;
 using WebUI.Client.Dtos.Instructors;
 using WebUI.Client.Pages.Departments;
@@ -48,11 +48,11 @@ public class DepartmentEditTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("h6").TrimmedText().Should().Be(title);
+        comp.Find("h6").TrimmedText().ShouldBe(title);
 
-        ((IHtmlInputElement)comp.FindAll("input")[0]).Value.Should().Be(departmentDetailDto.Name);
-        ((IHtmlInputElement)comp.FindAll("input")[1]).Value.Should().Be(departmentDetailDto.Budget.ToString());
-        ((IHtmlInputElement)comp.FindAll("input")[2]).Value.Should().Be(departmentDetailDto.StartDate.ToString("yyyy-MM-dd"));
+        ((IHtmlInputElement)comp.FindAll("input")[0]).Value.ShouldBe(departmentDetailDto.Name);
+        ((IHtmlInputElement)comp.FindAll("input")[1]).Value.ShouldBe(departmentDetailDto.Budget.ToString());
+        ((IHtmlInputElement)comp.FindAll("input")[2]).Value.ShouldBe(departmentDetailDto.StartDate.ToString("yyyy-MM-dd"));
 
         //InstructorID is an IHtmlSelectElement. For some reason the value is parsed as NULL by AngleSharp even when it is filled in so we can't check this field
     }
@@ -89,7 +89,7 @@ public class DepartmentEditTests : BunitTestBase
         Assert.NotEmpty(comp.Markup.Trim());
 
         await comp.Find("button[type='button']").ClickAsync();
-        comp.Markup.Trim().Should().BeEmpty();
+        comp.Markup.Trim().ShouldBeEmpty();
     }
 
     [Fact]
@@ -129,7 +129,7 @@ public class DepartmentEditTests : BunitTestBase
         await comp.Find("#InstructorID").ChangeAsync("1");
 
         await comp.Find("button[type='submit']").ClickAsync();
-        comp.Markup.Trim().Should().BeEmpty();
+        comp.Markup.Trim().ShouldBeEmpty();
     }
 
     [Fact]
@@ -214,8 +214,8 @@ public class DepartmentEditTests : BunitTestBase
 
         await comp.Find("button[type='submit']").ClickAsync();
 
-        dialog?.ErrorVisible.Should().Be(true);
-        comp.Find("div.mud-alert-message").TrimmedText().Should().Be("An error occured during saving");
+        dialog?.ErrorVisible.ShouldBe(true);
+        comp.Find("div.mud-alert-message").TrimmedText().ShouldBe("An error occured during saving");
     }
 
     [Fact]
@@ -256,9 +256,9 @@ public class DepartmentEditTests : BunitTestBase
 
         await comp.Find("button[type='submit']").ClickAsync();
 
-        comp.FindAll("div.validation-message")[0].TrimmedText().Should().Be("'Name' must not be empty.");
-        comp.FindAll("div.validation-message")[1].TrimmedText().Should().Be("The Budget field must be a number.");
-        comp.FindAll("div.validation-message")[2].TrimmedText().Should().Be("The StartDate field must be a date.");
+        comp.FindAll("div.validation-message")[0].TrimmedText().ShouldBe("'Name' must not be empty.");
+        comp.FindAll("div.validation-message")[1].TrimmedText().ShouldBe("The Budget field must be a number.");
+        comp.FindAll("div.validation-message")[2].TrimmedText().ShouldBe("The StartDate field must be a date.");
     }
 
     private static InstructorsLookupDto GetInstructorsLookupDtoWithTestData()

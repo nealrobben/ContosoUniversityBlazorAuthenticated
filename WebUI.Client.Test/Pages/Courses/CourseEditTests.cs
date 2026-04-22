@@ -2,9 +2,9 @@
 using AutoFixture;
 using Bunit;
 using FakeItEasy;
-using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
+using Shouldly;
 using WebUI.Client.Dtos.Courses;
 using WebUI.Client.Dtos.Departments;
 using WebUI.Client.Pages.Courses;
@@ -48,8 +48,8 @@ public class CourseEditTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        ((IHtmlInputElement)comp.FindAll("input")[0]).Value.Should().Be(courseDetailsDto.Title);
-        ((IHtmlInputElement)comp.FindAll("input")[1]).Value.Should().Be(courseDetailsDto.Credits.ToString());
+        ((IHtmlInputElement)comp.FindAll("input")[0]).Value.ShouldBe(courseDetailsDto.Title);
+        ((IHtmlInputElement)comp.FindAll("input")[1]).Value.ShouldBe(courseDetailsDto.Credits.ToString());
 
         //DepartmentID is an IHtmlSelectElement. For some reason the value is parsed as NULL by AngleSharp even when it is filled in so we can't check this field
     }
@@ -86,7 +86,7 @@ public class CourseEditTests : BunitTestBase
         Assert.NotEmpty(comp.Markup.Trim());
 
         await comp.Find("button[type='button']").ClickAsync();
-        comp.Markup.Trim().Should().BeEmpty();
+        comp.Markup.Trim().ShouldBeEmpty();
     }
 
     [Fact]
@@ -125,7 +125,7 @@ public class CourseEditTests : BunitTestBase
         await comp.Find("#Department").ChangeAsync("1");
 
         await comp.Find("button[type='submit']").ClickAsync();
-        comp.Markup.Trim().Should().BeEmpty();
+        comp.Markup.Trim().ShouldBeEmpty();
     }
 
     [Fact]
@@ -208,8 +208,8 @@ public class CourseEditTests : BunitTestBase
 
         await comp.Find("button[type='submit']").ClickAsync();
 
-        dialog?.ErrorVisible.Should().Be(true);
-        comp.Find("div.mud-alert-message").TrimmedText().Should().Be("An error occured during saving");
+        dialog?.ErrorVisible.ShouldBe(true);
+        comp.Find("div.mud-alert-message").TrimmedText().ShouldBe("An error occured during saving");
     }
 
     [Fact]
@@ -249,8 +249,8 @@ public class CourseEditTests : BunitTestBase
 
         await comp.Find("button[type='submit']").ClickAsync();
 
-        comp.FindAll("div.validation-message")[0].TrimmedText().Should().Be("'Title' must not be empty.");
-        comp.FindAll("div.validation-message")[1].TrimmedText().Should().Be("The Credits field must be a number.");
+        comp.FindAll("div.validation-message")[0].TrimmedText().ShouldBe("'Title' must not be empty.");
+        comp.FindAll("div.validation-message")[1].TrimmedText().ShouldBe("The Credits field must be a number.");
     }
 
     private static DepartmentsLookupDto GetDepartmentsLookupDtoWithTestData()

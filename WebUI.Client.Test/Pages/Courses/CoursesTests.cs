@@ -1,9 +1,9 @@
 ﻿using AutoFixture;
 using Bunit;
 using FakeItEasy;
-using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
+using Shouldly;
 using WebUI.Client.Dtos.Common;
 using WebUI.Client.Dtos.Courses;
 using WebUI.Client.Dtos.Departments;
@@ -34,8 +34,8 @@ public class CoursesTests : BunitTestBase
         var comp = RenderComponent<Client.Pages.Courses.Courses>();
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("h2").TrimmedText().Should().Be("Courses");
-        comp.Find("#CreateButton").Should().NotBeNull();
+        comp.Find("h2").TrimmedText().ShouldBe("Courses");
+        comp.Find("#CreateButton").ShouldNotBeNull();
 
         comp.Find("#CreateButton").Click();
 
@@ -51,7 +51,7 @@ public class CoursesTests : BunitTestBase
         var comp = RenderComponent<Client.Pages.Courses.Courses>();
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("#SearchButton").Should().NotBeNull();
+        comp.Find("#SearchButton").ShouldNotBeNull();
         comp.Find("#SearchButton").Click();
 
         A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored,
@@ -67,7 +67,7 @@ public class CoursesTests : BunitTestBase
         var comp = RenderComponent<Client.Pages.Courses.Courses>();
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("#BackToFullListButton").Should().NotBeNull();
+        comp.Find("#BackToFullListButton").ShouldNotBeNull();
         comp.Find("#BackToFullListButton").Click();
 
         A.CallTo(() => fakeCourseService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored,
@@ -89,7 +89,7 @@ public class CoursesTests : BunitTestBase
         var comp = RenderComponent<Client.Pages.Courses.Courses>();
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.FindAll(".OpenCourseDetailsButton")[0].Should().NotBeNull();
+        comp.FindAll(".OpenCourseDetailsButton")[0].ShouldNotBeNull();
         comp.FindAll(".OpenCourseDetailsButton")[0].Click();
 
         Assert.NotEmpty(dialog.Markup.Trim());
@@ -113,7 +113,7 @@ public class CoursesTests : BunitTestBase
         var comp = RenderComponent<Client.Pages.Courses.Courses>();
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.FindAll(".OpenCourseEditButton")[0].Should().NotBeNull();
+        comp.FindAll(".OpenCourseEditButton")[0].ShouldNotBeNull();
         comp.FindAll(".OpenCourseEditButton")[0].Click();
 
         Assert.NotEmpty(dialog.Markup.Trim());
@@ -137,12 +137,12 @@ public class CoursesTests : BunitTestBase
         var comp = RenderComponent<Client.Pages.Courses.Courses>();
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.FindAll(".CourseDeleteButton")[0].Should().NotBeNull();
+        comp.FindAll(".CourseDeleteButton")[0].ShouldNotBeNull();
         comp.FindAll(".CourseDeleteButton")[0].Click();
 
         Assert.NotEmpty(dialog.Markup.Trim());
 
-        dialog.Find(".mud-dialog-content").TrimmedText().Should().Be($"Are you sure you want to delete the course {coursesOverviewDto.Records[0].Title}?");
+        dialog.Find(".mud-dialog-content").TrimmedText().ShouldBe($"Are you sure you want to delete the course {coursesOverviewDto.Records[0].Title}?");
     }
 
     [Fact]
@@ -163,12 +163,12 @@ public class CoursesTests : BunitTestBase
         var comp = RenderComponent<Client.Pages.Courses.Courses>();
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.FindAll(".CourseDeleteButton")[0].Should().NotBeNull();
+        comp.FindAll(".CourseDeleteButton")[0].ShouldNotBeNull();
         comp.FindAll(".CourseDeleteButton")[0].Click();
 
         Assert.NotEmpty(dialog.Markup.Trim());
 
-        dialog.FindAll("button")[1].Should().NotBeNull();
+        dialog.FindAll("button")[1].ShouldNotBeNull();
         dialog.FindAll("button")[1].Click();
 
         A.CallTo(() => fakeCourseService.DeleteAsync(A<string>.Ignored)).MustHaveHappened();

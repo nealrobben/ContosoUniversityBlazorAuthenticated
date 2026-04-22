@@ -1,5 +1,5 @@
-﻿using FluentAssertions;
-using MediatR;
+﻿using MediatR;
+using Shouldly;
 
 namespace ArchitectureTests;
 
@@ -11,7 +11,7 @@ public class ColocationTests : BaseTest
         Type handlerType,
         Type commandOrQueryType)
     {
-        handlerType.Namespace.Should().Be(
+        handlerType.Namespace.ShouldBe(
             commandOrQueryType.Namespace,
             $"{handlerType.Name} should be in the same namespace as {commandOrQueryType.Name}");
     }

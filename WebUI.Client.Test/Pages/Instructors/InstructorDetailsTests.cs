@@ -1,9 +1,9 @@
 ﻿using AutoFixture;
 using Bunit;
 using FakeItEasy;
-using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
+using Shouldly;
 using WebUI.Client.Dtos.Instructors;
 using WebUI.Client.Pages.Instructors;
 using WebUI.Client.Services;
@@ -42,15 +42,15 @@ public class InstructorDetailsTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("h6").TrimmedText().Should().Be(title);
+        comp.Find("h6").TrimmedText().ShouldBe(title);
 
-        comp.FindAll("dt")[0].TrimmedText().Should().Be("Last name");
-        comp.FindAll("dt")[1].TrimmedText().Should().Be("First name");
-        comp.FindAll("dt")[2].TrimmedText().Should().Be("Hire date");
+        comp.FindAll("dt")[0].TrimmedText().ShouldBe("Last name");
+        comp.FindAll("dt")[1].TrimmedText().ShouldBe("First name");
+        comp.FindAll("dt")[2].TrimmedText().ShouldBe("Hire date");
 
-        comp.FindAll("dd")[0].TrimmedText().Should().Be(instructorDetailsDto.LastName);
-        comp.FindAll("dd")[1].TrimmedText().Should().Be(instructorDetailsDto.FirstName);
-        comp.FindAll("dd")[2].TrimmedText().Should().Be(instructorDetailsDto.HireDate.ToShortDateString());
+        comp.FindAll("dd")[0].TrimmedText().ShouldBe(instructorDetailsDto.LastName);
+        comp.FindAll("dd")[1].TrimmedText().ShouldBe(instructorDetailsDto.FirstName);
+        comp.FindAll("dd")[2].TrimmedText().ShouldBe(instructorDetailsDto.HireDate.ToShortDateString());
     }
 
     [Fact]
@@ -81,6 +81,6 @@ public class InstructorDetailsTests : BunitTestBase
         Assert.NotEmpty(comp.Markup.Trim());
 
         await comp.Find("button").ClickAsync();
-        comp.Markup.Trim().Should().BeEmpty();
+        comp.Markup.Trim().ShouldBeEmpty();
     }
 }

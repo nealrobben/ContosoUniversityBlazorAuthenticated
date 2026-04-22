@@ -1,7 +1,7 @@
 ﻿using Application.Common.Interfaces;
 using Domain.Entities;
-using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
+using Shouldly;
 using WebUI.Client.Dtos.Common;
 using WebUI.Client.Dtos.Instructors;
 
@@ -14,8 +14,8 @@ public class InstructorsControllerTests : IntegrationTest
     {
         var response = await _client.GetAsync("/api/instructors", TestContext.Current.CancellationToken);
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        (await response.Content.ReadAsAsync<OverviewDto<InstructorOverviewDto>>(TestContext.Current.CancellationToken)).Records.Should().BeEmpty();
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
+        (await response.Content.ReadAsAsync<OverviewDto<InstructorOverviewDto>>(TestContext.Current.CancellationToken)).Records.ShouldBeEmpty();
     }
 
     [Fact]
@@ -39,15 +39,15 @@ public class InstructorsControllerTests : IntegrationTest
 
         var response = await _client.GetAsync("/api/instructors", TestContext.Current.CancellationToken);
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
         var result = await response.Content.ReadAsAsync<OverviewDto<InstructorOverviewDto>>(TestContext.Current.CancellationToken);
 
-        result.Records.Should().ContainSingle();
+        result.Records.Count.ShouldBe(1);
 
-        result.Records[0].InstructorId.Should().Be(instructor.ID);
-        result.Records[0].FirstName.Should().Be(instructor.FirstMidName);
-        result.Records[0].LastName.Should().Be(instructor.LastName);
-        result.Records[0].HireDate.Should().Be(instructor.HireDate);
+        result.Records[0].InstructorId.ShouldBe(instructor.ID);
+        result.Records[0].FirstName.ShouldBe(instructor.FirstMidName);
+        result.Records[0].LastName.ShouldBe(instructor.LastName);
+        result.Records[0].HireDate.ShouldBe(instructor.HireDate);
     }
 
     [Fact]
@@ -80,21 +80,21 @@ public class InstructorsControllerTests : IntegrationTest
 
         var responseLowerCase = await _client.GetAsync("/api/instructors?searchString=de", TestContext.Current.CancellationToken);
 
-        responseLowerCase.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        responseLowerCase.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
         var result = await responseLowerCase.Content.ReadAsAsync<OverviewDto<InstructorOverviewDto>>(TestContext.Current.CancellationToken);
 
-        result.Records.Should().ContainSingle();
+        result.Records.Count.ShouldBe(1);
 
-        result.Records[0].InstructorId.Should().Be(instructor2.ID);
-        result.Records[0].FirstName.Should().Be(instructor2.FirstMidName);
-        result.Records[0].LastName.Should().Be(instructor2.LastName);
-        result.Records[0].HireDate.Should().Be(instructor2.HireDate);
+        result.Records[0].InstructorId.ShouldBe(instructor2.ID);
+        result.Records[0].FirstName.ShouldBe(instructor2.FirstMidName);
+        result.Records[0].LastName.ShouldBe(instructor2.LastName);
+        result.Records[0].HireDate.ShouldBe(instructor2.HireDate);
 
         var responseUpperCase = await _client.GetAsync("/api/instructors?searchString=DE", TestContext.Current.CancellationToken);
-        responseUpperCase.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        responseUpperCase.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
 
         var resultUpperCase = await responseUpperCase.Content.ReadAsAsync<OverviewDto<InstructorOverviewDto>>(TestContext.Current.CancellationToken);
-        resultUpperCase.Records.Should().ContainSingle();
+        resultUpperCase.Records.Count.ShouldBe(1);
     }
 
     [Fact]
@@ -127,15 +127,15 @@ public class InstructorsControllerTests : IntegrationTest
 
         var response = await _client.GetAsync("/api/instructors?sortOrder=lastname_desc", TestContext.Current.CancellationToken);
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
         var result = await response.Content.ReadAsAsync<OverviewDto<InstructorOverviewDto>>(TestContext.Current.CancellationToken);
 
-        result.Records.Count.Should().Be(2);
+        result.Records.Count.ShouldBe(2);
 
-        result.Records[0].InstructorId.Should().Be(instructor2.ID);
-        result.Records[0].FirstName.Should().Be(instructor2.FirstMidName);
-        result.Records[0].LastName.Should().Be(instructor2.LastName);
-        result.Records[0].HireDate.Should().Be(instructor2.HireDate);
+        result.Records[0].InstructorId.ShouldBe(instructor2.ID);
+        result.Records[0].FirstName.ShouldBe(instructor2.FirstMidName);
+        result.Records[0].LastName.ShouldBe(instructor2.LastName);
+        result.Records[0].HireDate.ShouldBe(instructor2.HireDate);
     }
 
     [Fact]
@@ -186,20 +186,20 @@ public class InstructorsControllerTests : IntegrationTest
 
         var response = await _client.GetAsync("/api/instructors?pageSize=2", TestContext.Current.CancellationToken);
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
         var result = await response.Content.ReadAsAsync<OverviewDto<InstructorOverviewDto>>(TestContext.Current.CancellationToken);
 
-        result.Records.Count.Should().Be(2);
+        result.Records.Count.ShouldBe(2);
 
-        result.Records[0].InstructorId.Should().Be(instructor1.ID);
-        result.Records[0].FirstName.Should().Be(instructor1.FirstMidName);
-        result.Records[0].LastName.Should().Be(instructor1.LastName);
-        result.Records[0].HireDate.Should().Be(instructor1.HireDate);
+        result.Records[0].InstructorId.ShouldBe(instructor1.ID);
+        result.Records[0].FirstName.ShouldBe(instructor1.FirstMidName);
+        result.Records[0].LastName.ShouldBe(instructor1.LastName);
+        result.Records[0].HireDate.ShouldBe(instructor1.HireDate);
 
-        result.Records[1].InstructorId.Should().Be(instructor2.ID);
-        result.Records[1].FirstName.Should().Be(instructor2.FirstMidName);
-        result.Records[1].LastName.Should().Be(instructor2.LastName);
-        result.Records[1].HireDate.Should().Be(instructor2.HireDate);
+        result.Records[1].InstructorId.ShouldBe(instructor2.ID);
+        result.Records[1].FirstName.ShouldBe(instructor2.FirstMidName);
+        result.Records[1].LastName.ShouldBe(instructor2.LastName);
+        result.Records[1].HireDate.ShouldBe(instructor2.HireDate);
     }
 
     [Fact]
@@ -250,27 +250,27 @@ public class InstructorsControllerTests : IntegrationTest
 
         var response = await _client.GetAsync("/api/instructors?pageSize=2&pageNumber=1", TestContext.Current.CancellationToken);
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
         var result = await response.Content.ReadAsAsync<OverviewDto<InstructorOverviewDto>>(TestContext.Current.CancellationToken);
 
-        result.Records.Count.Should().Be(2);
+        result.Records.Count.ShouldBe(2);
 
-        result.Records[0].InstructorId.Should().Be(instructor3.ID);
-        result.Records[0].FirstName.Should().Be(instructor3.FirstMidName);
-        result.Records[0].LastName.Should().Be(instructor3.LastName);
-        result.Records[0].HireDate.Should().Be(instructor3.HireDate);
+        result.Records[0].InstructorId.ShouldBe(instructor3.ID);
+        result.Records[0].FirstName.ShouldBe(instructor3.FirstMidName);
+        result.Records[0].LastName.ShouldBe(instructor3.LastName);
+        result.Records[0].HireDate.ShouldBe(instructor3.HireDate);
 
-        result.Records[1].InstructorId.Should().Be(instructor4.ID);
-        result.Records[1].FirstName.Should().Be(instructor4.FirstMidName);
-        result.Records[1].LastName.Should().Be(instructor4.LastName);
-        result.Records[1].HireDate.Should().Be(instructor4.HireDate);
+        result.Records[1].InstructorId.ShouldBe(instructor4.ID);
+        result.Records[1].FirstName.ShouldBe(instructor4.FirstMidName);
+        result.Records[1].LastName.ShouldBe(instructor4.LastName);
+        result.Records[1].HireDate.ShouldBe(instructor4.HireDate);
     }
 
     [Fact]
     public async Task GetSingle_WithNonExistingId_ReturnsNotFound()
     {
         var response = await _client.GetAsync("/api/courses/1", TestContext.Current.CancellationToken);
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.NotFound);
     }
 
     [Fact]
@@ -294,13 +294,13 @@ public class InstructorsControllerTests : IntegrationTest
 
         var response = await _client.GetAsync("/api/instructors/1", TestContext.Current.CancellationToken);
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
         var result = await response.Content.ReadAsAsync<InstructorDetailDto>(TestContext.Current.CancellationToken);
 
-        result.InstructorId.Should().Be(instructor.ID);
-        result.FirstName.Should().Be(instructor.FirstMidName);
-        result.LastName.Should().Be(instructor.LastName);
-        result.HireDate.Should().Be(instructor.HireDate);
+        result.InstructorId.ShouldBe(instructor.ID);
+        result.FirstName.ShouldBe(instructor.FirstMidName);
+        result.LastName.ShouldBe(instructor.LastName);
+        result.HireDate.ShouldBe(instructor.HireDate);
     }
 
     [Fact]
@@ -315,22 +315,22 @@ public class InstructorsControllerTests : IntegrationTest
 
         var response = await _client.PostAsJsonAsync("/api/instructors", instructor);
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.Created);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.Created);
 
         using var scope = _appFactory.Services.CreateScope();
         var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
 
-        schoolContext.Instructors.Should().ContainSingle();
-        schoolContext.Instructors.First().FirstMidName.Should().Be(instructor.FirstName);
-        schoolContext.Instructors.First().LastName.Should().Be(instructor.LastName);
-        schoolContext.Instructors.First().HireDate.Should().Be(instructor.HireDate);
+        schoolContext.Instructors.Count().ShouldBe(1);
+        schoolContext.Instructors.First().FirstMidName.ShouldBe(instructor.FirstName);
+        schoolContext.Instructors.First().LastName.ShouldBe(instructor.LastName);
+        schoolContext.Instructors.First().HireDate.ShouldBe(instructor.HireDate);
     }
 
     [Fact]
     public async Task Delete_WithNonExistingId_ReturnsNotFound()
     {
         var response = await _client.DeleteAsync("/api/instructors/1", TestContext.Current.CancellationToken);
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.NotFound);
     }
 
     [Fact]
@@ -350,9 +350,9 @@ public class InstructorsControllerTests : IntegrationTest
         await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
 
         var response = await _client.DeleteAsync("/api/instructors/1", TestContext.Current.CancellationToken);
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.NoContent);
 
-        schoolContext.Instructors.Should().BeEmpty();
+        schoolContext.Instructors.ShouldBeEmpty();
     }
 
     [Fact]
@@ -382,17 +382,17 @@ public class InstructorsControllerTests : IntegrationTest
         };
 
         var response = await _client.PutAsJsonAsync("/api/instructors", updateInstructorCommand);
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.NoContent);
 
         using (var scope = _appFactory.Services.CreateScope())
         {
             var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
 
-            schoolContext.Instructors.Should().ContainSingle();
-            schoolContext.Instructors.First().ID.Should().Be(updateInstructorCommand.InstructorId);
-            schoolContext.Instructors.First().FirstMidName.Should().Be(updateInstructorCommand.FirstName);
-            schoolContext.Instructors.First().LastName.Should().Be(updateInstructorCommand.LastName);
-            schoolContext.Instructors.First().HireDate.Should().Be(updateInstructorCommand.HireDate);
+            schoolContext.Instructors.Count().ShouldBe(1);
+            schoolContext.Instructors.First().ID.ShouldBe(updateInstructorCommand.InstructorId.Value);
+            schoolContext.Instructors.First().FirstMidName.ShouldBe(updateInstructorCommand.FirstName);
+            schoolContext.Instructors.First().LastName.ShouldBe(updateInstructorCommand.LastName);
+            schoolContext.Instructors.First().HireDate.ShouldBe(updateInstructorCommand.HireDate);
         }
     }
 
@@ -401,8 +401,8 @@ public class InstructorsControllerTests : IntegrationTest
     {
         var response = await _client.GetAsync("/api/instructors/lookup", TestContext.Current.CancellationToken);
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        (await response.Content.ReadAsAsync<InstructorsLookupDto>(TestContext.Current.CancellationToken)).Instructors.Should().BeEmpty();
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
+        (await response.Content.ReadAsAsync<InstructorsLookupDto>(TestContext.Current.CancellationToken)).Instructors.ShouldBeEmpty();
     }
 
     [Fact]
@@ -425,10 +425,10 @@ public class InstructorsControllerTests : IntegrationTest
 
         var response = await _client.GetAsync("/api/instructors/lookup", TestContext.Current.CancellationToken);
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
         var result = await response.Content.ReadAsAsync<InstructorsLookupDto>(TestContext.Current.CancellationToken);
 
-        result.Instructors[0].Id.Should().Be(instructor.ID);
-        result.Instructors[0].FullName.Should().Be(instructor.FullName);
+        result.Instructors[0].Id.ShouldBe(instructor.ID);
+        result.Instructors[0].FullName.ShouldBe(instructor.FullName);
     }
 }

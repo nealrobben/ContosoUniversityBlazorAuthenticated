@@ -1,9 +1,9 @@
 ﻿using AutoFixture;
 using Bunit;
 using FakeItEasy;
-using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
+using Shouldly;
 using WebUI.Client.Dtos.Departments;
 using WebUI.Client.Pages.Departments;
 using WebUI.Client.Services;
@@ -42,17 +42,17 @@ public class DepartmentDetailsTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("h6").TrimmedText().Should().Be(title);
+        comp.Find("h6").TrimmedText().ShouldBe(title);
 
-        comp.FindAll("dt")[0].TrimmedText().Should().Be("Name");
-        comp.FindAll("dt")[1].TrimmedText().Should().Be("Budget");
-        comp.FindAll("dt")[2].TrimmedText().Should().Be("Start date");
-        comp.FindAll("dt")[3].TrimmedText().Should().Be("Administrator");
+        comp.FindAll("dt")[0].TrimmedText().ShouldBe("Name");
+        comp.FindAll("dt")[1].TrimmedText().ShouldBe("Budget");
+        comp.FindAll("dt")[2].TrimmedText().ShouldBe("Start date");
+        comp.FindAll("dt")[3].TrimmedText().ShouldBe("Administrator");
 
-        comp.FindAll("dd")[0].TrimmedText().Should().Be(departmentDetailDto.Name);
-        comp.FindAll("dd")[1].TrimmedText().Should().Be(departmentDetailDto.Budget.ToString("F"));
-        comp.FindAll("dd")[2].TrimmedText().Should().Be(departmentDetailDto.StartDate.ToShortDateString());
-        comp.FindAll("dd")[3].TrimmedText().Should().Be(departmentDetailDto.AdministratorName);
+        comp.FindAll("dd")[0].TrimmedText().ShouldBe(departmentDetailDto.Name);
+        comp.FindAll("dd")[1].TrimmedText().ShouldBe(departmentDetailDto.Budget.ToString("F"));
+        comp.FindAll("dd")[2].TrimmedText().ShouldBe(departmentDetailDto.StartDate.ToShortDateString());
+        comp.FindAll("dd")[3].TrimmedText().ShouldBe(departmentDetailDto.AdministratorName);
     }
 
     [Fact]
@@ -83,6 +83,6 @@ public class DepartmentDetailsTests : BunitTestBase
         Assert.NotEmpty(comp.Markup.Trim());
 
         await comp.Find("button").ClickAsync();
-        comp.Markup.Trim().Should().BeEmpty();
+        comp.Markup.Trim().ShouldBeEmpty();
     }
 }

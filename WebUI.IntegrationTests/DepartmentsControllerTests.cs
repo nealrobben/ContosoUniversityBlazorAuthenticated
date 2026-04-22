@@ -1,7 +1,7 @@
 ﻿using Application.Common.Interfaces;
 using Domain.Entities;
-using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
+using Shouldly;
 using WebUI.Client.Dtos.Common;
 using WebUI.Client.Dtos.Departments;
 
@@ -14,8 +14,8 @@ public class DepartmentsControllerTests : IntegrationTest
     {
         var response = await _client.GetAsync("/api/departments", TestContext.Current.CancellationToken);
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        (await response.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>(TestContext.Current.CancellationToken)).Records.Should().BeEmpty();
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
+        (await response.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>(TestContext.Current.CancellationToken)).Records.ShouldBeEmpty();
     }
 
     [Fact]
@@ -39,14 +39,14 @@ public class DepartmentsControllerTests : IntegrationTest
 
         var response = await _client.GetAsync("/api/departments", TestContext.Current.CancellationToken);
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
         var result = await response.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>(TestContext.Current.CancellationToken);
 
-        result.Records.Should().ContainSingle();
-        result.Records[0].DepartmentID.Should().Be(department.DepartmentID);
-        result.Records[0].Name.Should().Be(department.Name);
-        result.Records[0].Budget.Should().Be(department.Budget);
-        result.Records[0].StartDate.Should().Be(department.StartDate);
+        result.Records.Count.ShouldBe(1);
+        result.Records[0].DepartmentID.ShouldBe(department.DepartmentID);
+        result.Records[0].Name.ShouldBe(department.Name);
+        result.Records[0].Budget.ShouldBe(department.Budget);
+        result.Records[0].StartDate.ShouldBe(department.StartDate);
     }
 
     [Fact]
@@ -79,20 +79,20 @@ public class DepartmentsControllerTests : IntegrationTest
 
         var responseLowerCase = await _client.GetAsync("/api/departments?searchString=ef", TestContext.Current.CancellationToken);
 
-        responseLowerCase.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        responseLowerCase.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
         var result = await responseLowerCase.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>(TestContext.Current.CancellationToken);
 
-        result.Records.Should().ContainSingle();
-        result.Records[0].DepartmentID.Should().Be(department2.DepartmentID);
-        result.Records[0].Name.Should().Be(department2.Name);
-        result.Records[0].Budget.Should().Be(department2.Budget);
-        result.Records[0].StartDate.Should().Be(department2.StartDate);
+        result.Records.Count.ShouldBe(1);
+        result.Records[0].DepartmentID.ShouldBe(department2.DepartmentID);
+        result.Records[0].Name.ShouldBe(department2.Name);
+        result.Records[0].Budget.ShouldBe(department2.Budget);
+        result.Records[0].StartDate.ShouldBe(department2.StartDate);
 
         var responseUpperCase = await _client.GetAsync("/api/departments?searchString=EF", TestContext.Current.CancellationToken);
-        responseUpperCase.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        responseUpperCase.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
 
         var resultUpperCase = await responseUpperCase.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>(TestContext.Current.CancellationToken);
-        resultUpperCase.Records.Should().ContainSingle();
+        resultUpperCase.Records.Count.ShouldBe(1);
     }
 
     [Fact]
@@ -125,14 +125,14 @@ public class DepartmentsControllerTests : IntegrationTest
 
         var response = await _client.GetAsync("/api/departments?sortOrder=name_desc", TestContext.Current.CancellationToken);
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
         var result = await response.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>(TestContext.Current.CancellationToken);
 
-        result.Records.Count.Should().Be(2);
-        result.Records[0].DepartmentID.Should().Be(department2.DepartmentID);
-        result.Records[0].Name.Should().Be(department2.Name);
-        result.Records[0].Budget.Should().Be(department2.Budget);
-        result.Records[0].StartDate.Should().Be(department2.StartDate);
+        result.Records.Count.ShouldBe(2);
+        result.Records[0].DepartmentID.ShouldBe(department2.DepartmentID);
+        result.Records[0].Name.ShouldBe(department2.Name);
+        result.Records[0].Budget.ShouldBe(department2.Budget);
+        result.Records[0].StartDate.ShouldBe(department2.StartDate);
     }
 
     [Fact]
@@ -183,20 +183,20 @@ public class DepartmentsControllerTests : IntegrationTest
 
         var response = await _client.GetAsync("/api/departments?pageSize=2", TestContext.Current.CancellationToken);
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
         var result = await response.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>(TestContext.Current.CancellationToken);
 
-        result.Records.Count.Should().Be(2);
+        result.Records.Count.ShouldBe(2);
 
-        result.Records[0].DepartmentID.Should().Be(department1.DepartmentID);
-        result.Records[0].Name.Should().Be(department1.Name);
-        result.Records[0].Budget.Should().Be(department1.Budget);
-        result.Records[0].StartDate.Should().Be(department1.StartDate);
+        result.Records[0].DepartmentID.ShouldBe(department1.DepartmentID);
+        result.Records[0].Name.ShouldBe(department1.Name);
+        result.Records[0].Budget.ShouldBe(department1.Budget);
+        result.Records[0].StartDate.ShouldBe(department1.StartDate);
 
-        result.Records[1].DepartmentID.Should().Be(department2.DepartmentID);
-        result.Records[1].Name.Should().Be(department2.Name);
-        result.Records[1].Budget.Should().Be(department2.Budget);
-        result.Records[1].StartDate.Should().Be(department2.StartDate);
+        result.Records[1].DepartmentID.ShouldBe(department2.DepartmentID);
+        result.Records[1].Name.ShouldBe(department2.Name);
+        result.Records[1].Budget.ShouldBe(department2.Budget);
+        result.Records[1].StartDate.ShouldBe(department2.StartDate);
     }
 
     [Fact]
@@ -247,27 +247,27 @@ public class DepartmentsControllerTests : IntegrationTest
 
         var response = await _client.GetAsync("/api/departments?pageNumber=1&pageSize=2", TestContext.Current.CancellationToken);
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
         var result = await response.Content.ReadAsAsync<OverviewDto<DepartmentOverviewDto>>(TestContext.Current.CancellationToken);
 
-        result.Records.Count.Should().Be(2);
+        result.Records.Count.ShouldBe(2);
 
-        result.Records[0].DepartmentID.Should().Be(department3.DepartmentID);
-        result.Records[0].Name.Should().Be(department3.Name);
-        result.Records[0].Budget.Should().Be(department3.Budget);
-        result.Records[0].StartDate.Should().Be(department3.StartDate);
+        result.Records[0].DepartmentID.ShouldBe(department3.DepartmentID);
+        result.Records[0].Name.ShouldBe(department3.Name);
+        result.Records[0].Budget.ShouldBe(department3.Budget);
+        result.Records[0].StartDate.ShouldBe(department3.StartDate);
 
-        result.Records[1].DepartmentID.Should().Be(department4.DepartmentID);
-        result.Records[1].Name.Should().Be(department4.Name);
-        result.Records[1].Budget.Should().Be(department4.Budget);
-        result.Records[1].StartDate.Should().Be(department4.StartDate);
+        result.Records[1].DepartmentID.ShouldBe(department4.DepartmentID);
+        result.Records[1].Name.ShouldBe(department4.Name);
+        result.Records[1].Budget.ShouldBe(department4.Budget);
+        result.Records[1].StartDate.ShouldBe(department4.StartDate);
     }
 
     [Fact]
     public async Task GetSingle_WithNonExistingId_ReturnsNotFound()
     {
         var response = await _client.GetAsync("/api/departments/1", TestContext.Current.CancellationToken);
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.NotFound);
     }
 
     [Fact]
@@ -291,12 +291,12 @@ public class DepartmentsControllerTests : IntegrationTest
 
         var response = await _client.GetAsync("/api/departments/1", TestContext.Current.CancellationToken);
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
         var result = await response.Content.ReadAsAsync<DepartmentDetailDto>(TestContext.Current.CancellationToken);
-        result.DepartmentId.Should().Be(department.DepartmentID);
-        result.Name.Should().Be(department.Name);
-        result.Budget.Should().Be(department.Budget);
-        result.StartDate.Should().Be(department.StartDate);
+        result.DepartmentId.ShouldBe(department.DepartmentID);
+        result.Name.ShouldBe(department.Name);
+        result.Budget.ShouldBe(department.Budget);
+        result.StartDate.ShouldBe(department.StartDate);
     }
 
     [Fact]
@@ -312,23 +312,23 @@ public class DepartmentsControllerTests : IntegrationTest
 
         var response = await _client.PostAsJsonAsync("/api/departments", department);
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.Created);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.Created);
 
         using var scope = _appFactory.Services.CreateScope();
         var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
 
-        schoolContext.Departments.Should().ContainSingle();
-        schoolContext.Departments.First().Name.Should().Be(department.Name);
-        schoolContext.Departments.First().Budget.Should().Be(department.Budget);
-        schoolContext.Departments.First().StartDate.Should().Be(department.StartDate);
-        schoolContext.Departments.First().InstructorID.Should().Be(department.InstructorId);
+        schoolContext.Departments.Count().ShouldBe(1);
+        schoolContext.Departments.First().Name.ShouldBe(department.Name);
+        schoolContext.Departments.First().Budget.ShouldBe(department.Budget);
+        schoolContext.Departments.First().StartDate.ShouldBe(department.StartDate);
+        schoolContext.Departments.First().InstructorID.ShouldBe(department.InstructorId);
     }
 
     [Fact]
     public async Task Delete_WithNonExistingId_ReturnsNotFound()
     {
         var response = await _client.DeleteAsync("/api/departments/1", TestContext.Current.CancellationToken);
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.NotFound);
     }
 
     [Fact]
@@ -347,9 +347,9 @@ public class DepartmentsControllerTests : IntegrationTest
         await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
 
         var response = await _client.DeleteAsync("/api/departments/1", TestContext.Current.CancellationToken);
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.NoContent);
 
-        schoolContext.Departments.Should().BeEmpty();
+        schoolContext.Departments.ShouldBeEmpty();
     }
 
     [Fact]
@@ -381,17 +381,17 @@ public class DepartmentsControllerTests : IntegrationTest
         };
 
         var response = await _client.PutAsJsonAsync("/api/departments", updateDepartmentCommand);
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.NoContent);
 
         using (var scope = _appFactory.Services.CreateScope())
         {
             var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
 
-            schoolContext.Departments.Should().ContainSingle();
-            schoolContext.Departments.First().Name.Should().Be(updateDepartmentCommand.Name);
-            schoolContext.Departments.First().Budget.Should().Be(updateDepartmentCommand.Budget);
-            schoolContext.Departments.First().StartDate.Should().Be(updateDepartmentCommand.StartDate);
-            schoolContext.Departments.First().InstructorID.Should().Be(updateDepartmentCommand.InstructorId);
+            schoolContext.Departments.Count().ShouldBe(1);
+            schoolContext.Departments.First().Name.ShouldBe(updateDepartmentCommand.Name);
+            schoolContext.Departments.First().Budget.ShouldBe(updateDepartmentCommand.Budget);
+            schoolContext.Departments.First().StartDate.ShouldBe(updateDepartmentCommand.StartDate);
+            schoolContext.Departments.First().InstructorID.ShouldBe(updateDepartmentCommand.InstructorId);
         }
     }
 
@@ -400,8 +400,8 @@ public class DepartmentsControllerTests : IntegrationTest
     {
         var response = await _client.GetAsync("/api/departments/lookup", TestContext.Current.CancellationToken);
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        (await response.Content.ReadAsAsync<DepartmentsLookupDto>(TestContext.Current.CancellationToken)).Departments.Should().BeEmpty();
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
+        (await response.Content.ReadAsAsync<DepartmentsLookupDto>(TestContext.Current.CancellationToken)).Departments.ShouldBeEmpty();
     }
 
     [Fact]
@@ -423,10 +423,10 @@ public class DepartmentsControllerTests : IntegrationTest
 
         var response = await _client.GetAsync("/api/departments/lookup", TestContext.Current.CancellationToken);
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
         var result = await response.Content.ReadAsAsync<DepartmentsLookupDto>(TestContext.Current.CancellationToken);
-        result.Departments.Should().ContainSingle();
-        result.Departments[0].DepartmentID.Should().Be(department.DepartmentID);
-        result.Departments[0].Name.Should().Be(department.Name);
+        result.Departments.Count.ShouldBe(1);
+        result.Departments[0].DepartmentID.ShouldBe(department.DepartmentID);
+        result.Departments[0].Name.ShouldBe(department.Name);
     }
 }

@@ -1,9 +1,9 @@
 ﻿using AutoFixture;
 using Bunit;
 using FakeItEasy;
-using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
+using Shouldly;
 using WebUI.Client.Dtos.Common;
 using WebUI.Client.Dtos.Departments;
 using WebUI.Client.Dtos.Instructors;
@@ -34,8 +34,8 @@ public class DepartmentsTests : BunitTestBase
         var comp = RenderComponent<Client.Pages.Departments.Departments>();
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("h2").TrimmedText().Should().Be("Departments");
-        comp.Find("#CreateButton").Should().NotBeNull();
+        comp.Find("h2").TrimmedText().ShouldBe("Departments");
+        comp.Find("#CreateButton").ShouldNotBeNull();
 
         comp.Find("#CreateButton").Click();
 
@@ -51,7 +51,7 @@ public class DepartmentsTests : BunitTestBase
         var comp = RenderComponent<Client.Pages.Departments.Departments>();
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("#SearchButton").Should().NotBeNull();
+        comp.Find("#SearchButton").ShouldNotBeNull();
         comp.Find("#SearchButton").Click();
 
         A.CallTo(() => fakeDepartmentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored, A<CancellationToken>.Ignored)).MustHaveHappened();
@@ -66,7 +66,7 @@ public class DepartmentsTests : BunitTestBase
         var comp = RenderComponent<Client.Pages.Departments.Departments>();
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("#BackToFullListButton").Should().NotBeNull();
+        comp.Find("#BackToFullListButton").ShouldNotBeNull();
         comp.Find("#BackToFullListButton").Click();
 
         A.CallTo(() => fakeDepartmentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored, A<int?>.Ignored, A<CancellationToken>.Ignored)).MustHaveHappened();
@@ -86,7 +86,7 @@ public class DepartmentsTests : BunitTestBase
         var comp = RenderComponent<Client.Pages.Departments.Departments>();
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.FindAll(".OpenDepartmentDetailsButton")[0].Should().NotBeNull();
+        comp.FindAll(".OpenDepartmentDetailsButton")[0].ShouldNotBeNull();
         comp.FindAll(".OpenDepartmentDetailsButton")[0].Click();
 
         Assert.NotEmpty(dialog.Markup.Trim());
@@ -109,7 +109,7 @@ public class DepartmentsTests : BunitTestBase
         var comp = RenderComponent<Client.Pages.Departments.Departments>();
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.FindAll(".OpenDepartmentEditButton")[0].Should().NotBeNull();
+        comp.FindAll(".OpenDepartmentEditButton")[0].ShouldNotBeNull();
         comp.FindAll(".OpenDepartmentEditButton")[0].Click();
 
         Assert.NotEmpty(dialog.Markup.Trim());
@@ -132,12 +132,12 @@ public class DepartmentsTests : BunitTestBase
         var comp = RenderComponent<Client.Pages.Departments.Departments>();
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.FindAll(".DepartmentDeleteButton")[0].Should().NotBeNull();
+        comp.FindAll(".DepartmentDeleteButton")[0].ShouldNotBeNull();
         comp.FindAll(".DepartmentDeleteButton")[0].Click();
 
         Assert.NotEmpty(dialog.Markup.Trim());
 
-        dialog.Find(".mud-dialog-content").TrimmedText().Should().Be($"Are you sure you want to delete the department {departmentsOverviewDto.Records[0].Name}?");
+        dialog.Find(".mud-dialog-content").TrimmedText().ShouldBe($"Are you sure you want to delete the department {departmentsOverviewDto.Records[0].Name}?");
     }
 
     [Fact]
@@ -157,12 +157,12 @@ public class DepartmentsTests : BunitTestBase
         var comp = RenderComponent<Client.Pages.Departments.Departments>();
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.FindAll(".DepartmentDeleteButton")[0].Should().NotBeNull();
+        comp.FindAll(".DepartmentDeleteButton")[0].ShouldNotBeNull();
         comp.FindAll(".DepartmentDeleteButton")[0].Click();
 
         Assert.NotEmpty(dialog.Markup.Trim());
 
-        dialog.FindAll("button")[1].Should().NotBeNull();
+        dialog.FindAll("button")[1].ShouldNotBeNull();
         dialog.FindAll("button")[1].Click();
 
         A.CallTo(() => fakeDepartmentService.DeleteAsync(A<string>.Ignored)).MustHaveHappened();

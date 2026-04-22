@@ -1,8 +1,8 @@
 ﻿using Bunit;
 using FakeItEasy;
-using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
+using Shouldly;
 using WebUI.Client.Dtos.Courses;
 using WebUI.Client.Dtos.Departments;
 using WebUI.Client.Pages.Courses;
@@ -36,12 +36,12 @@ public class CourseCreateTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("h6").TrimmedText().Should().Be(title);
+        comp.Find("h6").TrimmedText().ShouldBe(title);
 
-        comp.FindAll("input")[0].Id.Should().Be("CourseID");
-        comp.FindAll("input")[1].Id.Should().Be("Title");
-        comp.FindAll("input")[2].Id.Should().Be("Credits");
-        comp.FindAll("input")[3].Id.Should().Be("Department");
+        comp.FindAll("input")[0].Id.ShouldBe("CourseID");
+        comp.FindAll("input")[1].Id.ShouldBe("Title");
+        comp.FindAll("input")[2].Id.ShouldBe("Credits");
+        comp.FindAll("input")[3].Id.ShouldBe("Department");
     }
 
     [Fact]
@@ -68,7 +68,7 @@ public class CourseCreateTests : BunitTestBase
         Assert.NotEmpty(comp.Markup.Trim());
 
         await comp.Find("button[type='button']").ClickAsync();
-        comp.Markup.Trim().Should().BeEmpty();
+        comp.Markup.Trim().ShouldBeEmpty();
     }
 
     [Fact]
@@ -100,7 +100,7 @@ public class CourseCreateTests : BunitTestBase
         await comp.Find("#Department").ChangeAsync("3");
 
         await comp.Find("button[type='submit']").ClickAsync();
-        comp.Markup.Trim().Should().BeEmpty();
+        comp.Markup.Trim().ShouldBeEmpty();
     }
 
     [Fact]
@@ -169,8 +169,8 @@ public class CourseCreateTests : BunitTestBase
 
         await comp.Find("button[type='submit']").ClickAsync();
 
-        dialog?.ErrorVisible.Should().Be(true);
-        comp.Find("div.mud-alert-message").TrimmedText().Should().Be("An error occured during saving");
+        dialog?.ErrorVisible.ShouldBe(true);
+        comp.Find("div.mud-alert-message").TrimmedText().ShouldBe("An error occured during saving");
     }
 
     [Fact]
@@ -198,10 +198,10 @@ public class CourseCreateTests : BunitTestBase
 
         await comp.Find("button[type='submit']").ClickAsync();
 
-        comp.FindAll("div.validation-message")[0].TrimmedText().Should().Be("'Course ID' must not be empty.");
-        comp.FindAll("div.validation-message")[1].TrimmedText().Should().Be("'Title' must not be empty.");
-        comp.FindAll("div.validation-message")[2].TrimmedText().Should().Be("'Credits' must not be empty.");
-        comp.FindAll("div.validation-message")[3].TrimmedText().Should().Be("'Credits' must be greater than '0'.");
+        comp.FindAll("div.validation-message")[0].TrimmedText().ShouldBe("'Course ID' must not be empty.");
+        comp.FindAll("div.validation-message")[1].TrimmedText().ShouldBe("'Title' must not be empty.");
+        comp.FindAll("div.validation-message")[2].TrimmedText().ShouldBe("'Credits' must not be empty.");
+        comp.FindAll("div.validation-message")[3].TrimmedText().ShouldBe("'Credits' must be greater than '0'.");
     }
 
     private static DepartmentsLookupDto GetDepartmentsLookupDtoWithTestData()
