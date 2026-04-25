@@ -1,0 +1,101 @@
+using Application;
+using Application.Common.Interfaces;
+using Infrastructure;
+using Infrastructure.Persistence;
+using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics.CodeAnalysis;
+using WebUINew.Components;
+using WebUINew.Services;
+using Serilog;
+
+namespace WebUINew;
+
+#pragma warning disable S1118 // Utility classes should not have public constructors
+[ExcludeFromCodeCoverage]
+public class Program
+#pragma warning restore S1118 // Utility classes should not have public constructors
+{
+    public static async Task Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
+
+        builder.Services.AddControllersWithViews(options => options.Filters.Add(new ApiExceptionFilterAttribute()));
+        builder.Services.AddRazorPages();
+        builder.Services.AddRazorComponents()
+            .AddInteractiveWebAssemblyComponents();
+
+        builder.Services.AddApplication();
+        builder.Services.AddInfrastructure(builder.Configuration);
+
+        builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+
+        builder.Services.AddHttpContextAccessor();
+
+        builder.Services.AddHealthChecks()
+            .AddDbContextCheck<SchoolContext>();
+
+        // Customise default API behaviour
+        builder.Services.Configure<ApiBehaviorOptions>(options =>
+        {
+            options.SuppressModelStateInvalidFilter = true;
+        });
+
+        builder.Services.AddSwaggerDocument();
+
+        var app = builder.Build();
+
+        if (!app.Configuration.GetValue<bool>("UseInMemoryDatabase"))
+        {
+            await MigrateDatabase(app.Services);
+        }
+
+        // Configure the HTTP request pipeline.
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
+            app.UseWebAssemblyDebugging();
+
+            //Do NOT use this method with .Net 5, it will give an exception when processing a request
+            //app.UseDatabaseErrorPage(); //NOSONAR
+        }
+        else
+        {
+            app.UseExceptionHandler("/Error");
+            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+            app.UseHsts();
+        }
+
+        app.UseHealthChecks("/health");
+
+        app.UseOpenApi();
+        app.UseSwaggerUi(settings =>
+        {
+        });
+
+        app.UseStatusCodePagesWithReExecute("/not-found", createScopeForStatusCodePages: true);
+        app.UseHttpsRedirection();
+
+        app.UseAntiforgery();
+
+        app.MapStaticAssets();
+        app.MapRazorPages();
+        app.MapControllers();
+        app.MapRazorComponents<App>()
+            .AddInteractiveWebAssemblyRenderMode()
+            .AddAdditionalAssemblies(typeof(Client._Imports).Assembly);
+
+        try
+        {
+            Log.Information("Application Starting.");
+            await app.RunAsync();
+        }
+        catch (Exception ex)
+        {
+            Log.Fatal(ex, "The Application failed to start.");
+        }
+        finally
+        {
+            await Log.CloseAndFlushAsync();
+        }
+    }
+}
