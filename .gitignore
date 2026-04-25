@@ -351,3 +351,4 @@ MigrationBackup/
 /ContosoUniversityBlazorExtended/WebUI/Client/wwwroot/img/ProfilePictures
 /.sonarqube
 /WebUI/Server/Img/ProfilePictures
+/.github/copilot-instructions.md
