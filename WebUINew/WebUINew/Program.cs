@@ -1,12 +1,15 @@
 using Application;
 using Application.Common.Interfaces;
+using Application.Program.Commands.SeedData;
 using Infrastructure;
 using Infrastructure.Persistence;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 using System.Diagnostics.CodeAnalysis;
 using WebUINew.Components;
+using WebUINew.Filters;
 using WebUINew.Services;
-using Serilog;
 
 namespace WebUINew;
 
@@ -96,6 +99,27 @@ public class Program
         finally
         {
             await Log.CloseAndFlushAsync();
+        }
+    }
+
+    private static async Task MigrateDatabase(IServiceProvider services)
+    {
+        using var scope = services.CreateScope();
+        var serviceProvider = scope.ServiceProvider;
+
+        try
+        {
+            var context = serviceProvider.GetRequiredService<SchoolContext>();
+
+            await context.Database.EnsureCreatedAsync();
+
+            var mediator = serviceProvider.GetRequiredService<IMediator>();
+            await mediator.Send(new SeedDataCommand(), CancellationToken.None);
+        }
+        catch (Exception ex)
+        {
+            var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+            logger.LogError(ex, "An error occurred while migrating or seeding the database.");
         }
     }
 }
