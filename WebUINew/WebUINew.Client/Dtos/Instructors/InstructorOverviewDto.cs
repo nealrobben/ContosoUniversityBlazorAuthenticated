@@ -1,0 +1,18 @@
+﻿namespace WebUINew.Client.Dtos.Instructors;
+
+public class InstructorOverviewDto
+{
+    public int InstructorId { get; set; }
+
+    public string LastName { get; set; }
+
+    public string FirstName { get; set; }
+
+    public string FullName => $"{FirstName} {LastName}";
+
+    public DateTime HireDate { get; set; }
+
+    public string OfficeLocation { get; set; }
+
+    public List<CourseAssignmentDto> CourseAssignments { get; set; }
+}
