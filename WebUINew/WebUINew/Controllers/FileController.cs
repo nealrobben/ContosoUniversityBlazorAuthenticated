@@ -1,0 +1,35 @@
+﻿using Application.Common.Interfaces;
+using Application.File.Commands;
+using Microsoft.AspNetCore.Mvc;
+using WebUINew.Client.Dtos;
+
+namespace WebUINew.Controllers;
+
+public class FileController : ContosoApiController
+{
+    private readonly IWebHostEnvironment _env;
+    private readonly IProfilePictureService _profilePictureService;
+
+    public FileController(IWebHostEnvironment env, IProfilePictureService profilePictureService)
+    {
+        _env = env;
+        _profilePictureService = profilePictureService;
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<IList<UploadResultDto>>> UploadFiles([FromForm] IEnumerable<IFormFile> files)
+    {
+        var resourcePath = new Uri($"{Request.Scheme}://{Request.Host}/");
+        var uploadResult = await Mediator.Send(new UploadFileCommand(files.First()));
+
+        return new CreatedResult(resourcePath, uploadResult);
+    }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetFile(string id)
+    {
+        var path = Path.Combine(_env.ContentRootPath, "Img", "ProfilePictures", id);
+        var bytes = await _profilePictureService.GetImageFile(path);
+        return File(bytes, "image/jpeg", Path.GetFileName(path));
+    }
+}

@@ -1,0 +1,50 @@
+﻿using Domain.Entities.Projections.Departments;
+using WebUINew.Client.Dtos.Departments;
+
+namespace WebUINew.Mappers;
+
+public static class DepartmentDtoMapper
+{
+    public static DepartmentLookupDto ToDto(DepartmentLookup model)
+    {
+        return new DepartmentLookupDto
+        {
+            DepartmentID = model.DepartmentID,
+            Name = model.Name
+        };
+    }
+
+    public static DepartmentsLookupDto ToDto(DepartmentsLookup model)
+    {
+        return new DepartmentsLookupDto
+        {
+            Departments = model.Departments.Select(ToDto).ToList()
+        };
+    }
+
+    public static DepartmentDetailDto ToDto(DepartmentDetail model)
+    {
+        return new DepartmentDetailDto
+        {
+            DepartmentId = model.DepartmentID,
+            Name = model.Name,
+            Budget = model.Budget,
+            StartDate = model.StartDate,
+            AdministratorName = model.AdministratorName,
+            InstructorId = model.InstructorID,
+            RowVersion = model.RowVersion
+        };
+    }
+
+    public static DepartmentOverviewDto ToDto(DepartmentOverview model)
+    {
+        return new DepartmentOverviewDto
+        {
+            DepartmentID = model.DepartmentID,
+            Name = model.Name,
+            Budget = model.Budget,
+            StartDate = model.StartDate,
+            AdministratorName = model.AdministratorName
+        };
+    }
+}
