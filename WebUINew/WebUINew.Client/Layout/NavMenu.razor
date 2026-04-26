@@ -1,30 +1,18 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">WebUINew</a>
-    </div>
-</div>
+﻿@inject IStringLocalizer<NavMenu> Localizer
 
-<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
-
-<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
-    <nav class="nav flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
-            </NavLink>
-        </div>
-    </nav>
-</div>
-
+<MudNavMenu>
+    <MudNavLink Match="NavLinkMatch.All" href="" Icon="fas fa-home">@Localizer["Home"]</MudNavLink>
+    <MudNavLink Match="NavLinkMatch.All" href="about" Icon="fas fa-info-circle">@Localizer["About"]</MudNavLink>
+    <MudTooltip Text="@Localizer["Students"]">
+        <MudNavLink Match="NavLinkMatch.All" href="students" Icon="fas fa-user-graduate">@Localizer["Students"]</MudNavLink>
+    </MudTooltip>
+    <MudTooltip Text="@Localizer["Courses"]">
+        <MudNavLink Match="NavLinkMatch.All" href="courses" Icon="fas fa-book">@Localizer["Courses"]</MudNavLink>
+    </MudTooltip>
+    <MudTooltip Text="@Localizer["Instructors"]">
+        <MudNavLink Match="NavLinkMatch.All" href="instructors" Icon="fas fa-chalkboard-teacher">@Localizer["Instructors"]</MudNavLink>
+    </MudTooltip>
+    <MudTooltip Text="@Localizer["Departments"]">
+        <MudNavLink Match="NavLinkMatch.All" href="departments" Icon="fas fa-building">@Localizer["Departments"]</MudNavLink>
+    </MudTooltip>
+</MudNavMenu>
