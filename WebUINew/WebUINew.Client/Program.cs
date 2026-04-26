@@ -4,13 +4,15 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using WebUINew.Client.InputModels.Courses;
+using WebUINew.Client.Services;
 
 namespace WebUINew.Client;
 
 [ExcludeFromCodeCoverage]
-internal static class Program
+public static class Program
 {
-    static async Task Main(string[] args)
+    public static async Task Main(string[] args)
     {
         var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
@@ -22,7 +24,7 @@ internal static class Program
         builder.Services.AddLocalization(opts => { opts.ResourcesPath = "Localization"; });
 
         builder.Services.AddBlazoredLocalStorage();
-        //builder.Services.AddValidatorsFromAssemblyContaining<CreateCourseInputModel>(); //TODO
+        builder.Services.AddValidatorsFromAssemblyContaining<CreateCourseInputModel>();
 
         var host = builder.Build();
 
@@ -33,23 +35,23 @@ internal static class Program
 
     private static void RegisterServices(WebAssemblyHostBuilder builder)
     {
-        //builder.Services.AddScoped<IDepartmentService, DepartmentService>();//TODO
-        //builder.Services.AddScoped<ICourseService, CourseService>();//TODO
-        //builder.Services.AddScoped<IInstructorService, InstructorService>();//TODO
-        //builder.Services.AddScoped<IStudentService, StudentService>();//TODO
-        //builder.Services.AddScoped<IFileUploadService, FileUploadService>();//TODO
-        //builder.Services.AddScoped<ClientSettingService>();//TODO
+        builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+        builder.Services.AddScoped<ICourseService, CourseService>();
+        builder.Services.AddScoped<IInstructorService, InstructorService>();
+        builder.Services.AddScoped<IStudentService, StudentService>();
+        builder.Services.AddScoped<IFileUploadService, FileUploadService>();
+        builder.Services.AddScoped<ClientSettingService>();
     }
 
     private static async Task SetCulture(WebAssemblyHost host)
     {
-        //var clientSettingService = host.Services.GetRequiredService<ClientSettingService>(); //TODO
-        //if (clientSettingService != null)
-        //{
-        //    var preference = await clientSettingService.GetSettings();
-        //    var culture = preference != null ? new CultureInfo(preference.LanguageCode) : new CultureInfo("en-US");
-        //    CultureInfo.DefaultThreadCurrentCulture = culture;
-        //    CultureInfo.DefaultThreadCurrentUICulture = culture;
-        //}
+        var clientSettingService = host.Services.GetRequiredService<ClientSettingService>();
+        if (clientSettingService != null)
+        {
+            var preference = await clientSettingService.GetSettings();
+            var culture = preference != null ? new CultureInfo(preference.LanguageCode) : new CultureInfo("en-US");
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
+        }
     }
 }
