@@ -1,0 +1,16 @@
+﻿namespace WebUINew.Client.ViewModels.Instructors;
+
+public class InstructorsLookupVM
+{
+    public IList<InstructorLookupVM> Instructors { get; set; }
+
+    public InstructorsLookupVM()
+    {
+        Instructors = [];
+    }
+
+    public InstructorsLookupVM(IList<InstructorLookupVM> instructors)
+    {
+        Instructors = instructors;
+    }
+}

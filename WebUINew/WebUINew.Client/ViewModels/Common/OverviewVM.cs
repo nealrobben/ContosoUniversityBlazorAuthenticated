@@ -1,0 +1,21 @@
+﻿namespace WebUINew.Client.ViewModels.Common;
+
+public class OverviewVM<T>
+{
+    public IList<T> Records { get; set; }
+
+    public MetaDataVM MetaData { get; set; }
+
+    public OverviewVM()
+    {
+        Records = [];
+        MetaData = new MetaDataVM();
+    }
+
+    public OverviewVM(IList<T> records, MetaDataVM metaData)
+    {
+        Records = records ?? [];
+
+        MetaData = metaData;
+    }
+}
