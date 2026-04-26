@@ -25,4 +25,8 @@
       <PackageReference Include="System.Net.Http.Json" />
   </ItemGroup>
 
+    <PropertyGroup>
+        <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
+    </PropertyGroup>
+
 </Project>
