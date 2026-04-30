@@ -33,9 +33,9 @@
     <PackageVersion Include="Microsoft.Extensions.FileProviders.Embedded" Version="10.0.7" />
     <PackageVersion Include="Microsoft.Extensions.Localization" Version="10.0.7" />
     <PackageVersion Include="Microsoft.Extensions.Options" Version="10.0.7" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.4.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.5.1" />
     <PackageVersion Include="Microsoft.TypeScript.MSBuild" Version="6.0.3" />
-    <PackageVersion Include="MudBlazor" Version="9.3.0" />
+    <PackageVersion Include="MudBlazor" Version="9.4.0" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageVersion Include="NSwag.AspNetCore" Version="14.7.1" />
     <PackageVersion Include="NSwag.MSBuild" Version="14.7.1" />
@@ -44,7 +44,7 @@
     <PackageVersion Include="Serilog.Settings.Configuration" Version="10.0.0" />
     <PackageVersion Include="Serilog.Sinks.Console" Version="6.1.1" />
     <PackageVersion Include="Shouldly" Version="4.3.0" />
-    <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.24.0.138807" />
+    <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.25.0.139117" />
     <PackageVersion Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageVersion Include="System.Net.Http.Json" Version="10.0.7" />
     <PackageVersion Include="TngTech.ArchUnitNET" Version="0.13.3" />
