@@ -263,16 +263,10 @@ public class DepartmentEditTests : BunitTestBase
 
     private static InstructorsLookupDto GetInstructorsLookupDtoWithTestData()
     {
-        return new InstructorsLookupDto(new List<InstructorLookupDto>
-        {
-            new() {
-                Id = 1,
-                FullName = "Test One"
-            },
-            new() {
-                Id = 2,
-                FullName = "Test Two"
-            }
-        });
+        return new InstructorsLookupDto(
+        [
+            new(1, "Test One"),
+            new(2, "Test Two")
+        ]);
     }
 }

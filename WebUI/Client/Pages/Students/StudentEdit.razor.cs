@@ -57,14 +57,7 @@ public partial class StudentEdit
                     UpdateStudentInputModel.ProfilePictureName = await FileUploadService.UploadFile(File);
                 }
 
-                await StudentService.UpdateAsync(new UpdateStudentDto
-                {
-                    StudentId = UpdateStudentInputModel.StudentID,
-                    LastName = UpdateStudentInputModel.LastName,
-                    FirstName = UpdateStudentInputModel.FirstName,
-                    EnrollmentDate = UpdateStudentInputModel.EnrollmentDate,
-                    ProfilePictureName = UpdateStudentInputModel.ProfilePictureName
-                });
+                await StudentService.UpdateAsync(new UpdateStudentDto(UpdateStudentInputModel.StudentID, UpdateStudentInputModel.LastName, UpdateStudentInputModel.FirstName, UpdateStudentInputModel.EnrollmentDate, UpdateStudentInputModel.ProfilePictureName));
                 MudDialog.Close(DialogResult.Ok(true));
             }
             catch (System.Exception)

@@ -78,9 +78,12 @@ public class StudentTests : BunitTestBase
         A.CallTo(() => fakeStudentService.GetAllAsync(A<string>.Ignored, A<int?>.Ignored, A<string>.Ignored,
             A<int?>.Ignored, A<CancellationToken>.Ignored)).Returns(studentsOverviewDto);
 
-        var studentDetailDto = _fixture.Create<StudentDetailDto>();
         var enrollment = _fixture.Create<StudentDetailEnrollmentDto>();
-        studentDetailDto.Enrollments = [enrollment];
+        var studentDetailDto = _fixture
+            .Build<StudentDetailDto>()
+            .Do(x => x.Enrollments.Add(enrollment))
+            .Create();
+
         A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailDto);
 
         Context.Services.AddScoped(x => fakeStudentService);

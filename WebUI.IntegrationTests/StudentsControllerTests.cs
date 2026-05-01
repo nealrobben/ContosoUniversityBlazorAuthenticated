@@ -310,12 +310,7 @@ public class StudentsControllerTests : IntegrationTest
     [Fact]
     public async Task Create_CreatesStudent()
     {
-        var student = new CreateStudentDto
-        {
-            FirstName = "First name",
-            LastName = "Last name",
-            EnrollmentDate = DateTime.UtcNow
-        };
+        var student = new CreateStudentDto("First name", "Last name", DateTime.UtcNow, null);
 
         var response = await _client.PostAsJsonAsync("/api/students", student);
 
@@ -377,13 +372,7 @@ public class StudentsControllerTests : IntegrationTest
             await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
-        var updateStudentCommand = new UpdateStudentDto
-        {
-            StudentId = 1,
-            FirstName = "First name 2",
-            LastName = "Last name 2",
-            EnrollmentDate = DateTime.UtcNow.AddDays(1)
-        };
+        var updateStudentCommand = new UpdateStudentDto(1, "First name 2", "Last name 2", DateTime.UtcNow.AddDays(1), null);
 
         var response = await _client.PutAsJsonAsync("/api/students", updateStudentCommand);
         response.StatusCode.ShouldBe(System.Net.HttpStatusCode.NoContent);
@@ -393,7 +382,7 @@ public class StudentsControllerTests : IntegrationTest
             var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
 
             schoolContext.Students.Count().ShouldBe(1);
-            schoolContext.Students.First().ID.ShouldBe(updateStudentCommand.StudentId.Value);
+            schoolContext.Students.First().ID.ShouldBe(updateStudentCommand.StudentId!.Value);
             schoolContext.Students.First().FirstMidName.ShouldBe(updateStudentCommand.FirstName);
             schoolContext.Students.First().LastName.ShouldBe(updateStudentCommand.LastName);
             schoolContext.Students.First().EnrollmentDate.ShouldBe(updateStudentCommand.EnrollmentDate);

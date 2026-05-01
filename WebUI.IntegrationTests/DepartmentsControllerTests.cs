@@ -302,13 +302,7 @@ public class DepartmentsControllerTests : IntegrationTest
     [Fact]
     public async Task Create_CreatesDepartment()
     {
-        var department = new CreateDepartmentDto
-        {
-            Name = "Test 1",
-            Budget = 123,
-            StartDate = DateTime.UtcNow,
-            InstructorId = 1
-        };
+        var department = new CreateDepartmentDto("Test 1", 123, DateTime.UtcNow, 1);
 
         var response = await _client.PostAsJsonAsync("/api/departments", department);
 
@@ -371,14 +365,7 @@ public class DepartmentsControllerTests : IntegrationTest
             await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
-        var updateDepartmentCommand = new UpdateDepartmentDto
-        {
-            DepartmentId = 1,
-            Name = "Test 2",
-            Budget = 456,
-            StartDate = DateTime.UtcNow.AddDays(1),
-            InstructorId = 2
-        };
+        var updateDepartmentCommand = new UpdateDepartmentDto(1, "Test 2", 456, DateTime.UtcNow.AddDays(1), null, 2);
 
         var response = await _client.PutAsJsonAsync("/api/departments", updateDepartmentCommand);
         response.StatusCode.ShouldBe(System.Net.HttpStatusCode.NoContent);

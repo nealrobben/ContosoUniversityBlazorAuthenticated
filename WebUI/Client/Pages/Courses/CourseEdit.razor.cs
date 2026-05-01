@@ -66,13 +66,7 @@ public partial class CourseEdit
         {
             try
             {
-                await CourseService.UpdateAsync(new UpdateCourseDto
-                {
-                    CourseId = UpdateCourseInputModel.CourseID,
-                    Title = UpdateCourseInputModel.Title,
-                    Credits = UpdateCourseInputModel.Credits,
-                    DepartmentId = UpdateCourseInputModel.DepartmentID
-                });
+                await CourseService.UpdateAsync(new UpdateCourseDto(UpdateCourseInputModel.CourseID, UpdateCourseInputModel.Title, UpdateCourseInputModel.Credits, UpdateCourseInputModel.DepartmentID));
                 MudDialog.Close(DialogResult.Ok(true));
             }
             catch (ApiException ex)

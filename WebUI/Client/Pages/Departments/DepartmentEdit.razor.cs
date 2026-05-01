@@ -69,15 +69,7 @@ public partial class DepartmentEdit
         {
             try
             {
-                await DepartmentService.UpdateAsync(new UpdateDepartmentDto
-                {
-                    DepartmentId = UpdateDepartmentInputModel.DepartmentID,
-                    Name = UpdateDepartmentInputModel.Name,
-                    Budget = UpdateDepartmentInputModel.Budget,
-                    StartDate = UpdateDepartmentInputModel.StartDate,
-                    RowVersion = UpdateDepartmentInputModel.RowVersion,
-                    InstructorId = UpdateDepartmentInputModel.InstructorID
-                });
+                await DepartmentService.UpdateAsync(new UpdateDepartmentDto(UpdateDepartmentInputModel.DepartmentID, UpdateDepartmentInputModel.Name, UpdateDepartmentInputModel.Budget, UpdateDepartmentInputModel.StartDate, UpdateDepartmentInputModel.RowVersion, UpdateDepartmentInputModel.InstructorID));
                 MudDialog.Close(DialogResult.Ok(true));
             }
             catch (ApiException ex)

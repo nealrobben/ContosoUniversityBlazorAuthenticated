@@ -44,13 +44,7 @@ public partial class InstructorCreate
                     CreateInstructorInputModel.ProfilePictureName = await FileUploadService.UploadFile(File);
                 }
 
-                await InstructorService.CreateAsync(new CreateInstructorDto
-                {
-                    FirstName = CreateInstructorInputModel.FirstName,
-                    LastName = CreateInstructorInputModel.LastName,
-                    HireDate = CreateInstructorInputModel.HireDate,
-                    ProfilePictureName = CreateInstructorInputModel.ProfilePictureName
-                });
+                await InstructorService.CreateAsync(new CreateInstructorDto(CreateInstructorInputModel.FirstName, CreateInstructorInputModel.LastName, CreateInstructorInputModel.HireDate, CreateInstructorInputModel.ProfilePictureName));
 
                 CreateInstructorInputModel = new CreateInstructorInputModel();
                 MudDialog.Close(DialogResult.Ok(true));

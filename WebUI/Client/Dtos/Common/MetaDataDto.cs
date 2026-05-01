@@ -2,32 +2,15 @@
 
 namespace WebUI.Client.Dtos.Common;
 
-public class MetaDataDto
+public record MetaDataDto(int PageNumber, int TotalPages, int PageSize, int TotalRecords, string CurrentSort, string SearchString)
 {
-    public int PageNumber { get; set; }
-
-    public int TotalPages { get; set; }
-
-    public int PageSize { get; set; }
-
-    public int TotalRecords { get; set; }
-
-    public string CurrentSort { get; set; }
-
-    public string SearchString { get; set; }
-
-    public MetaDataDto()
+    public MetaDataDto() : this(default, default, default, default, default, default)
     {
     }
 
-    public MetaDataDto(int pageNumber, int totalRecords, int pageSize, string currentSort, string searchString)
+    public MetaDataDto(int pageNumber, int totalRecords, int pageSize, string currentSort, string searchString) 
+        : this(pageNumber, default, pageSize, totalRecords, currentSort, searchString)
     {
-        PageNumber = pageNumber;
-        TotalRecords = totalRecords;
-        PageSize = pageSize;
-        CurrentSort = currentSort;
-        SearchString = searchString;
-
         var numberOfPages = (TotalRecords / (double)PageSize);
         TotalPages = (int)Math.Ceiling(numberOfPages);
     }

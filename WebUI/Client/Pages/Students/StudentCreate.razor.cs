@@ -45,13 +45,7 @@ public partial class StudentCreate
                     CreateStudentInputModel.ProfilePictureName = await FileUploadService.UploadFile(File);
                 }
 
-                await StudentService.CreateAsync(new CreateStudentDto
-                {
-                    FirstName = CreateStudentInputModel.FirstName,
-                    LastName = CreateStudentInputModel.LastName,
-                    EnrollmentDate = CreateStudentInputModel.EnrollmentDate,
-                    ProfilePictureName = CreateStudentInputModel.ProfilePictureName
-                });
+                await StudentService.CreateAsync(new CreateStudentDto(CreateStudentInputModel.LastName, CreateStudentInputModel.FirstName, CreateStudentInputModel.EnrollmentDate, CreateStudentInputModel.ProfilePictureName));
 
                 CreateStudentInputModel = new CreateStudentInputModel();
                 MudDialog.Close(DialogResult.Ok(true));

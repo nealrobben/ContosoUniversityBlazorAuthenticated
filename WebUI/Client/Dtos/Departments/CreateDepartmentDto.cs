@@ -2,13 +2,4 @@
 
 namespace WebUI.Client.Dtos.Departments;
 
-public class CreateDepartmentDto
-{
-    public string Name { get; set; }
-
-    public decimal Budget { get; set; }
-
-    public DateTime StartDate { get; set; }
-
-    public int InstructorId { get; set; }
-}
+public record CreateDepartmentDto(string Name, decimal Budget, DateTime StartDate, int InstructorId);
