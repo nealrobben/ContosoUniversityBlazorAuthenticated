@@ -350,7 +350,7 @@ public class CoursesControllerTests : IntegrationTest
             Name = "Name 1"
         };
 
-        var course = new CreateCourseDto
+        var course = new CreateCourseDto(default, default, default, default)
         {
             CourseId = 1,
             Title = "Title 1",
@@ -430,7 +430,7 @@ public class CoursesControllerTests : IntegrationTest
             await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
-        var updateCourseCommand = new UpdateCourseDto
+        var updateCourseCommand = new UpdateCourseDto(null, default, default, default)
         {
             CourseId = 1,
             Title = "Title 2",

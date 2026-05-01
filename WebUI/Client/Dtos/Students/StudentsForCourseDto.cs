@@ -2,17 +2,9 @@
 
 namespace WebUI.Client.Dtos.Students;
 
-public class StudentsForCourseDto
+public record StudentsForCourseDto(IList<StudentForCourseDto> Students)
 {
-    public IList<StudentForCourseDto> Students { get; set; }
-
-    public StudentsForCourseDto()
+    public StudentsForCourseDto() : this([])
     {
-        Students = [];
-    }
-
-    public StudentsForCourseDto(IList<StudentForCourseDto> students)
-    {
-        Students = students;
     }
 }

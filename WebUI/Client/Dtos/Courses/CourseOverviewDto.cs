@@ -1,12 +1,3 @@
 ﻿namespace WebUI.Client.Dtos.Courses;
 
-public class CourseOverviewDto
-{
-    public int CourseId { get; set; }
-
-    public string Title { get; set; }
-
-    public int Credits { get; set; }
-
-    public string DepartmentName { get; set; }
-}
+public record CourseOverviewDto(int CourseId, string Title, int Credits, string DepartmentName);

@@ -255,20 +255,11 @@ public class CourseEditTests : BunitTestBase
 
     private static DepartmentsLookupDto GetDepartmentsLookupDtoWithTestData()
     {
-        return new DepartmentsLookupDto(new List<DepartmentLookupDto>
-        {
-            new() {
-                DepartmentID = 1,
-                Name = "Department One"
-            },
-            new() {
-                DepartmentID = 2,
-                Name = "Department Two"
-            },
-            new() {
-                DepartmentID = 3,
-                Name = "Department Three"
-            }
-        });
+        return new DepartmentsLookupDto(
+        [
+            new(1, "Department One"),
+            new(2, "Department Two"),
+            new(3, "Department Three")
+        ]);
     }
 }

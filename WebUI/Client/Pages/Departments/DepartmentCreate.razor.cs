@@ -57,13 +57,7 @@ public partial class DepartmentCreate
         {
             try
             {
-                await DepartmentService.CreateAsync(new CreateDepartmentDto
-                {
-                    Name = CreateDepartmentInputModel.Name,
-                    Budget = CreateDepartmentInputModel.Budget,
-                    StartDate = CreateDepartmentInputModel.StartDate,
-                    InstructorId = CreateDepartmentInputModel.InstructorID
-                });
+                await DepartmentService.CreateAsync(new CreateDepartmentDto(CreateDepartmentInputModel.Name, CreateDepartmentInputModel.Budget, CreateDepartmentInputModel.StartDate, CreateDepartmentInputModel.InstructorID));
 
                 CreateDepartmentInputModel = new CreateDepartmentInputModel();
                 MudDialog.Close(DialogResult.Ok(true));

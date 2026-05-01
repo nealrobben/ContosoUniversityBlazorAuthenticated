@@ -250,11 +250,7 @@ public class InstructorsTests : BunitTestBase
         {
             Students =
             {
-                new StudentForCourseDto
-                {
-                    StudentName = "Student X",
-                    StudentGrade = (int ?) Grade.A
-                }
+                new StudentForCourseDto("Student X", (int ?) Grade.A)
             }
         };
 

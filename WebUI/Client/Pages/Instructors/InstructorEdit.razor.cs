@@ -57,15 +57,7 @@ public partial class InstructorEdit
                     UpdateInstructorInputModel.ProfilePictureName = await FileUploadService.UploadFile(File);
                 }
 
-                await InstructorService.UpdateAsync(new UpdateInstructorDto
-                {
-                    InstructorId = UpdateInstructorInputModel.InstructorID,
-                    LastName = UpdateInstructorInputModel.LastName,
-                    FirstName = UpdateInstructorInputModel.FirstName,
-                    HireDate = UpdateInstructorInputModel.HireDate,
-                    OfficeLocation = UpdateInstructorInputModel.OfficeLocation,
-                    ProfilePictureName = UpdateInstructorInputModel.ProfilePictureName
-                });
+                await InstructorService.UpdateAsync(new UpdateInstructorDto(UpdateInstructorInputModel.InstructorID, UpdateInstructorInputModel.LastName, UpdateInstructorInputModel.FirstName, UpdateInstructorInputModel.HireDate, UpdateInstructorInputModel.OfficeLocation, UpdateInstructorInputModel.ProfilePictureName));
                 MudDialog.Close(DialogResult.Ok(true));
             }
             catch (System.Exception)

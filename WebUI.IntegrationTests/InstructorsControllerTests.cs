@@ -306,12 +306,7 @@ public class InstructorsControllerTests : IntegrationTest
     [Fact]
     public async Task Create_CreatesInstructor()
     {
-        var instructor = new CreateInstructorDto
-        {
-            FirstName = "First name",
-            LastName = "Last name",
-            HireDate = DateTime.UtcNow
-        };
+        var instructor = new CreateInstructorDto("First name", "Last name", DateTime.UtcNow, null);
 
         var response = await _client.PostAsJsonAsync("/api/instructors", instructor);
 
@@ -373,13 +368,7 @@ public class InstructorsControllerTests : IntegrationTest
             await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
-        var updateInstructorCommand = new UpdateInstructorDto
-        {
-            InstructorId = 1,
-            FirstName = "First name 2",
-            LastName = "Last name 2",
-            HireDate = DateTime.UtcNow.AddDays(1)
-        };
+        var updateInstructorCommand = new UpdateInstructorDto(1, "First name 2", "Last name 2", DateTime.UtcNow.AddDays(1), null, null);
 
         var response = await _client.PutAsJsonAsync("/api/instructors", updateInstructorCommand);
         response.StatusCode.ShouldBe(System.Net.HttpStatusCode.NoContent);
@@ -389,7 +378,7 @@ public class InstructorsControllerTests : IntegrationTest
             var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
 
             schoolContext.Instructors.Count().ShouldBe(1);
-            schoolContext.Instructors.First().ID.ShouldBe(updateInstructorCommand.InstructorId.Value);
+            schoolContext.Instructors.First().ID.ShouldBe(updateInstructorCommand.InstructorId!.Value);
             schoolContext.Instructors.First().FirstMidName.ShouldBe(updateInstructorCommand.FirstName);
             schoolContext.Instructors.First().LastName.ShouldBe(updateInstructorCommand.LastName);
             schoolContext.Instructors.First().HireDate.ShouldBe(updateInstructorCommand.HireDate);

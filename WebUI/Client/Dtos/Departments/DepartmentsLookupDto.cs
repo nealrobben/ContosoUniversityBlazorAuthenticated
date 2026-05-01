@@ -2,17 +2,9 @@
 
 namespace WebUI.Client.Dtos.Departments;
 
-public class DepartmentsLookupDto
+public record DepartmentsLookupDto(IList<DepartmentLookupDto> Departments)
 {
-    public IList<DepartmentLookupDto> Departments { get; set; }
-
-    public DepartmentsLookupDto()
+    public DepartmentsLookupDto() : this([])
     {
-        Departments = [];
-    }
-
-    public DepartmentsLookupDto(IList<DepartmentLookupDto> departments)
-    {
-        Departments = departments;
     }
 }

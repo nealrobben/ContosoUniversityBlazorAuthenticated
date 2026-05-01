@@ -8,11 +8,7 @@ public static class DepartmentDtoMapper
 {
     public static DepartmentLookupDto ToDto(DepartmentLookup model)
     {
-        return new DepartmentLookupDto
-        {
-            DepartmentID = model.DepartmentID,
-            Name = model.Name
-        };
+        return new DepartmentLookupDto(model.DepartmentID, model.Name);
     }
 
     public static DepartmentsLookupDto ToDto(DepartmentsLookup model)
@@ -25,27 +21,11 @@ public static class DepartmentDtoMapper
 
     public static DepartmentDetailDto ToDto(DepartmentDetail model)
     {
-        return new DepartmentDetailDto
-        {
-            DepartmentId = model.DepartmentID,
-            Name = model.Name,
-            Budget = model.Budget,
-            StartDate = model.StartDate,
-            AdministratorName = model.AdministratorName,
-            InstructorId = model.InstructorID,
-            RowVersion = model.RowVersion
-        };
+        return new DepartmentDetailDto(model.DepartmentID, model.Name, model.Budget, model.StartDate, model.AdministratorName, model.InstructorID, model.RowVersion);
     }
 
     public static DepartmentOverviewDto ToDto(DepartmentOverview model)
     {
-        return new DepartmentOverviewDto
-        {
-            DepartmentID = model.DepartmentID,
-            Name = model.Name,
-            Budget = model.Budget,
-            StartDate = model.StartDate,
-            AdministratorName = model.AdministratorName
-        };
+        return new DepartmentOverviewDto(model.DepartmentID, model.Name, model.Budget, model.StartDate, model.AdministratorName);
     }
 }

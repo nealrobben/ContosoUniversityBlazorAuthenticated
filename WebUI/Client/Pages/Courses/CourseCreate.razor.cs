@@ -57,13 +57,7 @@ public partial class CourseCreate
         {
             try
             {
-                await CourseService.CreateAsync(new CreateCourseDto
-                {
-                    CourseId = CreateCourseInputModel.CourseID,
-                    Title = CreateCourseInputModel.Title,
-                    Credits = CreateCourseInputModel.Credits,
-                    DepartmentId = CreateCourseInputModel.DepartmentID
-                });
+                await CourseService.CreateAsync(new CreateCourseDto(CreateCourseInputModel.CourseID, CreateCourseInputModel.Title, CreateCourseInputModel.Credits, CreateCourseInputModel.DepartmentID));
 
                 CreateCourseInputModel = new CreateCourseInputModel();
                 MudDialog.Close(DialogResult.Ok(true));

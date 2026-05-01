@@ -8,11 +8,7 @@ public static class StudentDtoMapper
 {
     public static StudentForCourseDto ToDto(StudentForCourse model)
     {
-        return new StudentForCourseDto
-        {
-            StudentName = model.StudentName,
-            StudentGrade = (int)model.StudentGrade
-        };
+        return new StudentForCourseDto(model.StudentName, (int)model.StudentGrade);
     }
 
     public static StudentsForCourseDto ToDto(StudentsForCourse model)
@@ -25,34 +21,16 @@ public static class StudentDtoMapper
 
     public static StudentDetailEnrollmentDto ToDto(StudentDetailEnrollment model)
     {
-        return new StudentDetailEnrollmentDto
-        {
-            CourseTitle = model.CourseTitle,
-            Grade = (int)model.Grade,
-        };
+        return new StudentDetailEnrollmentDto(model.CourseTitle, (int)model.Grade);
     }
 
     public static StudentDetailDto ToDto(StudentDetail model)
     {
-        return new StudentDetailDto
-        {
-            StudentID = model.StudentID,
-            LastName = model.LastName,
-            FirstName = model.FirstName,
-            EnrollmentDate = model.EnrollmentDate,
-            ProfilePictureName = model.ProfilePictureName,
-            Enrollments = model.Enrollments.Select(ToDto).ToList()
-        };
+        return new StudentDetailDto(model.StudentID, model.LastName, model.FirstName, model.EnrollmentDate, model.ProfilePictureName, model.Enrollments.Select(ToDto).ToList());
     }
 
     public static StudentOverviewDto ToDto(StudentOverview model)
     {
-        return new StudentOverviewDto
-        {
-            StudentId = model.StudentID,
-            LastName = model.LastName,
-            FirstName = model.FirstName,
-            EnrollmentDate = model.EnrollmentDate
-        };
+        return new StudentOverviewDto(model.StudentID, model.FirstName, model.LastName, model.EnrollmentDate);
     }
 }

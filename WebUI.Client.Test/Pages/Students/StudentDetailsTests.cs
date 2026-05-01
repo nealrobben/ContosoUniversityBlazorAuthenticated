@@ -18,9 +18,11 @@ public class StudentDetailsTests : BunitTestBase
     [Fact]
     public async Task StudentDetails_DisplayDetailsCorrectly()
     {
-        var studentDetailDto = _fixture.Create<StudentDetailDto>();
         var enrollment = _fixture.Create<StudentDetailEnrollmentDto>();
-        studentDetailDto.Enrollments = [enrollment];
+        var studentDetailDto = _fixture
+            .Build<StudentDetailDto>()
+            .With(x => x.Enrollments, [enrollment])
+            .Create();
 
         var fakeStudentService = A.Fake<IStudentService>();
         A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailDto);
@@ -63,9 +65,11 @@ public class StudentDetailsTests : BunitTestBase
     [Fact]
     public async Task StudentDetails_WhenOkButtonClicked_PopupCloses()
     {
-        var studentDetailDto = _fixture.Create<StudentDetailDto>();
         var enrollment = _fixture.Create<StudentDetailEnrollmentDto>();
-        studentDetailDto.Enrollments = [enrollment];
+        var studentDetailDto = _fixture
+            .Build<StudentDetailDto>()
+            .Do(x => x.Enrollments.Add(enrollment))
+            .Create();
 
         var fakeStudentService = A.Fake<IStudentService>();
         A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailDto);
