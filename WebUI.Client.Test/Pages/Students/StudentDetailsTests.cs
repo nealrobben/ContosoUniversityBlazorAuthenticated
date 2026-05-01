@@ -21,7 +21,7 @@ public class StudentDetailsTests : BunitTestBase
         var enrollment = _fixture.Create<StudentDetailEnrollmentDto>();
         var studentDetailDto = _fixture
             .Build<StudentDetailDto>()
-            .Do(x => x.Enrollments.Add(enrollment))
+            .With(x => x.Enrollments, [enrollment])
             .Create();
 
         var fakeStudentService = A.Fake<IStudentService>();
