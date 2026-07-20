@@ -1,17 +1,17 @@
-﻿using Application.Common.Interfaces;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Common.Exceptions;
+using Application.Common.Interfaces;
+using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using Application.Common.Exceptions;
-using Domain.Entities;
 
 namespace Application.Students.Commands;
 
 public class UpdateStudentCommand : IRequest
 {
-    public int? StudentID { get; set; }
+    public int? StudentId { get; set; }
 
     public string LastName { get; set; }
 
@@ -22,7 +22,7 @@ public class UpdateStudentCommand : IRequest
     public string ProfilePictureName { get; set; }
 }
 
-public class UpdateStudentCommandHandler : IRequestHandler<UpdateStudentCommand>
+internal class UpdateStudentCommandHandler : IRequestHandler<UpdateStudentCommand>
 {
     private readonly ISchoolContext _context;
     private readonly IProfilePictureService _profilePictureService;
@@ -35,11 +35,11 @@ public class UpdateStudentCommandHandler : IRequestHandler<UpdateStudentCommand>
 
     public async Task<Unit> Handle(UpdateStudentCommand request, CancellationToken cancellationToken)
     {
-        if (request.StudentID == null)
-            throw new NotFoundException(nameof(Student), request.StudentID);
+        if (request.StudentId == null)
+            throw new NotFoundException(nameof(Student), request.StudentId);
 
         var studentToUpdate = await _context.Students
-            .FirstOrDefaultAsync(s => s.ID == request.StudentID, cancellationToken);
+            .FirstOrDefaultAsync(s => s.ID == request.StudentId, cancellationToken);
 
         if (!Equals(studentToUpdate.ProfilePictureName, request.ProfilePictureName))
             await _profilePictureService.DeleteImageFile(studentToUpdate.ProfilePictureName);

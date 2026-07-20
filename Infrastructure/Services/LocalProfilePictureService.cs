@@ -1,7 +1,7 @@
-﻿using Application.Common.Interfaces;
-using Microsoft.AspNetCore.Hosting;
-using System.IO;
+﻿using System.IO;
 using System.Threading.Tasks;
+using Application.Common.Interfaces;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Infrastructure.Services;
 

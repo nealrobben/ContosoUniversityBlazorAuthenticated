@@ -2,17 +2,9 @@
 
 namespace WebUI.Client.Dtos.Home;
 
-public class AboutInfoDto
+public record AboutInfoDto(IEnumerable<EnrollmentDateGroupDto> Items)
 {
-    public IEnumerable<EnrollmentDateGroupDto> Items { get; set; }
-
-    public AboutInfoDto()
+    public AboutInfoDto() : this([])
     {
-        Items = [];
-    }
-
-    public AboutInfoDto(IEnumerable<EnrollmentDateGroupDto> items)
-    {
-        Items = items;
     }
 }

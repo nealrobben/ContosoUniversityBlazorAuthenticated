@@ -1,9 +1,9 @@
 ﻿
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
-using System.Threading.Tasks;
 using WebUI.Client.Dtos.Instructors;
 using WebUI.Client.InputModels.Instructors;
 using WebUI.Client.Services;
@@ -36,7 +36,7 @@ public partial class InstructorEdit
     {
         var instructor = await InstructorService.GetAsync(InstructorId.ToString());
 
-        UpdateInstructorInputModel.InstructorID = instructor.InstructorID;
+        UpdateInstructorInputModel.InstructorID = instructor.InstructorId;
         UpdateInstructorInputModel.FirstName = instructor.FirstName;
         UpdateInstructorInputModel.LastName = instructor.LastName;
         UpdateInstructorInputModel.HireDate = instructor.HireDate;
@@ -57,15 +57,7 @@ public partial class InstructorEdit
                     UpdateInstructorInputModel.ProfilePictureName = await FileUploadService.UploadFile(File);
                 }
 
-                await InstructorService.UpdateAsync(new UpdateInstructorDto
-                {
-                    InstructorID = UpdateInstructorInputModel.InstructorID,
-                    LastName = UpdateInstructorInputModel.LastName,
-                    FirstName = UpdateInstructorInputModel.FirstName,
-                    HireDate = UpdateInstructorInputModel.HireDate,
-                    OfficeLocation = UpdateInstructorInputModel.OfficeLocation,
-                    ProfilePictureName = UpdateInstructorInputModel.ProfilePictureName
-                });
+                await InstructorService.UpdateAsync(new UpdateInstructorDto(UpdateInstructorInputModel.InstructorID, UpdateInstructorInputModel.LastName, UpdateInstructorInputModel.FirstName, UpdateInstructorInputModel.HireDate, UpdateInstructorInputModel.OfficeLocation, UpdateInstructorInputModel.ProfilePictureName));
                 MudDialog.Close(DialogResult.Ok(true));
             }
             catch (System.Exception)

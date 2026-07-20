@@ -2,16 +2,15 @@
 using AutoFixture;
 using Bunit;
 using FakeItEasy;
-using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
+using Shouldly;
 using WebUI.Client.Dtos.Students;
 using WebUI.Client.Pages.Students;
 using WebUI.Client.Services;
-using WebUI.Client.Test.Extensions;
-using Xunit;
+using WebUI.Client.Tests.Extensions;
 
-namespace WebUI.Client.Test.Pages.Students;
+namespace WebUI.Client.Tests.Pages.Students;
 
 public class StudentEditTests : BunitTestBase
 {
@@ -20,12 +19,14 @@ public class StudentEditTests : BunitTestBase
     [Fact]
     public async Task StudentDetails_DisplayDetailsCorrectly()
     {
-        var studentDetailsDto = _fixture.Create<StudentDetailDto>();
         var enrollment = _fixture.Create<StudentDetailEnrollmentDto>();
-        studentDetailsDto.Enrollments = [enrollment];
+        var studentDetailDto = _fixture
+            .Build<StudentDetailDto>()
+            .Do(x => x.Enrollments.Add(enrollment))
+            .Create();
 
         var fakeStudentService = A.Fake<IStudentService>();
-        A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsDto);
+        A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailDto);
         Context.Services.AddScoped(x => fakeStudentService);
 
         var uploadService = A.Fake<IFileUploadService>();
@@ -49,22 +50,24 @@ public class StudentEditTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("h6").TrimmedText().Should().Be(title);
+        comp.Find("h6").TrimmedText().ShouldBe(title);
 
-        ((IHtmlInputElement)comp.FindAll("input")[0]).Value.Should().Be(studentDetailsDto.LastName);
-        ((IHtmlInputElement)comp.FindAll("input")[1]).Value.Should().Be(studentDetailsDto.FirstName);
-        ((IHtmlInputElement)comp.FindAll("input")[2]).Value.Should().Be(studentDetailsDto.EnrollmentDate.ToString("yyyy-MM-dd"));
+        ((IHtmlInputElement)comp.FindAll("input")[0]).Value.ShouldBe(studentDetailDto.LastName);
+        ((IHtmlInputElement)comp.FindAll("input")[1]).Value.ShouldBe(studentDetailDto.FirstName);
+        ((IHtmlInputElement)comp.FindAll("input")[2]).Value.ShouldBe(studentDetailDto.EnrollmentDate.ToString("yyyy-MM-dd"));
     }
 
     [Fact]
     public async Task StudentDetails_WhenCancelButtonClicked_PopupCloses()
     {
-        var studentDetailsDto = _fixture.Create<StudentDetailDto>();
         var enrollment = _fixture.Create<StudentDetailEnrollmentDto>();
-        studentDetailsDto.Enrollments = [enrollment];
+        var studentDetailDto = _fixture
+            .Build<StudentDetailDto>()
+            .Do(x => x.Enrollments.Add(enrollment))
+            .Create();
 
         var fakeStudentService = A.Fake<IStudentService>();
-        A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsDto);
+        A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailDto);
         Context.Services.AddScoped(x => fakeStudentService);
 
         var uploadService = A.Fake<IFileUploadService>();
@@ -89,18 +92,20 @@ public class StudentEditTests : BunitTestBase
         Assert.NotEmpty(comp.Markup.Trim());
 
         await comp.Find("button[type='button']").ClickAsync();
-        comp.Markup.Trim().Should().BeEmpty();
+        comp.Markup.Trim().ShouldBeEmpty();
     }
 
     [Fact]
     public async Task StudentDetails_WhenEditButtonClicked_PopupCloses()
     {
-        var studentDetailsDto = _fixture.Create<StudentDetailDto>();
         var enrollment = _fixture.Create<StudentDetailEnrollmentDto>();
-        studentDetailsDto.Enrollments = [enrollment];
+        var studentDetailDto = _fixture
+            .Build<StudentDetailDto>()
+            .Do(x => x.Enrollments.Add(enrollment))
+            .Create();
 
         var fakeStudentService = A.Fake<IStudentService>();
-        A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsDto);
+        A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailDto);
         Context.Services.AddScoped(x => fakeStudentService);
 
         var uploadService = A.Fake<IFileUploadService>();
@@ -124,23 +129,25 @@ public class StudentEditTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("#LastName").Change("new lastname");
-        comp.Find("#FirstName").Change("new firstname");
-        comp.Find("#EnrollmentDate").Change("1/3/2021");
+        await comp.Find("#LastName").ChangeAsync("new lastname");
+        await comp.Find("#FirstName").ChangeAsync("new firstname");
+        await comp.Find("#EnrollmentDate").ChangeAsync("1/3/2021");
 
         await comp.Find("button[type='submit']").ClickAsync();
-        comp.Markup.Trim().Should().BeEmpty();
+        comp.Markup.Trim().ShouldBeEmpty();
     }
 
     [Fact]
     public async Task StudentDetails_WhenEditButtonClicked_StudentServiceMustBeCalled()
     {
-        var studentDetailsDto = _fixture.Create<StudentDetailDto>();
         var enrollment = _fixture.Create<StudentDetailEnrollmentDto>();
-        studentDetailsDto.Enrollments = [enrollment];
+        var studentDetailDto = _fixture
+            .Build<StudentDetailDto>()
+            .Do(x => x.Enrollments.Add(enrollment))
+            .Create();
 
         var fakeStudentService = A.Fake<IStudentService>();
-        A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsDto);
+        A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailDto);
         Context.Services.AddScoped(x => fakeStudentService);
 
         var uploadService = A.Fake<IFileUploadService>();
@@ -164,12 +171,12 @@ public class StudentEditTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("#LastName").Change("new lastname");
-        comp.Find("#FirstName").Change("new firstname");
-        comp.Find("#EnrollmentDate").Change("1/3/2021");
+        await comp.Find("#LastName").ChangeAsync("new lastname");
+        await comp.Find("#FirstName").ChangeAsync("new firstname");
+        await comp.Find("#EnrollmentDate").ChangeAsync("1/3/2021");
 
         await comp.Find("button[type='submit']").ClickAsync();
-        comp.Markup.Trim().Should().BeEmpty();
+        comp.Markup.Trim().ShouldBeEmpty();
 
         A.CallTo(() => fakeStudentService.UpdateAsync(A<UpdateStudentDto>.That.IsInstanceOf(typeof(UpdateStudentDto)))).MustHaveHappened();
     }
@@ -177,12 +184,14 @@ public class StudentEditTests : BunitTestBase
     [Fact]
     public async Task StudentDetails_WhenExceptionCaughtAfterSave_ShowErrorMessage()
     {
-        var studentDetailsDto = _fixture.Create<StudentDetailDto>();
         var enrollment = _fixture.Create<StudentDetailEnrollmentDto>();
-        studentDetailsDto.Enrollments = [enrollment];
+        var studentDetailDto = _fixture
+            .Build<StudentDetailDto>()
+            .Do(x => x.Enrollments.Add(enrollment))
+            .Create();
 
         var fakeStudentService = A.Fake<IStudentService>();
-        A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsDto);
+        A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailDto);
         A.CallTo(() => fakeStudentService.UpdateAsync(A<UpdateStudentDto>.Ignored)).ThrowsAsync(new Exception("error"));
         Context.Services.AddScoped(x => fakeStudentService);
 
@@ -209,25 +218,27 @@ public class StudentEditTests : BunitTestBase
 
         var dialog = dialogReference?.Dialog as StudentEdit;
 
-        comp.Find("#LastName").Change("new lastname");
-        comp.Find("#FirstName").Change("new firstname");
-        comp.Find("#EnrollmentDate").Change("1/3/2021");
+        await comp.Find("#LastName").ChangeAsync("new lastname");
+        await comp.Find("#FirstName").ChangeAsync("new firstname");
+        await comp.Find("#EnrollmentDate").ChangeAsync("1/3/2021");
 
         await comp.Find("button[type='submit']").ClickAsync();
 
-        dialog?.ErrorVisible.Should().Be(true);
-        comp.Find("div.mud-alert-message").TrimmedText().Should().Be("An error occured during saving");
+        dialog?.ErrorVisible.ShouldBe(true);
+        comp.Find("div.mud-alert-message").TrimmedText().ShouldBe("An error occured during saving");
     }
 
     [Fact]
     public async Task StudentDetails_WhenValidationFails_ShowErrorMessagesForFields()
     {
-        var studentDetailsDto = _fixture.Create<StudentDetailDto>();
         var enrollment = _fixture.Create<StudentDetailEnrollmentDto>();
-        studentDetailsDto.Enrollments = [enrollment];
+        var studentDetailDto = _fixture
+            .Build<StudentDetailDto>()
+            .Do(x => x.Enrollments.Add(enrollment))
+            .Create();
 
         var fakeStudentService = A.Fake<IStudentService>();
-        A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailsDto);
+        A.CallTo(() => fakeStudentService.GetAsync(A<string>.Ignored)).Returns(studentDetailDto);
         A.CallTo(() => fakeStudentService.UpdateAsync(A<UpdateStudentDto>.Ignored)).ThrowsAsync(new Exception("error"));
         Context.Services.AddScoped(x => fakeStudentService);
 
@@ -252,14 +263,14 @@ public class StudentEditTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("#LastName").Change("");
-        comp.Find("#FirstName").Change("");
-        comp.Find("#EnrollmentDate").Change("");
+        await comp.Find("#LastName").ChangeAsync("");
+        await comp.Find("#FirstName").ChangeAsync("");
+        await comp.Find("#EnrollmentDate").ChangeAsync("");
 
         await comp.Find("button[type='submit']").ClickAsync();
 
-        comp.FindAll("div.validation-message")[0].TrimmedText().Should().Be("'Last Name' must not be empty.");
-        comp.FindAll("div.validation-message")[1].TrimmedText().Should().Be("'First Name' must not be empty.");
-        comp.FindAll("div.validation-message")[2].TrimmedText().Should().Be("The EnrollmentDate field must be a date.");
+        comp.FindAll("div.validation-message")[0].TrimmedText().ShouldBe("'Last Name' must not be empty.");
+        comp.FindAll("div.validation-message")[1].TrimmedText().ShouldBe("'First Name' must not be empty.");
+        comp.FindAll("div.validation-message")[2].TrimmedText().ShouldBe("The EnrollmentDate field must be a date.");
     }
 }

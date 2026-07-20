@@ -20,7 +20,7 @@ public static class StudentViewModelMapper
     {
         return new StudentDetailVM
         {
-            StudentID = dto.StudentID,
+            StudentId = dto.StudentID,
             LastName = dto.LastName,
             FirstName = dto.FirstName,
             EnrollmentDate = dto.EnrollmentDate,
@@ -33,7 +33,7 @@ public static class StudentViewModelMapper
     {
         return new StudentOverviewVM
         {
-            StudentID = dto.StudentID,
+            StudentId = dto.StudentId,
             LastName = dto.LastName,
             FirstName = dto.FirstName,
             EnrollmentDate = dto.EnrollmentDate

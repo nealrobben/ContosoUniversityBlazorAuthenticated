@@ -51,21 +51,21 @@
         <MudTd DataLabel="StartDate">@context.StartDate.ToShortDateString()</MudTd>
         <MudTd DataLabel="AdministratorName">@context.AdministratorName</MudTd>
         <MudTd DataLabel="">
-            <MudIconButton OnClick="(e => OpenDepartmentEdit(context.DepartmentID))"
+            <MudIconButton OnClick="(e => OpenDepartmentEdit(context.DepartmentId))"
                            title="@Localizer["Edit"]"
                            Variant="Variant.Filled"
                            Icon="fas fa-edit"
                            Color="Color.Primary" Size="Size.Small"
                            Class="OpenDepartmentEditButton">
             </MudIconButton>
-            <MudIconButton OnClick="(e => OpenDepartmentDetails(context.DepartmentID))"
+            <MudIconButton OnClick="(e => OpenDepartmentDetails(context.DepartmentId))"
                            title="@Localizer["Details"]"
                            Variant="Variant.Filled"
                            Icon="fas fa-eye"
                            Color="Color.Primary" Size="Size.Small"
                            Class="OpenDepartmentDetailsButton">
             </MudIconButton>
-            <MudIconButton OnClick=@(e => DeleteDepartment(context.DepartmentID, $"{context.Name}"))
+            <MudIconButton OnClick=@(e => DeleteDepartment(context.DepartmentId, $"{context.Name}"))
                            title="@Localizer["Delete"]"
                            Variant="Variant.Filled"
                            Icon="fas fa-trash-alt"

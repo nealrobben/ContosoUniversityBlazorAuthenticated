@@ -1,7 +1,7 @@
-﻿using Application.Common.Interfaces;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
+using Application.Common.Interfaces;
 using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -10,15 +10,15 @@ namespace Application.Students.Commands;
 
 public class DeleteStudentCommand : IRequest
 {
-    public int ID { get; set; }
+    public int Id { get; set; }
 
     public DeleteStudentCommand(int id)
     {
-        ID = id;
+        Id = id;
     }
 }
 
-public class DeleteStudentCommandHandler : IRequestHandler<DeleteStudentCommand>
+internal class DeleteStudentCommandHandler : IRequestHandler<DeleteStudentCommand>
 {
     private readonly ISchoolContext _context;
     private readonly IProfilePictureService _profilePictureService;
@@ -31,8 +31,8 @@ public class DeleteStudentCommandHandler : IRequestHandler<DeleteStudentCommand>
 
     public async Task<Unit> Handle(DeleteStudentCommand request, CancellationToken cancellationToken)
     {
-        var student = await _context.Students.SingleOrDefaultAsync(x => x.ID == request.ID, cancellationToken)
-            ?? throw new NotFoundException(nameof(Student), request.ID);
+        var student = await _context.Students.SingleOrDefaultAsync(x => x.ID == request.Id, cancellationToken)
+            ?? throw new NotFoundException(nameof(Student), request.Id);
 
         if (!string.IsNullOrWhiteSpace(student.ProfilePictureName))
             await _profilePictureService.DeleteImageFile(student.ProfilePictureName);

@@ -2,11 +2,11 @@
 
 public class InstructorLookupVM
 {
-    public int ID { get; set; }
+    public int Id { get; set; }
     public string FullName { get; set; }
 
     public override string ToString()
     {
-        return $"{ID} - {FullName}";
+        return $"{Id} - {FullName}";
     }
 }

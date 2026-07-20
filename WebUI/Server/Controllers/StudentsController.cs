@@ -78,7 +78,7 @@ public class StudentsController : ContosoApiController
     {
         await Mediator.Send(new UpdateStudentCommand
         {
-            StudentID = dto.StudentID,
+            StudentId = dto.StudentId,
             LastName = dto.LastName,
             FirstName = dto.FirstName,
             EnrollmentDate = dto.EnrollmentDate,

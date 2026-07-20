@@ -5,7 +5,7 @@ namespace WebUI.Client.ViewModels.Students;
 
 public class StudentOverviewVM
 {
-    public int StudentID { get; set; }
+    public int StudentId { get; set; }
 
     public string FirstName { get; set; }
 

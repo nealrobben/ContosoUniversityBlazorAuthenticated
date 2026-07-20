@@ -10,12 +10,12 @@ public static class DepartmentViewModelMapper
     {
         return new DepartmentDetailVM
         {
-            DepartmentID = dto.DepartmentID,
+            DepartmentId = dto.DepartmentId,
             Name = dto.Name,
             Budget = dto.Budget,
             StartDate = dto.StartDate,
             AdministratorName = dto.AdministratorName,
-            InstructorID = dto.InstructorID,
+            InstructorId = dto.InstructorId,
             RowVersion = dto.RowVersion
         };
     }
@@ -24,7 +24,7 @@ public static class DepartmentViewModelMapper
     {
         return new DepartmentOverviewVM
         {
-            DepartmentID = dto.DepartmentID,
+            DepartmentId = dto.DepartmentID,
             Name = dto.Name,
             Budget = dto.Budget,
             StartDate = dto.StartDate,
@@ -36,7 +36,7 @@ public static class DepartmentViewModelMapper
     {
         return new DepartmentLookupVM
         {
-            DepartmentID = dto.DepartmentID,
+            DepartmentId = dto.DepartmentID,
             Name = dto.Name
         };
     }

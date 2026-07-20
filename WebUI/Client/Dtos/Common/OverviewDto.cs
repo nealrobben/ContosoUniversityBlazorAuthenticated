@@ -2,22 +2,9 @@
 
 namespace WebUI.Client.Dtos.Common;
 
-public class OverviewDto<T>
+public record OverviewDto<T>(IList<T> Records, MetaDataDto MetaData)
 {
-    public IList<T> Records { get; set; }
-
-    public MetaDataDto MetaData { get; set; }
-
-    public OverviewDto()
+    public OverviewDto() : this([], new MetaDataDto())
     {
-        Records = new List<T>();
-        MetaData = new MetaDataDto();
-    }
-
-    public OverviewDto(IList<T> records, MetaDataDto metaData)
-    {
-        Records = records ?? new List<T>();
-
-        MetaData = metaData;
     }
 }

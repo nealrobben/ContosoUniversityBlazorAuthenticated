@@ -5,7 +5,7 @@ namespace WebUI.Client.ViewModels.Instructors;
 
 public class InstructorOverviewVM
 {
-    public int InstructorID { get; set; }
+    public int InstructorId { get; set; }
 
     public string LastName { get; set; }
 
@@ -21,6 +21,6 @@ public class InstructorOverviewVM
 
     public override string ToString()
     {
-        return $"{InstructorID} - {LastName} - {FirstName}";
+        return $"{InstructorId} - {LastName} - {FirstName}";
     }
 }

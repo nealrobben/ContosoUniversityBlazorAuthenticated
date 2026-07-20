@@ -1,10 +1,9 @@
-﻿
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Application.Common.Interfaces;
 using Application.Courses.Commands;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using System.Threading;
-using System.Threading.Tasks;
-using Application.Common.Interfaces;
 
 namespace Application.Courses.Validators;
 
@@ -17,10 +16,10 @@ public class CreateCourseValidator
     {
         _context = context;
 
-        RuleFor(p => p.CourseID).NotEmpty();
+        RuleFor(p => p.CourseId).NotEmpty();
         RuleFor(p => p.Title).NotEmpty().MaximumLength(50);
         RuleFor(p => p.Credits).NotEmpty().GreaterThan(0);
-        RuleFor(p => p.DepartmentID).NotEmpty();
+        RuleFor(p => p.DepartmentId).NotEmpty();
 
         RuleFor(v => v.Title)
             .MustAsync(BeUniqueTitle)

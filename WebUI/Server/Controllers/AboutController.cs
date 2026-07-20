@@ -19,7 +19,7 @@ public class AboutController : ContosoApiController
 
         return Ok(new AboutInfoDto
         {
-            Items = result.Items.Select(x => new EnrollmentDateGroupDto
+            Items = result.Items.Select(x => new EnrollmentDateGroupDto(null, default)
             {
                 EnrollmentDate = x.EnrollmentDate,
                 StudentCount = x.StudentCount

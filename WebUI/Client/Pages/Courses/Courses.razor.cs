@@ -1,10 +1,10 @@
 ﻿
-using Microsoft.AspNetCore.Components;
-using Microsoft.Extensions.Localization;
-using MudBlazor;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Localization;
+using MudBlazor;
 using WebUI.Client.Extensions;
 using WebUI.Client.Mappers;
 using WebUI.Client.Services;
@@ -44,7 +44,7 @@ public partial class Courses
 
     public async Task DeleteCourse(int courseId, string title)
     {
-        bool? dialogResult = await DialogService.ShowMessageBox(Localizer["Confirm"], Localizer["DeleteConfirmation", title],
+        bool? dialogResult = await DialogService.ShowMessageBoxAsync(Localizer["Confirm"], Localizer["DeleteConfirmation", title],
             yesText: Localizer["Delete"], cancelText: Localizer["Cancel"]);
 
         if (dialogResult == true)

@@ -2,17 +2,9 @@
 
 namespace WebUI.Client.Dtos.Instructors;
 
-public class InstructorsLookupDto
+public record InstructorsLookupDto(IList<InstructorLookupDto> Instructors)
 {
-    public IList<InstructorLookupDto> Instructors { get; set; }
-
-    public InstructorsLookupDto()
+    public InstructorsLookupDto() : this([])
     {
-        Instructors = new List<InstructorLookupDto>();
-    }
-
-    public InstructorsLookupDto(IList<InstructorLookupDto> instructors)
-    {
-        Instructors = instructors;
     }
 }

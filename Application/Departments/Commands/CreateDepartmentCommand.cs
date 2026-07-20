@@ -1,9 +1,9 @@
-﻿using MediatR;
-using System;
-using System.Threading.Tasks;
+﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Application.Common.Interfaces;
 using Domain.Entities;
+using MediatR;
 
 namespace Application.Departments.Commands;
 
@@ -15,10 +15,10 @@ public class CreateDepartmentCommand : IRequest<int>
 
     public DateTime StartDate { get; set; }
 
-    public int InstructorID { get; set; }
+    public int InstructorId { get; set; }
 }
 
-public class CreateDepartmentCommandHandler : IRequestHandler<CreateDepartmentCommand, int>
+internal class CreateDepartmentCommandHandler : IRequestHandler<CreateDepartmentCommand, int>
 {
     private readonly ISchoolContext _context;
 
@@ -34,7 +34,7 @@ public class CreateDepartmentCommandHandler : IRequestHandler<CreateDepartmentCo
             Name = request.Name,
             Budget = request.Budget,
             StartDate = request.StartDate,
-            InstructorID = request.InstructorID
+            InstructorID = request.InstructorId
         };
 
         _context.Departments.Add(newDepartment);

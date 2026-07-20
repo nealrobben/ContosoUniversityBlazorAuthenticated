@@ -1,11 +1,11 @@
 ﻿
 using System.Text.Json;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
-using System.Threading.Tasks;
 using WebUI.Client.Dtos.Courses;
 using WebUI.Client.Extensions;
 using WebUI.Client.InputModels.Courses;
@@ -43,7 +43,7 @@ public partial class CourseCreate
         var departmentsLookup = await DepartmentService.GetLookupAsync();
         DepartmentsLookup = DepartmentViewModelMapper.ToViewModel(departmentsLookup);
 
-        CreateCourseInputModel.DepartmentID = DepartmentsLookup.Departments[0].DepartmentID;
+        CreateCourseInputModel.DepartmentID = DepartmentsLookup.Departments[0].DepartmentId;
         StateHasChanged();
     }
 
@@ -57,13 +57,7 @@ public partial class CourseCreate
         {
             try
             {
-                await CourseService.CreateAsync(new CreateCourseDto
-                {
-                    CourseID = CreateCourseInputModel.CourseID,
-                    Title = CreateCourseInputModel.Title,
-                    Credits = CreateCourseInputModel.Credits,
-                    DepartmentID = CreateCourseInputModel.DepartmentID
-                });
+                await CourseService.CreateAsync(new CreateCourseDto(CreateCourseInputModel.CourseID, CreateCourseInputModel.Title, CreateCourseInputModel.Credits, CreateCourseInputModel.DepartmentID));
 
                 CreateCourseInputModel = new CreateCourseInputModel();
                 MudDialog.Close(DialogResult.Ok(true));

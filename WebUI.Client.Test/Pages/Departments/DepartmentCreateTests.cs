@@ -1,16 +1,15 @@
 ﻿using Bunit;
 using FakeItEasy;
-using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
+using Shouldly;
 using WebUI.Client.Dtos.Departments;
 using WebUI.Client.Dtos.Instructors;
 using WebUI.Client.Pages.Departments;
 using WebUI.Client.Services;
-using WebUI.Client.Test.Extensions;
-using Xunit;
+using WebUI.Client.Tests.Extensions;
 
-namespace WebUI.Client.Test.Pages.Departments;
+namespace WebUI.Client.Tests.Pages.Departments;
 
 public class DepartmentCreateTests : BunitTestBase
 {
@@ -37,12 +36,12 @@ public class DepartmentCreateTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("h6").TrimmedText().Should().Be(title);
+        comp.Find("h6").TrimmedText().ShouldBe(title);
 
-        comp.FindAll("input")[0].Id.Should().Be("Name");
-        comp.FindAll("input")[1].Id.Should().Be("Budget");
-        comp.FindAll("input")[2].Id.Should().Be("StartDate");
-        comp.FindAll("input")[3].Id.Should().Be("InstructorID");
+        comp.FindAll("input")[0].Id.ShouldBe("Name");
+        comp.FindAll("input")[1].Id.ShouldBe("Budget");
+        comp.FindAll("input")[2].Id.ShouldBe("StartDate");
+        comp.FindAll("input")[3].Id.ShouldBe("InstructorID");
     }
 
     [Fact]
@@ -68,8 +67,8 @@ public class DepartmentCreateTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("button[type='button']").Click();
-        comp.Markup.Trim().Should().BeEmpty();
+        await comp.Find("button[type='button']").ClickAsync();
+        comp.Markup.Trim().ShouldBeEmpty();
     }
 
     [Fact]
@@ -95,13 +94,13 @@ public class DepartmentCreateTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("#Name").Change("My name");
-        comp.Find("#Budget").Change("123");
-        comp.Find("#StartDate").Change("1/3/2021");
-        comp.Find("#InstructorID").Change("1");
+        await comp.Find("#Name").ChangeAsync("My name");
+        await comp.Find("#Budget").ChangeAsync("123");
+        await comp.Find("#StartDate").ChangeAsync("1/3/2021");
+        await comp.Find("#InstructorID").ChangeAsync("1");
 
-        comp.Find("button[type='submit']").Click();
-        comp.Markup.Trim().Should().BeEmpty();
+        await comp.Find("button[type='submit']").ClickAsync();
+        comp.Markup.Trim().ShouldBeEmpty();
     }
 
     [Fact]
@@ -127,12 +126,12 @@ public class DepartmentCreateTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("#Name").Change("My name");
-        comp.Find("#Budget").Change("123");
-        comp.Find("#StartDate").Change("1/3/2021");
-        comp.Find("#InstructorID").Change("1");
+        await comp.Find("#Name").ChangeAsync("My name");
+        await comp.Find("#Budget").ChangeAsync("123");
+        await comp.Find("#StartDate").ChangeAsync("1/3/2021");
+        await comp.Find("#InstructorID").ChangeAsync("1");
 
-        comp.Find("button[type='submit']").Click();
+        await comp.Find("button[type='submit']").ClickAsync();
 
         A.CallTo(() => fakeDepartmentService.CreateAsync(A<CreateDepartmentDto>.That.IsInstanceOf(typeof(CreateDepartmentDto)))).MustHaveHappened();
     }
@@ -163,15 +162,15 @@ public class DepartmentCreateTests : BunitTestBase
 
         var dialog = dialogReference?.Dialog as DepartmentCreate;
 
-        comp.Find("#Name").Change("My name");
-        comp.Find("#Budget").Change("123");
-        comp.Find("#StartDate").Change("1/3/2021");
-        comp.Find("#InstructorID").Change("1");
+        await comp.Find("#Name").ChangeAsync("My name");
+        await comp.Find("#Budget").ChangeAsync("123");
+        await comp.Find("#StartDate").ChangeAsync("1/3/2021");
+        await comp.Find("#InstructorID").ChangeAsync("1");
 
-        comp.Find("button[type='submit']").Click();
+        await comp.Find("button[type='submit']").ClickAsync();
 
-        dialog?.ErrorVisible.Should().Be(true);
-        comp.Find("div.mud-alert-message").TrimmedText().Should().Be("An error occured during saving");
+        dialog?.ErrorVisible.ShouldBe(true);
+        comp.Find("div.mud-alert-message").TrimmedText().ShouldBe("An error occured during saving");
     }
 
     [Fact]
@@ -197,28 +196,22 @@ public class DepartmentCreateTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("#StartDate").Change("");
+        await comp.Find("#StartDate").ChangeAsync("");
 
-        comp.Find("button[type='submit']").Click();
+        await comp.Find("button[type='submit']").ClickAsync();
 
-        comp.FindAll("div.validation-message")[0].TrimmedText().Should().Be("'Name' must not be empty.");
-        comp.FindAll("div.validation-message")[1].TrimmedText().Should().Be("'Budget' must not be empty.");
-        comp.FindAll("div.validation-message")[2].TrimmedText().Should().Be("'Budget' must be greater than '0'.");
-        comp.FindAll("div.validation-message")[3].TrimmedText().Should().Be("The StartDate field must be a date.");
+        comp.FindAll("div.validation-message")[0].TrimmedText().ShouldBe("'Name' must not be empty.");
+        comp.FindAll("div.validation-message")[1].TrimmedText().ShouldBe("'Budget' must not be empty.");
+        comp.FindAll("div.validation-message")[2].TrimmedText().ShouldBe("'Budget' must be greater than '0'.");
+        comp.FindAll("div.validation-message")[3].TrimmedText().ShouldBe("The StartDate field must be a date.");
     }
 
     private static InstructorsLookupDto GetInstructorsLookupDtoWithTestData()
     {
-        return new InstructorsLookupDto(new List<InstructorLookupDto>
-        {
-            new() {
-                ID = 1,
-                FullName = "Test One"
-            },
-            new() {
-                ID = 2,
-                FullName = "Test Two"
-            }
-        });
+        return new InstructorsLookupDto(
+        [
+            new(1, "Test One"),
+            new(2, "Test Two")
+        ]);
     }
 }

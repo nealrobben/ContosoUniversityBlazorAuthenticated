@@ -1,17 +1,17 @@
-﻿using Application.Common.Interfaces;
-using MediatR;
-using System;
-using System.Threading.Tasks;
+﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Application.Common.Exceptions;
+using Application.Common.Interfaces;
 using Domain.Entities;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Instructors.Commands;
 
 public class UpdateInstructorCommand : IRequest
 {
-    public int? InstructorID { get; set; }
+    public int? InstructorId { get; set; }
 
     public string LastName { get; set; }
 
@@ -24,7 +24,7 @@ public class UpdateInstructorCommand : IRequest
     public string ProfilePictureName { get; set; }
 }
 
-public class UpdateInstructorCommandHandler : IRequestHandler<UpdateInstructorCommand>
+internal class UpdateInstructorCommandHandler : IRequestHandler<UpdateInstructorCommand>
 {
     private readonly ISchoolContext _context;
     private readonly IProfilePictureService _profilePictureService;
@@ -37,15 +37,15 @@ public class UpdateInstructorCommandHandler : IRequestHandler<UpdateInstructorCo
 
     public async Task<Unit> Handle(UpdateInstructorCommand request, CancellationToken cancellationToken)
     {
-        if (request.InstructorID == null)
-            throw new NotFoundException(nameof(Instructor), request.InstructorID);
+        if (request.InstructorId == null)
+            throw new NotFoundException(nameof(Instructor), request.InstructorId);
 
         var instructorToUpdate = await _context.Instructors
             .Include(i => i.OfficeAssignment)
             .Include(i => i.CourseAssignments)
             .ThenInclude(i => i.Course)
-            .FirstOrDefaultAsync(m => m.ID == request.InstructorID, cancellationToken)
-            ?? throw new NotFoundException(nameof(Instructor), request.InstructorID);
+            .FirstOrDefaultAsync(m => m.ID == request.InstructorId, cancellationToken)
+            ?? throw new NotFoundException(nameof(Instructor), request.InstructorId);
 
         if (!Equals(instructorToUpdate.ProfilePictureName, request.ProfilePictureName))
             await _profilePictureService.DeleteImageFile(instructorToUpdate.ProfilePictureName);

@@ -6,9 +6,9 @@ using MudBlazor.Services;
 using WebUI.Client.InputModels.Courses;
 using WebUI.Client.Shared;
 
-namespace WebUI.Client.Test;
+namespace WebUI.Client.Tests;
 
-public abstract class BunitTestBase
+public class BunitTestBase
 {
     private bool _mudPopoverAdded;
     protected BunitContext Context { get; }
@@ -34,7 +34,7 @@ public abstract class BunitTestBase
         where TComponent : IComponent
     {
         return Context.Render<UnitTestLayout>(hostParams => hostParams
-        .AddChildContent<TComponent>());
+            .AddChildContent<TComponent>());
     }
 
     private IRenderedComponent<IComponent> RenderWithoutMudPopover<TComponent>()

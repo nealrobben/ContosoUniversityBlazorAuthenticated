@@ -1,7 +1,7 @@
 ﻿
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Localization;
-using System.Threading.Tasks;
 using WebUI.Client.Mappers;
 using WebUI.Client.Services;
 using WebUI.Client.ViewModels.Courses;
@@ -38,7 +38,7 @@ public partial class CoursesForInstructor
 
     public string CoursesSelectRowClassFunc(CourseForInstructorVM course, int rowNumber)
     {
-        if (course?.CourseID == SelectedCourseId)
+        if (course?.CourseId == SelectedCourseId)
             return "mud-theme-primary";
 
         return "";

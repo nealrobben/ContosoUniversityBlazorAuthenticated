@@ -1,11 +1,11 @@
 ﻿
 using System.Text.Json;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
-using System.Threading.Tasks;
 using WebUI.Client.Dtos.Courses;
 using WebUI.Client.Extensions;
 using WebUI.Client.InputModels.Courses;
@@ -50,9 +50,9 @@ public partial class CourseEdit
     {
         var course = await CourseService.GetAsync(CourseId.ToString());
 
-        UpdateCourseInputModel.CourseID = course.CourseID;
+        UpdateCourseInputModel.CourseID = course.CourseId;
         UpdateCourseInputModel.Credits = course.Credits;
-        UpdateCourseInputModel.DepartmentID = course.DepartmentID;
+        UpdateCourseInputModel.DepartmentID = course.DepartmentId;
         UpdateCourseInputModel.Title = course.Title;
     }
 
@@ -66,13 +66,7 @@ public partial class CourseEdit
         {
             try
             {
-                await CourseService.UpdateAsync(new UpdateCourseDto
-                {
-                    CourseID = UpdateCourseInputModel.CourseID,
-                    Title = UpdateCourseInputModel.Title,
-                    Credits = UpdateCourseInputModel.Credits,
-                    DepartmentID = UpdateCourseInputModel.DepartmentID
-                });
+                await CourseService.UpdateAsync(new UpdateCourseDto(UpdateCourseInputModel.CourseID, UpdateCourseInputModel.Title, UpdateCourseInputModel.Credits, UpdateCourseInputModel.DepartmentID));
                 MudDialog.Close(DialogResult.Ok(true));
             }
             catch (ApiException ex)

@@ -2,7 +2,7 @@
 
 public class CourseDetailVM
 {
-    public int CourseID { get; set; }
+    public int CourseId { get; set; }
 
     public string Title { get; set; }
 
@@ -12,6 +12,6 @@ public class CourseDetailVM
 
     public override string ToString()
     {
-        return $"{CourseID} - {Title}";
+        return $"{CourseId} - {Title}";
     }
 }

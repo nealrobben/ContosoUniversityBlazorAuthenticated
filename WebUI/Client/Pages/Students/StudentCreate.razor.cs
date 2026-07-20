@@ -1,10 +1,10 @@
 ﻿
+using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
-using System;
-using System.Threading.Tasks;
 using WebUI.Client.Dtos.Students;
 using WebUI.Client.InputModels.Students;
 using WebUI.Client.Services;
@@ -45,13 +45,7 @@ public partial class StudentCreate
                     CreateStudentInputModel.ProfilePictureName = await FileUploadService.UploadFile(File);
                 }
 
-                await StudentService.CreateAsync(new CreateStudentDto
-                {
-                    FirstName = CreateStudentInputModel.FirstName,
-                    LastName = CreateStudentInputModel.LastName,
-                    EnrollmentDate = CreateStudentInputModel.EnrollmentDate,
-                    ProfilePictureName = CreateStudentInputModel.ProfilePictureName
-                });
+                await StudentService.CreateAsync(new CreateStudentDto(CreateStudentInputModel.LastName, CreateStudentInputModel.FirstName, CreateStudentInputModel.EnrollmentDate, CreateStudentInputModel.ProfilePictureName));
 
                 CreateStudentInputModel = new CreateStudentInputModel();
                 MudDialog.Close(DialogResult.Ok(true));

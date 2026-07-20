@@ -1,9 +1,9 @@
-﻿using MediatR;
-using System;
-using System.Threading.Tasks;
+﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Application.Common.Interfaces;
 using Domain.Entities;
+using MediatR;
 
 namespace Application.Instructors.Commands;
 
@@ -18,7 +18,7 @@ public class CreateInstructorCommand : IRequest<int>
     public string ProfilePictureName { get; set; }
 }
 
-public class CreateInstructorCommandHandler : IRequestHandler<CreateInstructorCommand, int>
+internal class CreateInstructorCommandHandler : IRequestHandler<CreateInstructorCommand, int>
 {
     private readonly ISchoolContext _context;
 

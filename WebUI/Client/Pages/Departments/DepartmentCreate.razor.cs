@@ -1,12 +1,12 @@
 ﻿
+using System;
+using System.Text.Json;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
-using System;
-using System.Text.Json;
-using System.Threading.Tasks;
 using WebUI.Client.Dtos.Departments;
 using WebUI.Client.Extensions;
 using WebUI.Client.InputModels.Departments;
@@ -43,7 +43,7 @@ public partial class DepartmentCreate
         var instructorsLookup = await InstructorService.GetLookupAsync();
         InstructorsLookup = InstructorViewModelMapper.ToViewModel(instructorsLookup);
 
-        CreateDepartmentInputModel.InstructorID = InstructorsLookup.Instructors[0].ID;
+        CreateDepartmentInputModel.InstructorID = InstructorsLookup.Instructors[0].Id;
         StateHasChanged();
     }
 
@@ -57,13 +57,7 @@ public partial class DepartmentCreate
         {
             try
             {
-                await DepartmentService.CreateAsync(new CreateDepartmentDto
-                {
-                    Name = CreateDepartmentInputModel.Name,
-                    Budget = CreateDepartmentInputModel.Budget,
-                    StartDate = CreateDepartmentInputModel.StartDate,
-                    InstructorID = CreateDepartmentInputModel.InstructorID
-                });
+                await DepartmentService.CreateAsync(new CreateDepartmentDto(CreateDepartmentInputModel.Name, CreateDepartmentInputModel.Budget, CreateDepartmentInputModel.StartDate, CreateDepartmentInputModel.InstructorID));
 
                 CreateDepartmentInputModel = new CreateDepartmentInputModel();
                 MudDialog.Close(DialogResult.Ok(true));

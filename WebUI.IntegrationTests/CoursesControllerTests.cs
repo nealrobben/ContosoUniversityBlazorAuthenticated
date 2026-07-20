@@ -1,7 +1,7 @@
 ﻿using Application.Common.Interfaces;
 using Domain.Entities;
-using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
+using Shouldly;
 using WebUI.Client.Dtos.Common;
 using WebUI.Client.Dtos.Courses;
 
@@ -12,10 +12,10 @@ public class CoursesControllerTests : IntegrationTest
     [Fact]
     public async Task GetAll_WithoutCourses_ReturnsEmptyResponse()
     {
-        var response = await _client.GetAsync("/api/courses");
+        var response = await _client.GetAsync("/api/courses", TestContext.Current.CancellationToken);
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        (await response.Content.ReadAsAsync<OverviewDto<CourseOverviewDto>>()).Records.Should().BeEmpty();
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
+        (await response.Content.ReadAsAsync<OverviewDto<CourseOverviewDto>>(TestContext.Current.CancellationToken)).Records.ShouldBeEmpty();
     }
 
     [Fact]
@@ -41,18 +41,18 @@ public class CoursesControllerTests : IntegrationTest
 
             schoolContext.Departments.Add(department);
             schoolContext.Courses.Add(course);
-            await schoolContext.SaveChangesAsync();
+            await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
-        var response = await _client.GetAsync("/api/courses");
+        var response = await _client.GetAsync("/api/courses", TestContext.Current.CancellationToken);
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewDto<CourseOverviewDto>>());
-        result.Records.Should().ContainSingle();
-        result.Records[0].CourseID.Should().Be(course.CourseID);
-        result.Records[0].Title.Should().Be(course.Title);
-        result.Records[0].Credits.Should().Be(course.Credits);
-        result.Records[0].DepartmentName.Should().Be(department.Name);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
+        var result = await response.Content.ReadAsAsync<OverviewDto<CourseOverviewDto>>(TestContext.Current.CancellationToken);
+        result.Records.Count.ShouldBe(1);
+        result.Records[0].CourseId.ShouldBe(course.CourseID);
+        result.Records[0].Title.ShouldBe(course.Title);
+        result.Records[0].Credits.ShouldBe(course.Credits);
+        result.Records[0].DepartmentName.ShouldBe(department.Name);
     }
 
     [Fact]
@@ -87,25 +87,25 @@ public class CoursesControllerTests : IntegrationTest
             schoolContext.Departments.Add(department);
             schoolContext.Courses.Add(course1);
             schoolContext.Courses.Add(course2);
-            await schoolContext.SaveChangesAsync();
+            await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
-        var responseLowerCase = await _client.GetAsync("/api/courses?searchString=math");
+        var responseLowerCase = await _client.GetAsync("/api/courses?searchString=math", TestContext.Current.CancellationToken);
 
-        responseLowerCase.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await responseLowerCase.Content.ReadAsAsync<OverviewDto<CourseOverviewDto>>());
+        responseLowerCase.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
+        var result = await responseLowerCase.Content.ReadAsAsync<OverviewDto<CourseOverviewDto>>(TestContext.Current.CancellationToken);
 
-        result.Records.Should().ContainSingle();
-        result.Records[0].CourseID.Should().Be(course2.CourseID);
-        result.Records[0].Title.Should().Be(course2.Title);
-        result.Records[0].Credits.Should().Be(course2.Credits);
-        result.Records[0].DepartmentName.Should().Be(department.Name);
+        result.Records.Count.ShouldBe(1);
+        result.Records[0].CourseId.ShouldBe(course2.CourseID);
+        result.Records[0].Title.ShouldBe(course2.Title);
+        result.Records[0].Credits.ShouldBe(course2.Credits);
+        result.Records[0].DepartmentName.ShouldBe(department.Name);
 
-        var responseUpperCase = await _client.GetAsync("/api/courses?searchString=MATH");
-        responseUpperCase.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
+        var responseUpperCase = await _client.GetAsync("/api/courses?searchString=MATH", TestContext.Current.CancellationToken);
+        responseUpperCase.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
 
-        var resultUpperCase = (await responseUpperCase.Content.ReadAsAsync<OverviewDto<CourseOverviewDto>>());
-        resultUpperCase.Records.Should().ContainSingle();
+        var resultUpperCase = await responseUpperCase.Content.ReadAsAsync<OverviewDto<CourseOverviewDto>>(TestContext.Current.CancellationToken);
+        resultUpperCase.Records.Count.ShouldBe(1);
     }
 
 
@@ -141,19 +141,19 @@ public class CoursesControllerTests : IntegrationTest
             schoolContext.Departments.Add(department);
             schoolContext.Courses.Add(course1);
             schoolContext.Courses.Add(course2);
-            await schoolContext.SaveChangesAsync();
+            await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
-        var response = await _client.GetAsync("/api/courses?sortOrder=title_desc");
+        var response = await _client.GetAsync("/api/courses?sortOrder=title_desc", TestContext.Current.CancellationToken);
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewDto<CourseOverviewDto>>());
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
+        var result = await response.Content.ReadAsAsync<OverviewDto<CourseOverviewDto>>(TestContext.Current.CancellationToken);
 
-        result.Records.Count.Should().Be(2);
-        result.Records[0].CourseID.Should().Be(course2.CourseID);
-        result.Records[0].Title.Should().Be(course2.Title);
-        result.Records[0].Credits.Should().Be(course2.Credits);
-        result.Records[0].DepartmentName.Should().Be(department.Name);
+        result.Records.Count.ShouldBe(2);
+        result.Records[0].CourseId.ShouldBe(course2.CourseID);
+        result.Records[0].Title.ShouldBe(course2.Title);
+        result.Records[0].Credits.ShouldBe(course2.Credits);
+        result.Records[0].DepartmentName.ShouldBe(department.Name);
     }
 
     [Fact]
@@ -206,25 +206,25 @@ public class CoursesControllerTests : IntegrationTest
             schoolContext.Courses.Add(course2);
             schoolContext.Courses.Add(course3);
             schoolContext.Courses.Add(course4);
-            await schoolContext.SaveChangesAsync();
+            await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
-        var response = await _client.GetAsync("/api/courses?pageSize=2");
+        var response = await _client.GetAsync("/api/courses?pageSize=2", TestContext.Current.CancellationToken);
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewDto<CourseOverviewDto>>());
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
+        var result = await response.Content.ReadAsAsync<OverviewDto<CourseOverviewDto>>(TestContext.Current.CancellationToken);
 
-        result.Records.Count.Should().Be(2);
+        result.Records.Count.ShouldBe(2);
 
-        result.Records[0].CourseID.Should().Be(course1.CourseID);
-        result.Records[0].Title.Should().Be(course1.Title);
-        result.Records[0].Credits.Should().Be(course1.Credits);
-        result.Records[0].DepartmentName.Should().Be(department.Name);
+        result.Records[0].CourseId.ShouldBe(course1.CourseID);
+        result.Records[0].Title.ShouldBe(course1.Title);
+        result.Records[0].Credits.ShouldBe(course1.Credits);
+        result.Records[0].DepartmentName.ShouldBe(department.Name);
 
-        result.Records[1].CourseID.Should().Be(course2.CourseID);
-        result.Records[1].Title.Should().Be(course2.Title);
-        result.Records[1].Credits.Should().Be(course2.Credits);
-        result.Records[1].DepartmentName.Should().Be(department.Name);
+        result.Records[1].CourseId.ShouldBe(course2.CourseID);
+        result.Records[1].Title.ShouldBe(course2.Title);
+        result.Records[1].Credits.ShouldBe(course2.Credits);
+        result.Records[1].DepartmentName.ShouldBe(department.Name);
     }
 
     [Fact]
@@ -277,32 +277,32 @@ public class CoursesControllerTests : IntegrationTest
             schoolContext.Courses.Add(course2);
             schoolContext.Courses.Add(course3);
             schoolContext.Courses.Add(course4);
-            await schoolContext.SaveChangesAsync();
+            await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
-        var response = await _client.GetAsync("/api/courses?pageNumber=1&pageSize=2");
+        var response = await _client.GetAsync("/api/courses?pageNumber=1&pageSize=2", TestContext.Current.CancellationToken);
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<OverviewDto<CourseOverviewDto>>());
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
+        var result = await response.Content.ReadAsAsync<OverviewDto<CourseOverviewDto>>(TestContext.Current.CancellationToken);
 
-        result.Records.Count.Should().Be(2);
+        result.Records.Count.ShouldBe(2);
 
-        result.Records[0].CourseID.Should().Be(course3.CourseID);
-        result.Records[0].Title.Should().Be(course3.Title);
-        result.Records[0].Credits.Should().Be(course3.Credits);
-        result.Records[0].DepartmentName.Should().Be(department.Name);
+        result.Records[0].CourseId.ShouldBe(course3.CourseID);
+        result.Records[0].Title.ShouldBe(course3.Title);
+        result.Records[0].Credits.ShouldBe(course3.Credits);
+        result.Records[0].DepartmentName.ShouldBe(department.Name);
 
-        result.Records[1].CourseID.Should().Be(course4.CourseID);
-        result.Records[1].Title.Should().Be(course4.Title);
-        result.Records[1].Credits.Should().Be(course4.Credits);
-        result.Records[1].DepartmentName.Should().Be(department.Name);
+        result.Records[1].CourseId.ShouldBe(course4.CourseID);
+        result.Records[1].Title.ShouldBe(course4.Title);
+        result.Records[1].Credits.ShouldBe(course4.Credits);
+        result.Records[1].DepartmentName.ShouldBe(department.Name);
     }
 
     [Fact]
     public async Task GetSingle_WithNonExistingId_ReturnsNotFound()
     {
-        var response = await _client.GetAsync("/api/courses/1");
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
+        var response = await _client.GetAsync("/api/courses/1", TestContext.Current.CancellationToken);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.NotFound);
     }
 
     [Fact]
@@ -328,17 +328,17 @@ public class CoursesControllerTests : IntegrationTest
 
             schoolContext.Departments.Add(department);
             schoolContext.Courses.Add(course);
-            await schoolContext.SaveChangesAsync();
+            await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
-        var response = await _client.GetAsync("/api/courses/1");
+        var response = await _client.GetAsync("/api/courses/1", TestContext.Current.CancellationToken);
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<CourseDetailDto>());
-        result.CourseID.Should().Be(course.CourseID);
-        result.Title.Should().Be(course.Title);
-        result.Credits.Should().Be(course.Credits);
-        result.DepartmentID.Should().Be(department.DepartmentID);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
+        var result = await response.Content.ReadAsAsync<CourseDetailDto>(TestContext.Current.CancellationToken);
+        result.CourseId.ShouldBe(course.CourseID);
+        result.Title.ShouldBe(course.Title);
+        result.Credits.ShouldBe(course.Credits);
+        result.DepartmentId.ShouldBe(department.DepartmentID);
     }
 
     [Fact]
@@ -350,12 +350,12 @@ public class CoursesControllerTests : IntegrationTest
             Name = "Name 1"
         };
 
-        var course = new CreateCourseDto
+        var course = new CreateCourseDto(default, default, default, default)
         {
-            CourseID = 1,
+            CourseId = 1,
             Title = "Title 1",
             Credits = 2,
-            DepartmentID = 1
+            DepartmentId = 1
         };
 
         using (var scope = _appFactory.Services.CreateScope())
@@ -363,30 +363,30 @@ public class CoursesControllerTests : IntegrationTest
             var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
 
             schoolContext.Departments.Add(department);
-            await schoolContext.SaveChangesAsync();
+            await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
-        var response = await _client.PostAsJsonAsync("/api/courses", course);
+        var response = await _client.PostAsJsonAsync("/api/courses", course, TestContext.Current.CancellationToken);
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.Created);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.Created);
 
         using (var scope = _appFactory.Services.CreateScope())
         {
             var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
 
-            schoolContext.Courses.Should().ContainSingle();
-            schoolContext.Courses.First().CourseID.Should().Be(course.CourseID);
-            schoolContext.Courses.First().Title.Should().Be(course.Title);
-            schoolContext.Courses.First().Credits.Should().Be(course.Credits);
-            schoolContext.Courses.First().DepartmentID.Should().Be(course.DepartmentID);
+            schoolContext.Courses.Count().ShouldBe(1);
+            schoolContext.Courses.First().CourseID.ShouldBe(course.CourseId);
+            schoolContext.Courses.First().Title.ShouldBe(course.Title);
+            schoolContext.Courses.First().Credits.ShouldBe(course.Credits);
+            schoolContext.Courses.First().DepartmentID.ShouldBe(course.DepartmentId);
         }
     }
 
     [Fact]
     public async Task Delete_WithNonExistingId_ReturnsNotFound()
     {
-        var response = await _client.DeleteAsync("/api/courses/1");
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
+        var response = await _client.DeleteAsync("/api/courses/1", TestContext.Current.CancellationToken);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.NotFound);
     }
 
     [Fact]
@@ -403,12 +403,12 @@ public class CoursesControllerTests : IntegrationTest
 
         var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
         schoolContext.Courses.Add(course);
-        await schoolContext.SaveChangesAsync();
+        await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
 
-        var response = await _client.DeleteAsync("/api/courses/1");
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
+        var response = await _client.DeleteAsync("/api/courses/1", TestContext.Current.CancellationToken);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.NoContent);
 
-        schoolContext.Courses.Should().BeEmpty();
+        schoolContext.Courses.ShouldBeEmpty();
     }
 
 
@@ -427,38 +427,38 @@ public class CoursesControllerTests : IntegrationTest
 
             var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
             schoolContext.Courses.Add(course);
-            await schoolContext.SaveChangesAsync();
+            await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
-        var updateCourseCommand = new UpdateCourseDto
+        var updateCourseCommand = new UpdateCourseDto(null, default, default, default)
         {
-            CourseID = 1,
+            CourseId = 1,
             Title = "Title 2",
             Credits = 22,
-            DepartmentID = 4
+            DepartmentId = 4
         };
 
         var response = await _client.PutAsJsonAsync("/api/courses", updateCourseCommand);
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.NoContent);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.NoContent);
 
         using (var scope = _appFactory.Services.CreateScope())
         {
             var schoolContext = scope.ServiceProvider.GetRequiredService<ISchoolContext>();
 
-            schoolContext.Courses.Should().ContainSingle();
-            schoolContext.Courses.First().Title.Should().Be(updateCourseCommand.Title);
-            schoolContext.Courses.First().Credits.Should().Be(updateCourseCommand.Credits);
-            schoolContext.Courses.First().DepartmentID.Should().Be(updateCourseCommand.DepartmentID);
+            schoolContext.Courses.Count().ShouldBe(1);
+            schoolContext.Courses.First().Title.ShouldBe(updateCourseCommand.Title);
+            schoolContext.Courses.First().Credits.ShouldBe(updateCourseCommand.Credits);
+            schoolContext.Courses.First().DepartmentID.ShouldBe(updateCourseCommand.DepartmentId);
         }
     }
 
     [Fact]
     public async Task GetByInstructor_WithoutCourses_ReturnsEmptyResponse()
     {
-        var response = await _client.GetAsync("/api/courses/byinstructor/1");
+        var response = await _client.GetAsync("/api/courses/byinstructor/1", TestContext.Current.CancellationToken);
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        (await response.Content.ReadAsAsync<CoursesForInstructorOverviewDto>()).Courses.Should().BeEmpty();
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
+        (await response.Content.ReadAsAsync<CoursesForInstructorOverviewDto>(TestContext.Current.CancellationToken)).Courses.ShouldBeEmpty();
     }
 
     [Fact]
@@ -498,17 +498,17 @@ public class CoursesControllerTests : IntegrationTest
             schoolContext.Departments.Add(department);
             schoolContext.Courses.Add(course);
             schoolContext.CourseAssignments.Add(courseAssignment);
-            await schoolContext.SaveChangesAsync();
+            await schoolContext.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
-        var response = await _client.GetAsync("/api/courses/byinstructor/1");
+        var response = await _client.GetAsync("/api/courses/byinstructor/1", TestContext.Current.CancellationToken);
 
-        response.StatusCode.Should().Be(System.Net.HttpStatusCode.OK);
-        var result = (await response.Content.ReadAsAsync<CoursesForInstructorOverviewDto>());
-        
-        result.Courses.Should().ContainSingle();
-        result.Courses[0].CourseID.Should().Be(course.CourseID);
-        result.Courses[0].Title.Should().Be(course.Title);
-        result.Courses[0].DepartmentName.Should().Be(department.Name);
+        response.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
+        var result = await response.Content.ReadAsAsync<CoursesForInstructorOverviewDto>(TestContext.Current.CancellationToken);
+
+        result.Courses.Count.ShouldBe(1);
+        result.Courses[0].CourseId.ShouldBe(course.CourseID);
+        result.Courses[0].Title.ShouldBe(course.Title);
+        result.Courses[0].DepartmentName.ShouldBe(department.Name);
     }
 }

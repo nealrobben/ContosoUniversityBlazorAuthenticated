@@ -1,17 +1,17 @@
-﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
+﻿using System.Linq;
 using System.Threading;
-using System.Linq;
 using System.Threading.Tasks;
 using Application.Common.Interfaces;
 using Domain.Entities.Projections.Departments;
 using Domain.Entities.Projections.Mappers;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Departments.Queries;
 
 public class GetDepartmentsLookupQuery : IRequest<DepartmentsLookup>;
 
-public class GetDepartmentsLookupQueryHandler : IRequestHandler<GetDepartmentsLookupQuery, DepartmentsLookup>
+internal class GetDepartmentsLookupQueryHandler : IRequestHandler<GetDepartmentsLookupQuery, DepartmentsLookup>
 {
     private readonly ISchoolContext _context;
 

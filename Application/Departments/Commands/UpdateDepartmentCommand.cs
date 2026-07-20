@@ -1,17 +1,17 @@
-﻿using MediatR;
-using System;
-using System.Threading.Tasks;
+﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Application.Common.Exceptions;
 using Application.Common.Interfaces;
 using Domain.Entities;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Departments.Commands;
 
 public class UpdateDepartmentCommand : IRequest
 {
-    public int DepartmentID { get; set; }
+    public int DepartmentId { get; set; }
 
     public string Name { get; set; }
 
@@ -21,10 +21,10 @@ public class UpdateDepartmentCommand : IRequest
 
     public byte[] RowVersion { get; set; }
 
-    public int InstructorID { get; set; }
+    public int InstructorId { get; set; }
 }
 
-public class UpdateDepartmentCommandHandler : IRequestHandler<UpdateDepartmentCommand>
+internal class UpdateDepartmentCommandHandler : IRequestHandler<UpdateDepartmentCommand>
 {
     private readonly ISchoolContext _context;
 
@@ -35,18 +35,18 @@ public class UpdateDepartmentCommandHandler : IRequestHandler<UpdateDepartmentCo
 
     public async Task<Unit> Handle(UpdateDepartmentCommand request, CancellationToken cancellationToken)
     {
-        if (request.DepartmentID == 0)
-            throw new NotFoundException(nameof(Department), request.DepartmentID);
+        if (request.DepartmentId == 0)
+            throw new NotFoundException(nameof(Department), request.DepartmentId);
 
         var departmentToUpdate = await _context.Departments
             .Include(i => i.Administrator)
-            .FirstOrDefaultAsync(m => m.DepartmentID == request.DepartmentID, cancellationToken)
-            ?? throw new NotFoundException(nameof(Department), request.DepartmentID);
+            .FirstOrDefaultAsync(m => m.DepartmentID == request.DepartmentId, cancellationToken)
+            ?? throw new NotFoundException(nameof(Department), request.DepartmentId);
 
         departmentToUpdate.Name = request.Name;
         departmentToUpdate.Budget = request.Budget;
         departmentToUpdate.StartDate = request.StartDate;
-        departmentToUpdate.InstructorID = request.InstructorID;
+        departmentToUpdate.InstructorID = request.InstructorId;
 
         _context.Entry(departmentToUpdate).Property("RowVersion").OriginalValue = request.RowVersion;
 

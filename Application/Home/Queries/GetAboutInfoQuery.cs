@@ -1,16 +1,16 @@
-﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Linq;
 using Application.Common.Interfaces;
 using Domain.Entities.Projections.Home;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Home.Queries;
 
 public class GetAboutInfoQuery : IRequest<AboutInfo>;
 
-public class GetAboutInfoQueryHandler : IRequestHandler<GetAboutInfoQuery, AboutInfo>
+internal class GetAboutInfoQueryHandler : IRequestHandler<GetAboutInfoQuery, AboutInfo>
 {
     private readonly ISchoolContext _context;
 

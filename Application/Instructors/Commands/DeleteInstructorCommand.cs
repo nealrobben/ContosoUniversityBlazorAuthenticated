@@ -1,8 +1,8 @@
-﻿using Application.Common.Interfaces;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
+using Application.Common.Interfaces;
 using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -11,15 +11,15 @@ namespace Application.Instructors.Commands;
 
 public class DeleteInstructorCommand : IRequest
 {
-    public int ID { get; set; }
+    public int Id { get; set; }
 
     public DeleteInstructorCommand(int id)
     {
-        ID = id;
+        Id = id;
     }
 }
 
-public class DeleteInstructorCommandHandler : IRequestHandler<DeleteInstructorCommand>
+internal class DeleteInstructorCommandHandler : IRequestHandler<DeleteInstructorCommand>
 {
     private readonly ISchoolContext _context;
     private readonly IProfilePictureService _profilePictureService;
@@ -34,14 +34,14 @@ public class DeleteInstructorCommandHandler : IRequestHandler<DeleteInstructorCo
     {
         var instructor = await _context.Instructors
             .Include(i => i.CourseAssignments)
-            .SingleOrDefaultAsync(i => i.ID == request.ID, cancellationToken)
-            ?? throw new NotFoundException(nameof(Instructor), request.ID);
+            .SingleOrDefaultAsync(i => i.ID == request.Id, cancellationToken)
+            ?? throw new NotFoundException(nameof(Instructor), request.Id);
 
         if (!string.IsNullOrWhiteSpace(instructor.ProfilePictureName))
             await _profilePictureService.DeleteImageFile(instructor.ProfilePictureName);
 
         var departments = await _context.Departments
-            .Where(d => d.InstructorID == request.ID)
+            .Where(d => d.InstructorID == request.Id)
             .ToListAsync(cancellationToken);
         departments.ForEach(d => d.InstructorID = null);
 

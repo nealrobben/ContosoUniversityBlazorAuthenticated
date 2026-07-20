@@ -1,16 +1,15 @@
 ﻿using AutoFixture;
 using Bunit;
 using FakeItEasy;
-using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor;
+using Shouldly;
 using WebUI.Client.Dtos.Courses;
 using WebUI.Client.Pages.Courses;
 using WebUI.Client.Services;
-using WebUI.Client.Test.Extensions;
-using Xunit;
+using WebUI.Client.Tests.Extensions;
 
-namespace WebUI.Client.Test.Pages.Courses;
+namespace WebUI.Client.Tests.Pages.Courses;
 
 public class CourseDetailsTests : BunitTestBase
 {
@@ -43,15 +42,15 @@ public class CourseDetailsTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("h6").TrimmedText().Should().Be(title);
+        comp.Find("h6").TrimmedText().ShouldBe(title);
 
-        comp.FindAll("dt")[0].TrimmedText().Should().Be("Title");
-        comp.FindAll("dt")[1].TrimmedText().Should().Be("Credits");
-        comp.FindAll("dt")[2].TrimmedText().Should().Be("Department");
+        comp.FindAll("dt")[0].TrimmedText().ShouldBe("Title");
+        comp.FindAll("dt")[1].TrimmedText().ShouldBe("Credits");
+        comp.FindAll("dt")[2].TrimmedText().ShouldBe("Department");
 
-        comp.FindAll("dd")[0].TrimmedText().Should().Be(courseDetailsDto.Title);
-        comp.FindAll("dd")[1].TrimmedText().Should().Be(courseDetailsDto.Credits.ToString());
-        comp.FindAll("dd")[2].TrimmedText().Should().Be(courseDetailsDto.DepartmentID.ToString());
+        comp.FindAll("dd")[0].TrimmedText().ShouldBe(courseDetailsDto.Title);
+        comp.FindAll("dd")[1].TrimmedText().ShouldBe(courseDetailsDto.Credits.ToString());
+        comp.FindAll("dd")[2].TrimmedText().ShouldBe(courseDetailsDto.DepartmentId.ToString());
     }
 
     [Fact]
@@ -81,7 +80,7 @@ public class CourseDetailsTests : BunitTestBase
 
         Assert.NotEmpty(comp.Markup.Trim());
 
-        comp.Find("button").Click();
-        comp.Markup.Trim().Should().BeEmpty();
+        await comp.Find("button").ClickAsync();
+        comp.Markup.Trim().ShouldBeEmpty();
     }
 }

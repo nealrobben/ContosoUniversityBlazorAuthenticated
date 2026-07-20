@@ -1,5 +1,5 @@
-﻿using Domain.Entities.Projections.Instructors;
-using System.Linq;
+﻿using System.Linq;
+using Domain.Entities.Projections.Instructors;
 using WebUI.Client.Dtos.Instructors;
 
 namespace WebUI.Server.Mappers;
@@ -8,11 +8,7 @@ public static class InstructorDtoMapper
 {
     public static InstructorLookupDto ToDto(InstructorLookup model)
     {
-        return new InstructorLookupDto
-        {
-            ID = model.ID,
-            FullName = model.FullName
-        };
+        return new InstructorLookupDto(model.ID, model.FullName);
     }
 
     public static InstructorsLookupDto ToDto(InstructorsLookup model)
@@ -25,36 +21,16 @@ public static class InstructorDtoMapper
 
     public static InstructorDetailDto ToDto(InstructorDetail model)
     {
-        return new InstructorDetailDto
-        {
-            InstructorID = model.InstructorID,
-            LastName = model.LastName,
-            FirstName = model.FirstName,
-            HireDate = model.HireDate,
-            OfficeLocation = model.OfficeLocation,
-            ProfilePictureName = model.ProfilePictureName,
-        };
+        return new InstructorDetailDto(model.InstructorID, model.LastName, model.FirstName, model.HireDate, model.OfficeLocation, model.ProfilePictureName);
     }
 
     public static CourseAssignmentDto ToDto(CourseAssignment model)
     {
-        return new CourseAssignmentDto
-        {
-            CourseID = model.CourseID,
-            CourseTitle = model.CourseTitle
-        };
+        return new CourseAssignmentDto(model.CourseID, model.CourseTitle);
     }
 
     public static InstructorOverviewDto ToDto(InstructorOverview model)
     {
-        return new InstructorOverviewDto
-        {
-            InstructorID = model.InstructorID,
-            LastName = model.LastName,
-            FirstName = model.FirstName,
-            HireDate = model.HireDate,
-            OfficeLocation = model.OfficeLocation,
-            CourseAssignments = model.CourseAssignments.Select(ToDto).ToList()
-        };
+        return new InstructorOverviewDto(model.InstructorID, model.LastName, model.FirstName, model.HireDate, model.OfficeLocation, model.CourseAssignments.Select(ToDto).ToList());
     }
 }

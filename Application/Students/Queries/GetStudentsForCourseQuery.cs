@@ -1,26 +1,26 @@
-﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Linq;
 using Application.Common.Interfaces;
-using Domain.Entities.Projections.Students;
 using Domain.Entities.Projections.Mappers;
+using Domain.Entities.Projections.Students;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Students.Queries;
 
 public class GetStudentsForCourseQuery : IRequest<StudentsForCourse>
 {
-    public int? ID { get; set; }
+    public int? Id { get; set; }
 
     public GetStudentsForCourseQuery(int? id)
     {
-        ID = id;
+        Id = id;
     }
 }
 
-public class GetStudentsForCourseQueryHandler : IRequestHandler<GetStudentsForCourseQuery, StudentsForCourse>
+internal class GetStudentsForCourseQueryHandler : IRequestHandler<GetStudentsForCourseQuery, StudentsForCourse>
 {
     private readonly ISchoolContext _context;
 
@@ -31,11 +31,11 @@ public class GetStudentsForCourseQueryHandler : IRequestHandler<GetStudentsForCo
 
     public async Task<StudentsForCourse> Handle(GetStudentsForCourseQuery request, CancellationToken cancellationToken)
     {
-        if (request.ID == null)
+        if (request.Id == null)
             return new StudentsForCourse(new List<StudentForCourse>());
 
         var students = await _context.Enrollments
-            .Where(x => x.CourseID == request.ID)
+            .Where(x => x.CourseID == request.Id)
             .Include(c => c.Student)
             .AsNoTracking()
             .ToListAsync(cancellationToken);

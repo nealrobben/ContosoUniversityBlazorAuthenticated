@@ -16,6 +16,7 @@ The solution contains the following projects:
 | Infrastructure 			| Infrastructure layer containing implementations for the interfaces from the application layer & persistence with EF Core      | 
 | WebUI.Client 				| Blazor WASM client      | 
 | WebUI.Server 				| API in ASP.Net Core       | 
+| ArchitectureTests 		| Architecture tests with ArchUnitNET       | 
 | WebUI.Client.Test 		| Unit tests for the WebUI.Client project      | 
 | WebUI.Integration.Tests 	| Integration tests      | 
 

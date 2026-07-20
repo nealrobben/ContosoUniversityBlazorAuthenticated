@@ -4,7 +4,7 @@ namespace WebUI.Client.ViewModels.Departments;
 
 public class DepartmentOverviewVM
 {
-    public int DepartmentID { get; set; }
+    public int DepartmentId { get; set; }
 
     public string Name { get; set; }
 
@@ -16,6 +16,6 @@ public class DepartmentOverviewVM
 
     public override string ToString()
     {
-        return $"{DepartmentID} - {Name}";
+        return $"{DepartmentId} - {Name}";
     }
 }

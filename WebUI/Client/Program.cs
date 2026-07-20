@@ -1,14 +1,14 @@
 
-using Blazored.LocalStorage;
-using FluentValidation;
-using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using MudBlazor.Services;
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Blazored.LocalStorage;
+using FluentValidation;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using MudBlazor.Services;
 using WebUI.Client.InputModels.Courses;
 using WebUI.Client.Services;
 

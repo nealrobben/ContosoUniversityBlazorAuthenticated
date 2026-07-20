@@ -8,7 +8,7 @@ public class CoursesForInstructorOverviewVM
 
     public CoursesForInstructorOverviewVM()
     {
-        Courses = new List<CourseForInstructorVM>();
+        Courses = [];
     }
 
     public CoursesForInstructorOverviewVM(IList<CourseForInstructorVM> courses)

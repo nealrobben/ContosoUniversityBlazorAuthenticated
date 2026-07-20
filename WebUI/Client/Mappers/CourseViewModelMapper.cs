@@ -10,10 +10,10 @@ public static class CourseViewModelMapper
     {
         return new CourseDetailVM
         {
-            CourseID = dto.CourseID,
+            CourseId = dto.CourseId,
             Title = dto.Title,
             Credits = dto.Credits,
-            DepartmentID = dto.DepartmentID
+            DepartmentID = dto.DepartmentId
         };
     }
 
@@ -21,7 +21,7 @@ public static class CourseViewModelMapper
     {
         return new CourseOverviewVM
         {
-            CourseID = dto.CourseID,
+            CourseId = dto.CourseId,
             Title = dto.Title,
             Credits = dto.Credits,
             DepartmentName = dto.DepartmentName
@@ -32,7 +32,7 @@ public static class CourseViewModelMapper
     {
         return new CourseForInstructorVM
         {
-            CourseID = dto.CourseID,
+            CourseId = dto.CourseId,
             Title = dto.Title,
             DepartmentName = dto.DepartmentName
         };

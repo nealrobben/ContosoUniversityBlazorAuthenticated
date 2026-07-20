@@ -1,23 +1,23 @@
-﻿using MediatR;
+﻿using System.Threading;
 using System.Threading.Tasks;
-using System.Threading;
 using Application.Common.Interfaces;
 using Domain.Entities;
+using MediatR;
 
 namespace Application.Courses.Commands;
 
 public class CreateCourseCommand : IRequest<int>
 {
-    public int CourseID { get; set; }
+    public int CourseId { get; set; }
 
     public string Title { get; set; }
 
     public int Credits { get; set; }
 
-    public int DepartmentID { get; set; }
+    public int DepartmentId { get; set; }
 }
 
-public class CreateCourseCommandHandler : IRequestHandler<CreateCourseCommand, int>
+internal class CreateCourseCommandHandler : IRequestHandler<CreateCourseCommand, int>
 {
     private readonly ISchoolContext _context;
 
@@ -30,10 +30,10 @@ public class CreateCourseCommandHandler : IRequestHandler<CreateCourseCommand, i
     {
         var course = new Course
         {
-            CourseID = request.CourseID,
+            CourseID = request.CourseId,
             Title = request.Title,
             Credits = request.Credits,
-            DepartmentID = request.DepartmentID
+            DepartmentID = request.DepartmentId
         };
 
         _context.Courses.Add(course);

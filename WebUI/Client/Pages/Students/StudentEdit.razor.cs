@@ -1,9 +1,9 @@
 ﻿
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.Extensions.Localization;
 using MudBlazor;
-using System.Threading.Tasks;
 using WebUI.Client.Dtos.Students;
 using WebUI.Client.InputModels.Students;
 using WebUI.Client.Services;
@@ -57,14 +57,7 @@ public partial class StudentEdit
                     UpdateStudentInputModel.ProfilePictureName = await FileUploadService.UploadFile(File);
                 }
 
-                await StudentService.UpdateAsync(new UpdateStudentDto
-                {
-                    StudentID = UpdateStudentInputModel.StudentID,
-                    LastName = UpdateStudentInputModel.LastName,
-                    FirstName = UpdateStudentInputModel.FirstName,
-                    EnrollmentDate = UpdateStudentInputModel.EnrollmentDate,
-                    ProfilePictureName = UpdateStudentInputModel.ProfilePictureName
-                });
+                await StudentService.UpdateAsync(new UpdateStudentDto(UpdateStudentInputModel.StudentID, UpdateStudentInputModel.LastName, UpdateStudentInputModel.FirstName, UpdateStudentInputModel.EnrollmentDate, UpdateStudentInputModel.ProfilePictureName));
                 MudDialog.Close(DialogResult.Ok(true));
             }
             catch (System.Exception)

@@ -10,7 +10,7 @@ public static class InstructorViewModelMapper
     {
         return new InstructorDetailVM
         {
-            InstructorID = dto.InstructorID,
+            InstructorId = dto.InstructorId,
             LastName = dto.LastName,
             FirstName = dto.FirstName,
             HireDate = dto.HireDate,
@@ -23,7 +23,7 @@ public static class InstructorViewModelMapper
     {
         return new CourseAssignmentVM
         {
-            CourseID = dto.CourseID,
+            CourseId = dto.CourseId,
             CourseTitle = dto.CourseTitle
         };
     }
@@ -32,7 +32,7 @@ public static class InstructorViewModelMapper
     {
         return new InstructorOverviewVM
         {
-            InstructorID = dto.InstructorID,
+            InstructorId = dto.InstructorId,
             LastName = dto.LastName,
             FirstName = dto.FirstName,
             HireDate = dto.HireDate,
@@ -45,7 +45,7 @@ public static class InstructorViewModelMapper
     {
         return new InstructorLookupVM
         {
-            ID = dto.ID,
+            Id = dto.Id,
             FullName = dto.FullName
         };
     }

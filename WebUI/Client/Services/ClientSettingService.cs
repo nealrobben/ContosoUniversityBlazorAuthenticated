@@ -1,6 +1,6 @@
-﻿using Blazored.LocalStorage;
+﻿using System.Threading.Tasks;
+using Blazored.LocalStorage;
 using MudBlazor;
-using System.Threading.Tasks;
 using WebUI.Client.Settings;
 
 namespace WebUI.Client.Services;

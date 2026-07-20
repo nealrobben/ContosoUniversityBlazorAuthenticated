@@ -1,6 +1,6 @@
-﻿using Application.Common.Interfaces;
-using System.IO;
+﻿using System.IO;
 using System.Threading.Tasks;
+using Application.Common.Interfaces;
 using Azure.Storage.Blobs;
 using Microsoft.Extensions.Configuration;
 

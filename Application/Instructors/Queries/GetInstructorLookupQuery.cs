@@ -11,7 +11,7 @@ namespace Application.Instructors.Queries;
 
 public class GetInstructorLookupQuery : IRequest<InstructorsLookup>;
 
-public class GetInstructorLookupQueryHandler : IRequestHandler<GetInstructorLookupQuery, InstructorsLookup>
+internal class GetInstructorLookupQueryHandler : IRequestHandler<GetInstructorLookupQuery, InstructorsLookup>
 {
     private readonly ISchoolContext _context;
 

@@ -1,9 +1,9 @@
-﻿using Application.Departments.Commands;
-using FluentValidation;
-using Microsoft.EntityFrameworkCore;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Interfaces;
+using Application.Departments.Commands;
+using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Departments.Validators;
 
@@ -19,7 +19,7 @@ public class CreateDepartmentValidator
         RuleFor(p => p.Name).NotEmpty().MaximumLength(50);
         RuleFor(p => p.Budget).NotEmpty().GreaterThan(0);
         RuleFor(p => p.StartDate).NotEmpty();
-        RuleFor(p => p.InstructorID).NotEmpty();
+        RuleFor(p => p.InstructorId).NotEmpty();
 
         RuleFor(v => v.Name)
             .MustAsync(BeUniqueName)

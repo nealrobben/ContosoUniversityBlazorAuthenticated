@@ -8,7 +8,7 @@ public class InstructorsLookupVM
 
     public InstructorsLookupVM()
     {
-        Instructors = new List<InstructorLookupVM>();
+        Instructors = [];
     }
 
     public InstructorsLookupVM(IList<InstructorLookupVM> instructors)

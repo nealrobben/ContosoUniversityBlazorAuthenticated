@@ -8,7 +8,7 @@ public class DepartmentsLookupVM
 
     public DepartmentsLookupVM()
     {
-        Departments = new List<DepartmentLookupVM>();
+        Departments = [];
     }
 
     public DepartmentsLookupVM(IList<DepartmentLookupVM> departments)

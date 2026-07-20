@@ -10,13 +10,13 @@ public class OverviewVM<T>
 
     public OverviewVM()
     {
-        Records = new List<T>();
+        Records = [];
         MetaData = new MetaDataVM();
     }
 
     public OverviewVM(IList<T> records, MetaDataVM metaData)
     {
-        Records = records ?? new List<T>();
+        Records = records ?? [];
 
         MetaData = metaData;
     }
